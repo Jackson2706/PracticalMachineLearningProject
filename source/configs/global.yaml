@@ -1,0 +1,88 @@
+# Global experiment configuration. Every run is determined by
+# (dataset, method, tokenizer, size, seed) plus this file, data.yaml and configs/frozen/.
+
+data_seed: 2026            # fixed seed for train-pool/val/test splits (independent of experiment seeds)
+tuning_seed: 0             # seed for the tuning subset and tuning fits
+tuning_size: 2000          # training size used for hyperparameter selection
+seeds: [13, 42, 87, 2024, 31337]
+sizes: [500, 1000, 2000, 4000, 8000]
+datasets: [nsmc, shopping, steam]
+methods:
+  - tfidf_lr
+  - tfidf_svm
+  - tfidf_rf
+  - tfidf_xgb
+  - emb_mlp
+  - emb_lstm
+  - emb_gru
+  - small_transformer
+  - small_mamba
+
+# ---- hardware (all device logic lives in src/ksent/hardware.py)
+device: auto               # auto | cuda | cuda:N | mps | cpu   (env KSENT_DEVICE or --device override)
+n_threads: 8               # capped at os.cpu_count()          (env KSENT_THREADS overrides)
+precision: fp32            # all reported results are fp32; --amp exists for experiments only
+mamba_backend: auto        # auto | mamba_ssm | torch_ref ; pick ONE at the pilot and set it explicitly
+                           # before the final sweep (all reported Mamba results must share a backend)
+
+# ---- tokenizers
+tokenizer: kiwi            # main-experiment tokenizer
+tokenizers: [kiwi, whitespace, char]
+# Per tokenizer: smallest multiple of 8 covering >= 95% of reviews in the train pool of the
+# dataset with the longest reviews. Written by `python -m ksent.data.stats --write-max-len`.
+max_seq_len: {kiwi: 72, whitespace: 32, char: 96}
+
+paths:
+  data_raw: data/raw
+  data_processed: data/processed
+  data_tokenized: data/tokenized
+  results: results
+  frozen: configs/frozen
+  search_spaces: configs/search_spaces
+  model_widths: configs/model_widths.yaml
+  logs: logs
+  report: ../submission/report
+
+latency:
+  n_reviews: 200           # fixed test reviews (same for every method)
+  n_warmup: 20
+  cpu: true                # every method is timed on CPU (primary comparison)
+  accelerator: true        # neural methods are additionally timed on the resolved accelerator
+
+tfidf:
+  ngram_range: [1, 2]      # token n-grams for kiwi / whitespace
+  char_ngram_range: [2, 4] # character n-grams for the `char` tokenizer
+  max_features: 10000
+  sublinear_tf: true
+  min_df: 1
+  norm: l2
+
+neural:
+  embed_dim: 128
+  vocab_cap: 20000
+  min_freq: 2              # so <unk> is seen during training
+  optimizer: adamw
+  weight_decay: 0.01
+  batch_size: 64
+  max_epochs: 30
+  patience: 5              # early stopping on validation macro-F1
+  grad_clip: 1.0
+  param_tolerance: 0.15    # non-embedding params must be within +-15% of the level target
+  width_targets: {S: 50000, M: 200000, L: 500000}
+
+xgb_tuning:
+  max_rounds: 1000
+  early_stopping_rounds: 50
+
+analysis:
+  crossover_margin: 1.0    # macro-F1 points (x100 scale)
+  pareto_size_fallback: 8000
+
+ablation:
+  tokenizers: [whitespace, kiwi, char]
+  sizes: [500, 8000]
+  selection_size: 8000     # family winners chosen by mean validation macro-F1 at this size (main sweep)
+
+artifacts:
+  save_models_size: 8000   # model artifacts only saved for main-tokenizer runs at this size
+  demo_seed: 13

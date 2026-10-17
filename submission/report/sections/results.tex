@@ -1,0 +1,107 @@
+\section{Results}
+\label{sec:results}
+
+\subsection{Learning curves}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig2_learning_curves.pdf}
+  \caption{Learning curves: test macro-F1 versus training size (log scale) for all
+  nine methods; shaded bands are $\pm1$ standard deviation over \nSeeds{} seeds
+  (sample std, ddof\,=\,1). Dashed lines with hollow markers are TF-IDF methods;
+  solid lines with filled markers are neural methods. The dotted vertical line marks
+  the crossover threshold when one exists.}
+  \label{fig:curves}
+\end{figure}
+
+\begin{table}[t]
+  \centering
+  \caption{Test macro-F1 ($\times100$) across training sizes. \pmnote{} Bold: best
+  mean in the column within each dataset. $^{\dagger}$/$^{\ddagger}$: best TF-IDF /
+  best neural method at that size, selected by validation macro-F1 (the pair used for
+  the crossover).}
+  \label{tab:f1}
+  \input{tables/table3}
+\end{table}
+
+\Cref{fig:curves} and \cref{tab:f1} show test macro-F1 for every method and size.
+At $n=8{,}000$ the best method is \bestMethodNSMC{} on NSMC
+(\macroFOneBestNSMC), \bestMethodShopping{} on Shopping (\macroFOneBestShopping)
+and \bestMethodSteam{} on Steam (\macroFOneBestSteam).
+\TBD{describe the shape of the curves: which family leads at 500, where curves cross, which methods saturate}
+
+\subsection{Crossover thresholds}
+
+\begin{table}[t]
+  \centering
+  \caption{Crossover threshold and cost by dataset. Winners are chosen per size by
+  validation macro-F1; the threshold is the smallest size where the mean paired test
+  macro-F1 gap (neural $-$ TF-IDF, points) is at least \crossoverMargin. Gap and costs
+  are reported at the threshold, or at $n=8{,}000$ when there is no crossover. \pmnote{}
+  ``Pareto'': the neural winner is not dominated by the TF-IDF winner on (macro-F1,
+  CPU latency, fit time, peak RAM).}
+  \label{tab:crossover}
+  \input{tables/table5}
+\end{table}
+
+\Cref{tab:crossover} answers the research question. The crossover threshold is
+\crossoverNSMC{} for NSMC (\bestNeuralNSMC{} vs \bestTfidfNSMC, gap \gapNSMC{} points),
+\crossoverShopping{} for Shopping (\bestNeuralShopping{} vs \bestTfidfShopping, gap
+\gapShopping) and \crossoverSteam{} for Steam (\bestNeuralSteam{} vs \bestTfidfSteam,
+gap \gapSteam). Selecting the winners by test instead of validation macro-F1 gives
+thresholds of \crossoverTestSelNSMC, \crossoverTestSelShopping{} and
+\crossoverTestSelSteam{} (\cref{tab:a4}). \TBD{comment on whether the sensitivity check changes the conclusion}
+
+\subsection{Quality and cost at 8,000 reviews}
+
+\begin{table}[p]
+  \centering
+  \caption{Predictive quality (Panel A, $\times100$) and computational cost (Panel B)
+  at $n=8{,}000$. \pmnote{} Fit times in seconds (end-to-end includes tokenisation
+  and vectoriser/vocabulary construction); latency is the median per-review time at
+  batch size 1 in milliseconds; ``Tune'' is the total fit time of the ten tuning runs
+  (single seed); RAM is the peak resident memory of the run's process. Bold: best per
+  column within a dataset (highest quality, lowest cost). Hardware: \cpuModel{} with
+  \nThreads{} threads (CPU columns) and \gpuModel{} (accelerator columns); precision
+  \precisionUsed.}
+  \label{tab:cost}
+  \input{tables/table4}
+\end{table}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig3_quality_vs_cost.pdf}
+  \caption{Quality versus inference cost at $n=8{,}000$: test macro-F1 against
+  end-to-end CPU latency per review (log scale), error bars $\pm1$ std over \nSeeds{}
+  seeds (sample std). Stars connected to neural points show the same model's latency on
+  the accelerator (\accelDevice). The grey step line and shaded region mark the CPU Pareto front.}
+  \label{fig:cost}
+\end{figure}
+
+\Cref{tab:cost} and \cref{fig:cost} compare all methods at the largest size.
+At the crossover (or at 8{,}000), the neural winner is \latencyRatioNSMC{} (NSMC),
+\latencyRatioShopping{} (Shopping) and \latencyRatioSteam{} (Steam) slower per review
+on the CPU than the TF-IDF winner, and takes \fitRatioNSMC, \fitRatioShopping{} and
+\fitRatioSteam{} longer to fit. It is Pareto-efficient on NSMC: \paretoNSMC;
+Shopping: \paretoShopping; Steam: \paretoSteam.
+\TBD{interpret the trade-off; mention accelerator latency and memory}
+
+\subsection{Class-specific errors}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig4_confusion.pdf}
+  \caption{Confusion matrices at $n=8{,}000$ (rows: true label, columns: predicted),
+  counts summed over the \nSeeds{} runs and then row-normalised; cells show
+  percentages.}
+  \label{fig:confusion}
+\end{figure}
+
+\TBD{describe which class is harder per dataset and whether neural and TF-IDF methods err differently (\cref{fig:confusion})}
+
+\subsection{Marginal value of labels}
+Doubling the data from 500 to 1{,}000 reviews improves the best 8{,}000-review method by
+\gainFirstNSMC, \gainFirstShopping{} and \gainFirstSteam{} points on NSMC, Shopping and
+Steam, whereas the last doubling (4{,}000 $\to$ 8{,}000) adds \gainLastNSMC,
+\gainLastShopping{} and \gainLastSteam{} points (all gains in \cref{tab:a3}).
+\TBD{saturation discussion}

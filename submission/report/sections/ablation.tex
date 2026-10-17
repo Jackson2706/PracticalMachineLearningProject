@@ -1,0 +1,46 @@
+\section{Tokenizer Ablation}
+\label{sec:ablation}
+
+The main experiment gives every method the same Kiwi morphemes. A natural objection is
+that a stronger \emph{TF-IDF} representation---character $n$-grams, which are robust to
+spelling variation and need no analyser---might remove the neural advantage. We
+therefore re-run, for each dataset, the best TF-IDF and the best neural method (selected by
+mean validation macro-F1 at $n=8{,}000$ in the main sweep: \ablationTfidfNSMC{} and
+\ablationNeuralNSMC{} on NSMC, \ablationTfidfShopping{} and \ablationNeuralShopping{} on
+Shopping, \ablationTfidfSteam{} and \ablationNeuralSteam{} on Steam) with three
+tokenizers: eojeol (whitespace) unigrams+bigrams, Kiwi morphemes, and character
+2--4-grams for TF-IDF (single characters for neural models), at $n=500$ and $8{,}000$
+with all \nSeeds{} seeds (\nAblationFits{} new fits). Vocabulary, TF-IDF and maximum
+length (eojeol: \maxSeqLenWhitespace, character: \maxSeqLenChar{} tokens) are rebuilt per
+tokenizer; hyperparameters are the frozen, Kiwi-tuned ones.
+
+\begin{table}[t]
+  \centering
+  \caption{Tokenizer ablation: test macro-F1 ($\times100$) of the best TF-IDF and best
+  neural method per dataset with eojeol, Kiwi and character tokenization. \pmnote{}
+  Bold: best tokenizer for the method and size (test); $^{\star}$: best tokenizer selected on
+  validation. ``Gap, best tok.'': paired neural $-$ TF-IDF gap (points) when each family
+  uses its validation-selected best tokenizer, with the main (Kiwi) gap for comparison.}
+  \label{tab:ablation}
+  \input{tables/table6}
+\end{table}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig5_tokenizers.pdf}
+  \caption{Tokenizer effect: test macro-F1 of the best TF-IDF (hollow) and best neural
+  (filled) method per dataset at $n=500$ (top) and $n=8{,}000$ (bottom); error bars are
+  $\pm1$ std over \nSeeds{} seeds (sample std).}
+  \label{fig:tokenizers}
+\end{figure}
+
+With each family using its best tokenizer, the neural $-$ TF-IDF gap is \ablationGapSmallNSMC{}
+(NSMC), \ablationGapSmallShopping{} (Shopping) and \ablationGapSmallSteam{} (Steam) points
+at $n=500$, and \ablationGapLargeNSMC, \ablationGapLargeShopping{} and
+\ablationGapLargeSteam{} points at $n=8{,}000$ (\cref{tab:ablation,fig:tokenizers}). The best
+TF-IDF tokenizer at 8{,}000 is \bestTokenizerTfidfNSMC/\bestTokenizerTfidfShopping/\bestTokenizerTfidfSteam{}
+and the best neural tokenizer \bestTokenizerNeuralNSMC/\bestTokenizerNeuralShopping/\bestTokenizerNeuralSteam{}
+(NSMC/Shopping/Steam). The main conclusion (whether the gap reaches \crossoverMargin{} point)
+holds with the best tokenizers on NSMC: \ablationHoldsNSMC; Shopping: \ablationHoldsShopping;
+Steam: \ablationHoldsSteam. \TBD{interpret: does character TF-IDF close the gap? is Kiwi's
+linguistic knowledge what helps the neural models?}

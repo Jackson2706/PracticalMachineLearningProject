@@ -1,0 +1,20 @@
+# 9 = full max_depth x learning_rate grid with subsample/colsample alternating in a
+# checkerboard, plus id 9 (depth 6, lr 0.1) with the other sampling value.
+# During tuning: up to 1,000 rounds with early stopping on validation (50 rounds);
+# the best number of rounds is frozen into configs/frozen/ (no early stopping in final runs).
+method: tfidf_xgb
+default_index: 4
+# n_estimators below is only used by smoke/pilot runs; tuning overwrites it with the
+# early-stopped best round count.
+fixed: {tree_method: hist, device: cpu, eval_metric: logloss, n_estimators: 300}
+configs:
+  - {id: 0, max_depth: 4, learning_rate: 0.05, subsample: 0.8, colsample_bytree: 0.8}
+  - {id: 1, max_depth: 4, learning_rate: 0.1,  subsample: 1.0, colsample_bytree: 1.0}
+  - {id: 2, max_depth: 4, learning_rate: 0.3,  subsample: 0.8, colsample_bytree: 0.8}
+  - {id: 3, max_depth: 6, learning_rate: 0.05, subsample: 1.0, colsample_bytree: 1.0}
+  - {id: 4, max_depth: 6, learning_rate: 0.1,  subsample: 0.8, colsample_bytree: 0.8}
+  - {id: 5, max_depth: 6, learning_rate: 0.3,  subsample: 1.0, colsample_bytree: 1.0}
+  - {id: 6, max_depth: 8, learning_rate: 0.05, subsample: 0.8, colsample_bytree: 0.8}
+  - {id: 7, max_depth: 8, learning_rate: 0.1,  subsample: 1.0, colsample_bytree: 1.0}
+  - {id: 8, max_depth: 8, learning_rate: 0.3,  subsample: 0.8, colsample_bytree: 0.8}
+  - {id: 9, max_depth: 6, learning_rate: 0.1,  subsample: 1.0, colsample_bytree: 1.0}

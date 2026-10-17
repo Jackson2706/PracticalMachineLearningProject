@@ -1,0 +1,37 @@
+% Fig. 1 - experimental pipeline (TikZ). Shared by the report and the slides.
+\begin{adjustbox}{max width=\linewidth, max totalheight=0.5\textheight}
+\begin{tikzpicture}[
+  node distance=5mm and 5mm,
+  box/.style={draw=black!55, rounded corners=2pt, fill=#1, align=center, font=\footnotesize,
+              minimum height=11mm, text width=22mm, inner sep=2pt},
+  box/.default=black!4,
+  arr/.style={-{Stealth[length=2mm]}, thick, black!60},
+  lab/.style={font=\scriptsize\itshape, text=black!60}]
+  % row 1: data
+  \node[box] (dl) {Download\\NSMC, Shopping,\\Steam};
+  \node[box, right=of dl] (nm) {Normalization\\NFC, cap repeats,\\no NFKC};
+  \node[box, right=of nm] (cl) {Cleaning\\empty, conflicts,\\dups};
+  \node[box, right=of cl] (sp) {Fixed splits\\8k / 2k / 2k\\(seed 2026)};
+  \node[box, right=of sp] (sub) {Nested subsets\\500 $\subset$ \dots $\subset$ 8k\\$\times$ 5 seeds};
+  % row 2: modelling
+  \node[box=green!8, below=9mm of sub] (tok) {Tokenization\\Kiwi\\morphemes (main)};
+  \node[box=blue!8, left=of tok] (tune) {Tuning at $n$=2k\\10 configs $\times$ 9\\(val macro-F1)};
+  \node[box=blue!8, left=of tune] (frz) {Frozen configs\\per dataset \&\\method};
+  \node[box=blue!8, left=of frz] (fit) {Final fits: 675\\3$\times$9$\times$5$\times$5\\same review IDs};
+  \node[box=orange!12, left=of fit] (ev) {Test evaluation\\+ cost (CPU \&\\accelerator)};
+  % row 3: ablation branch
+  \node[box=purple!8, below=7mm of frz, text width=46mm] (abl) {Tokenizer ablation: best TF-IDF + best neural\\
+    $\times$ \{eojeol, Kiwi, char\} $\times$ \{500, 8k\} $\times$ 5 seeds (+120 fits)};
+  \draw[arr] (dl) -- (nm);
+  \draw[arr] (nm) -- (cl);
+  \draw[arr] (cl) -- (sp);
+  \draw[arr] (sp) -- (sub);
+  \draw[arr] (sub) -- (tok);
+  \draw[arr] (tok) -- (tune);
+  \draw[arr] (tune) -- (frz);
+  \draw[arr] (frz) -- (fit);
+  \draw[arr] (fit) -- (ev);
+  \draw[arr, dashed] (frz) -- (abl);
+  \draw[arr, dashed] (abl.west) -| (ev.south);
+\end{tikzpicture}
+\end{adjustbox}

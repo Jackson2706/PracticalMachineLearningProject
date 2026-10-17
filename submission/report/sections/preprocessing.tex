@@ -1,0 +1,59 @@
+\section{Preprocessing}
+\label{sec:preprocessing}
+
+Korean is agglutinative: a single space-delimited word (\emph{eojeol}) combines a
+stem with particles and endings, e.g.\ 봤는데 = 보/VV + 었/EP + 는데/EC (``saw,
+but\ldots''). Treating eojeols as tokens therefore produces a very sparse vocabulary in
+which the same verb appears in dozens of surface forms---a problem that is most severe
+exactly in the small-data regime this study is about. All preprocessing below is
+rule-based or uses a fixed, pre-trained analyser, and is applied identically to every
+method; nothing is fitted on the evaluation data.
+
+\paragraph{Normalization.}
+Every review passes through six fixed rules, in order:
+(1)~HTML entities are unescaped;
+(2)~Unicode is normalized to \textbf{NFC}. We deliberately avoid NFKC, which maps the
+compatibility jamo common in reviews (ㅋ, ㅠ, ㅎ) to a different Unicode block and can
+split visually identical tokens;
+(3)~zero-width and control characters are removed;
+(4)~Latin letters are lowercased (Hangul is unaffected);
+(5)~runs of three or more identical characters are capped at two
+(ㅋㅋㅋㅋㅋ $\to$ ㅋㅋ, !!!!! $\to$ !!), which keeps the cue while merging length
+variants that would otherwise be separate, rare tokens;
+(6)~whitespace is collapsed. Digits, punctuation, emoji, jamo-only expressions,
+English words and profanity are kept: they are frequent, informative sentiment cues.
+We perform no spacing correction, no stopword removal and no digit replacement---a
+review such as ``10점 만점에 1점'' (``1 point out of 10'') is legitimate content whose
+digits carry the label. Cleaning (empty texts, conflicting duplicates, exact
+duplicates) operates on the normalized text (\cref{tab:data}).
+
+\paragraph{Morphological tokenization.}
+The main experiment tokenizes with Kiwi~\cite{kiwipiepy} into morphemes tagged with
+their part of speech (\texttt{form/TAG}, e.g.\ 좋/VA, 안/MAG), with typo correction
+disabled. We keep \emph{all} morphemes, including particles and endings, because many
+of them carry sentiment: negation (안/MAG, 못/MAG, -지 않-), contrast (-는데/EC) and
+tone (-네/EF). Kiwi embodies external linguistic knowledge, but it is applied equally to
+all nine methods, so it does not favour either family; the ablation in
+\cref{sec:ablation} replaces it by eojeol and character tokenization to test how much
+the conclusions depend on it. Sentiment symbols survive tokenization (verified
+automatically): ㅋ, ㅠ, ㅎ or emoji occur in \symbolShareNSMC{} of NSMC,
+\symbolShareShopping{} of Shopping and \symbolShareSteam{} of Steam reviews
+(\cref{tab:a5sym}). \nKiwiEmptyNSMC, \nKiwiEmptyShopping{} and \nKiwiEmptySteam{}
+reviews yielded no Kiwi tokens and were dropped.
+
+\paragraph{Features.}
+TF-IDF methods use morpheme unigrams and bigrams. sklearn's default token pattern
+silently discards one-character tokens such as 좋, 안, 못, 다; we therefore pass
+pre-tokenized lists, and a test asserts that 안/MAG is in the fitted vocabulary.
+Neural methods use a vocabulary built on the training subset with a minimum frequency
+of 2, so that the \texttt{<unk>} embedding is trained. Sequences are truncated from the
+end at \maxSeqLenKiwi{} morphemes (the smallest multiple of 8 covering 95\% of the
+train pool of the dataset with the longest reviews), which truncates
+\truncKiwiNSMC, \truncKiwiShopping{} and \truncKiwiSteam{} of the train-pool reviews.
+
+\paragraph{Data sparsity at small sizes.}
+With 500 training reviews, \oovSmallNSMC{} of NSMC test morphemes are out of vocabulary,
+falling to \oovLargeNSMC{} at 8{,}000 (Shopping: \oovSmallShopping{} $\to$ \oovLargeShopping;
+Steam: \oovSmallSteam{} $\to$ \oovLargeSteam; \cref{tab:a5,fig:oov}). Neural models that
+learn embeddings from scratch cannot use these tokens at all, which is one mechanism
+behind their weakness at small sizes.

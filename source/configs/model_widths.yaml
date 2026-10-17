@@ -1,0 +1,20 @@
+emb_mlp:
+  S: 167
+  M: 386
+  L: 644
+emb_lstm:
+  S: 37
+  M: 106
+  L: 193
+emb_gru:
+  S: 47
+  M: 129
+  L: 231
+small_transformer:
+  S: 52
+  M: 108
+  L: 172
+small_mamba:
+  S: 50
+  M: 112
+  L: 186

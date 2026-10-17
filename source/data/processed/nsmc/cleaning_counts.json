@@ -1,0 +1,25 @@
+{
+  "train": {
+    "raw": 150000,
+    "malformed": 0,
+    "neutral_dropped": 0,
+    "parsed": 150000,
+    "empty": 5,
+    "conflicting_dup": 1612,
+    "exact_dup": 2743,
+    "kiwi_empty": 0,
+    "clean": 145640
+  },
+  "test": {
+    "raw": 50000,
+    "malformed": 0,
+    "neutral_dropped": 0,
+    "parsed": 50000,
+    "empty": 3,
+    "conflicting_dup": 358,
+    "exact_dup": 626,
+    "kiwi_empty": 0,
+    "clean": 48269,
+    "cross_file_overlap": 744
+  }
+}

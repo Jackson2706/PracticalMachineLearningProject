@@ -1,0 +1,16 @@
+# Balanced 10 of the 2^5 grid: a 2^(5-2) fractional design (ids 0-7) plus a complementary
+# pair (ids 8-9) so every level of every factor appears exactly 5 times.
+method: tfidf_rf
+default_index: 0
+fixed: {}
+configs:
+  - {id: 0, n_estimators: 300, max_depth: null, max_features: sqrt, min_samples_leaf: 1, class_weight: null}
+  - {id: 1, n_estimators: 300, max_depth: null, max_features: log2, min_samples_leaf: 2, class_weight: balanced}
+  - {id: 2, n_estimators: 300, max_depth: 64,   max_features: sqrt, min_samples_leaf: 2, class_weight: balanced}
+  - {id: 3, n_estimators: 300, max_depth: 64,   max_features: log2, min_samples_leaf: 1, class_weight: null}
+  - {id: 4, n_estimators: 600, max_depth: null, max_features: sqrt, min_samples_leaf: 2, class_weight: null}
+  - {id: 5, n_estimators: 600, max_depth: null, max_features: log2, min_samples_leaf: 1, class_weight: balanced}
+  - {id: 6, n_estimators: 600, max_depth: 64,   max_features: sqrt, min_samples_leaf: 1, class_weight: balanced}
+  - {id: 7, n_estimators: 600, max_depth: 64,   max_features: log2, min_samples_leaf: 2, class_weight: null}
+  - {id: 8, n_estimators: 300, max_depth: null, max_features: sqrt, min_samples_leaf: 2, class_weight: null}
+  - {id: 9, n_estimators: 600, max_depth: 64,   max_features: log2, min_samples_leaf: 1, class_weight: balanced}

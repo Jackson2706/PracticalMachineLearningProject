@@ -1,0 +1,17 @@
+# Exactly 10 predefined configurations (no random search). Selected by validation macro-F1.
+method: tfidf_svm
+default_index: 4          # used by smoke test and pilot (C = 1)
+fixed:
+  max_iter: 10000
+  dual: auto
+configs:
+  - {id: 0, C: 0.01}
+  - {id: 1, C: 0.03}
+  - {id: 2, C: 0.1}
+  - {id: 3, C: 0.3}
+  - {id: 4, C: 1}
+  - {id: 5, C: 3}
+  - {id: 6, C: 10}
+  - {id: 7, C: 30}
+  - {id: 8, C: 100}
+  - {id: 9, C: 300}

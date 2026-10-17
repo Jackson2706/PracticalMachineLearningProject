@@ -1,0 +1,13 @@
+{
+  "all": {
+    "raw": 200000,
+    "malformed": 0,
+    "neutral_dropped": 0,
+    "parsed": 200000,
+    "empty": 0,
+    "conflicting_dup": 20,
+    "exact_dup": 99,
+    "kiwi_empty": 0,
+    "clean": 199881
+  }
+}

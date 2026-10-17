@@ -1,0 +1,17 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\paragraph{When does a neural model pay off?}
+\TBD{synthesise the thresholds: what a team with $n$ labelled reviews should do in each domain}
+
+\paragraph{Cost of the switch.}
+\TBD{Pareto analysis: is the quality gain worth $\times$ latency / fit time / memory; CPU vs accelerator deployment}
+
+\paragraph{Cross-domain consistency.}
+\TBD{do method rankings and thresholds agree across movie, shopping and game reviews? relate to review length and label noise (Table~\ref{tab:data})}
+
+\paragraph{Which backbone?}
+\TBD{compare MLP/LSTM/GRU/Transformer/Mamba at matched parameter budgets; Mamba F1 at 8,000: NSMC \mambaFOneNSMC, Shopping \mambaFOneShopping, Steam \mambaFOneSteam}
+
+\paragraph{Variance.}
+\TBD{comment on seed variance; note zero/near-zero std of deterministic linear models at $n=8{,}000$ where every seed uses the same full pool}

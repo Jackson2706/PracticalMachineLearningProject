@@ -1,0 +1,96 @@
+\section{Additional Tables}
+\label{sec:appendix}
+
+\begin{table}[h]
+  \centering
+  \caption{Test accuracy ($\times100$) across training sizes. \pmnote}
+  \label{tab:a1acc}
+  \input{tables/tableA1_accuracy}
+\end{table}
+
+\begin{table}[h]
+  \centering
+  \caption{Test macro-precision ($\times100$) across training sizes. \pmnote}
+  \label{tab:a1p}
+  \input{tables/tableA1_precision}
+\end{table}
+
+\begin{table}[h]
+  \centering
+  \caption{Test macro-recall ($\times100$) across training sizes. \pmnote}
+  \label{tab:a1r}
+  \input{tables/tableA1_recall}
+\end{table}
+
+\clearpage
+\begin{table}[h]
+  \centering
+  \caption{The ten predefined tuning configurations per method. The five neural
+  methods share the same ten (lr, dropout, width) combinations; widths S/M/L are
+  parameter-matched per architecture. XGBoost rounds are chosen by early stopping on
+  validation (maximum 1{,}000, patience 50) and frozen.}
+  \label{tab:a2defs}
+  \input{tables/tableA2_defs}
+\end{table}
+
+\begin{table}[h]
+  \centering
+  \caption{Validation macro-F1 ($\times100$) of all ten tuning configurations
+  ($n=2{,}000$, tuning seed 0, single run). Bold: selected configuration.}
+  \label{tab:a2}
+  \input{tables/tableA2}
+\end{table}
+
+\clearpage
+\begin{table}[h]
+  \centering
+  \caption{Marginal value of labels: test macro-F1 gain (points) between adjacent
+  training sizes, computed per seed on the nested subsets. \pmnote}
+  \label{tab:a3}
+  \input{tables/tableA3}
+\end{table}
+
+\begin{table}[h]
+  \centering
+  \caption{Crossover sensitivity: paired test macro-F1 gap (neural $-$ TF-IDF, points)
+  per size when the family winners are selected by validation (main analysis) or by
+  test macro-F1. The second row of each pair lists the selected neural vs TF-IDF
+  methods. \pmnote}
+  \label{tab:a4}
+  \input{tables/tableA4}
+\end{table}
+
+\clearpage
+\begin{table}[h]
+  \centering
+  \caption{Preprocessing diagnostics for the Kiwi neural vocabulary (minimum frequency 2,
+  cap 20{,}000): vocabulary size and test-set out-of-vocabulary (OOV) rates per training
+  size. \pmnote{} (Seeds change the training subset.)}
+  \label{tab:a5}
+  \input{tables/tableA5}
+\end{table}
+
+\begin{table}[h]
+  \centering
+  \caption{Symbol coverage (share of all 12{,}000 reviews per dataset containing the jamo
+  ㅋ, ㅠ, ㅎ or an emoji; all survive Kiwi tokenization, verified automatically) and the
+  share of train-pool reviews truncated at each tokenizer's maximum length $L$.}
+  \label{tab:a5sym}
+  \input{tables/tableA5_symbols}
+\end{table}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.85\linewidth]{figures/figA1_oov.pdf}
+  \caption{Out-of-vocabulary rate of the Kiwi neural vocabulary on the test set versus
+  training size: share of test tokens (left) and of test reviews with at least one OOV
+  token (right); error bars $\pm1$ std over \nSeeds{} training subsets (sample std).}
+  \label{fig:oov}
+\end{figure}
+
+\begin{table}[h]
+  \centering
+  \caption{Hardware and software environment of all reported measurements.}
+  \label{tab:a6}
+  \input{tables/tableA6}
+\end{table}

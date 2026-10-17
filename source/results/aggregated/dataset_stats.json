@@ -1,0 +1,249 @@
+{
+  "tokenizer": "kiwi",
+  "datasets": {
+    "nsmc": {
+      "cleaning": {
+        "raw": 200000,
+        "malformed": 0,
+        "neutral_dropped": 0,
+        "empty": 8,
+        "conflicting_dup": 1970,
+        "exact_dup": 3369,
+        "kiwi_empty": 0,
+        "cross_file_overlap": 744,
+        "clean": 193909,
+        "per_file": {
+          "train": {
+            "raw": 150000,
+            "malformed": 0,
+            "neutral_dropped": 0,
+            "parsed": 150000,
+            "empty": 5,
+            "conflicting_dup": 1612,
+            "exact_dup": 2743,
+            "kiwi_empty": 0,
+            "clean": 145640
+          },
+          "test": {
+            "raw": 50000,
+            "malformed": 0,
+            "neutral_dropped": 0,
+            "parsed": 50000,
+            "empty": 3,
+            "conflicting_dup": 358,
+            "exact_dup": 626,
+            "kiwi_empty": 0,
+            "clean": 48269,
+            "cross_file_overlap": 744
+          }
+        }
+      },
+      "splits": {
+        "train_pool": {
+          "n": 8000,
+          "pct_positive": 49.825,
+          "tok_mean": 20.082,
+          "tok_median": 15.0,
+          "tok_p95": 60.0,
+          "trunc_pct": 2.5250000000000004
+        },
+        "val": {
+          "n": 2000,
+          "pct_positive": 49.85,
+          "tok_mean": 20.88,
+          "tok_median": 15.5,
+          "tok_p95": 65.04999999999995,
+          "trunc_pct": 3.35
+        },
+        "test": {
+          "n": 2000,
+          "pct_positive": 50.3,
+          "tok_mean": 19.3945,
+          "tok_median": 15.0,
+          "tok_p95": 51.0,
+          "trunc_pct": 1.9
+        }
+      },
+      "symbols": {
+        "n_reviews": 12000,
+        "pct_kieuk": 6.0,
+        "lost_kieuk": 0,
+        "pct_yu": 2.5749999999999997,
+        "lost_yu": 0,
+        "pct_hieuh": 1.9833333333333334,
+        "lost_hieuh": 0,
+        "pct_emoji": 0.8666666666666666,
+        "lost_emoji": 0,
+        "pct_any_symbol": 10.858333333333334,
+        "survival_ok": true,
+        "failure_examples": []
+      }
+    },
+    "shopping": {
+      "cleaning": {
+        "raw": 200000,
+        "malformed": 0,
+        "neutral_dropped": 0,
+        "empty": 0,
+        "conflicting_dup": 20,
+        "exact_dup": 99,
+        "kiwi_empty": 0,
+        "cross_file_overlap": 0,
+        "clean": 199881,
+        "per_file": {
+          "all": {
+            "raw": 200000,
+            "malformed": 0,
+            "neutral_dropped": 0,
+            "parsed": 200000,
+            "empty": 0,
+            "conflicting_dup": 20,
+            "exact_dup": 99,
+            "kiwi_empty": 0,
+            "clean": 199881
+          }
+        }
+      },
+      "splits": {
+        "train_pool": {
+          "n": 8000,
+          "pct_positive": 50.0,
+          "tok_mean": 22.510125,
+          "tok_median": 17.0,
+          "tok_p95": 57.0,
+          "trunc_pct": 1.2375
+        },
+        "val": {
+          "n": 2000,
+          "pct_positive": 50.0,
+          "tok_mean": 21.833,
+          "tok_median": 16.0,
+          "tok_p95": 56.0,
+          "trunc_pct": 0.7000000000000001
+        },
+        "test": {
+          "n": 2000,
+          "pct_positive": 50.0,
+          "tok_mean": 22.9915,
+          "tok_median": 17.0,
+          "tok_p95": 60.0,
+          "trunc_pct": 1.7000000000000002
+        }
+      },
+      "symbols": {
+        "n_reviews": 12000,
+        "pct_kieuk": 2.6083333333333334,
+        "lost_kieuk": 0,
+        "pct_yu": 6.441666666666666,
+        "lost_yu": 0,
+        "pct_hieuh": 4.041666666666666,
+        "lost_hieuh": 0,
+        "pct_emoji": 0.5916666666666667,
+        "lost_emoji": 0,
+        "pct_any_symbol": 13.083333333333332,
+        "survival_ok": true,
+        "failure_examples": []
+      }
+    },
+    "steam": {
+      "cleaning": {
+        "raw": 100000,
+        "malformed": 0,
+        "neutral_dropped": 0,
+        "empty": 0,
+        "conflicting_dup": 226,
+        "exact_dup": 0,
+        "kiwi_empty": 0,
+        "cross_file_overlap": 0,
+        "clean": 99774,
+        "per_file": {
+          "all": {
+            "raw": 100000,
+            "malformed": 0,
+            "neutral_dropped": 0,
+            "parsed": 100000,
+            "empty": 0,
+            "conflicting_dup": 226,
+            "exact_dup": 0,
+            "kiwi_empty": 0,
+            "clean": 99774
+          }
+        }
+      },
+      "splits": {
+        "train_pool": {
+          "n": 8000,
+          "pct_positive": 50.0,
+          "tok_mean": 25.472125,
+          "tok_median": 20.0,
+          "tok_p95": 66.0,
+          "trunc_pct": 2.225
+        },
+        "val": {
+          "n": 2000,
+          "pct_positive": 50.0,
+          "tok_mean": 26.4565,
+          "tok_median": 21.0,
+          "tok_p95": 66.0,
+          "trunc_pct": 2.4
+        },
+        "test": {
+          "n": 2000,
+          "pct_positive": 50.0,
+          "tok_mean": 25.4435,
+          "tok_median": 19.0,
+          "tok_p95": 65.0,
+          "trunc_pct": 2.0
+        }
+      },
+      "symbols": {
+        "n_reviews": 12000,
+        "pct_kieuk": 2.675,
+        "lost_kieuk": 0,
+        "pct_yu": 1.825,
+        "lost_yu": 0,
+        "pct_hieuh": 1.1666666666666667,
+        "lost_hieuh": 0,
+        "pct_emoji": 0.2583333333333333,
+        "lost_emoji": 0,
+        "pct_any_symbol": 5.800000000000001,
+        "survival_ok": true,
+        "failure_examples": []
+      }
+    }
+  },
+  "max_seq_len_detail": {
+    "kiwi": {
+      "max_seq_len": 72,
+      "longest_dataset": "steam",
+      "mean_lengths": {
+        "nsmc": 20.082,
+        "shopping": 22.510125,
+        "steam": 25.472125
+      }
+    },
+    "whitespace": {
+      "max_seq_len": 32,
+      "longest_dataset": "steam",
+      "mean_lengths": {
+        "nsmc": 7.714875,
+        "shopping": 8.53,
+        "steam": 10.660375
+      }
+    },
+    "char": {
+      "max_seq_len": 96,
+      "longest_dataset": "steam",
+      "mean_lengths": {
+        "nsmc": 28.56325,
+        "shopping": 31.743,
+        "steam": 36.46975
+      }
+    }
+  },
+  "max_seq_len": {
+    "kiwi": 72,
+    "whitespace": 32,
+    "char": 96
+  }
+}

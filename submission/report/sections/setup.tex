@@ -1,0 +1,58 @@
+\section{Experimental Setup}
+\label{sec:setup}
+
+\begin{figure}[t]
+  \centering
+  \input{figures/fig1_pipeline}
+  \caption{Experimental pipeline. Validation data drive tuning, early stopping, the choice
+  of the best method per family and of the ablation methods; test data are used once, for
+  the final evaluation of frozen pipelines. The dashed branch is the tokenizer ablation.}
+  \label{fig:pipeline}
+\end{figure}
+
+\paragraph{Protocol.}
+\Cref{fig:pipeline} summarises the protocol. Every final condition
+(3 datasets $\times$ 9 methods $\times$ 5 sizes) is repeated with \nSeeds{} seeds
+(\seedList), giving \nFinalFits{} final fits plus \nTuningFits{} tuning fits.
+The seed controls the nested training subset and all model randomness, so the
+TF-IDF and neural runs with the same seed see exactly the same reviews.
+
+\paragraph{Metrics.}
+Macro-F1 is the primary metric; accuracy, macro-precision and macro-recall are
+secondary. We report mean\,$\pm$\,sample standard deviation over seeds; the seeds
+measure variability but do not constitute a significance test. Confusion matrices at
+$n=8{,}000$ are summed over the \nSeeds{} runs and row-normalised. The marginal value of
+labels is the per-seed macro-F1 gain between adjacent sizes.
+
+\paragraph{Crossover threshold.}
+At every size we select the best TF-IDF and the best neural method by mean
+\emph{validation} macro-F1, compute the test macro-F1 gap (neural minus TF-IDF)
+per seed---paired, because both saw the same subset---and average it. The
+threshold is the smallest size whose mean gap is at least \crossoverMargin{} point;
+otherwise we report ``no observed crossover up to 8{,}000''. As a sensitivity check we
+repeat the procedure with winners selected by test macro-F1 (\cref{tab:a4}). At the
+threshold (or at 8{,}000 if there is none) we check whether the neural winner is
+Pareto-efficient against the TF-IDF winner on test macro-F1, CPU end-to-end latency,
+fit time and peak RAM.
+
+\paragraph{Cost measurement.}
+Each final run executes sequentially in its own process on an otherwise idle machine
+(\cpuModel{}, \nThreads{} CPU threads; accelerator: \gpuModel; \hardwareNote). Neural
+models train on \trainDevice{} in \precisionUsed{}; TF-IDF models always run on the CPU. We record end-to-end fit
+time (tokenisation + vectoriser/vocabulary + training) and classifier-only fit time;
+batch-size-1 inference latency on 200 fixed test reviews after 20 warm-up calls
+(median), both classifier-only (pre-vectorised input) and end-to-end (raw string to
+label), on the CPU for every method (the primary, comparable measurement) and
+additionally on the accelerator (\accelDevice) for neural methods, with device
+synchronisation around every call; peak host RAM of the process; peak accelerator
+memory; serialised artefact size; and model size
+(parameters, non-zero coefficients or tree nodes). Hardware and software versions
+are listed in \cref{tab:a6}.
+
+\paragraph{Deviations from the proposal.}
+(i) \nSeeds{} seeds instead of 3, i.e.\ \nFinalFits{} instead of 405 final fits; confusion
+matrices are summed over \nSeeds{} runs. Tuning is unchanged (\nTuningFits{} fits).
+(ii) A tokenizer ablation (\cref{sec:ablation}, \nAblationFits{} additional fits) that was not
+planned. (iii) Preprocessing is specified in more detail than in the proposal (fixed
+normalization rules, Kiwi morphemes with POS tags, \cref{sec:preprocessing}).
+(iv) All results are reported as mean\,$\pm$\,sample standard deviation over \nSeeds{} seeds.

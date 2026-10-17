@@ -1,0 +1,17 @@
+# 9 = Latin square over (lr x width) with dropout = levels[(i_lr + i_width) % 3],
+# plus id 9 = centre point (lr 1e-3, dropout 0.3, width M). Width levels S/M/L are
+# parameter-matched across architectures (see configs/model_widths.yaml).
+method: emb_gru
+default_index: 9
+fixed: {num_layers: 1, bidirectional: true, pooling: mean}
+configs:
+  - {id: 0, lr: 3.0e-4, dropout: 0.1, width: S}
+  - {id: 1, lr: 3.0e-4, dropout: 0.3, width: M}
+  - {id: 2, lr: 3.0e-4, dropout: 0.5, width: L}
+  - {id: 3, lr: 1.0e-3, dropout: 0.3, width: S}
+  - {id: 4, lr: 1.0e-3, dropout: 0.5, width: M}
+  - {id: 5, lr: 1.0e-3, dropout: 0.1, width: L}
+  - {id: 6, lr: 2.0e-3, dropout: 0.5, width: S}
+  - {id: 7, lr: 2.0e-3, dropout: 0.1, width: M}
+  - {id: 8, lr: 2.0e-3, dropout: 0.3, width: L}
+  - {id: 9, lr: 1.0e-3, dropout: 0.3, width: M}

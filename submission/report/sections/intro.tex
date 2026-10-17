@@ -1,0 +1,38 @@
+\section{Introduction}
+\label{sec:intro}
+
+Sentiment classification of user reviews is one of the most common text
+classification tasks in Korean industry, yet many teams start with only a few
+hundred labelled reviews. Two levers are then available: \emph{label more data} or
+\emph{use a more expressive model}. Prior work shows that the preferred text
+classifier changes with data scale and efficiency requirements: simple linear
+models over sparse $n$-gram features are strong at small scale and extremely
+cheap~\cite{joulin2017bag}, averaging networks are competitive with syntactic
+models~\cite{iyyer2015deep}, and deep models pull ahead only when training sets
+are large~\cite{zhang2015character}. Learning curves can be used to predict how
+performance grows with data~\cite{kolachina2012prediction}.
+
+This project turns the model choice into a practical data-collection and
+deployment decision for Korean reviews.
+
+\paragraph{Research question.}
+\emph{For each Korean review dataset, what is the minimum training size among
+500, 1{,}000, 2{,}000, 4{,}000 and 8{,}000 reviews at which the best neural sequence
+model exceeds the best TF-IDF baseline by at least \crossoverMargin{} macro-F1
+point? At that threshold, does the neural model remain competitive in training
+time, inference latency and memory use?}
+
+\paragraph{Contributions.}
+\begin{itemize}
+  \item A controlled learning-curve comparison of four TF-IDF and five neural
+        pipelines on three Korean review domains with identical nested training
+        subsets, fixed validation/test sets and equal tuning budgets.
+  \item A crossover threshold per dataset, with paired per-seed gaps and a
+        sensitivity check on how the family winners are selected.
+  \item A tokenizer ablation (eojeol, Kiwi morphemes, characters) testing whether the
+        conclusion depends on the representation.
+  \item A cost profile (fit time, batch-1 latency on CPU and accelerator, peak memory,
+        artefact size, model size) and a Pareto analysis at the crossover.
+  \item Fully reproducible code: every number in this report is generated from
+        the result files (\cref{sec:setup}).
+\end{itemize}

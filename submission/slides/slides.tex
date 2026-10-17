@@ -1,0 +1,236 @@
+% Presentation slides. Uses the SAME auto-generated tables, figures and numbers as the
+% report (symlinks: tables/, figures/, generated/ -> ../report/...).
+% Build with XeLaTeX (Korean via kotex): latexmk -xelatex slides.tex  (or: tectonic slides.tex)
+% Speaker notes: add [notes=show] / [notes=only] via \setbeameroption{show notes on second screen=right}
+\documentclass[aspectratio=169,11pt]{beamer}
+\usepackage{amsmath,amssymb}
+\usepackage{kotex}
+\setmainhangulfont{UnDotum}[Extension=.ttf]
+\setsanshangulfont{UnDotum}[Extension=.ttf]
+\usepackage{booktabs,multirow,adjustbox,array}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,calc}
+
+\usetheme{default}
+\usecolortheme{default}
+\definecolor{accent}{HTML}{2a78d6}
+\definecolor{ink}{HTML}{1f1f1e}
+\setbeamercolor{frametitle}{fg=ink}
+\setbeamercolor{title}{fg=ink}
+\setbeamercolor{structure}{fg=accent}
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{footline}{\hfill\scriptsize\color{gray}\insertframenumber/\inserttotalframenumber\hspace{3mm}\vspace{2mm}}
+
+\newcommand{\TBD}[1]{\textcolor{red}{\textbf{[TBD:\,#1]}}}
+\input{generated/numbers}
+
+\title{Training Data Thresholds for\\Cost-Effective Korean Sentiment Analysis}
+\subtitle{When do neural models beat TF-IDF --- and is it worth the cost?}
+\author{\TBD{author names}}
+\institute{Practical Machine Learning, Hanyang University (ERICA)}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+  \note{Introduce the team and the one-line question: how many labelled reviews do you need before a neural model is worth it?}
+\end{frame}
+
+\begin{frame}{Motivation}
+  \begin{itemize}
+    \item A small team has a few hundred labelled Korean reviews. Two options:
+      \begin{itemize}
+        \item \textbf{label more data}, or
+        \item \textbf{use a more complex model}.
+      \end{itemize}
+    \item TF-IDF + linear models: strong at small scale, very cheap.
+    \item Neural sequence models: better with more data, but slower and heavier.
+    \item Goal: turn ``which model?'' into a \textbf{data-collection and deployment decision}.
+  \end{itemize}
+  \note{Cite Zhang et al.\ 2015 and Joulin et al.\ 2017: simple baselines win at small scale.}
+\end{frame}
+
+\begin{frame}{Research question}
+  \begin{block}{}
+    For each Korean review dataset, what is the \textbf{minimum training size}
+    (500, 1k, 2k, 4k, 8k) at which the best neural model beats the best TF-IDF
+    model by \textbf{$\ge$ \crossoverMargin{} macro-F1 point}?
+  \end{block}
+  \vspace{2mm}
+  \begin{block}{}
+    At that threshold, is the neural model still competitive in
+    \textbf{training time, latency and memory}?
+  \end{block}
+\end{frame}
+
+\begin{frame}{Datasets}
+  \begin{columns}[T]
+    \begin{column}{0.36\linewidth}
+      \small
+      \begin{itemize}
+        \item \textbf{NSMC}: movie reviews (\nCleanNSMC{} clean)
+        \item \textbf{Shopping}: product reviews, ratings 1--2 / 4--5 (\nCleanShopping)
+        \item \textbf{Steam}: game reviews (\nCleanSteam)
+        \item Fixed 8k pool / 2k val / 2k test, stratified, no text overlap
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.62\linewidth}
+      \input{tables/table1}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Preprocessing for Korean}
+  \small
+  \begin{columns}[T]
+    \begin{column}{0.5\linewidth}
+      \textbf{Normalization} (fixed rules, before splitting)
+      \begin{itemize}\small
+        \item NFC, \emph{not} NFKC (keeps ㅋ ㅠ ㅎ intact)
+        \item cap repeats: ㅋㅋㅋㅋㅋ $\to$ ㅋㅋ, !!!!! $\to$ !!
+        \item keep digits (``10점 만점에 1점''), emoji, profanity
+        \item no spacing correction, no stopwords
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\linewidth}
+      \textbf{Kiwi morphemes} (\texttt{form/TAG})
+      \begin{itemize}\small
+        \item 봤는데 $\to$ 보/VV 었/EP 는데/EC
+        \item keep particles \& endings: 안/MAG, -지 않-, -네
+        \item symbols survive: \symbolShareNSMC{} of NSMC reviews
+        \item OOV at $n$=500: \oovSmallNSMC{} $\to$ \oovLargeNSMC{} at 8k
+      \end{itemize}
+    \end{column}
+  \end{columns}
+  \vspace{3mm}
+  Same tokens for all nine methods; ablation swaps Kiwi for eojeols / characters.
+  \note{Explain why agglutination makes eojeol vocabularies sparse, and why sklearn's default token pattern would drop 안/좋/못.}
+\end{frame}
+
+\begin{frame}{Nine pipelines, two families}
+  \begin{columns}[T]
+    \begin{column}{0.48\linewidth}
+      \textbf{TF-IDF} (1--2-grams, 10k features)
+      \begin{itemize}\small
+        \item Logistic regression, linear SVM
+        \item Random Forest, XGBoost
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\linewidth}
+      \textbf{Neural} (embeddings from scratch)
+      \begin{itemize}\small
+        \item MLP (DAN), BiLSTM, BiGRU
+        \item small Transformer, small Mamba
+        \item non-embedding params matched: 50k / 200k / 500k
+      \end{itemize}
+    \end{column}
+  \end{columns}
+  \vspace{4mm}
+  \small Shared Kiwi morphemes; all vocabularies fitted on the training subset only (neural: min.\ frequency 2).
+  Same training rules for every size (AdamW, batch 64, early stopping on val macro-F1).
+\end{frame}
+
+\begin{frame}{Protocol}
+  \centering
+  \input{figures/fig1_pipeline}
+  \vspace{3mm}
+  \small
+  \begin{itemize}
+    \item 10 predefined configs per method, tuned once at $n$=2k on \textbf{validation}
+    \item \nFinalFits{} final fits: 3 datasets $\times$ 9 methods $\times$ 5 sizes $\times$ \nSeeds{} seeds
+    \item Paired comparison: same seed $\Rightarrow$ same training reviews for every method
+    \item Tokenizer ablation: +\nAblationFits{} fits
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Learning curves}
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig2_learning_curves.pdf}\\[-1mm]
+  {\scriptsize Test macro-F1, mean $\pm$ std over \nSeeds{} seeds (sample std). Dashed = TF-IDF, solid = neural.}
+  \note{Walk through one panel: who leads at 500, where the lines cross.}
+\end{frame}
+
+\begin{frame}{Crossover threshold per dataset}
+  \centering
+  \input{tables/table5}
+  \vspace{3mm}
+  \small
+  \begin{itemize}
+    \item NSMC: \crossoverNSMC \quad Shopping: \crossoverShopping \quad Steam: \crossoverSteam
+    \item Winners chosen on validation; sensitivity (test-selected): \crossoverTestSelNSMC, \crossoverTestSelShopping, \crossoverTestSelSteam
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Quality vs inference cost ($n$ = 8,000)}
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig3_quality_vs_cost.pdf}\\[-1mm]
+  {\scriptsize CPU end-to-end latency per review (batch 1, median); stars = accelerator (\accelDevice) latency; shaded = CPU Pareto front.}
+\end{frame}
+
+\begin{frame}{Cost at $n$ = 8,000}
+  \centering
+  \scriptsize
+  \input{tables/table4b}
+\end{frame}
+
+\begin{frame}{Tokenizer ablation: does the conclusion depend on Kiwi?}
+  \centering
+  \includegraphics[width=0.78\linewidth]{figures/fig5_tokenizers.pdf}\\[-1mm]
+  {\scriptsize Best TF-IDF and best neural method per dataset with eojeol / Kiwi / character tokens; mean $\pm$ std over \nSeeds{} seeds.}\\
+  \small Gap with each family's best tokenizer at 8k: \ablationGapLargeNSMC{} / \ablationGapLargeShopping{} / \ablationGapLargeSteam{}
+  \quad conclusion holds: \ablationHoldsNSMC{} / \ablationHoldsShopping{} / \ablationHoldsSteam
+  \note{Main question: does character TF-IDF close the gap?}
+\end{frame}
+
+\begin{frame}{Where do models make mistakes?}
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig4_confusion.pdf}\\[-1mm]
+  {\scriptsize Confusion matrices at $n$ = 8,000, summed over \nSeeds{} runs, row-normalised (\%).}
+  \note{\TBD{which class is harder per dataset}}
+\end{frame}
+
+\begin{frame}{Conclusions}
+  \begin{itemize}
+    \item Crossover thresholds: NSMC \crossoverNSMC, Shopping \crossoverShopping, Steam \crossoverSteam.
+    \item Best at 8k: \bestMethodNSMC{} (\macroFOneBestNSMC), \bestMethodShopping{} (\macroFOneBestShopping), \bestMethodSteam{} (\macroFOneBestSteam).
+    \item Neural winner Pareto-efficient? NSMC \paretoNSMC, Shopping \paretoShopping, Steam \paretoSteam.
+    \item \TBD{practical recommendation}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Limitations}
+  \begin{itemize}
+    \item Rating-based labels are imperfect sentiment proxies.
+    \item Three domains, binary labels; no pretrained models.
+    \item Thresholds resolved only to a factor of two (tested sizes).
+    \item Kiwi brings external linguistic knowledge (applied to all methods; see ablation).
+    \item Ablation reuses Kiwi-tuned hyperparameters.
+    \item One machine (\cpuModel); timings depend on hardware and implementation (Mamba: \mambaBackend).
+    \item \nSeeds{} seeds measure variability --- not a significance test.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Demo}
+  \begin{itemize}
+    \item Type a Korean review, pick a dataset: see the normalized text, Kiwi tokens, all
+          nine models' predictions, confidences and measured latency.
+    \item Run: \texttt{python source/demo/app.py [--device cpu|auto]} (models trained on $n$ = 8,000, seed 13).
+  \end{itemize}
+  \note{Try a sarcastic review and one with only emoticons (e.g.\ repeated laughing characters).}
+\end{frame}
+
+\begin{frame}[plain]
+  \centering \Large Thank you --- questions?
+\end{frame}
+
+\appendix
+\begin{frame}{Backup: test macro-F1 across sizes}
+  \centering
+  \tiny
+  \input{tables/table3}
+\end{frame}
+
+\end{document}

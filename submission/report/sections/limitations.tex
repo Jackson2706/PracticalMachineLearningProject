@@ -1,0 +1,28 @@
+\section{Limitations}
+\label{sec:limitations}
+
+\begin{itemize}
+  \item \textbf{Labels are proxies.} Ratings and recommendation flags only
+        approximate sentiment; the conflicting-duplicate statistics in \cref{tab:data}
+        hint at label noise.
+  \item \textbf{Three domains, binary labels.} Conclusions are limited to the tested
+        datasets, model families and protocol and may not transfer to other domains or
+        fine-grained sentiment.
+  \item \textbf{No pretrained models.} Pretrained Korean encoders were deliberately excluded;
+        with them the crossover could look very different.
+  \item \textbf{Kiwi's linguistic knowledge.} The morphological analyser is itself trained
+        on external Korean data; it is applied equally to all methods, and the ablation
+        (\cref{sec:ablation}) measures how much the conclusions depend on it.
+  \item \textbf{Ablation reuses Kiwi-tuned configurations.} Hyperparameters were not re-tuned
+        for eojeol or character tokens, which may understate those tokenizers.
+  \item \textbf{Fixed grid of sizes.} The threshold is only resolved to the tested sizes
+        (a factor of two).
+  \item \textbf{One tuning size and seed.} Configurations are tuned at $n=2{,}000$ and
+        frozen; a different optimum at other sizes is possible and could favour either
+        family.
+  \item \textbf{Single machine.} Costs were measured on one machine (\cpuModel) with a
+        fixed thread count; absolute timings and the CPU/accelerator ranking depend on hardware
+        and on implementation (e.g.\ the Mamba backend).
+  \item \textbf{Variability, not significance.} \nSeeds{} seeds quantify run-to-run
+        variability but are not a formal significance test.
+\end{itemize}

@@ -1,0 +1,58 @@
+\section{Methods}
+\label{sec:methods}
+
+All nine pipelines share the same normalized text, the same Kiwi morpheme tokens
+(\cref{sec:preprocessing}) and the same training subsets. Every data-dependent
+transform---TF-IDF vocabulary and IDF weights, the neural vocabulary---is fitted on
+the current training subset only. Because the two families use different
+representations, the comparison is between \emph{complete pipelines}.
+
+\paragraph{TF-IDF family.}
+Morpheme unigrams and bigrams, at most 10{,}000 features, sublinear term frequency,
+$\ell_2$ normalisation, sparse matrices; all four run on the CPU. Four classifiers:
+logistic regression (\textbf{LR}) and a linear SVM (\textbf{SVM}) from scikit-learn~\cite{pedregosa2011scikit},
+Random Forest~\cite{breiman2001random} (\textbf{RF}) and
+XGBoost~\cite{chen2016xgboost} (\textbf{XGB}, histogram trees).
+
+\paragraph{Neural family.}
+A vocabulary of at most 20{,}000 training morphemes with frequency $\ge2$ (plus
+padding/unknown), 128-dimensional embeddings learned from scratch and a maximum length
+of \maxSeqLenKiwi{} morphemes (\cref{sec:preprocessing}). Five backbones:
+\textbf{MLP} (masked mean of embeddings $\to$ two-layer MLP, DAN-style~\cite{iyyer2015deep});
+\textbf{LSTM} and \textbf{GRU} (one bidirectional layer, masked mean pooling);
+\textbf{Transformer} (learned positional embeddings, two pre-norm encoder layers,
+four heads); and \textbf{Mamba} (two residual selective state-space
+blocks~\cite{gu2023mamba}). Mamba has two interchangeable implementations with identical
+parameters: the fused CUDA kernels of \texttt{mamba-ssm} and a pure-PyTorch reference
+selective scan (\texttt{torch\_ref}); all reported Mamba results use \mambaBackend{}, and CPU
+latency always uses \texttt{torch\_ref}.
+Each architecture has three width levels (S/M/L) chosen so that non-embedding
+parameter counts are approximately 50k/200k/500k ($\pm$15\%; actual counts are in
+\cref{tab:methods}).
+
+\paragraph{Fixed neural training rules.}
+AdamW~\cite{loshchilov2019decoupled} (weight decay 0.01), batch size 64, at most 30
+epochs, early stopping with patience 5 on validation macro-F1 with the best
+checkpoint restored, gradient clipping at 1.0, cross-entropy loss and fp32
+precision---identical for every size.
+
+\paragraph{Tuning.}
+For each dataset and method we evaluate exactly ten predefined configurations
+(\cref{tab:a2defs}) at $n=2{,}000$ with tuning seed 0 and select the one with the
+highest validation macro-F1 (ties: lower fit time). The search covers
+regularisation for linear models, tree structure and sampling for RF, depth,
+learning rate and sampling for XGBoost (whose early-stopped number of rounds is
+frozen), and learning rate, dropout and width for neural models. The selected
+configuration is frozen for all sizes and seeds.
+
+\begin{table}[t]
+  \centering
+  \caption{Method configurations. ``Selected'' is the frozen configuration per
+  dataset (RF: trees, depth, features, minimum leaf size, class weight; XGB: depth,
+  learning rate, subsampling, rounds; neural: width level, learning rate, dropout).
+  ``Size'' is the non-embedding parameter count (neural), the number of non-zero
+  coefficients (LR/SVM) or total tree nodes (RF/XGB) at $n=8{,}000$.
+  ``Tune'' is the summed fit time of the ten tuning runs.}
+  \label{tab:methods}
+  \input{tables/table2}
+\end{table}
