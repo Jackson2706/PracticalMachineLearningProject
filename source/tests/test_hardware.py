@@ -73,3 +73,19 @@ def test_mamba_backends_match_on_cuda() -> None:
 def test_accelerator_list_consistent() -> None:
     acc = accelerators()
     assert ("cuda" in acc) == cuda_available() and ("mps" in acc) == mps_available()
+
+
+def test_model_moves_to_resolved_device() -> None:
+    """``.to(device)`` with the auto-resolved device puts parameters and outputs there."""
+    from ksent.hardware import assert_on_device, to_device
+    from ksent.models.registry import _fixed, build_neural, model_widths
+
+    dev, _ = resolve_device("auto")
+    m = to_device(build_neural("emb_mlp", 50, model_widths()["emb_mlp"]["S"], 0.0, 16, _fixed("emb_mlp")), dev)
+    assert assert_on_device(m, dev).split(":")[0] == dev.split(":")[0]
+    ids = to_device(torch.randint(2, 50, (2, 8)), dev)
+    out = m(ids, to_device(torch.tensor([8, 3]), dev))
+    assert out.device.type == dev.split(":")[0]
+    if dev != "cpu":  # a model left on the CPU must be rejected when an accelerator was requested
+        with pytest.raises(RuntimeError):
+            assert_on_device(m.to("cpu"), dev)

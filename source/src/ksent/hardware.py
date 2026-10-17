@@ -183,10 +183,27 @@ def set_threads(n: int | None = None) -> int:
 
 # ----------------------------------------------------------------------------- data movement
 def to_device(x, device: str):
-    """Move a tensor or module to ``device`` (tensors non-blocking on CUDA)."""
+    """``x.to(device)`` for a tensor or module (tensors non-blocking on CUDA).
+
+    ``device`` is the string resolved by :func:`resolve_device` (``cuda``, ``cuda:N``,
+    ``mps`` or ``cpu``), so the same code runs on any hardware.
+    """
     if hasattr(x, "parameters"):  # nn.Module
         return x.to(device)
     return x.to(device, non_blocking=is_cuda(device))
+
+
+def module_device(model) -> str:
+    """Device the model's parameters actually live on (e.g. ``cuda:0``, ``mps:0``, ``cpu``)."""
+    return str(next(model.parameters()).device)
+
+
+def assert_on_device(model, device: str) -> str:
+    """Verify that ``model.to(device)`` took effect; return the actual device string."""
+    actual = module_device(model)
+    if actual.split(":")[0] != device.split(":")[0]:
+        raise RuntimeError(f"model is on {actual}, expected {device}")
+    return actual
 
 
 def loader_kwargs(device: str) -> dict[str, Any]:

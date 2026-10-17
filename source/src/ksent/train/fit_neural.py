@@ -19,8 +19,8 @@ from ksent.eval.cost import Timer
 from ksent.eval.metrics import macro_f1
 from ksent.features.tokenize import Tokens
 from ksent.features.vocab import Vocab
-from ksent.hardware import (AcceleratorMemoryTracker, autocast, loader_kwargs, record_mps_fallbacks, seed_everything,
-                            to_device)
+from ksent.hardware import (AcceleratorMemoryTracker, assert_on_device, autocast, loader_kwargs, record_mps_fallbacks,
+                            seed_everything, to_device)
 from ksent.models.registry import build_neural, count_params, width_for
 from ksent.pipeline import NeuralPipeline
 
@@ -44,7 +44,9 @@ def fit_neural(method: str, params: dict[str, Any], train_docs: list[Tokens], y_
     build_kwargs = dict(vocab_size=len(vocab), width=width_for(method, params["width"]),
                         dropout=float(params["dropout"]), max_len=max_len, fixed=fixed,
                         mamba_backend=mamba_backend if method == "small_mamba" else "torch_ref")
-    model = to_device(build_neural(method, **build_kwargs), device)
+    model = to_device(build_neural(method, **build_kwargs), device)   # model.to(device)
+    info["model_device"] = assert_on_device(model, device)
+    log(f"    model parameters on {info['model_device']}")
     info["params"] = count_params(model)
     info["width"] = build_kwargs["width"]
     info["mamba_backend"] = getattr(model, "backend", None)

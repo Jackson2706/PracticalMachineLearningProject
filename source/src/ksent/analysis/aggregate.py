@@ -28,7 +28,8 @@ def flatten(r: dict) -> dict:
     """Flatten one result record into a tidy row."""
     row = {k: r.get(k) for k in ID_COLS}
     hw = r.get("hardware") or {}
-    row.update(config_id=r.get("config_id"), train_device=r.get("train_device"), mamba_backend=r.get("mamba_backend"),
+    row.update(config_id=r.get("config_id"), train_device=r.get("train_device"), model_device=r.get("model_device"),
+               mamba_backend=r.get("mamba_backend"),
                precision=r.get("precision"), n_threads=r.get("n_threads"), fingerprint=hw.get("fingerprint"),
                gpu_name=hw.get("gpu_name"), cpu_model=hw.get("cpu_model"),
                timing_reportable=r.get("timing_reportable", True), mps_fallback_used=r.get("mps_fallback_used"),

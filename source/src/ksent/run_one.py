@@ -125,7 +125,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     measure_cost = mode in ("final", "smoke", "pilot") and not args.no_latency
 
     # ---- device
-    if fam == "tfidf":
+    if fam == "tfidf":  # scikit-learn / XGBoost (device="cpu") have no .to(device)
         device, device_reason = "cpu", "classical methods always run on CPU"
     else:
         device, device_reason = resolve_device(args.device or configured_device(), allow_fallback=args.allow_fallback)
@@ -173,6 +173,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         pipe, info = fit_neural(method, params, train_inputs, y_tr, val_inputs, y_val, seed, device, msl, tok,
                                 mamba_backend=backend or "torch_ref", max_epochs=args.max_epochs, amp=args.amp)
         impl = {"max_seq_len": msl, "width": info["width"]}
+        rec["model_device"] = info["model_device"]
         rec["mps_fallbacks"] = info.get("mps_fallbacks", [])
         rec["mps_fallback_used"] = bool(rec["mps_fallbacks"])
     rec["mamba_backend"] = info.get("mamba_backend")
