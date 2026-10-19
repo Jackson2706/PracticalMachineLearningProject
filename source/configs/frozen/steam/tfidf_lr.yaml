@@ -1,0 +1,50 @@
+dataset: steam
+method: tfidf_lr
+selected_config_id: 4
+params:
+  solver: liblinear
+  max_iter: 2000
+  C: 1
+  config_id: 4
+val_macro_f1: 0.736470945921788
+tuning_time_selected_s: 0.39414713793667033
+tuning_time_total_s: 4.142211377911735
+tuning_wall_time_total_s: 53.59853046707576
+tuning_times_reportable: true
+selection_source: tuning
+times_source: tuning
+replay_val_f1_max_abs_diff: 0.0
+all_configs:
+- config_id: 0
+  val_macro_f1: 0.7049244606619294
+  fit_time_s: 0.34620872093364596
+- config_id: 1
+  val_macro_f1: 0.7094546022816065
+  fit_time_s: 0.4116487079882063
+- config_id: 2
+  val_macro_f1: 0.7124740507830831
+  fit_time_s: 0.3355591599829495
+- config_id: 3
+  val_macro_f1: 0.7199955199283188
+  fit_time_s: 0.43375750101404265
+- config_id: 4
+  val_macro_f1: 0.736470945921788
+  fit_time_s: 0.39414713793667033
+- config_id: 5
+  val_macro_f1: 0.730998923995696
+  fit_time_s: 0.4152821640018374
+- config_id: 6
+  val_macro_f1: 0.7254944412624356
+  fit_time_s: 0.4398005020339042
+- config_id: 7
+  val_macro_f1: 0.7189929748243706
+  fit_time_s: 0.44858958205441013
+- config_id: 8
+  val_macro_f1: 0.7179954879278069
+  fit_time_s: 0.4521008469746448
+- config_id: 9
+  val_macro_f1: 0.7134913331128268
+  fit_time_s: 0.4651170549914241
+tuning_size: 2000
+tuning_seed: 0
+frozen_at: '2026-10-19T06:33:25+00:00'

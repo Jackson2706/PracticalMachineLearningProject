@@ -1,0 +1,65 @@
+dataset: shopping
+method: tfidf_xgb
+selected_config_id: 1
+params:
+  tree_method: hist
+  device: cpu
+  eval_metric: logloss
+  n_estimators: 331
+  max_depth: 4
+  learning_rate: 0.1
+  subsample: 1.0
+  colsample_bytree: 1.0
+  config_id: 1
+val_macro_f1: 0.8619729466975528
+tuning_time_selected_s: 21.986927823978476
+tuning_time_total_s: 174.00337617099285
+tuning_wall_time_total_s: 223.60349814599613
+tuning_times_reportable: true
+selection_source: tuning
+times_source: tuning
+replay_val_f1_max_abs_diff: 0.0
+all_configs:
+- config_id: 0
+  val_macro_f1: 0.8574400891974853
+  fit_time_s: 32.93355863698525
+  xgb_best_rounds: 605
+- config_id: 1
+  val_macro_f1: 0.8619729466975528
+  fit_time_s: 21.986927823978476
+  xgb_best_rounds: 331
+- config_id: 2
+  val_macro_f1: 0.8544196032258815
+  fit_time_s: 8.933897780021653
+  xgb_best_rounds: 90
+- config_id: 3
+  val_macro_f1: 0.8579909114183307
+  fit_time_s: 33.45620245102327
+  xgb_best_rounds: 520
+- config_id: 4
+  val_macro_f1: 0.8549476360966308
+  fit_time_s: 15.177853321947623
+  xgb_best_rounds: 220
+- config_id: 5
+  val_macro_f1: 0.8459698100827762
+  fit_time_s: 7.186690968985204
+  xgb_best_rounds: 77
+- config_id: 6
+  val_macro_f1: 0.8594350238397699
+  fit_time_s: 20.088111084944103
+  xgb_best_rounds: 283
+- config_id: 7
+  val_macro_f1: 0.8554736600745486
+  fit_time_s: 13.202164205024019
+  xgb_best_rounds: 141
+- config_id: 8
+  val_macro_f1: 0.8569536529835666
+  fit_time_s: 5.517804146045819
+  xgb_best_rounds: 40
+- config_id: 9
+  val_macro_f1: 0.86097650502935
+  fit_time_s: 15.520165752037428
+  xgb_best_rounds: 229
+tuning_size: 2000
+tuning_seed: 0
+frozen_at: '2026-10-19T06:33:25+00:00'

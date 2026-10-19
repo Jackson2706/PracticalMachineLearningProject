@@ -1,0 +1,50 @@
+dataset: shopping
+method: tfidf_svm
+selected_config_id: 2
+params:
+  max_iter: 10000
+  dual: auto
+  C: 0.1
+  config_id: 2
+val_macro_f1: 0.8782589222307475
+tuning_time_selected_s: 0.37490543501917273
+tuning_time_total_s: 4.661576732061803
+tuning_wall_time_total_s: 53.918499229999725
+tuning_times_reportable: true
+selection_source: tuning
+times_source: tuning
+replay_val_f1_max_abs_diff: 0.0
+all_configs:
+- config_id: 0
+  val_macro_f1: 0.8624187190881474
+  fit_time_s: 0.3835512329824269
+- config_id: 1
+  val_macro_f1: 0.8710737375447574
+  fit_time_s: 0.37660662207053974
+- config_id: 2
+  val_macro_f1: 0.8782589222307475
+  fit_time_s: 0.37490543501917273
+- config_id: 3
+  val_macro_f1: 0.8769102675850695
+  fit_time_s: 0.3562934069777839
+- config_id: 4
+  val_macro_f1: 0.877979378514969
+  fit_time_s: 0.36618080496555194
+- config_id: 5
+  val_macro_f1: 0.8674792936396312
+  fit_time_s: 0.3301223250455223
+- config_id: 6
+  val_macro_f1: 0.8619950318211456
+  fit_time_s: 0.4143747240304947
+- config_id: 7
+  val_macro_f1: 0.8609987489887408
+  fit_time_s: 0.45725292299175635
+- config_id: 8
+  val_macro_f1: 0.8584982666037659
+  fit_time_s: 0.5930828599375673
+- config_id: 9
+  val_macro_f1: 0.8564991031193945
+  fit_time_s: 1.0092063980409876
+tuning_size: 2000
+tuning_seed: 0
+frozen_at: '2026-10-19T06:33:25+00:00'

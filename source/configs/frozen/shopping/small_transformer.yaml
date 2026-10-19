@@ -1,0 +1,54 @@
+dataset: shopping
+method: small_transformer
+selected_config_id: 6
+params:
+  num_layers: 2
+  nhead: 4
+  ff_mult: 2
+  pooling: mean
+  lr: 0.002
+  dropout: 0.5
+  width: S
+  config_id: 6
+val_macro_f1: 0.8414980583512148
+tuning_time_selected_s: 6.579059012990911
+tuning_time_total_s: 85.55417325202143
+tuning_wall_time_total_s: 149.12785347696627
+tuning_times_reportable: true
+selection_source: tuning
+times_source: tuning
+replay_val_f1_max_abs_diff: 0.0
+all_configs:
+- config_id: 0
+  val_macro_f1: 0.828999828999829
+  fit_time_s: 14.549172979954164
+- config_id: 1
+  val_macro_f1: 0.8200226550869544
+  fit_time_s: 11.90336300706258
+- config_id: 2
+  val_macro_f1: 0.8104203291433225
+  fit_time_s: 8.742912549932953
+- config_id: 3
+  val_macro_f1: 0.8329797905546572
+  fit_time_s: 8.847508540959097
+- config_id: 4
+  val_macro_f1: 0.8364966890579534
+  fit_time_s: 8.890484930074308
+- config_id: 5
+  val_macro_f1: 0.8169983529851769
+  fit_time_s: 6.528963089978788
+- config_id: 6
+  val_macro_f1: 0.8414980583512148
+  fit_time_s: 6.579059012990911
+- config_id: 7
+  val_macro_f1: 0.824376668515465
+  fit_time_s: 5.734190447023138
+- config_id: 8
+  val_macro_f1: 0.8289171959228266
+  fit_time_s: 6.665279306995217
+- config_id: 9
+  val_macro_f1: 0.8309567249215799
+  fit_time_s: 7.113239387050271
+tuning_size: 2000
+tuning_seed: 0
+frozen_at: '2026-10-19T06:33:25+00:00'
