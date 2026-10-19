@@ -74,6 +74,8 @@ def fit_neural(method: str, params: dict[str, Any], train_docs: list[Tokens], y_
                 bl, by = to_device(bl, device), to_device(by, device)
                 with autocast(device, amp):
                     loss = loss_fn(model(bx, bl), by)
+                if not torch.isfinite(loss):  # recorded as a failure by the scheduler, never silently dropped
+                    raise FloatingPointError(f"NaN/inf training loss at epoch {epoch}")
                 opt.zero_grad(set_to_none=True)
                 if scaler is None:  # fp32 (all reported runs)
                     loss.backward()

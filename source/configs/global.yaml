@@ -21,6 +21,8 @@ methods:
 # ---- hardware (all device logic lives in src/ksent/hardware.py)
 device: auto               # auto | cuda | cuda:N | mps | cpu   (env KSENT_DEVICE or --device override)
 n_threads: 8               # capped at os.cpu_count()          (env KSENT_THREADS overrides)
+                           # = threads of every classical fit and of every CPU latency measurement
+neural_threads: 2          # CPU threads of a neural training job (same in quality and cost mode)
 precision: fp32            # all reported results are fp32; --amp exists for experiments only
 mamba_backend: auto        # auto | mamba_ssm | torch_ref ; pick ONE at the pilot and set it explicitly
                            # before the final sweep (all reported Mamba results must share a backend)
@@ -86,3 +88,12 @@ ablation:
 artifacts:
   save_models_size: 8000   # model artifacts only saved for main-tokenizer runs at this size
   demo_seed: 13
+
+# ---- scheduler (src/ksent/scheduler.py). Frozen after the pilot (Stage C); quality mode only -
+# cost mode always runs one job at a time on an otherwise idle machine.
+scheduler:
+  k_gpu: null              # concurrent neural jobs per GPU (set from the pilot)
+  cpu_jobs: null           # concurrent classical jobs (null: floor((physical - reserved) / n_threads))
+  reserved_system_cores: 2
+  vram_max_fraction: 0.85
+  ram_margin_mb: 8192

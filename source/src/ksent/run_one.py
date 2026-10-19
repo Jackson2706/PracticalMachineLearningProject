@@ -12,6 +12,14 @@ Modes
   smoke   default config, short training, everything exercised -> results_smoke/{device}/
   pilot   default config, full training + cost, validation only -> results_pilot/
 
+Run modes (``--run-mode``; hardware concurrency only, never the protocol)
+  quality  run alongside other jobs: predictive metrics + predictions only, no latency,
+           ``timing_reportable: false`` -> results/raw/ (tuning: results/tuning_quality/)
+  cost     exclusive and sequential: every cost metric, ``timing_reportable: true``
+           -> results/cost/raw/ (tuning: results/tuning/)
+Both modes use the same per-job thread counts and device, so predictions are identical
+(up to cuDNN RNN nondeterminism).
+
 Example::
 
     python -m ksent.run_one --dataset nsmc --method tfidf_lr --tokenizer kiwi --size 2000 --seed 13
@@ -53,10 +61,14 @@ def result_path(out_root: Path, mode: str, dataset: str, method: str, tokenizer:
     return out_root / "raw" / dataset / method / tokenizer / f"n{size}_s{seed}.json"
 
 
-def default_out_root(mode: str, device: str | None = None) -> Path:
-    """``results/`` (or ``$KSENT_RESULTS_DIR``) for final/tuning; separate roots otherwise."""
-    if mode in ("final", "tuning"):
-        return path("results")
+def default_out_root(mode: str, device: str | None = None, run_mode: str = "cost") -> Path:
+    """Result root of a mode: final quality runs in ``results/``, final cost runs in
+    ``results/cost/``; tuning cost runs in ``results/`` (-> ``results/tuning/``), tuning
+    quality runs in ``results/tuning_quality/``; separate roots for smoke/pilot."""
+    if mode == "final":
+        return path("results") / "cost" if run_mode == "cost" else path("results")
+    if mode == "tuning":
+        return path("results") if run_mode == "cost" else path("results") / "tuning_quality"
     if mode == "smoke":
         return SOURCE_DIR / "results_smoke" / (device or "auto").replace(":", "")
     return SOURCE_DIR / "results_pilot"
@@ -108,6 +120,10 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     """Execute one run and return the result record (also written to disk)."""
     g = global_cfg()
     n_threads = set_threads()
+    fam0 = family(args.method)
+    # neural jobs train with `neural_threads` CPU threads (in both run modes) so several can share a
+    # GPU; every CPU latency measurement uses `n_threads`, the same count as the classical fits
+    train_threads = int(g.get("neural_threads") or n_threads) if fam0 == "neural" else n_threads
     sampler = RSSSampler().start()
     t_start = time.perf_counter()
     method, dataset, tok, size, seed, mode = args.method, args.dataset, args.tokenizer, args.size, args.seed, args.mode
@@ -137,6 +153,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "config": params, "git_commit": git_commit(), "timestamp": now_iso(), "hostname": os.uname().nodename,
         "n_threads": n_threads, "train_device": device, "device_reason": device_reason,
         "precision": "amp_fp16" if args.amp else "fp32", "timing_reportable": not args.not_reportable,
+        "run_mode": args.run_mode, "train_threads": train_threads,
         "hardware": compact_info(), "python": sys.version.split()[0],
     }
 
@@ -166,7 +183,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     else:
         from ksent.train.fit_neural import fit_neural
 
-        set_threads(n_threads)  # torch is loaded now -> apply the thread limit to it
+        set_threads(train_threads)  # torch is loaded now -> apply the thread limit to it
         rec.update(set_determinism(device))
         msl = max_seq_len(tok)
         backend = resolve_mamba_backend(args.mamba_backend, device) if method == "small_mamba" else None
@@ -211,16 +228,19 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     else:
         rec["model_size"] = {**info["params"], "vocab_size": info["vocab_size"]}
 
+    # artifacts: quality runs at n=8,000, main tokenizer, demo seed only (disk budget);
+    # serialized size is a cost metric and is recorded by every cost-measuring run
+    art_cfg = g["artifacts"]
+    if (mode == "final" and args.run_mode == "quality" and tok == main_tokenizer()
+            and size == int(art_cfg["save_models_size"]) and seed == int(art_cfg["demo_seed"])):
+        art = pipe.save(path("results") / "models" / dataset / method / f"n{size}_s{seed}")
+        rec["artifact_path"] = str(art)
+        rec["cost"]["serialized_mb"] = file_size_mb(art)
+
     if measure_cost:
-        save_final = (mode == "final" and tok == main_tokenizer() and size == int(g["artifacts"]["save_models_size"]))
-        if save_final:
-            art = pipe.save(path("results") / "models" / dataset / method / f"n{size}_s{seed}")
-            rec["artifact_path"] = str(art)
-            rec["cost"]["serialized_mb"] = file_size_mb(art)
-        else:
-            tmp = Path(tempfile.mkdtemp(prefix="ksent_"))
-            rec["cost"]["serialized_mb"] = file_size_mb(pipe.save(tmp / "model"))
-            shutil.rmtree(tmp, ignore_errors=True)
+        tmp = Path(tempfile.mkdtemp(prefix="ksent_"))
+        rec["cost"]["serialized_mb"] = file_size_mb(pipe.save(tmp / "model"))
+        shutil.rmtree(tmp, ignore_errors=True)
 
         lat_cfg = g["latency"]
         lat_ids = read_json(processed_dir(dataset) / "latency_ids.json")["review_ids"]
@@ -228,6 +248,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         lat_raw = lat_frame["text_raw"].tolist()
         lat_inputs = _model_inputs(fam, tok, dataset, lat_frame)
         latency: dict[str, Any] = {}
+        set_threads(n_threads)
         if lat_cfg["cpu"]:
             cpu_pipe = pipe if fam == "tfidf" else pipe.to("cpu")
             latency["cpu"] = _latency(cpu_pipe, lat_raw, lat_inputs, int(lat_cfg["n_warmup"]), "cpu")
@@ -276,6 +297,8 @@ def build_parser() -> argparse.ArgumentParser:
     ap.add_argument("--no-latency", action="store_true")
     ap.add_argument("--not-reportable", action="store_true", help="mark timings as not reportable (parallel runs)")
     ap.add_argument("--force", action="store_true", help="re-run even if a valid result exists")
+    ap.add_argument("--run-mode", choices=["quality", "cost"], default="cost",
+                    help="quality: parallel-safe, no latency, timings not reportable; cost: exclusive (default)")
     return ap
 
 
@@ -290,7 +313,12 @@ def main(argv: list[str] | None = None) -> int:
             ap.error("tuning always uses the main tokenizer")
     if args.mode == "final" and (args.allow_fallback or args.amp or args.max_epochs):
         ap.error("--allow-fallback/--amp/--max-epochs are not allowed for final (reported) runs")
-    out_root = args.out_root or default_out_root(args.mode, args.device)
+    if args.run_mode == "quality":
+        args.not_reportable = True
+        args.no_latency = True
+    elif args.not_reportable and args.mode in ("final", "tuning"):
+        ap.error("--not-reportable with --run-mode cost: use --run-mode quality for parallel runs")
+    out_root = args.out_root or default_out_root(args.mode, args.device, args.run_mode)
     args.result_path = result_path(out_root, args.mode, args.dataset, args.method, args.tokenizer, args.size,
                                    args.seed, args.config_id)
     if is_done(args.result_path) and not args.force:
