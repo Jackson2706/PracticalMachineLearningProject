@@ -77,6 +77,10 @@ def build() -> Numbers:
     N.add("nFinalFits", _n(n_final), "planned final fits")
     N.add("nTuningFits", _n(len(g["datasets"]) * len(g["methods"]) * 10), "planned tuning fits")
     N.add("nThreads", str(g["n_threads"]), "CPU threads")
+    sc = g.get("scheduler") or {}
+    N.add("neuralThreads", str(g.get("neural_threads") or g["n_threads"]), "CPU threads per neural training job")
+    N.add("kGpu", str(sc["k_gpu"]) if sc.get("k_gpu") else None, "concurrent neural jobs per GPU (quality runs)")
+    N.add("cpuJobs", str(sc["cpu_jobs"]) if sc.get("cpu_jobs") else None, "concurrent classical jobs (quality runs)")
     N.add("crossoverMargin", f"{float(g['analysis']['crossover_margin']):.1f}", "crossover margin (macro-F1 points)")
     N.add("dataSeed", str(g["data_seed"]), "split seed")
 

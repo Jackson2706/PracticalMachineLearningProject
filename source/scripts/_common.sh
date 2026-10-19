@@ -21,6 +21,10 @@ export CUBLAS_WORKSPACE_CONFIG="${CUBLAS_WORKSPACE_CONFIG:-:4096:8}"
 # scratch/caches off the small overlay disk when /dev/shm is available (see logs/RUN_JOURNAL.md)
 if [ -d /dev/shm ] && [ -w /dev/shm ]; then
   mkdir -p /dev/shm/ksent/tmp /dev/shm/ksent/cache
+  # recreate the targets of bulky-data symlinks (tmpfs is wiped on container restart)
+  for l in data/raw data/tokenized results/models logs/runs; do
+    [ -L "$l" ] && mkdir -p "$(readlink "$l")"
+  done
   export TMPDIR="${TMPDIR:-/dev/shm/ksent/tmp}" TECTONIC_CACHE_DIR="${TECTONIC_CACHE_DIR:-/dev/shm/ksent/cache/tectonic}"
   export MPLCONFIGDIR="${MPLCONFIGDIR:-/dev/shm/ksent/cache/matplotlib}"
 fi

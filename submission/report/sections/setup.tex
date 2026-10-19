@@ -36,8 +36,15 @@ Pareto-efficient against the TF-IDF winner on test macro-F1, CPU end-to-end late
 fit time and peak RAM.
 
 \paragraph{Cost measurement.}
-Each final run executes sequentially in its own process on an otherwise idle machine
-(\cpuModel{}, \nThreads{} CPU threads; accelerator: \gpuModel; \hardwareNote). Neural
+All runs use one machine (\cpuModel{}; accelerator: \gpuModel; \hardwareNote). Every run
+is a separate process with a fixed thread count: \nThreads{} CPU threads for TF-IDF fits
+and all CPU inference, and \neuralThreads{} for neural training. We run in two modes. In
+\emph{quality} runs, which supply all predictive metrics, jobs run concurrently: up to
+\kGpu{} neural jobs share the GPU, and \cpuJobs{} TF-IDF jobs run alongside them. Concurrency
+changes neither a job's thread count nor its device. In \emph{cost} runs, which supply
+every reported time and memory figure, jobs run one at a time on an otherwise idle machine.
+These cover all methods at $n=8{,}000$, the crossover sizes and all tuning fits. We check
+that the two modes produce the same test predictions (\cref{sec:results}). Neural
 models train on \trainDevice{} in \precisionUsed{}; TF-IDF models always run on the CPU. We record end-to-end fit
 time (tokenisation + vectoriser/vocabulary + training) and classifier-only fit time;
 batch-size-1 inference latency on 200 fixed test reviews after 20 warm-up calls
@@ -56,3 +63,9 @@ matrices are summed over \nSeeds{} runs. Tuning is unchanged (\nTuningFits{} fit
 planned. (iii) Preprocessing is specified in more detail than in the proposal (fixed
 normalization rules, Kiwi morphemes with POS tags, \cref{sec:preprocessing}).
 (iv) All results are reported as mean\,$\pm$\,sample standard deviation over \nSeeds{} seeds.
+(v) Cost figures (fit time, latency, memory) are measured in separate exclusive cost runs.
+These cover all methods at $n=8{,}000$ and the crossover sizes; they are not measured at every
+training size.
+(vi) Mamba uses the pure-PyTorch selective scan (\mambaBackend{}), because no
+\texttt{mamba-ssm} build exists for the PyTorch version we used. Its fit time and GPU latency are
+therefore probably higher than the fused kernels would give.
