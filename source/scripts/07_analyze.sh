@@ -17,7 +17,9 @@ done
 python -m ksent.analysis.aggregate $AGG_ARGS
 python -m ksent.analysis.crossover
 python -m ksent.analysis.ablation
+python -m ksent.analysis.compute_usage
 python -m ksent.analysis.make_tables
 # shellcheck disable=SC2086
 python -m ksent.analysis.make_figures $FIG_ARGS
 python -m ksent.analysis.make_numbers
+python -m ksent.analysis.make_summary

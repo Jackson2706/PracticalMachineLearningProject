@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "mode": "final",
+  "dataset": "shopping",
+  "method": "tfidf_lr",
+  "family": "tfidf",
+  "tokenizer": "kiwi",
+  "size": 4000,
+  "seed": 13,
+  "config_id": 5,
+  "config_source": "frozen",
+  "config": {
+    "solver": "liblinear",
+    "max_iter": 2000,
+    "C": 3,
+    "config_id": 5
+  },
+  "git_commit": "9ba4ec4a75a437d013eebda9ffbecbc3bf8e9222-dirty",
+  "timestamp": "2026-10-19T06:58:49+00:00",
+  "hostname": "c6fba5554810",
+  "n_threads": 8,
+  "train_device": "cpu",
+  "device_reason": "classical methods always run on CPU",
+  "precision": "fp32",
+  "timing_reportable": false,
+  "run_mode": "quality",
+  "train_threads": 8,
+  "hardware": {
+    "fingerprint": "cdc5011e44d8",
+    "os": "Linux-5.15.0-144-generic-x86_64-with-glibc2.39",
+    "cpu_model": "AMD EPYC 7C13 64-Core Processor",
+    "gpu_name": "NVIDIA RTX 6000 Ada Generation",
+    "cuda_version": "13.0",
+    "cudnn_version": 92400,
+    "torch": "2.14.1+cu130",
+    "n_threads": 8
+  },
+  "python": "3.12.15",
+  "data": {
+    "n_train": 4000,
+    "n_val": 2000,
+    "n_test": 2000,
+    "train_pct_positive": 50.0
+  },
+  "mamba_backend": null,
+  "implementation": {},
+  "fit": {
+    "featurize_time_s": 0.12804261897690594,
+    "n_features": 10000,
+    "classifier_time_s": 0.020372215018142015,
+    "tokenize_time_s": 0.3571292660199106
+  },
+  "history": null,
+  "cost": {
+    "fit_time_classifier_s": 0.020372215018142015,
+    "fit_time_end_to_end_s": 0.5055441000149585,
+    "tokenize_time_s": 0.3571292660199106,
+    "featurize_time_s": 0.12804261897690594,
+    "peak_accelerator_mem_train_mb": null,
+    "peak_rss_sampled_mb": 1444.234375,
+    "peak_rss_mb": 1444.234375,
+    "rss_before_fit_mb": 1430.1015625,
+    "peak_rss_delta_mb": 14.1328125
+  },
+  "val": {
+    "macro_f1": 0.8909423084811865,
+    "accuracy": 0.891,
+    "macro_precision": 0.8918291103976013,
+    "macro_recall": 0.891,
+    "f1_per_class": [
+      0.8934506353861192,
+      0.8884339815762539
+    ],
+    "confusion": [
+      [
+        914,
+        86
+      ],
+      [
+        132,
+        868
+      ]
+    ],
+    "n": 2000
+  },
+  "test": {
+    "macro_f1": 0.8939728570514052,
+    "accuracy": 0.894,
+    "macro_precision": 0.8944038695624319,
+    "macro_recall": 0.894,
+    "f1_per_class": [
+      0.8956692913385826,
+      0.8922764227642277
+    ],
+    "confusion": [
+      [
+        910,
+        90
+      ],
+      [
+        122,
+        878
+      ]
+    ],
+    "n": 2000
+  },
+  "predictions_path": "/workspace/PracticalMachineLearningProject/source/results/predictions/shopping/tfidf_lr/kiwi/n4000_s13.csv",
+  "model_size": {
+    "n_coef": 10000,
+    "n_nonzero_coef": 10000,
+    "n_features": 10000
+  },
+  "wall_time_s": 5.855176058947109
+}

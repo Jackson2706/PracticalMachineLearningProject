@@ -11,6 +11,7 @@
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx}
 \usepackage{booktabs,multirow,adjustbox,array}
+\usepackage{rotating}                                % landscape pages for wide tables
 \usepackage{xcolor}
 \usepackage{caption,subcaption}
 \usepackage{tikz}
@@ -41,9 +42,15 @@ trained from scratch beats the best of four TF-IDF classifiers by at least
 \crossoverMargin{} macro-F1 point, and whether that neural model remains competitive
 in training time, inference latency and memory. Across \nFinalFits{} final fits
 (\nSeeds{} seeds) we find crossover thresholds of \crossoverNSMC{} (NSMC),
-\crossoverShopping{} (Shopping) and \crossoverSteam{} (Steam). \TBD{one-sentence summary of the cost/Pareto verdict}.
+\crossoverShopping{} (Shopping) and \crossoverSteam{} (Steam): a linear TF-IDF model is the
+most accurate at every size, and at 8{,}000 reviews the best neural model still trails it by
+\gapNSMC, \gapShopping{} and \gapSteam{} points while taking \fitRatioSteam--\fitRatioShopping{}
+longer to train at a similar millisecond-scale CPU latency.
 A tokenizer ablation (eojeol, Kiwi morphemes, characters) tests whether the
-conclusion survives a stronger TF-IDF representation. \TBD{ablation verdict}.
+conclusion survives a stronger TF-IDF representation. It does: Kiwi morphemes are the best
+tokenizer for both families, and with each family's best tokenizer the gap stays below
+\crossoverMargin{} point on every dataset. The gap narrows steadily with more data and no
+method has saturated, so more labels remain the better investment in this regime.
 \end{abstract}
 
 \input{sections/intro}

@@ -4,35 +4,35 @@
 \toprule
 Dataset & Method & 500$\to$1{,}000 & 1{,}000$\to$2{,}000 & 2{,}000$\to$4{,}000 & 4{,}000$\to$8{,}000 \\
 \midrule
-\multirow{9}{*}{NSMC} & TF-IDF + LR & -- & -- & -- & -- \\
- & TF-IDF + SVM & -- & -- & -- & -- \\
- & TF-IDF + RF & -- & -- & -- & -- \\
- & TF-IDF + XGBoost & -- & -- & -- & -- \\
- & Emb + MLP & -- & -- & -- & -- \\
- & Emb + LSTM & -- & -- & -- & -- \\
- & Emb + GRU & -- & -- & -- & -- \\
- & Transformer & -- & -- & -- & -- \\
- & Mamba & -- & -- & -- & -- \\
+\multirow{9}{*}{NSMC} & TF-IDF + LR & 3.44{\scriptsize$\pm$1.10} & 2.29{\scriptsize$\pm$0.78} & 2.11{\scriptsize$\pm$0.67} & 2.02{\scriptsize$\pm$0.40} \\
+ & TF-IDF + SVM & 3.43{\scriptsize$\pm$1.29} & 2.39{\scriptsize$\pm$0.85} & 1.96{\scriptsize$\pm$0.53} & 2.05{\scriptsize$\pm$0.39} \\
+ & TF-IDF + RF & 5.01{\scriptsize$\pm$1.21} & 3.48{\scriptsize$\pm$1.56} & 2.35{\scriptsize$\pm$0.72} & 1.46{\scriptsize$\pm$0.70} \\
+ & TF-IDF + XGBoost & 4.29{\scriptsize$\pm$1.57} & 5.34{\scriptsize$\pm$0.88} & 2.47{\scriptsize$\pm$0.45} & 3.75{\scriptsize$\pm$0.68} \\
+ & Emb + MLP & 3.68{\scriptsize$\pm$2.12} & 5.01{\scriptsize$\pm$1.96} & 2.40{\scriptsize$\pm$1.62} & 2.40{\scriptsize$\pm$1.00} \\
+ & Emb + LSTM & 3.57{\scriptsize$\pm$0.57} & 2.89{\scriptsize$\pm$0.80} & 3.88{\scriptsize$\pm$1.80} & 2.24{\scriptsize$\pm$1.20} \\
+ & Emb + GRU & 4.30{\scriptsize$\pm$1.55} & 3.97{\scriptsize$\pm$2.07} & 2.66{\scriptsize$\pm$1.23} & 3.14{\scriptsize$\pm$0.89} \\
+ & Transformer & 4.71{\scriptsize$\pm$1.44} & 2.96{\scriptsize$\pm$1.66} & 3.10{\scriptsize$\pm$0.88} & 2.14{\scriptsize$\pm$0.65} \\
+ & Mamba & 4.13{\scriptsize$\pm$1.58} & 2.03{\scriptsize$\pm$0.70} & 3.67{\scriptsize$\pm$0.97} & 2.11{\scriptsize$\pm$1.44} \\
 \midrule
-\multirow{9}{*}{Shopping} & TF-IDF + LR & -- & -- & -- & -- \\
- & TF-IDF + SVM & -- & -- & -- & -- \\
- & TF-IDF + RF & -- & -- & -- & -- \\
- & TF-IDF + XGBoost & -- & -- & -- & -- \\
- & Emb + MLP & -- & -- & -- & -- \\
- & Emb + LSTM & -- & -- & -- & -- \\
- & Emb + GRU & -- & -- & -- & -- \\
- & Transformer & -- & -- & -- & -- \\
- & Mamba & -- & -- & -- & -- \\
+\multirow{9}{*}{Shopping} & TF-IDF + LR & 1.44{\scriptsize$\pm$0.36} & 1.31{\scriptsize$\pm$0.19} & 1.06{\scriptsize$\pm$0.92} & 0.76{\scriptsize$\pm$0.47} \\
+ & TF-IDF + SVM & 1.36{\scriptsize$\pm$0.55} & 1.14{\scriptsize$\pm$0.23} & 1.30{\scriptsize$\pm$0.51} & 1.28{\scriptsize$\pm$0.37} \\
+ & TF-IDF + RF & 2.37{\scriptsize$\pm$1.03} & 2.45{\scriptsize$\pm$1.22} & 0.97{\scriptsize$\pm$0.37} & 0.68{\scriptsize$\pm$0.29} \\
+ & TF-IDF + XGBoost & 5.97{\scriptsize$\pm$0.51} & 3.14{\scriptsize$\pm$0.52} & 1.57{\scriptsize$\pm$0.28} & 1.44{\scriptsize$\pm$0.14} \\
+ & Emb + MLP & 3.36{\scriptsize$\pm$2.03} & 1.82{\scriptsize$\pm$1.04} & 1.61{\scriptsize$\pm$0.61} & 0.93{\scriptsize$\pm$0.67} \\
+ & Emb + LSTM & 2.99{\scriptsize$\pm$0.49} & 1.94{\scriptsize$\pm$0.83} & 1.95{\scriptsize$\pm$1.71} & 2.32{\scriptsize$\pm$0.59} \\
+ & Emb + GRU & 3.13{\scriptsize$\pm$0.94} & 1.99{\scriptsize$\pm$0.88} & 2.20{\scriptsize$\pm$0.95} & 1.55{\scriptsize$\pm$0.48} \\
+ & Transformer & 3.21{\scriptsize$\pm$1.49} & 2.18{\scriptsize$\pm$0.97} & 1.44{\scriptsize$\pm$0.50} & 1.53{\scriptsize$\pm$0.64} \\
+ & Mamba & 2.01{\scriptsize$\pm$0.97} & 2.44{\scriptsize$\pm$0.90} & 2.41{\scriptsize$\pm$1.50} & 1.31{\scriptsize$\pm$1.39} \\
 \midrule
-\multirow{9}{*}{Steam} & TF-IDF + LR & -- & -- & -- & -- \\
- & TF-IDF + SVM & -- & -- & -- & -- \\
- & TF-IDF + RF & -- & -- & -- & -- \\
- & TF-IDF + XGBoost & -- & -- & -- & -- \\
- & Emb + MLP & -- & -- & -- & -- \\
- & Emb + LSTM & -- & -- & -- & -- \\
- & Emb + GRU & -- & -- & -- & -- \\
- & Transformer & -- & -- & -- & -- \\
- & Mamba & -- & -- & -- & -- \\
+\multirow{9}{*}{Steam} & TF-IDF + LR & 1.81{\scriptsize$\pm$0.61} & 1.11{\scriptsize$\pm$0.69} & 1.73{\scriptsize$\pm$0.41} & 1.62{\scriptsize$\pm$0.48} \\
+ & TF-IDF + SVM & 1.82{\scriptsize$\pm$0.58} & 1.16{\scriptsize$\pm$0.65} & 1.66{\scriptsize$\pm$0.55} & 1.50{\scriptsize$\pm$0.46} \\
+ & TF-IDF + RF & 3.34{\scriptsize$\pm$1.68} & 1.71{\scriptsize$\pm$0.96} & 1.80{\scriptsize$\pm$0.23} & 1.60{\scriptsize$\pm$0.35} \\
+ & TF-IDF + XGBoost & 4.20{\scriptsize$\pm$0.48} & 3.05{\scriptsize$\pm$1.36} & 3.16{\scriptsize$\pm$0.46} & 0.95{\scriptsize$\pm$0.44} \\
+ & Emb + MLP & 2.87{\scriptsize$\pm$1.53} & 3.72{\scriptsize$\pm$0.80} & 1.98{\scriptsize$\pm$0.85} & 2.49{\scriptsize$\pm$0.47} \\
+ & Emb + LSTM & 5.13{\scriptsize$\pm$5.28} & 2.51{\scriptsize$\pm$1.58} & 1.90{\scriptsize$\pm$0.65} & 3.25{\scriptsize$\pm$1.81} \\
+ & Emb + GRU & 1.98{\scriptsize$\pm$0.99} & 1.99{\scriptsize$\pm$0.64} & 2.59{\scriptsize$\pm$1.22} & 2.67{\scriptsize$\pm$1.39} \\
+ & Transformer & 5.55{\scriptsize$\pm$4.26} & 1.97{\scriptsize$\pm$0.59} & 2.15{\scriptsize$\pm$1.14} & 3.12{\scriptsize$\pm$0.54} \\
+ & Mamba & 2.43{\scriptsize$\pm$0.56} & 2.68{\scriptsize$\pm$0.94} & 2.75{\scriptsize$\pm$1.15} & 2.49{\scriptsize$\pm$1.16} \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}

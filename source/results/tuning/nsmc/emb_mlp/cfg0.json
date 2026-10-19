@@ -1,0 +1,247 @@
+{
+  "status": "ok",
+  "mode": "tuning",
+  "dataset": "nsmc",
+  "method": "emb_mlp",
+  "family": "neural",
+  "tokenizer": "kiwi",
+  "size": 2000,
+  "seed": 0,
+  "config_id": 0,
+  "config_source": "search_space:cfg0",
+  "config": {
+    "n_hidden_layers": 2,
+    "activation": "relu",
+    "lr": 0.0003,
+    "dropout": 0.1,
+    "width": "S",
+    "config_id": 0
+  },
+  "git_commit": "ddc27c4cd1c95c4da833cc7b8e0207942695ce22-dirty",
+  "timestamp": "2026-10-19T05:59:10+00:00",
+  "hostname": "c6fba5554810",
+  "n_threads": 8,
+  "train_device": "cuda",
+  "device_reason": "requested cuda",
+  "precision": "fp32",
+  "timing_reportable": true,
+  "run_mode": "cost",
+  "train_threads": 2,
+  "hardware": {
+    "fingerprint": "cdc5011e44d8",
+    "os": "Linux-5.15.0-144-generic-x86_64-with-glibc2.39",
+    "cpu_model": "AMD EPYC 7C13 64-Core Processor",
+    "gpu_name": "NVIDIA RTX 6000 Ada Generation",
+    "cuda_version": "13.0",
+    "cudnn_version": 92400,
+    "torch": "2.14.1+cu130",
+    "n_threads": 8
+  },
+  "python": "3.12.15",
+  "data": {
+    "n_train": 2000,
+    "n_val": 2000,
+    "n_test": 2000,
+    "train_pct_positive": 49.8
+  },
+  "determinism": "cudnn.deterministic + use_deterministic_algorithms(warn_only)",
+  "determinism_caveat": "cuDNN RNN kernels may remain slightly nondeterministic",
+  "model_device": "cuda:0",
+  "mps_fallbacks": [],
+  "mps_fallback_used": false,
+  "mamba_backend": null,
+  "implementation": {
+    "max_seq_len": 72,
+    "width": 167
+  },
+  "fit": {
+    "featurize_time_s": 0.011052713030949235,
+    "vocab_size": 2224,
+    "model_device": "cuda:0",
+    "params": {
+      "embedding": 284672,
+      "non_embedding": 49935,
+      "total": 334607
+    },
+    "width": 167,
+    "mamba_backend": null,
+    "classifier_time_s": 4.824935986020137,
+    "best_epoch": 20,
+    "epochs_run": 25,
+    "best_val_macro_f1": 0.744631247521421,
+    "peak_accelerator_mem_train_mb": 88.52880859375,
+    "tokenize_time_s": 0.21147477702470496
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.6915685958862304,
+      "val_macro_f1": 0.5847641793939982
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.6829018549919128,
+      "val_macro_f1": 0.6072029472288418
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.6668434238433838,
+      "val_macro_f1": 0.6276351606896522
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.6429458141326905,
+      "val_macro_f1": 0.6458084997933047
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.6102921667098999,
+      "val_macro_f1": 0.6577437765857468
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.5782727179527283,
+      "val_macro_f1": 0.6924830640306354
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.5431077263355255,
+      "val_macro_f1": 0.6993339571778514
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.5142607717514038,
+      "val_macro_f1": 0.7043077260988958
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.48726066303253174,
+      "val_macro_f1": 0.7089813748079877
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.4638517096042633,
+      "val_macro_f1": 0.7189449132029878
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.44907799339294435,
+      "val_macro_f1": 0.7264259416853172
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.42529604864120485,
+      "val_macro_f1": 0.7276655612501256
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.4189983587265015,
+      "val_macro_f1": 0.7271201305795626
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.39316730880737305,
+      "val_macro_f1": 0.7379989519958079
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.36964502930641174,
+      "val_macro_f1": 0.7291506163328196
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.35011700344085694,
+      "val_macro_f1": 0.7368726463608386
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.3411174449920654,
+      "val_macro_f1": 0.733973397339734
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.31029008626937865,
+      "val_macro_f1": 0.7442262845106447
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.2974138000011444,
+      "val_macro_f1": 0.7394290595614657
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.2815176711082458,
+      "val_macro_f1": 0.744631247521421
+    },
+    {
+      "epoch": 21,
+      "train_loss": 0.25993102872371676,
+      "val_macro_f1": 0.736808133129051
+    },
+    {
+      "epoch": 22,
+      "train_loss": 0.26203821051120757,
+      "val_macro_f1": 0.7424298765338864
+    },
+    {
+      "epoch": 23,
+      "train_loss": 0.2295737428665161,
+      "val_macro_f1": 0.7384967965857582
+    },
+    {
+      "epoch": 24,
+      "train_loss": 0.21888822072744368,
+      "val_macro_f1": 0.7384983656147851
+    },
+    {
+      "epoch": 25,
+      "train_loss": 0.21095271492004394,
+      "val_macro_f1": 0.7311983373340731
+    }
+  ],
+  "cost": {
+    "fit_time_classifier_s": 4.824935986020137,
+    "fit_time_end_to_end_s": 5.047463476075791,
+    "tokenize_time_s": 0.21147477702470496,
+    "featurize_time_s": 0.011052713030949235,
+    "peak_accelerator_mem_train_mb": 88.52880859375,
+    "peak_rss_sampled_mb": 2183.83203125,
+    "peak_rss_mb": 2183.83203125,
+    "rss_before_fit_mb": 1417.99609375,
+    "peak_rss_delta_mb": 765.8359375
+  },
+  "val": {
+    "macro_f1": 0.744631247521421,
+    "accuracy": 0.745,
+    "macro_precision": 0.7462025131928045,
+    "macro_recall": 0.7448927040343363,
+    "f1_per_class": [
+      0.7543352601156069,
+      0.7349272349272349
+    ],
+    "confusion": [
+      [
+        783,
+        220
+      ],
+      [
+        290,
+        707
+      ]
+    ],
+    "n": 2000
+  },
+  "preprocessing": {
+    "oov_token_rate": 0.11084770114942528,
+    "oov_review_rate": 0.746,
+    "truncation_rate": 0.0335,
+    "evaluated_on": "val"
+  },
+  "model_size": {
+    "embedding": 284672,
+    "non_embedding": 49935,
+    "total": 334607,
+    "vocab_size": 2224
+  },
+  "wall_time_s": 11.344508658978157
+}

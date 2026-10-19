@@ -39,48 +39,34 @@
   \note{Introduce the team and the one-line question: how many labelled reviews do you need before a neural model is worth it?}
 \end{frame}
 
-\begin{frame}{Motivation}
+\begin{frame}{Label more reviews, or use a bigger model?}
   \begin{itemize}
-    \item A small team has a few hundred labelled Korean reviews. Two options:
-      \begin{itemize}
-        \item \textbf{label more data}, or
-        \item \textbf{use a more complex model}.
-      \end{itemize}
-    \item TF-IDF + linear models: strong at small scale, very cheap.
-    \item Neural sequence models: better with more data, but slower and heavier.
-    \item Goal: turn ``which model?'' into a \textbf{data-collection and deployment decision}.
+    \item A small team has a few hundred labelled Korean reviews and must choose:
+          \textbf{label more data} or \textbf{use a more complex model}.
+    \item TF-IDF + linear models are cheap; neural sequence models need more data and compute.
   \end{itemize}
-  \note{Cite Zhang et al.\ 2015 and Joulin et al.\ 2017: simple baselines win at small scale.}
-\end{frame}
-
-\begin{frame}{Research question}
-  \begin{block}{}
-    For each Korean review dataset, what is the \textbf{minimum training size}
-    (500, 1k, 2k, 4k, 8k) at which the best neural model beats the best TF-IDF
-    model by \textbf{$\ge$ \crossoverMargin{} macro-F1 point}?
-  \end{block}
   \vspace{2mm}
-  \begin{block}{}
-    At that threshold, is the neural model still competitive in
-    \textbf{training time, latency and memory}?
+  \begin{block}{Research question}
+    For each dataset, what is the \textbf{minimum training size} (500, 1k, 2k, 4k, 8k) at which
+    the best neural model beats the best TF-IDF model by \textbf{$\ge$ \crossoverMargin{} macro-F1
+    point}, and is it still competitive in \textbf{training time, latency and memory}?
   \end{block}
+  \note{Frame the decision a team actually faces. Simple baselines are known to win at small
+  scale (Zhang et al.\ 2015; Joulin et al.\ 2017); we measure where that stops for Korean reviews.}
 \end{frame}
 
-\begin{frame}{Datasets}
-  \begin{columns}[T]
-    \begin{column}{0.36\linewidth}
-      \small
-      \begin{itemize}
-        \item \textbf{NSMC}: movie reviews (\nCleanNSMC{} clean)
-        \item \textbf{Shopping}: product reviews, ratings 1--2 / 4--5 (\nCleanShopping)
-        \item \textbf{Steam}: game reviews (\nCleanSteam)
-        \item Fixed 8k pool / 2k val / 2k test, stratified, no text overlap
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.62\linewidth}
-      \input{tables/table1}
-    \end{column}
-  \end{columns}
+\begin{frame}{Three Korean review domains, fixed splits}
+  \small
+  \textbf{NSMC} movie reviews (\nCleanNSMC{} clean) \quad
+  \textbf{Shopping} product reviews, ratings 1--2 / 4--5 (\nCleanShopping) \quad
+  \textbf{Steam} game reviews (\nCleanSteam)\\[1mm]
+  Fixed 8k pool / 2k val / 2k test per dataset, stratified, no text overlap.
+  \vspace{3mm}
+
+  \centering
+  \input{tables/table1}
+  \note{Three domains with different label sources: movie ratings, shopping stars (3 dropped),
+  Steam recommendation flags. All splits are fixed before any modelling.}
 \end{frame}
 
 \begin{frame}{Preprocessing for Korean}
@@ -131,6 +117,8 @@
   \vspace{4mm}
   \small Shared Kiwi morphemes; all vocabularies fitted on the training subset only (neural: min.\ frequency 2).
   Same training rules for every size (AdamW, batch 64, early stopping on val macro-F1).
+  \note{Four TF-IDF and five neural models; neural backbones are budget-matched so that the
+  comparison is about architecture, not size.}
 \end{frame}
 
 \begin{frame}{Protocol}
@@ -144,16 +132,59 @@
     \item Paired comparison: same seed $\Rightarrow$ same training reviews for every method
     \item Tokenizer ablation: +\nAblationFits{} fits
   \end{itemize}
+  \note{Tuning happens once, on validation, at 2k; configurations are then frozen. Test data is
+  never used for any choice.}
 \end{frame}
 
-\begin{frame}{Learning curves}
+\begin{frame}{Hardware and protocol: parallel for quality, exclusive for cost}
+  \small
+  \begin{columns}[T]
+    \begin{column}{0.5\linewidth}
+      \textbf{One machine}
+      \begin{itemize}\small
+        \item \gpuModel, \cpuModel
+        \item fp32; \nThreads{} CPU threads per TF-IDF job and all CPU inference
+        \item Neural training on \trainDevice{} (\neuralThreads{} threads); Mamba: \mambaBackend
+      \end{itemize}
+      \textbf{Two run modes}
+      \begin{itemize}\small
+        \item \emph{Quality}: \kGpu{} neural jobs share the GPU, \cpuJobs{} TF-IDF jobs alongside
+        \item \emph{Cost}: one job at a time, idle machine: all times and memory
+        \item Predictions identical in both modes: \detIdentical/\detRuns{} runs
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\linewidth}
+      \textbf{Compute (busy wall time)}\\[1mm]
+      \begin{tabular}{lrr}
+        \toprule
+        Stage & hours & GPU util \\
+        \midrule
+        Tuning (exclusive) & \wallTuning & \gpuUtilTuning \\
+        Main sweep (parallel) & \wallSweep & \gpuUtilSweep \\
+        Ablation (parallel) & \wallAblation & \gpuUtilAblation \\
+        Cost pass (exclusive) & \wallCostPass & \gpuUtilCostPass \\
+        \midrule
+        Total incl.\ pilot & \wallTotal & \\
+        \bottomrule
+      \end{tabular}
+    \end{column}
+  \end{columns}
+  \note{Running jobs concurrently is fast but distorts timings, so every reported time comes from
+  a separate exclusive run. The determinism check shows concurrency never changed a prediction.
+  The whole study took \wallTotal{} GPU-hours.}
+\end{frame}
+
+\begin{frame}{TF-IDF leads at every size; neural models close the gap}
   \centering
   \includegraphics[width=\linewidth]{figures/fig2_learning_curves.pdf}\\[-1mm]
   {\scriptsize Test macro-F1, mean $\pm$ std over \nSeeds{} seeds (sample std). Dashed = TF-IDF, solid = neural.}
-  \note{Walk through one panel: who leads at 500, where the lines cross.}
+  \note{At 500 reviews the best neural model trails by \ablationGapSmallNSMC{} (NSMC),
+  \ablationGapSmallShopping{} (Shopping) and \ablationGapSmallSteam{} (Steam) points. Neural curves
+  are steeper, but they never cross. Test OOV drops from \oovSmallNSMC{} to \oovLargeNSMC{} on
+  NSMC, one plausible reason for the slow neural start.}
 \end{frame}
 
-\begin{frame}{Crossover threshold per dataset}
+\begin{frame}{No crossover up to 8,000 reviews in any domain}
   \centering
   \input{tables/table5}
   \vspace{3mm}
@@ -162,43 +193,53 @@
     \item NSMC: \crossoverNSMC \quad Shopping: \crossoverShopping \quad Steam: \crossoverSteam
     \item Winners chosen on validation; sensitivity (test-selected): \crossoverTestSelNSMC, \crossoverTestSelShopping, \crossoverTestSelSteam
   \end{itemize}
+  \note{This answers the research question. The gap at 8k is \gapNSMC, \gapShopping{} and
+  \gapSteam{} points, i.e.\ the neural winner is still behind. Steam's neural winner is
+  formally Pareto-efficient only because its CPU latency is slightly lower.}
 \end{frame}
 
-\begin{frame}{Quality vs inference cost ($n$ = 8,000)}
+\begin{frame}{Same millisecond latency, far more training cost}
   \centering
   \includegraphics[width=\linewidth]{figures/fig3_quality_vs_cost.pdf}\\[-1mm]
-  {\scriptsize CPU end-to-end latency per review (batch 1, median); stars = accelerator (\accelDevice) latency; shaded = CPU Pareto front.}
+  {\scriptsize $n$ = 8,000. CPU end-to-end latency per review (batch 1, median); stars = accelerator (\accelDevice) latency; shaded = CPU Pareto front.}
+  \note{Per-review CPU latency is about 1 ms for both families; the GPU does not help at batch
+  size 1. Training is the real cost: the neural winners need \fitRatioSteam--\fitRatioShopping{}
+  the fit time and about \ramRatioNSMC{} the RAM. Random Forest is the latency outlier.}
 \end{frame}
 
-\begin{frame}{Cost at $n$ = 8,000}
+\begin{frame}{Kiwi morphemes help both families; the conclusion holds}
   \centering
-  \scriptsize
-  \input{tables/table4b}
-\end{frame}
-
-\begin{frame}{Tokenizer ablation: does the conclusion depend on Kiwi?}
-  \centering
-  \includegraphics[width=0.78\linewidth]{figures/fig5_tokenizers.pdf}\\[-1mm]
+  \includegraphics[width=0.7\linewidth]{figures/fig5_tokenizers.pdf}\\[-1mm]
   {\scriptsize Best TF-IDF and best neural method per dataset with eojeol / Kiwi / character tokens; mean $\pm$ std over \nSeeds{} seeds.}\\
   \small Gap with each family's best tokenizer at 8k: \ablationGapLargeNSMC{} / \ablationGapLargeShopping{} / \ablationGapLargeSteam{}
   \quad conclusion holds: \ablationHoldsNSMC{} / \ablationHoldsShopping{} / \ablationHoldsSteam
-  \note{Main question: does character TF-IDF close the gap?}
+  \note{Character n-grams do not make TF-IDF stronger here; Kiwi is best for both families in
+  almost every cell. Shopping at 8k: validation picks character TF-IDF, which is worse on test,
+  so the best-tokenizer gap turns positive (\ablationGapLargeShopping), still below
+  \crossoverMargin{} point.}
 \end{frame}
 
-\begin{frame}{Where do models make mistakes?}
+\begin{frame}{Steam is hardest; on Shopping the families err differently}
   \centering
   \includegraphics[width=\linewidth]{figures/fig4_confusion.pdf}\\[-1mm]
   {\scriptsize Confusion matrices at $n$ = 8,000, summed over \nSeeds{} runs, row-normalised (\%).}
-  \note{\TBD{which class is harder per dataset}}
+  \note{NSMC: both classes similar. Shopping: TF-IDF misses positives (\fnrTfidfShopping), the
+  neural winner mislabels negatives (\fprNeuralShopping), which hints at ensemble potential.
+  Steam: about a quarter of each class is wrong for both families; positives slightly harder.}
 \end{frame}
 
-\begin{frame}{Conclusions}
+\begin{frame}{Conclusion: use TF-IDF + a linear model, and label more data}
   \begin{itemize}
     \item Crossover thresholds: NSMC \crossoverNSMC, Shopping \crossoverShopping, Steam \crossoverSteam.
     \item Best at 8k: \bestMethodNSMC{} (\macroFOneBestNSMC), \bestMethodShopping{} (\macroFOneBestShopping), \bestMethodSteam{} (\macroFOneBestSteam).
     \item Neural winner Pareto-efficient? NSMC \paretoNSMC, Shopping \paretoShopping, Steam \paretoSteam.
-    \item \TBD{practical recommendation}
+    \item No method has saturated: the last doubling still adds \gainLastNSMC{} / \gainLastShopping{} / \gainLastSteam{} points (TF-IDF winner).
+    \item \textbf{Recommendation:} up to 8k labelled reviews and no pretrained encoder, deploy a
+          linear model on Kiwi TF-IDF features and invest in labels.
   \end{itemize}
+  \note{Neural models get closer with more data, and a crossover beyond 8k is plausible but
+  untested. Mamba and the Transformer underperform the simple embedding models in this
+  small, from-scratch regime.}
 \end{frame}
 
 \begin{frame}{Limitations}
@@ -211,6 +252,8 @@
     \item One machine (\cpuModel); timings depend on hardware and implementation (Mamba: \mambaBackend).
     \item \nSeeds{} seeds measure variability --- not a significance test.
   \end{itemize}
+  \note{The biggest caveat is the lack of pretrained Korean encoders; with them the answer could
+  be very different.}
 \end{frame}
 
 \begin{frame}{Demo}
@@ -227,10 +270,16 @@
 \end{frame}
 
 \appendix
+\begin{frame}{Backup: cost at $n$ = 8,000}
+  \centering
+  \scriptsize
+  \begin{adjustbox}{max totalheight=0.82\textheight}\input{tables/table4b}\end{adjustbox}
+\end{frame}
+
 \begin{frame}{Backup: test macro-F1 across sizes}
   \centering
   \tiny
-  \input{tables/table3}
+  \begin{adjustbox}{max totalheight=0.82\textheight}\input{tables/table3}\end{adjustbox}
 \end{frame}
 
 \end{document}

@@ -1,6 +1,8 @@
 """Shared analysis helpers: locations, loading, number formatting, method styling."""
 from __future__ import annotations
 
+import re
+
 import math
 from pathlib import Path
 
@@ -15,6 +17,12 @@ TABLE_DIR: Path = REPORT_DIR / "tables"
 FIG_DIR: Path = REPORT_DIR / "figures"
 GEN_DIR: Path = REPORT_DIR / "generated"
 MISSING = "--"
+_MISSING_CELL = re.compile(r"(?:^|&)\s*" + re.escape(MISSING) + r"\s*(?=&|\\\\)", re.M)
+
+
+def count_missing(tex: str) -> int:
+    """Number of table cells that are exactly the MISSING marker (not ``1--2-gram`` en-dashes)."""
+    return len(_MISSING_CELL.findall(tex))
 
 # Colour = method identity (reference palette, 8 validated slots + neutral grey for the 9th).
 # Family is a second channel: TF-IDF dashed + hollow markers, neural solid + filled markers.

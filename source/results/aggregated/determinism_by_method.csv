@@ -1,0 +1,10 @@
+method,family,runs,identical_runs,mean_disagree_pct,max_disagree_pct,max_abs_prob_diff
+emb_gru,neural,15,15,0.0,0.0,0.0
+emb_lstm,neural,15,15,0.0,0.0,0.0
+emb_mlp,neural,15,15,0.0,0.0,0.0
+small_mamba,neural,15,15,0.0,0.0,0.0
+small_transformer,neural,15,15,0.0,0.0,0.0
+tfidf_lr,tfidf,15,15,0.0,0.0,0.0
+tfidf_rf,tfidf,15,15,0.0,0.0,3.3306690738754696e-16
+tfidf_svm,tfidf,15,15,0.0,0.0,
+tfidf_xgb,tfidf,15,15,0.0,0.0,0.0

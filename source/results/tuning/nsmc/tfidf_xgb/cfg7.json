@@ -1,0 +1,99 @@
+{
+  "status": "ok",
+  "mode": "tuning",
+  "dataset": "nsmc",
+  "method": "tfidf_xgb",
+  "family": "tfidf",
+  "tokenizer": "kiwi",
+  "size": 2000,
+  "seed": 0,
+  "config_id": 7,
+  "config_source": "search_space:cfg7",
+  "config": {
+    "tree_method": "hist",
+    "device": "cpu",
+    "eval_metric": "logloss",
+    "n_estimators": 300,
+    "max_depth": 8,
+    "learning_rate": 0.1,
+    "subsample": 1.0,
+    "colsample_bytree": 1.0,
+    "config_id": 7
+  },
+  "git_commit": "ddc27c4cd1c95c4da833cc7b8e0207942695ce22-dirty",
+  "timestamp": "2026-10-19T06:10:06+00:00",
+  "hostname": "c6fba5554810",
+  "n_threads": 8,
+  "train_device": "cpu",
+  "device_reason": "classical methods always run on CPU",
+  "precision": "fp32",
+  "timing_reportable": true,
+  "run_mode": "cost",
+  "train_threads": 8,
+  "hardware": {
+    "fingerprint": "cdc5011e44d8",
+    "os": "Linux-5.15.0-144-generic-x86_64-with-glibc2.39",
+    "cpu_model": "AMD EPYC 7C13 64-Core Processor",
+    "gpu_name": "NVIDIA RTX 6000 Ada Generation",
+    "cuda_version": "13.0",
+    "cudnn_version": 92400,
+    "torch": "2.14.1+cu130",
+    "n_threads": 8
+  },
+  "python": "3.12.15",
+  "data": {
+    "n_train": 2000,
+    "n_val": 2000,
+    "n_test": 2000,
+    "train_pct_positive": 49.8
+  },
+  "mamba_backend": null,
+  "implementation": {},
+  "fit": {
+    "featurize_time_s": 0.134949179016985,
+    "n_features": 10000,
+    "classifier_time_s": 11.908994907978922,
+    "xgb_best_rounds": 174,
+    "xgb_rounds_grown": 224,
+    "tokenize_time_s": 0.21684264700161293
+  },
+  "history": null,
+  "cost": {
+    "fit_time_classifier_s": 11.908994907978922,
+    "fit_time_end_to_end_s": 12.26078673399752,
+    "tokenize_time_s": 0.21684264700161293,
+    "featurize_time_s": 0.134949179016985,
+    "peak_accelerator_mem_train_mb": null,
+    "peak_rss_sampled_mb": 1589.7734375,
+    "peak_rss_mb": 1589.7734375,
+    "rss_before_fit_mb": 1399.6328125,
+    "peak_rss_delta_mb": 190.140625
+  },
+  "val": {
+    "macro_f1": 0.7523855402159648,
+    "accuracy": 0.7525,
+    "macro_precision": 0.7528445512820513,
+    "macro_recall": 0.7524422719804478,
+    "f1_per_class": [
+      0.7577092511013216,
+      0.747061829330608
+    ],
+    "confusion": [
+      [
+        774,
+        229
+      ],
+      [
+        266,
+        731
+      ]
+    ],
+    "n": 2000
+  },
+  "model_size": {
+    "n_trees": 224,
+    "total_nodes": 7308,
+    "n_features": 10000
+  },
+  "wall_time_s": 17.175965922011528
+}

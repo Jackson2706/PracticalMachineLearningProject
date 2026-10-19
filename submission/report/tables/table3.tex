@@ -5,40 +5,40 @@
 Method & $n$=500 & $n$=1{,}000 & $n$=2{,}000 & $n$=4{,}000 & $n$=8{,}000 \\
 \midrule
 \multicolumn{6}{l}{\textit{NSMC}} \\
-TF-IDF + LR & -- & -- & -- & -- & -- \\
-TF-IDF + SVM & -- & -- & -- & -- & -- \\
-TF-IDF + RF & -- & -- & -- & -- & -- \\
-TF-IDF + XGBoost & -- & -- & -- & -- & -- \\
+TF-IDF + LR & 73.59{\scriptsize$\pm$0.89} & 77.03{\scriptsize$\pm$0.77} & 79.32{\scriptsize$\pm$0.76} & 81.43{\scriptsize$\pm$0.40}$^{\dagger}$ & 83.45{\scriptsize$\pm$0.00} \\
+TF-IDF + SVM & \textbf{73.67}{\scriptsize$\pm$0.95}$^{\dagger}$ & \textbf{77.10}{\scriptsize$\pm$0.75}$^{\dagger}$ & \textbf{79.49}{\scriptsize$\pm$0.75}$^{\dagger}$ & \textbf{81.45}{\scriptsize$\pm$0.39} & \textbf{83.50}{\scriptsize$\pm$0.00}$^{\dagger}$ \\
+TF-IDF + RF & 69.13{\scriptsize$\pm$1.11} & 74.15{\scriptsize$\pm$0.53} & 77.63{\scriptsize$\pm$1.06} & 79.98{\scriptsize$\pm$0.66} & 81.43{\scriptsize$\pm$0.23} \\
+TF-IDF + XGBoost & 64.90{\scriptsize$\pm$1.15} & 69.19{\scriptsize$\pm$0.73} & 74.54{\scriptsize$\pm$0.50} & 77.01{\scriptsize$\pm$0.55} & 80.76{\scriptsize$\pm$0.14} \\
 \cmidrule(lr){1-6}
-Emb + MLP & -- & -- & -- & -- & -- \\
-Emb + LSTM & -- & -- & -- & -- & -- \\
-Emb + GRU & -- & -- & -- & -- & -- \\
-Transformer & -- & -- & -- & -- & -- \\
-Mamba & -- & -- & -- & -- & -- \\
+Emb + MLP & 69.16{\scriptsize$\pm$1.29} & 72.84{\scriptsize$\pm$1.99} & 77.84{\scriptsize$\pm$1.04}$^{\ddagger}$ & 80.24{\scriptsize$\pm$0.78}$^{\ddagger}$ & 82.65{\scriptsize$\pm$0.40} \\
+Emb + LSTM & 69.50{\scriptsize$\pm$1.22} & 73.06{\scriptsize$\pm$0.83} & 75.96{\scriptsize$\pm$1.32} & 79.84{\scriptsize$\pm$0.70} & 82.08{\scriptsize$\pm$0.64} \\
+Emb + GRU & 68.96{\scriptsize$\pm$0.96}$^{\ddagger}$ & 73.26{\scriptsize$\pm$1.35}$^{\ddagger}$ & 77.23{\scriptsize$\pm$0.86} & 79.89{\scriptsize$\pm$0.51} & 83.02{\scriptsize$\pm$0.49}$^{\ddagger}$ \\
+Transformer & 68.25{\scriptsize$\pm$1.12} & 72.96{\scriptsize$\pm$1.48} & 75.92{\scriptsize$\pm$0.90} & 79.02{\scriptsize$\pm$0.96} & 81.16{\scriptsize$\pm$0.44} \\
+Mamba & 66.88{\scriptsize$\pm$0.73} & 71.00{\scriptsize$\pm$1.02} & 73.03{\scriptsize$\pm$0.44} & 76.71{\scriptsize$\pm$0.66} & 78.81{\scriptsize$\pm$0.87} \\
 \midrule
 \multicolumn{6}{l}{\textit{Shopping}} \\
-TF-IDF + LR & -- & -- & -- & -- & -- \\
-TF-IDF + SVM & -- & -- & -- & -- & -- \\
-TF-IDF + RF & -- & -- & -- & -- & -- \\
-TF-IDF + XGBoost & -- & -- & -- & -- & -- \\
+TF-IDF + LR & \textbf{85.67}{\scriptsize$\pm$0.62}$^{\dagger}$ & \textbf{87.11}{\scriptsize$\pm$0.66}$^{\dagger}$ & \textbf{88.42}{\scriptsize$\pm$0.59}$^{\dagger}$ & \textbf{89.49}{\scriptsize$\pm$0.47}$^{\dagger}$ & 90.25{\scriptsize$\pm$0.00} \\
+TF-IDF + SVM & 85.37{\scriptsize$\pm$0.67} & 86.73{\scriptsize$\pm$0.61} & 87.87{\scriptsize$\pm$0.41} & 89.17{\scriptsize$\pm$0.37} & \textbf{90.45}{\scriptsize$\pm$0.00}$^{\dagger}$ \\
+TF-IDF + RF & 83.09{\scriptsize$\pm$0.51} & 85.46{\scriptsize$\pm$1.10} & 87.90{\scriptsize$\pm$0.39} & 88.87{\scriptsize$\pm$0.13} & 89.55{\scriptsize$\pm$0.33} \\
+TF-IDF + XGBoost & 77.44{\scriptsize$\pm$0.71} & 83.42{\scriptsize$\pm$0.75} & 86.56{\scriptsize$\pm$0.36} & 88.13{\scriptsize$\pm$0.31} & 89.57{\scriptsize$\pm$0.22} \\
 \cmidrule(lr){1-6}
-Emb + MLP & -- & -- & -- & -- & -- \\
-Emb + LSTM & -- & -- & -- & -- & -- \\
-Emb + GRU & -- & -- & -- & -- & -- \\
-Transformer & -- & -- & -- & -- & -- \\
-Mamba & -- & -- & -- & -- & -- \\
+Emb + MLP & 81.04{\scriptsize$\pm$1.39}$^{\ddagger}$ & 84.40{\scriptsize$\pm$1.09}$^{\ddagger}$ & 86.21{\scriptsize$\pm$0.39}$^{\ddagger}$ & 87.83{\scriptsize$\pm$0.47} & 88.76{\scriptsize$\pm$0.39} \\
+Emb + LSTM & 80.77{\scriptsize$\pm$0.67} & 83.75{\scriptsize$\pm$0.49} & 85.69{\scriptsize$\pm$1.16} & 87.64{\scriptsize$\pm$0.77} & 89.96{\scriptsize$\pm$0.39}$^{\ddagger}$ \\
+Emb + GRU & 80.87{\scriptsize$\pm$0.66} & 83.99{\scriptsize$\pm$0.56} & 85.98{\scriptsize$\pm$0.63} & 88.19{\scriptsize$\pm$0.51}$^{\ddagger}$ & 89.74{\scriptsize$\pm$0.20} \\
+Transformer & 79.69{\scriptsize$\pm$1.17} & 82.90{\scriptsize$\pm$0.95} & 85.08{\scriptsize$\pm$0.67} & 86.52{\scriptsize$\pm$0.44} & 88.04{\scriptsize$\pm$0.41} \\
+Mamba & 79.04{\scriptsize$\pm$0.81} & 81.04{\scriptsize$\pm$0.84} & 83.48{\scriptsize$\pm$0.50} & 85.89{\scriptsize$\pm$1.03} & 87.20{\scriptsize$\pm$0.44} \\
 \midrule
 \multicolumn{6}{l}{\textit{Steam}} \\
-TF-IDF + LR & -- & -- & -- & -- & -- \\
-TF-IDF + SVM & -- & -- & -- & -- & -- \\
-TF-IDF + RF & -- & -- & -- & -- & -- \\
-TF-IDF + XGBoost & -- & -- & -- & -- & -- \\
+TF-IDF + LR & \textbf{69.68}{\scriptsize$\pm$0.39}$^{\dagger}$ & \textbf{71.49}{\scriptsize$\pm$0.59} & 72.60{\scriptsize$\pm$0.66}$^{\dagger}$ & \textbf{74.33}{\scriptsize$\pm$0.48}$^{\dagger}$ & \textbf{75.95}{\scriptsize$\pm$0.00}$^{\dagger}$ \\
+TF-IDF + SVM & 69.66{\scriptsize$\pm$0.44} & 71.48{\scriptsize$\pm$0.58}$^{\dagger}$ & \textbf{72.64}{\scriptsize$\pm$0.67} & 74.30{\scriptsize$\pm$0.46} & 75.80{\scriptsize$\pm$0.00} \\
+TF-IDF + RF & 66.03{\scriptsize$\pm$1.49} & 69.37{\scriptsize$\pm$1.18} & 71.09{\scriptsize$\pm$0.40} & 72.89{\scriptsize$\pm$0.34} & 74.49{\scriptsize$\pm$0.24} \\
+TF-IDF + XGBoost & 61.78{\scriptsize$\pm$1.19} & 65.98{\scriptsize$\pm$1.27} & 69.04{\scriptsize$\pm$0.73} & 72.20{\scriptsize$\pm$0.53} & 73.15{\scriptsize$\pm$0.18} \\
 \cmidrule(lr){1-6}
-Emb + MLP & -- & -- & -- & -- & -- \\
-Emb + LSTM & -- & -- & -- & -- & -- \\
-Emb + GRU & -- & -- & -- & -- & -- \\
-Transformer & -- & -- & -- & -- & -- \\
-Mamba & -- & -- & -- & -- & -- \\
+Emb + MLP & 63.77{\scriptsize$\pm$1.31} & 66.64{\scriptsize$\pm$0.44} & 70.36{\scriptsize$\pm$1.16} & 72.34{\scriptsize$\pm$0.61}$^{\ddagger}$ & 74.83{\scriptsize$\pm$0.24}$^{\ddagger}$ \\
+Emb + LSTM & 60.87{\scriptsize$\pm$5.79} & 66.00{\scriptsize$\pm$1.10} & 68.52{\scriptsize$\pm$1.30} & 70.42{\scriptsize$\pm$1.08} & 73.66{\scriptsize$\pm$0.76} \\
+Emb + GRU & 65.20{\scriptsize$\pm$0.67}$^{\ddagger}$ & 67.18{\scriptsize$\pm$0.80}$^{\ddagger}$ & 69.17{\scriptsize$\pm$0.60}$^{\ddagger}$ & 71.76{\scriptsize$\pm$1.24} & 74.43{\scriptsize$\pm$0.52} \\
+Transformer & 60.95{\scriptsize$\pm$3.49} & 66.51{\scriptsize$\pm$1.08} & 68.48{\scriptsize$\pm$0.98} & 70.63{\scriptsize$\pm$0.46} & 73.75{\scriptsize$\pm$0.40} \\
+Mamba & 62.87{\scriptsize$\pm$0.76} & 65.29{\scriptsize$\pm$0.77} & 67.98{\scriptsize$\pm$0.64} & 70.73{\scriptsize$\pm$0.83} & 73.22{\scriptsize$\pm$0.63} \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}

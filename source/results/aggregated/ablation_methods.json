@@ -1,0 +1,14 @@
+{
+  "nsmc": [
+    "tfidf_svm",
+    "emb_gru"
+  ],
+  "shopping": [
+    "tfidf_svm",
+    "emb_lstm"
+  ],
+  "steam": [
+    "tfidf_lr",
+    "emb_mlp"
+  ]
+}

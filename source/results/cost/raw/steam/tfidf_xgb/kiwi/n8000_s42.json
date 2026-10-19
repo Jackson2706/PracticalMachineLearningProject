@@ -1,0 +1,143 @@
+{
+  "status": "ok",
+  "mode": "final",
+  "dataset": "steam",
+  "method": "tfidf_xgb",
+  "family": "tfidf",
+  "tokenizer": "kiwi",
+  "size": 8000,
+  "seed": 42,
+  "config_id": 0,
+  "config_source": "frozen",
+  "config": {
+    "tree_method": "hist",
+    "device": "cpu",
+    "eval_metric": "logloss",
+    "n_estimators": 488,
+    "max_depth": 4,
+    "learning_rate": 0.05,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "config_id": 0
+  },
+  "git_commit": "9ba4ec4a75a437d013eebda9ffbecbc3bf8e9222-dirty",
+  "timestamp": "2026-10-19T09:36:25+00:00",
+  "hostname": "c6fba5554810",
+  "n_threads": 8,
+  "train_device": "cpu",
+  "device_reason": "classical methods always run on CPU",
+  "precision": "fp32",
+  "timing_reportable": true,
+  "run_mode": "cost",
+  "train_threads": 8,
+  "hardware": {
+    "fingerprint": "cdc5011e44d8",
+    "os": "Linux-5.15.0-144-generic-x86_64-with-glibc2.39",
+    "cpu_model": "AMD EPYC 7C13 64-Core Processor",
+    "gpu_name": "NVIDIA RTX 6000 Ada Generation",
+    "cuda_version": "13.0",
+    "cudnn_version": 92400,
+    "torch": "2.14.1+cu130",
+    "n_threads": 8
+  },
+  "python": "3.12.15",
+  "data": {
+    "n_train": 8000,
+    "n_val": 2000,
+    "n_test": 2000,
+    "train_pct_positive": 50.0
+  },
+  "mamba_backend": null,
+  "implementation": {},
+  "fit": {
+    "featurize_time_s": 0.2598317380179651,
+    "n_features": 10000,
+    "classifier_time_s": 7.631050643045455,
+    "tokenize_time_s": 0.7854742489871569
+  },
+  "history": null,
+  "cost": {
+    "fit_time_classifier_s": 7.631050643045455,
+    "fit_time_end_to_end_s": 8.676356630050577,
+    "tokenize_time_s": 0.7854742489871569,
+    "featurize_time_s": 0.2598317380179651,
+    "peak_accelerator_mem_train_mb": null,
+    "serialized_mb": 1.060256004333496,
+    "peak_rss_sampled_mb": 1632.59375,
+    "peak_rss_mb": 1632.84765625,
+    "rss_before_fit_mb": 1428.6484375,
+    "peak_rss_delta_mb": 203.9453125
+  },
+  "val": {
+    "macro_f1": 0.7395405495293698,
+    "accuracy": 0.74,
+    "macro_precision": 0.7417054738232971,
+    "macro_recall": 0.74,
+    "f1_per_class": [
+      0.7286012526096033,
+      0.7504798464491362
+    ],
+    "confusion": [
+      [
+        698,
+        302
+      ],
+      [
+        218,
+        782
+      ]
+    ],
+    "n": 2000
+  },
+  "test": {
+    "macro_f1": 0.7333527440529033,
+    "accuracy": 0.7335,
+    "macro_precision": 0.7340169434280326,
+    "macro_recall": 0.7335,
+    "f1_per_class": [
+      0.7270865335381465,
+      0.73961895456766
+    ],
+    "confusion": [
+      [
+        710,
+        290
+      ],
+      [
+        243,
+        757
+      ]
+    ],
+    "n": 2000
+  },
+  "predictions_path": "/workspace/PracticalMachineLearningProject/source/results/cost/predictions/steam/tfidf_xgb/kiwi/n8000_s42.csv",
+  "model_size": {
+    "n_trees": 488,
+    "total_nodes": 9844,
+    "n_features": 10000
+  },
+  "latency": {
+    "cpu": {
+      "classifier_only": {
+        "median_ms": 0.32074202317744493,
+        "p95_ms": 0.34032044641207904,
+        "mean_ms": 0.325766074238345,
+        "n": 200,
+        "n_warmup": 20,
+        "device": "cpu"
+      },
+      "end_to_end": {
+        "median_ms": 1.3524474925361574,
+        "p95_ms": 2.5049520278116675,
+        "mean_ms": 1.519115571572911,
+        "n": 200,
+        "n_warmup": 20,
+        "device": "cpu"
+      }
+    }
+  },
+  "latency_devices": [
+    "cpu"
+  ],
+  "wall_time_s": 14.3472891409765
+}

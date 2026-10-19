@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "mode": "tuning",
+  "dataset": "nsmc",
+  "method": "tfidf_rf",
+  "family": "tfidf",
+  "tokenizer": "kiwi",
+  "size": 2000,
+  "seed": 0,
+  "config_id": 5,
+  "config_source": "search_space:cfg5",
+  "config": {
+    "n_estimators": 600,
+    "max_depth": null,
+    "max_features": "log2",
+    "min_samples_leaf": 1,
+    "class_weight": "balanced",
+    "config_id": 5
+  },
+  "git_commit": "ddc27c4cd1c95c4da833cc7b8e0207942695ce22-dirty",
+  "timestamp": "2026-10-19T06:19:58+00:00",
+  "hostname": "c6fba5554810",
+  "n_threads": 8,
+  "train_device": "cpu",
+  "device_reason": "classical methods always run on CPU",
+  "precision": "fp32",
+  "timing_reportable": true,
+  "run_mode": "cost",
+  "train_threads": 8,
+  "hardware": {
+    "fingerprint": "cdc5011e44d8",
+    "os": "Linux-5.15.0-144-generic-x86_64-with-glibc2.39",
+    "cpu_model": "AMD EPYC 7C13 64-Core Processor",
+    "gpu_name": "NVIDIA RTX 6000 Ada Generation",
+    "cuda_version": "13.0",
+    "cudnn_version": 92400,
+    "torch": "2.14.1+cu130",
+    "n_threads": 8
+  },
+  "python": "3.12.15",
+  "data": {
+    "n_train": 2000,
+    "n_val": 2000,
+    "n_test": 2000,
+    "train_pct_positive": 49.8
+  },
+  "mamba_backend": null,
+  "implementation": {},
+  "fit": {
+    "featurize_time_s": 0.06859581102617085,
+    "n_features": 10000,
+    "classifier_time_s": 1.0768730900017545,
+    "tokenize_time_s": 0.21890973503468558
+  },
+  "history": null,
+  "cost": {
+    "fit_time_classifier_s": 1.0768730900017545,
+    "fit_time_end_to_end_s": 1.364378636062611,
+    "tokenize_time_s": 0.21890973503468558,
+    "featurize_time_s": 0.06859581102617085,
+    "peak_accelerator_mem_train_mb": null,
+    "peak_rss_sampled_mb": 1511.5390625,
+    "peak_rss_mb": 1511.609375,
+    "rss_before_fit_mb": 1409.99609375,
+    "peak_rss_delta_mb": 101.54296875
+  },
+  "val": {
+    "macro_f1": 0.7743035876971935,
+    "accuracy": 0.7745,
+    "macro_precision": 0.7752792758089369,
+    "macro_recall": 0.774418469766228,
+    "f1_per_class": [
+      0.7809616318601262,
+      0.7676455435342607
+    ],
+    "confusion": [
+      [
+        804,
+        199
+      ],
+      [
+        252,
+        745
+      ]
+    ],
+    "n": 2000
+  },
+  "model_size": {
+    "n_trees": 600,
+    "total_nodes": 1029614,
+    "mean_depth": 376.29333333333335,
+    "n_features": 10000
+  },
+  "wall_time_s": 6.564382415032014
+}

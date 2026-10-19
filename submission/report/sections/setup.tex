@@ -19,7 +19,7 @@ TF-IDF and neural runs with the same seed see exactly the same reviews.
 
 \paragraph{Metrics.}
 Macro-F1 is the primary metric; accuracy, macro-precision and macro-recall are
-secondary. We report mean\,$\pm$\,sample standard deviation over seeds; the seeds
+secondary (\cref{tab:a1acc,tab:a1p,tab:a1r}). We report mean\,$\pm$\,sample standard deviation over seeds; the seeds
 measure variability but do not constitute a significance test. Confusion matrices at
 $n=8{,}000$ are summed over the \nSeeds{} runs and row-normalised. The marginal value of
 labels is the per-seed macro-F1 gain between adjacent sizes.
@@ -54,7 +54,21 @@ additionally on the accelerator (\accelDevice) for neural methods, with device
 synchronisation around every call; peak host RAM of the process; peak accelerator
 memory; serialised artefact size; and model size
 (parameters, non-zero coefficients or tree nodes). Hardware and software versions
-are listed in \cref{tab:a6}.
+are listed in \cref{tab:a6}. As a check on the two-mode design, every cost run was compared
+with its quality run: \detIdentical{} of \detRuns{} runs produced identical test
+predictions (maximum disagreement \detMaxDisagree), so concurrency did not affect any
+predictive result.
+
+\paragraph{Compute used.}
+All experiments ran on a single machine with one \gpuModel{} and a \cpuModel{},
+in \precisionUsed. Busy wall-clock time per stage, from the first job start to the last job
+end, was: pilot \wallPilot{}\,h, tuning \wallTuning{}\,h (exclusive), main sweep
+\wallSweep{}\,h (parallel, mean GPU utilisation \gpuUtilSweep), tokenizer ablation
+\wallAblation{}\,h (parallel, \gpuUtilAblation) and cost pass \wallCostPass{}\,h
+(exclusive). The total is \wallTotal{}\,h, i.e.\ \wallTotal{} GPU-hours on one GPU; the
+neural jobs alone add up to \gpuJobHours{}\,h of job time, because up to \kGpu{} of them
+shared the GPU. The exclusive stages leave the GPU mostly idle (\gpuUtilTuning{} in tuning,
+\gpuUtilCostPass{} in the cost pass), as they must for undisturbed timings.
 
 \paragraph{Deviations from the proposal.}
 (i) \nSeeds{} seeds instead of 3, i.e.\ \nFinalFits{} instead of 405 final fits; confusion
@@ -69,3 +83,5 @@ training size.
 (vi) Mamba uses the pure-PyTorch selective scan (\mambaBackend{}), because no
 \texttt{mamba-ssm} build exists for the PyTorch version we used. Its fit time and GPU latency are
 therefore probably higher than the fused kernels would give.
+(vii) Because no crossover was observed, no additional cost runs at a crossover size were
+needed; all cost figures refer to $n=8{,}000$.

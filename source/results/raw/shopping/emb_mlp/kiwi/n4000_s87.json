@@ -1,0 +1,249 @@
+{
+  "status": "ok",
+  "mode": "final",
+  "dataset": "shopping",
+  "method": "emb_mlp",
+  "family": "neural",
+  "tokenizer": "kiwi",
+  "size": 4000,
+  "seed": 87,
+  "config_id": 6,
+  "config_source": "frozen",
+  "config": {
+    "n_hidden_layers": 2,
+    "activation": "relu",
+    "lr": 0.002,
+    "dropout": 0.5,
+    "width": "S",
+    "config_id": 6
+  },
+  "git_commit": "9ba4ec4a75a437d013eebda9ffbecbc3bf8e9222-dirty",
+  "timestamp": "2026-10-19T07:59:22+00:00",
+  "hostname": "c6fba5554810",
+  "n_threads": 8,
+  "train_device": "cuda",
+  "device_reason": "requested cuda",
+  "precision": "fp32",
+  "timing_reportable": false,
+  "run_mode": "quality",
+  "train_threads": 2,
+  "hardware": {
+    "fingerprint": "cdc5011e44d8",
+    "os": "Linux-5.15.0-144-generic-x86_64-with-glibc2.39",
+    "cpu_model": "AMD EPYC 7C13 64-Core Processor",
+    "gpu_name": "NVIDIA RTX 6000 Ada Generation",
+    "cuda_version": "13.0",
+    "cudnn_version": 92400,
+    "torch": "2.14.1+cu130",
+    "n_threads": 8
+  },
+  "python": "3.12.15",
+  "data": {
+    "n_train": 4000,
+    "n_val": 2000,
+    "n_test": 2000,
+    "train_pct_positive": 50.0
+  },
+  "determinism": "cudnn.deterministic + use_deterministic_algorithms(warn_only)",
+  "determinism_caveat": "cuDNN RNN kernels may remain slightly nondeterministic",
+  "model_device": "cuda:0",
+  "mps_fallbacks": [],
+  "mps_fallback_used": false,
+  "mamba_backend": null,
+  "implementation": {
+    "max_seq_len": 72,
+    "width": 167
+  },
+  "fit": {
+    "featurize_time_s": 0.025642225984483957,
+    "vocab_size": 3258,
+    "model_device": "cuda:0",
+    "params": {
+      "embedding": 417024,
+      "non_embedding": 49935,
+      "total": 466959
+    },
+    "width": 167,
+    "mamba_backend": null,
+    "classifier_time_s": 4.937713019025978,
+    "best_epoch": 16,
+    "epochs_run": 21,
+    "best_val_macro_f1": 0.8819924475166411,
+    "peak_accelerator_mem_train_mb": 91.13818359375,
+    "tokenize_time_s": 0.3900409889756702
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.6184726848602294,
+      "val_macro_f1": 0.7980249040806235
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.5062746105194091,
+      "val_macro_f1": 0.828999828999829
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.4497933220863342,
+      "val_macro_f1": 0.8423975189867212
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.41007518100738527,
+      "val_macro_f1": 0.8574919839240958
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.3826362736225128,
+      "val_macro_f1": 0.8639835420085831
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.3539823114871979,
+      "val_macro_f1": 0.873999495997984
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.3345185880661011,
+      "val_macro_f1": 0.8699426447063154
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.32203376936912537,
+      "val_macro_f1": 0.8719783643435741
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.3046813032627106,
+      "val_macro_f1": 0.8749898741798086
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.2812961568832397,
+      "val_macro_f1": 0.8729918714797746
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.273084431886673,
+      "val_macro_f1": 0.8789901982060547
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.2509771934747696,
+      "val_macro_f1": 0.8799941197118659
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.24784554028511047,
+      "val_macro_f1": 0.8779901171994932
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.2469301792383194,
+      "val_macro_f1": 0.8734111029470446
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.2325754531621933,
+      "val_macro_f1": 0.8784839294996764
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.2170977100133896,
+      "val_macro_f1": 0.8819924475166411
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.20885589373111724,
+      "val_macro_f1": 0.8754835326971993
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.20657429313659667,
+      "val_macro_f1": 0.8764196418721274
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.18356188839673995,
+      "val_macro_f1": 0.877999877999878
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.1810536602139473,
+      "val_macro_f1": 0.8809855992575102
+    },
+    {
+      "epoch": 21,
+      "train_loss": 0.17540074902772904,
+      "val_macro_f1": 0.8759920634920635
+    }
+  ],
+  "cost": {
+    "fit_time_classifier_s": 4.937713019025978,
+    "fit_time_end_to_end_s": 5.353396233986132,
+    "tokenize_time_s": 0.3900409889756702,
+    "featurize_time_s": 0.025642225984483957,
+    "peak_accelerator_mem_train_mb": 91.13818359375,
+    "peak_rss_sampled_mb": 2174.09765625,
+    "peak_rss_mb": 2174.09765625,
+    "rss_before_fit_mb": 1407.44140625,
+    "peak_rss_delta_mb": 766.65625
+  },
+  "val": {
+    "macro_f1": 0.8819924475166411,
+    "accuracy": 0.882,
+    "macro_precision": 0.8820978170411625,
+    "macro_recall": 0.882,
+    "f1_per_class": [
+      0.8829365079365079,
+      0.8810483870967742
+    ],
+    "confusion": [
+      [
+        890,
+        110
+      ],
+      [
+        126,
+        874
+      ]
+    ],
+    "n": 2000
+  },
+  "preprocessing": {
+    "oov_token_rate": 0.059435008590131136,
+    "oov_review_rate": 0.573,
+    "truncation_rate": 0.017,
+    "evaluated_on": "test"
+  },
+  "test": {
+    "macro_f1": 0.8809855992575102,
+    "accuracy": 0.881,
+    "macro_precision": 0.8811844932947546,
+    "macro_recall": 0.881,
+    "f1_per_class": [
+      0.8822947576656776,
+      0.8796764408493428
+    ],
+    "confusion": [
+      [
+        892,
+        108
+      ],
+      [
+        130,
+        870
+      ]
+    ],
+    "n": 2000
+  },
+  "predictions_path": "/workspace/PracticalMachineLearningProject/source/results/predictions/shopping/emb_mlp/kiwi/n4000_s87.csv",
+  "model_size": {
+    "embedding": 417024,
+    "non_embedding": 49935,
+    "total": 466959,
+    "vocab_size": 3258
+  },
+  "wall_time_s": 12.27294554898981
+}

@@ -4,20 +4,20 @@
 \toprule
 Dataset & Selection & $n$=500 & $n$=1{,}000 & $n$=2{,}000 & $n$=4{,}000 & $n$=8{,}000 & Threshold \\
 \midrule
-\multirow{4}{*}{NSMC} & validation & -- & -- & -- & -- & -- & -- \\
- & &  &  &  &  &  & \\
- & test & -- & -- & -- & -- & -- & -- \\
- & &  &  &  &  &  & \\
+\multirow{4}{*}{NSMC} & validation & -4.71{\scriptsize$\pm$1.24} & -3.83{\scriptsize$\pm$1.13} & -1.64{\scriptsize$\pm$1.07} & -1.19{\scriptsize$\pm$1.07} & -0.48{\scriptsize$\pm$0.49} & none \\
+ & & {\scriptsize GRU vs SVM} & {\scriptsize GRU vs SVM} & {\scriptsize MLP vs SVM} & {\scriptsize MLP vs LR} & {\scriptsize GRU vs SVM} & \\
+ & test & -4.18{\scriptsize$\pm$1.35} & -3.83{\scriptsize$\pm$1.13} & -1.64{\scriptsize$\pm$1.07} & -1.21{\scriptsize$\pm$0.97} & -0.48{\scriptsize$\pm$0.49} & none \\
+ & & {\scriptsize LSTM vs SVM} & {\scriptsize GRU vs SVM} & {\scriptsize MLP vs SVM} & {\scriptsize MLP vs SVM} & {\scriptsize GRU vs SVM} & \\
 \midrule
-\multirow{4}{*}{Shopping} & validation & -- & -- & -- & -- & -- & -- \\
- & &  &  &  &  &  & \\
- & test & -- & -- & -- & -- & -- & -- \\
- & &  &  &  &  &  & \\
+\multirow{4}{*}{Shopping} & validation & -4.64{\scriptsize$\pm$1.98} & -2.72{\scriptsize$\pm$0.68} & -2.21{\scriptsize$\pm$0.61} & -1.30{\scriptsize$\pm$0.68} & -0.49{\scriptsize$\pm$0.39} & none \\
+ & & {\scriptsize MLP vs LR} & {\scriptsize MLP vs LR} & {\scriptsize MLP vs LR} & {\scriptsize GRU vs LR} & {\scriptsize LSTM vs SVM} & \\
+ & test & -4.64{\scriptsize$\pm$1.98} & -2.72{\scriptsize$\pm$0.68} & -2.21{\scriptsize$\pm$0.61} & -1.30{\scriptsize$\pm$0.68} & -0.49{\scriptsize$\pm$0.39} & none \\
+ & & {\scriptsize MLP vs LR} & {\scriptsize MLP vs LR} & {\scriptsize MLP vs LR} & {\scriptsize GRU vs LR} & {\scriptsize LSTM vs SVM} & \\
 \midrule
-\multirow{4}{*}{Steam} & validation & -- & -- & -- & -- & -- & -- \\
- & &  &  &  &  &  & \\
- & test & -- & -- & -- & -- & -- & -- \\
- & &  &  &  &  &  & \\
+\multirow{4}{*}{Steam} & validation & -4.48{\scriptsize$\pm$0.67} & -4.30{\scriptsize$\pm$0.46} & -3.42{\scriptsize$\pm$0.82} & -1.99{\scriptsize$\pm$0.72} & -1.12{\scriptsize$\pm$0.24} & none \\
+ & & {\scriptsize GRU vs LR} & {\scriptsize GRU vs SVM} & {\scriptsize GRU vs LR} & {\scriptsize MLP vs LR} & {\scriptsize MLP vs LR} & \\
+ & test & -4.48{\scriptsize$\pm$0.67} & -4.31{\scriptsize$\pm$0.51} & -2.28{\scriptsize$\pm$1.23} & -1.99{\scriptsize$\pm$0.72} & -1.12{\scriptsize$\pm$0.24} & none \\
+ & & {\scriptsize GRU vs LR} & {\scriptsize GRU vs LR} & {\scriptsize MLP vs SVM} & {\scriptsize MLP vs LR} & {\scriptsize MLP vs LR} & \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}

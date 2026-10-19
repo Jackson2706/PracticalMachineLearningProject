@@ -1,0 +1,249 @@
+{
+  "status": "ok",
+  "mode": "tuning",
+  "dataset": "steam",
+  "method": "small_transformer",
+  "family": "neural",
+  "tokenizer": "kiwi",
+  "size": 2000,
+  "seed": 0,
+  "config_id": 0,
+  "config_source": "search_space:cfg0",
+  "config": {
+    "num_layers": 2,
+    "nhead": 4,
+    "ff_mult": 2,
+    "pooling": "mean",
+    "lr": 0.0003,
+    "dropout": 0.1,
+    "width": "S",
+    "config_id": 0
+  },
+  "git_commit": "ddc27c4cd1c95c4da833cc7b8e0207942695ce22-dirty",
+  "timestamp": "2026-10-19T05:55:40+00:00",
+  "hostname": "c6fba5554810",
+  "n_threads": 8,
+  "train_device": "cuda",
+  "device_reason": "requested cuda",
+  "precision": "fp32",
+  "timing_reportable": true,
+  "run_mode": "cost",
+  "train_threads": 2,
+  "hardware": {
+    "fingerprint": "cdc5011e44d8",
+    "os": "Linux-5.15.0-144-generic-x86_64-with-glibc2.39",
+    "cpu_model": "AMD EPYC 7C13 64-Core Processor",
+    "gpu_name": "NVIDIA RTX 6000 Ada Generation",
+    "cuda_version": "13.0",
+    "cudnn_version": 92400,
+    "torch": "2.14.1+cu130",
+    "n_threads": 8
+  },
+  "python": "3.12.15",
+  "data": {
+    "n_train": 2000,
+    "n_val": 2000,
+    "n_test": 2000,
+    "train_pct_positive": 50.0
+  },
+  "determinism": "cudnn.deterministic + use_deterministic_algorithms(warn_only)",
+  "determinism_caveat": "cuDNN RNN kernels may remain slightly nondeterministic",
+  "model_device": "cuda:0",
+  "mps_fallbacks": [],
+  "mps_fallback_used": false,
+  "mamba_backend": null,
+  "implementation": {
+    "max_seq_len": 72,
+    "width": 52
+  },
+  "fit": {
+    "featurize_time_s": 0.013442308001685888,
+    "vocab_size": 2630,
+    "model_device": "cuda:0",
+    "params": {
+      "embedding": 340384,
+      "non_embedding": 51326,
+      "total": 391710
+    },
+    "width": 52,
+    "mamba_backend": null,
+    "classifier_time_s": 14.035239214019384,
+    "best_epoch": 20,
+    "epochs_run": 25,
+    "best_val_macro_f1": 0.682998731994928,
+    "peak_accelerator_mem_train_mb": 134.66748046875,
+    "tokenize_time_s": 0.2621546480222605
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.7007455945014953,
+      "val_macro_f1": 0.4599894198554047
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.6872291975021362,
+      "val_macro_f1": 0.5843101918466129
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.671923129081726,
+      "val_macro_f1": 0.5925713363481695
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.646935875415802,
+      "val_macro_f1": 0.6120801162454875
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.6287474575042724,
+      "val_macro_f1": 0.6306068202680444
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.6083048734664916,
+      "val_macro_f1": 0.6405845157001493
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.584321264743805,
+      "val_macro_f1": 0.6421812450129956
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.5678777103424072,
+      "val_macro_f1": 0.6514748190556767
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.5495686292648315,
+      "val_macro_f1": 0.6522912878455293
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.544094765663147,
+      "val_macro_f1": 0.6596057451320609
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.5124115772247314,
+      "val_macro_f1": 0.66302613049601
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.5055927572250366,
+      "val_macro_f1": 0.6669037351794669
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.4860622110366821,
+      "val_macro_f1": 0.6711002751894946
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.4759758915901184,
+      "val_macro_f1": 0.6694860357850119
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.4619506232738495,
+      "val_macro_f1": 0.6708928836606344
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.4310298352241516,
+      "val_macro_f1": 0.6739701866081119
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.41808741664886473,
+      "val_macro_f1": 0.6718205865693452
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.39774361610412595,
+      "val_macro_f1": 0.679401816806397
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.3797532093524933,
+      "val_macro_f1": 0.6704309708079059
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.36818684005737307,
+      "val_macro_f1": 0.682998731994928
+    },
+    {
+      "epoch": 21,
+      "train_loss": 0.33821760284900665,
+      "val_macro_f1": 0.6755868563462443
+    },
+    {
+      "epoch": 22,
+      "train_loss": 0.3318465278148651,
+      "val_macro_f1": 0.6789537693427854
+    },
+    {
+      "epoch": 23,
+      "train_loss": 0.3140861086845398,
+      "val_macro_f1": 0.674049528424887
+    },
+    {
+      "epoch": 24,
+      "train_loss": 0.29236761689186097,
+      "val_macro_f1": 0.6734933882411119
+    },
+    {
+      "epoch": 25,
+      "train_loss": 0.28915154135227206,
+      "val_macro_f1": 0.676927308644445
+    }
+  ],
+  "cost": {
+    "fit_time_classifier_s": 14.035239214019384,
+    "fit_time_end_to_end_s": 14.31083617004333,
+    "tokenize_time_s": 0.2621546480222605,
+    "featurize_time_s": 0.013442308001685888,
+    "peak_accelerator_mem_train_mb": 134.66748046875,
+    "peak_rss_sampled_mb": 2298.09375,
+    "peak_rss_mb": 2298.09375,
+    "rss_before_fit_mb": 1408.74609375,
+    "peak_rss_delta_mb": 889.34765625
+  },
+  "val": {
+    "macro_f1": 0.682998731994928,
+    "accuracy": 0.683,
+    "macro_precision": 0.6830029280468487,
+    "macro_recall": 0.683,
+    "f1_per_class": [
+      0.6836327345309381,
+      0.6823647294589178
+    ],
+    "confusion": [
+      [
+        685,
+        315
+      ],
+      [
+        319,
+        681
+      ]
+    ],
+    "n": 2000
+  },
+  "preprocessing": {
+    "oov_token_rate": 0.09683637600634992,
+    "oov_review_rate": 0.7715,
+    "truncation_rate": 0.024,
+    "evaluated_on": "val"
+  },
+  "model_size": {
+    "embedding": 340384,
+    "non_embedding": 51326,
+    "total": 391710,
+    "vocab_size": 2630
+  },
+  "wall_time_s": 20.96213070995873
+}

@@ -4,24 +4,24 @@
 \toprule
 Item & Value \\
 \midrule
-CPU & Apple M4 \\
-Cores (physical / logical) & 10 / 10 \\
-RAM (GB) & 16.0 \\
-GPU & Apple M4 GPU (MPS) \\
-GPU memory (GB) & -- \\
-CUDA / cuDNN & n/a / n/a \\
-OS & macOS-27.0.1-arm64-arm-64bit \\
+CPU & AMD EPYC 7C13 64-Core Processor \\
+Cores (physical / logical) & 64 / 128 \\
+RAM (GB) & 503.5 \\
+GPU & NVIDIA RTX 6000 Ada Generation \\
+GPU memory (GB) & 47.4 \\
+CUDA / cuDNN & 13.0 / 92400 \\
+OS & Linux-5.15.0-144-generic-x86\_64-with-glibc2.39 \\
 Python & 3.12.15 \\
-PyTorch & 2.14.1 \\
+PyTorch & 2.14.1+cu130 \\
 scikit-learn & 1.9.1 \\
 XGBoost & 3.4.1 \\
 kiwipiepy & 0.24.0 \\
 CPU threads & 8 \\
-Neural training device & -- \\
-Accelerator latency device & -- \\
-Mamba backend & -- \\
+Neural training device & cuda \\
+Accelerator latency device & cuda \\
+Mamba backend & torch\_ref \\
 Precision & fp32 \\
-Hardware fingerprint(s) & -- \\
+Hardware fingerprint(s) & cdc5011e44d8 \\
 Max sequence length & kiwi: 72, whitespace: 32, char: 96 \\
 Latency protocol & batch 1, 20 warm-up calls, 200 fixed test reviews, median \\
 \bottomrule

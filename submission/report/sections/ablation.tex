@@ -42,5 +42,18 @@ TF-IDF tokenizer at 8{,}000 is \bestTokenizerTfidfNSMC/\bestTokenizerTfidfShoppi
 and the best neural tokenizer \bestTokenizerNeuralNSMC/\bestTokenizerNeuralShopping/\bestTokenizerNeuralSteam{}
 (NSMC/Shopping/Steam). The main conclusion (whether the gap reaches \crossoverMargin{} point)
 holds with the best tokenizers on NSMC: \ablationHoldsNSMC; Shopping: \ablationHoldsShopping;
-Steam: \ablationHoldsSteam. \TBD{interpret: does character TF-IDF close the gap? is Kiwi's
-linguistic knowledge what helps the neural models?}
+Steam: \ablationHoldsSteam.
+
+A stronger TF-IDF representation does not change the picture, because character $n$-grams
+are \emph{not} stronger here. Kiwi morphemes are the best tokenizer for both families in
+almost every cell of \cref{tab:ablation}, and eojeol tokens are clearly the worst. Korean
+attaches particles and endings to the stem, so whole eojeol are sparse and most of them
+are unseen at small sizes. The single exception is Shopping at $n=8{,}000$. There,
+validation selects character $n$-grams for TF-IDF, but on test they do worse than Kiwi
+morphemes. The paired gap with each family's validation-selected tokenizer therefore turns
+positive (\ablationGapLargeShopping{} points). It still stays below the
+\crossoverMargin-point margin, and it comes from a selection miss on the TF-IDF side, not
+from a neural gain. Kiwi's linguistic knowledge helps both families. Removing it (eojeol or
+characters) costs the TF-IDF and the neural model similar amounts, with no consistent
+advantage for either. The conclusion of the main experiment (no crossover up to 8{,}000) is therefore not
+an artefact of the tokenizer choice.

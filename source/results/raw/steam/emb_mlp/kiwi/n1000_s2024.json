@@ -1,0 +1,249 @@
+{
+  "status": "ok",
+  "mode": "final",
+  "dataset": "steam",
+  "method": "emb_mlp",
+  "family": "neural",
+  "tokenizer": "kiwi",
+  "size": 1000,
+  "seed": 2024,
+  "config_id": 4,
+  "config_source": "frozen",
+  "config": {
+    "n_hidden_layers": 2,
+    "activation": "relu",
+    "lr": 0.001,
+    "dropout": 0.5,
+    "width": "M",
+    "config_id": 4
+  },
+  "git_commit": "9ba4ec4a75a437d013eebda9ffbecbc3bf8e9222-dirty",
+  "timestamp": "2026-10-19T08:05:30+00:00",
+  "hostname": "c6fba5554810",
+  "n_threads": 8,
+  "train_device": "cuda",
+  "device_reason": "requested cuda",
+  "precision": "fp32",
+  "timing_reportable": false,
+  "run_mode": "quality",
+  "train_threads": 2,
+  "hardware": {
+    "fingerprint": "cdc5011e44d8",
+    "os": "Linux-5.15.0-144-generic-x86_64-with-glibc2.39",
+    "cpu_model": "AMD EPYC 7C13 64-Core Processor",
+    "gpu_name": "NVIDIA RTX 6000 Ada Generation",
+    "cuda_version": "13.0",
+    "cudnn_version": 92400,
+    "torch": "2.14.1+cu130",
+    "n_threads": 8
+  },
+  "python": "3.12.15",
+  "data": {
+    "n_train": 1000,
+    "n_val": 2000,
+    "n_test": 2000,
+    "train_pct_positive": 50.0
+  },
+  "determinism": "cudnn.deterministic + use_deterministic_algorithms(warn_only)",
+  "determinism_caveat": "cuDNN RNN kernels may remain slightly nondeterministic",
+  "model_device": "cuda:0",
+  "mps_fallbacks": [],
+  "mps_fallback_used": false,
+  "mamba_backend": null,
+  "implementation": {
+    "max_seq_len": 72,
+    "width": 386
+  },
+  "fit": {
+    "featurize_time_s": 0.007398339046631008,
+    "vocab_size": 1645,
+    "model_device": "cuda:0",
+    "params": {
+      "embedding": 210560,
+      "non_embedding": 199950,
+      "total": 410510
+    },
+    "width": 386,
+    "mamba_backend": null,
+    "classifier_time_s": 2.3354240729822777,
+    "best_epoch": 16,
+    "epochs_run": 21,
+    "best_val_macro_f1": 0.6798856820592483,
+    "peak_accelerator_mem_train_mb": 90.52734375,
+    "tokenize_time_s": 0.16798475198447704
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.6955912017822266,
+      "val_macro_f1": 0.4045568255014455
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.6885903062820434,
+      "val_macro_f1": 0.4313872425460408
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.6754181790351867,
+      "val_macro_f1": 0.5645406857795516
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.6747487225532531,
+      "val_macro_f1": 0.5447472128093124
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.6608330307006836,
+      "val_macro_f1": 0.6136097483779079
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.6433044505119324,
+      "val_macro_f1": 0.6097049308293465
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.6326934318542481,
+      "val_macro_f1": 0.6315740996592061
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.6182636232376099,
+      "val_macro_f1": 0.6231476042163133
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.6388646364212036,
+      "val_macro_f1": 0.6454531111739528
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.6024096813201905,
+      "val_macro_f1": 0.651746989928974
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.5795021004676819,
+      "val_macro_f1": 0.6514162527547243
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.5744072337150574,
+      "val_macro_f1": 0.6565533752405066
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.5744792442321778,
+      "val_macro_f1": 0.6426344293568136
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.5587031364440918,
+      "val_macro_f1": 0.6647138605472234
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.5369011621475219,
+      "val_macro_f1": 0.676237023522356
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.539109893321991,
+      "val_macro_f1": 0.6798856820592483
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.5243717203140259,
+      "val_macro_f1": 0.6709308543457695
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.5068060531616211,
+      "val_macro_f1": 0.6692694161402538
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.5034533772468567,
+      "val_macro_f1": 0.663770855294246
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.4870892767906189,
+      "val_macro_f1": 0.6698808269785392
+    },
+    {
+      "epoch": 21,
+      "train_loss": 0.5075770227909088,
+      "val_macro_f1": 0.6741443590698202
+    }
+  ],
+  "cost": {
+    "fit_time_classifier_s": 2.3354240729822777,
+    "fit_time_end_to_end_s": 2.5108071640133858,
+    "tokenize_time_s": 0.16798475198447704,
+    "featurize_time_s": 0.007398339046631008,
+    "peak_accelerator_mem_train_mb": 90.52734375,
+    "peak_rss_sampled_mb": 2158.40625,
+    "peak_rss_mb": 2158.40625,
+    "rss_before_fit_mb": 1398.68359375,
+    "peak_rss_delta_mb": 759.72265625
+  },
+  "val": {
+    "macro_f1": 0.6798856820592483,
+    "accuracy": 0.681,
+    "macro_precision": 0.683555831396363,
+    "macro_recall": 0.681,
+    "f1_per_class": [
+      0.6987724268177526,
+      0.6609989373007439
+    ],
+    "confusion": [
+      [
+        740,
+        260
+      ],
+      [
+        378,
+        622
+      ]
+    ],
+    "n": 2000
+  },
+  "preprocessing": {
+    "oov_token_rate": 0.13716666339143593,
+    "oov_review_rate": 0.843,
+    "truncation_rate": 0.02,
+    "evaluated_on": "test"
+  },
+  "test": {
+    "macro_f1": 0.6650232076735761,
+    "accuracy": 0.666,
+    "macro_precision": 0.6679590746466788,
+    "macro_recall": 0.6659999999999999,
+    "f1_per_class": [
+      0.683111954459203,
+      0.6469344608879493
+    ],
+    "confusion": [
+      [
+        720,
+        280
+      ],
+      [
+        388,
+        612
+      ]
+    ],
+    "n": 2000
+  },
+  "predictions_path": "/workspace/PracticalMachineLearningProject/source/results/predictions/steam/emb_mlp/kiwi/n1000_s2024.csv",
+  "model_size": {
+    "embedding": 210560,
+    "non_embedding": 199950,
+    "total": 410510,
+    "vocab_size": 1645
+  },
+  "wall_time_s": 9.415485624980647
+}

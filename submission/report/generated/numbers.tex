@@ -6,23 +6,26 @@
 \newcommand{\nFinalFits}{675}  % planned final fits
 \newcommand{\nTuningFits}{270}  % planned tuning fits
 \newcommand{\nThreads}{8}  % CPU threads
+\newcommand{\neuralThreads}{2}  % CPU threads per neural training job
+\newcommand{\kGpu}{4}  % concurrent neural jobs per GPU (quality runs)
+\newcommand{\cpuJobs}{6}  % concurrent classical jobs (quality runs)
 \newcommand{\crossoverMargin}{1.0}  % crossover margin (macro-F1 points)
 \newcommand{\dataSeed}{2026}  % split seed
-\newcommand{\cpuModel}{Apple M4}  % CPU model
-\newcommand{\gpuModel}{Apple M4 GPU (MPS)}  % GPU / accelerator model
-\newcommand{\trainDevice}{\TBD{trainDevice}}  % neural training device(s) of the reported runs
-\newcommand{\accelDevice}{\TBD{accelDevice}}  % accelerator used for neural latency
-\newcommand{\precisionUsed}{\TBD{precisionUsed}}  % numeric precision of reported runs
-\newcommand{\mambaBackend}{\TBD{mambaBackend}}  % Mamba backend of reported runs
+\newcommand{\cpuModel}{AMD EPYC 7C13 64-Core Processor}  % CPU model
+\newcommand{\gpuModel}{NVIDIA RTX 6000 Ada Generation}  % GPU / accelerator model
+\newcommand{\trainDevice}{cuda}  % neural training device(s) of the reported runs
+\newcommand{\accelDevice}{cuda}  % accelerator used for neural latency
+\newcommand{\precisionUsed}{fp32}  % numeric precision of reported runs
+\newcommand{\mambaBackend}{torch\_ref}  % Mamba backend of reported runs
 \newcommand{\hardwareNote}{all results from one machine}  % hardware consistency
-\newcommand{\nRunsDone}{\TBD{nRunsDone}}  % successful main runs
-\newcommand{\nAblationRunsDone}{\TBD{nAblationRunsDone}}  % successful ablation-only runs
+\newcommand{\nRunsDone}{675}  % successful main runs
+\newcommand{\nAblationRunsDone}{120}  % successful ablation-only runs
 \newcommand{\nAblationFits}{120}  % planned new ablation fits
 \newcommand{\maxSeqLenKiwi}{72}  % max sequence length (kiwi)
 \newcommand{\maxSeqLenWhitespace}{32}  % max sequence length (whitespace)
 \newcommand{\maxSeqLenChar}{96}  % max sequence length (char)
-\newcommand{\totalTuningHours}{\TBD{totalTuningHours}}  % total tuning fit time (h)
-\newcommand{\totalSweepHours}{\TBD{totalSweepHours}}  % total wall time of final runs (h)
+\newcommand{\totalTuningHours}{0.91}  % total tuning fit time (h)
+\newcommand{\totalSweepHours}{6.6}  % total wall time of final runs (h)
 \newcommand{\nRawNSMC}{200{,}000}  % NSMC raw reviews
 \newcommand{\nCleanNSMC}{193{,}909}  % NSMC reviews after cleaning
 \newcommand{\nKiwiEmptyNSMC}{0}  % NSMC reviews dropped for zero Kiwi tokens
@@ -31,34 +34,34 @@
 \newcommand{\truncKiwiNSMC}{2.5\%}  % NSMC train-pool reviews truncated (Kiwi)
 \newcommand{\oovSmallNSMC}{20.5\%}  % NSMC test OOV token rate (Kiwi vocab) at n=500
 \newcommand{\oovLargeNSMC}{5.9\%}  % NSMC test OOV token rate (Kiwi vocab) at n=8000
-\newcommand{\ablationTfidfNSMC}{\TBD{ablationTfidfNSMC}}  % ablation TF-IDF method
-\newcommand{\ablationNeuralNSMC}{\TBD{ablationNeuralNSMC}}  % ablation neural method
-\newcommand{\ablationGapSmallNSMC}{\TBD{ablationGapSmallNSMC}}  % gap with each family's best tokenizer at n=500
-\newcommand{\ablationGapLargeNSMC}{\TBD{ablationGapLargeNSMC}}  % gap with each family's best tokenizer at n=8000
-\newcommand{\bestTokenizerTfidfNSMC}{\TBD{bestTokenizerTfidfNSMC}}  % best TF-IDF tokenizer (validation) at n=8000
-\newcommand{\bestTokenizerNeuralNSMC}{\TBD{bestTokenizerNeuralNSMC}}  % best neural tokenizer (validation) at n=8000
-\newcommand{\ablationHoldsNSMC}{\TBD{ablationHoldsNSMC}}  % does the main conclusion hold with the best tokenizers
-\newcommand{\crossoverNSMC}{\TBD{crossoverNSMC}}  % NSMC crossover threshold (val-selected winners)
-\newcommand{\crossoverTestSelNSMC}{\TBD{crossoverTestSelNSMC}}  % NSMC threshold with test-selected winners (sensitivity)
-\newcommand{\evalSizeNSMC}{\TBD{evalSizeNSMC}}  % size used for the Pareto check
-\newcommand{\bestTfidfNSMC}{\TBD{bestTfidfNSMC}}  % best TF-IDF method at eval size
-\newcommand{\bestNeuralNSMC}{\TBD{bestNeuralNSMC}}  % best neural method at eval size
-\newcommand{\gapNSMC}{\TBD{gapNSMC}}  % neural - TF-IDF test macro-F1 gap at eval size (points)
-\newcommand{\paretoNSMC}{\TBD{paretoNSMC}}  % is the neural winner Pareto-efficient vs the TF-IDF winner
-\newcommand{\latencyRatioNSMC}{\TBD{latencyRatioNSMC}}  % neural / TF-IDF latency ratio
-\newcommand{\fitRatioNSMC}{\TBD{fitRatioNSMC}}  % neural / TF-IDF fit ratio
-\newcommand{\ramRatioNSMC}{\TBD{ramRatioNSMC}}  % neural / TF-IDF ram ratio
-\newcommand{\tfidfLatencyNSMC}{\TBD{tfidfLatencyNSMC}}  % TF-IDF winner CPU e2e ms
-\newcommand{\neuralLatencyNSMC}{\TBD{neuralLatencyNSMC}}  % neural winner CPU e2e ms
-\newcommand{\bestMethodNSMC}{\TBD{bestMethodNSMC}}  % best method by test macro-F1 at n=8000
-\newcommand{\macroFOneBestNSMC}{\TBD{macroFOneBestNSMC}}  % its test macro-F1 (x100) at n=8000
-\newcommand{\bestEightKTfidfNSMC}{\TBD{bestEightKTfidfNSMC}}  % val-selected best tfidf at n=8000
-\newcommand{\macroFOneEightKTfidfNSMC}{\TBD{macroFOneEightKTfidfNSMC}}  % its test macro-F1 (x100) at n=8000
-\newcommand{\bestEightKNeuralNSMC}{\TBD{bestEightKNeuralNSMC}}  % val-selected best neural at n=8000
-\newcommand{\macroFOneEightKNeuralNSMC}{\TBD{macroFOneEightKNeuralNSMC}}  % its test macro-F1 (x100) at n=8000
-\newcommand{\mambaFOneNSMC}{\TBD{mambaFOneNSMC}}  % Mamba test macro-F1 at n=8000
-\newcommand{\gainFirstNSMC}{\TBD{gainFirstNSMC}}  % best method's macro-F1 gain 500->1000 (points)
-\newcommand{\gainLastNSMC}{\TBD{gainLastNSMC}}  % best method's macro-F1 gain 4000->8000 (points)
+\newcommand{\ablationTfidfNSMC}{TF-IDF + SVM}  % ablation TF-IDF method
+\newcommand{\ablationNeuralNSMC}{Emb + GRU}  % ablation neural method
+\newcommand{\ablationGapSmallNSMC}{\ensuremath{-4.71 \pm 1.24}}  % gap with each family's best tokenizer at n=500
+\newcommand{\ablationGapLargeNSMC}{\ensuremath{-0.48 \pm 0.49}}  % gap with each family's best tokenizer at n=8000
+\newcommand{\bestTokenizerTfidfNSMC}{Kiwi}  % best TF-IDF tokenizer (validation) at n=8000
+\newcommand{\bestTokenizerNeuralNSMC}{Kiwi}  % best neural tokenizer (validation) at n=8000
+\newcommand{\ablationHoldsNSMC}{yes}  % does the main conclusion hold with the best tokenizers
+\newcommand{\crossoverNSMC}{none up to 8{,}000}  % NSMC crossover threshold (val-selected winners)
+\newcommand{\crossoverTestSelNSMC}{none up to 8{,}000}  % NSMC threshold with test-selected winners (sensitivity)
+\newcommand{\evalSizeNSMC}{8{,}000}  % size used for the Pareto check
+\newcommand{\bestTfidfNSMC}{TF-IDF + SVM}  % best TF-IDF method at eval size
+\newcommand{\bestNeuralNSMC}{Emb + GRU}  % best neural method at eval size
+\newcommand{\gapNSMC}{\ensuremath{-0.48 \pm 0.49}}  % neural - TF-IDF test macro-F1 gap at eval size (points)
+\newcommand{\paretoNSMC}{no}  % is the neural winner Pareto-efficient vs the TF-IDF winner
+\newcommand{\latencyRatioNSMC}{1.2\ensuremath{\times}}  % neural / TF-IDF latency ratio
+\newcommand{\fitRatioNSMC}{54.4\ensuremath{\times}}  % neural / TF-IDF fit ratio
+\newcommand{\ramRatioNSMC}{1.6\ensuremath{\times}}  % neural / TF-IDF ram ratio
+\newcommand{\tfidfLatencyNSMC}{1.045}  % TF-IDF winner CPU e2e ms
+\newcommand{\neuralLatencyNSMC}{1.214}  % neural winner CPU e2e ms
+\newcommand{\bestMethodNSMC}{TF-IDF + SVM}  % best method by test macro-F1 at n=8000
+\newcommand{\macroFOneBestNSMC}{\ensuremath{83.50 \pm 0.00}}  % its test macro-F1 (x100) at n=8000
+\newcommand{\bestEightKTfidfNSMC}{TF-IDF + SVM}  % val-selected best tfidf at n=8000
+\newcommand{\macroFOneEightKTfidfNSMC}{\ensuremath{83.50 \pm 0.00}}  % its test macro-F1 (x100) at n=8000
+\newcommand{\bestEightKNeuralNSMC}{Emb + GRU}  % val-selected best neural at n=8000
+\newcommand{\macroFOneEightKNeuralNSMC}{\ensuremath{83.02 \pm 0.49}}  % its test macro-F1 (x100) at n=8000
+\newcommand{\mambaFOneNSMC}{\ensuremath{78.81 \pm 0.87}}  % Mamba test macro-F1 at n=8000
+\newcommand{\gainFirstNSMC}{\ensuremath{3.43 \pm 1.29}}  % best method's macro-F1 gain 500->1000 (points)
+\newcommand{\gainLastNSMC}{\ensuremath{2.05 \pm 0.39}}  % best method's macro-F1 gain 4000->8000 (points)
 \newcommand{\nRawShopping}{200{,}000}  % Shopping raw reviews
 \newcommand{\nCleanShopping}{199{,}881}  % Shopping reviews after cleaning
 \newcommand{\nKiwiEmptyShopping}{0}  % Shopping reviews dropped for zero Kiwi tokens
@@ -67,34 +70,34 @@
 \newcommand{\truncKiwiShopping}{1.2\%}  % Shopping train-pool reviews truncated (Kiwi)
 \newcommand{\oovSmallShopping}{16.6\%}  % Shopping test OOV token rate (Kiwi vocab) at n=500
 \newcommand{\oovLargeShopping}{4.2\%}  % Shopping test OOV token rate (Kiwi vocab) at n=8000
-\newcommand{\ablationTfidfShopping}{\TBD{ablationTfidfShopping}}  % ablation TF-IDF method
-\newcommand{\ablationNeuralShopping}{\TBD{ablationNeuralShopping}}  % ablation neural method
-\newcommand{\ablationGapSmallShopping}{\TBD{ablationGapSmallShopping}}  % gap with each family's best tokenizer at n=500
-\newcommand{\ablationGapLargeShopping}{\TBD{ablationGapLargeShopping}}  % gap with each family's best tokenizer at n=8000
-\newcommand{\bestTokenizerTfidfShopping}{\TBD{bestTokenizerTfidfShopping}}  % best TF-IDF tokenizer (validation) at n=8000
-\newcommand{\bestTokenizerNeuralShopping}{\TBD{bestTokenizerNeuralShopping}}  % best neural tokenizer (validation) at n=8000
-\newcommand{\ablationHoldsShopping}{\TBD{ablationHoldsShopping}}  % does the main conclusion hold with the best tokenizers
-\newcommand{\crossoverShopping}{\TBD{crossoverShopping}}  % Shopping crossover threshold (val-selected winners)
-\newcommand{\crossoverTestSelShopping}{\TBD{crossoverTestSelShopping}}  % Shopping threshold with test-selected winners (sensitivity)
-\newcommand{\evalSizeShopping}{\TBD{evalSizeShopping}}  % size used for the Pareto check
-\newcommand{\bestTfidfShopping}{\TBD{bestTfidfShopping}}  % best TF-IDF method at eval size
-\newcommand{\bestNeuralShopping}{\TBD{bestNeuralShopping}}  % best neural method at eval size
-\newcommand{\gapShopping}{\TBD{gapShopping}}  % neural - TF-IDF test macro-F1 gap at eval size (points)
-\newcommand{\paretoShopping}{\TBD{paretoShopping}}  % is the neural winner Pareto-efficient vs the TF-IDF winner
-\newcommand{\latencyRatioShopping}{\TBD{latencyRatioShopping}}  % neural / TF-IDF latency ratio
-\newcommand{\fitRatioShopping}{\TBD{fitRatioShopping}}  % neural / TF-IDF fit ratio
-\newcommand{\ramRatioShopping}{\TBD{ramRatioShopping}}  % neural / TF-IDF ram ratio
-\newcommand{\tfidfLatencyShopping}{\TBD{tfidfLatencyShopping}}  % TF-IDF winner CPU e2e ms
-\newcommand{\neuralLatencyShopping}{\TBD{neuralLatencyShopping}}  % neural winner CPU e2e ms
-\newcommand{\bestMethodShopping}{\TBD{bestMethodShopping}}  % best method by test macro-F1 at n=8000
-\newcommand{\macroFOneBestShopping}{\TBD{macroFOneBestShopping}}  % its test macro-F1 (x100) at n=8000
-\newcommand{\bestEightKTfidfShopping}{\TBD{bestEightKTfidfShopping}}  % val-selected best tfidf at n=8000
-\newcommand{\macroFOneEightKTfidfShopping}{\TBD{macroFOneEightKTfidfShopping}}  % its test macro-F1 (x100) at n=8000
-\newcommand{\bestEightKNeuralShopping}{\TBD{bestEightKNeuralShopping}}  % val-selected best neural at n=8000
-\newcommand{\macroFOneEightKNeuralShopping}{\TBD{macroFOneEightKNeuralShopping}}  % its test macro-F1 (x100) at n=8000
-\newcommand{\mambaFOneShopping}{\TBD{mambaFOneShopping}}  % Mamba test macro-F1 at n=8000
-\newcommand{\gainFirstShopping}{\TBD{gainFirstShopping}}  % best method's macro-F1 gain 500->1000 (points)
-\newcommand{\gainLastShopping}{\TBD{gainLastShopping}}  % best method's macro-F1 gain 4000->8000 (points)
+\newcommand{\ablationTfidfShopping}{TF-IDF + SVM}  % ablation TF-IDF method
+\newcommand{\ablationNeuralShopping}{Emb + LSTM}  % ablation neural method
+\newcommand{\ablationGapSmallShopping}{\ensuremath{-4.60 \pm 0.58}}  % gap with each family's best tokenizer at n=500
+\newcommand{\ablationGapLargeShopping}{\ensuremath{0.77 \pm 0.39}}  % gap with each family's best tokenizer at n=8000
+\newcommand{\bestTokenizerTfidfShopping}{character}  % best TF-IDF tokenizer (validation) at n=8000
+\newcommand{\bestTokenizerNeuralShopping}{Kiwi}  % best neural tokenizer (validation) at n=8000
+\newcommand{\ablationHoldsShopping}{yes}  % does the main conclusion hold with the best tokenizers
+\newcommand{\crossoverShopping}{none up to 8{,}000}  % Shopping crossover threshold (val-selected winners)
+\newcommand{\crossoverTestSelShopping}{none up to 8{,}000}  % Shopping threshold with test-selected winners (sensitivity)
+\newcommand{\evalSizeShopping}{8{,}000}  % size used for the Pareto check
+\newcommand{\bestTfidfShopping}{TF-IDF + SVM}  % best TF-IDF method at eval size
+\newcommand{\bestNeuralShopping}{Emb + LSTM}  % best neural method at eval size
+\newcommand{\gapShopping}{\ensuremath{-0.49 \pm 0.39}}  % neural - TF-IDF test macro-F1 gap at eval size (points)
+\newcommand{\paretoShopping}{no}  % is the neural winner Pareto-efficient vs the TF-IDF winner
+\newcommand{\latencyRatioShopping}{1.4\ensuremath{\times}}  % neural / TF-IDF latency ratio
+\newcommand{\fitRatioShopping}{61.3\ensuremath{\times}}  % neural / TF-IDF fit ratio
+\newcommand{\ramRatioShopping}{1.7\ensuremath{\times}}  % neural / TF-IDF ram ratio
+\newcommand{\tfidfLatencyShopping}{1.042}  % TF-IDF winner CPU e2e ms
+\newcommand{\neuralLatencyShopping}{1.503}  % neural winner CPU e2e ms
+\newcommand{\bestMethodShopping}{TF-IDF + SVM}  % best method by test macro-F1 at n=8000
+\newcommand{\macroFOneBestShopping}{\ensuremath{90.45 \pm 0.00}}  % its test macro-F1 (x100) at n=8000
+\newcommand{\bestEightKTfidfShopping}{TF-IDF + SVM}  % val-selected best tfidf at n=8000
+\newcommand{\macroFOneEightKTfidfShopping}{\ensuremath{90.45 \pm 0.00}}  % its test macro-F1 (x100) at n=8000
+\newcommand{\bestEightKNeuralShopping}{Emb + LSTM}  % val-selected best neural at n=8000
+\newcommand{\macroFOneEightKNeuralShopping}{\ensuremath{89.96 \pm 0.39}}  % its test macro-F1 (x100) at n=8000
+\newcommand{\mambaFOneShopping}{\ensuremath{87.20 \pm 0.44}}  % Mamba test macro-F1 at n=8000
+\newcommand{\gainFirstShopping}{\ensuremath{1.36 \pm 0.55}}  % best method's macro-F1 gain 500->1000 (points)
+\newcommand{\gainLastShopping}{\ensuremath{1.28 \pm 0.37}}  % best method's macro-F1 gain 4000->8000 (points)
 \newcommand{\nRawSteam}{100{,}000}  % Steam raw reviews
 \newcommand{\nCleanSteam}{99{,}774}  % Steam reviews after cleaning
 \newcommand{\nKiwiEmptySteam}{0}  % Steam reviews dropped for zero Kiwi tokens
@@ -103,31 +106,69 @@
 \newcommand{\truncKiwiSteam}{2.2\%}  % Steam train-pool reviews truncated (Kiwi)
 \newcommand{\oovSmallSteam}{18.6\%}  % Steam test OOV token rate (Kiwi vocab) at n=500
 \newcommand{\oovLargeSteam}{5.1\%}  % Steam test OOV token rate (Kiwi vocab) at n=8000
-\newcommand{\ablationTfidfSteam}{\TBD{ablationTfidfSteam}}  % ablation TF-IDF method
-\newcommand{\ablationNeuralSteam}{\TBD{ablationNeuralSteam}}  % ablation neural method
-\newcommand{\ablationGapSmallSteam}{\TBD{ablationGapSmallSteam}}  % gap with each family's best tokenizer at n=500
-\newcommand{\ablationGapLargeSteam}{\TBD{ablationGapLargeSteam}}  % gap with each family's best tokenizer at n=8000
-\newcommand{\bestTokenizerTfidfSteam}{\TBD{bestTokenizerTfidfSteam}}  % best TF-IDF tokenizer (validation) at n=8000
-\newcommand{\bestTokenizerNeuralSteam}{\TBD{bestTokenizerNeuralSteam}}  % best neural tokenizer (validation) at n=8000
-\newcommand{\ablationHoldsSteam}{\TBD{ablationHoldsSteam}}  % does the main conclusion hold with the best tokenizers
-\newcommand{\crossoverSteam}{\TBD{crossoverSteam}}  % Steam crossover threshold (val-selected winners)
-\newcommand{\crossoverTestSelSteam}{\TBD{crossoverTestSelSteam}}  % Steam threshold with test-selected winners (sensitivity)
-\newcommand{\evalSizeSteam}{\TBD{evalSizeSteam}}  % size used for the Pareto check
-\newcommand{\bestTfidfSteam}{\TBD{bestTfidfSteam}}  % best TF-IDF method at eval size
-\newcommand{\bestNeuralSteam}{\TBD{bestNeuralSteam}}  % best neural method at eval size
-\newcommand{\gapSteam}{\TBD{gapSteam}}  % neural - TF-IDF test macro-F1 gap at eval size (points)
-\newcommand{\paretoSteam}{\TBD{paretoSteam}}  % is the neural winner Pareto-efficient vs the TF-IDF winner
-\newcommand{\latencyRatioSteam}{\TBD{latencyRatioSteam}}  % neural / TF-IDF latency ratio
-\newcommand{\fitRatioSteam}{\TBD{fitRatioSteam}}  % neural / TF-IDF fit ratio
-\newcommand{\ramRatioSteam}{\TBD{ramRatioSteam}}  % neural / TF-IDF ram ratio
-\newcommand{\tfidfLatencySteam}{\TBD{tfidfLatencySteam}}  % TF-IDF winner CPU e2e ms
-\newcommand{\neuralLatencySteam}{\TBD{neuralLatencySteam}}  % neural winner CPU e2e ms
-\newcommand{\bestMethodSteam}{\TBD{bestMethodSteam}}  % best method by test macro-F1 at n=8000
-\newcommand{\macroFOneBestSteam}{\TBD{macroFOneBestSteam}}  % its test macro-F1 (x100) at n=8000
-\newcommand{\bestEightKTfidfSteam}{\TBD{bestEightKTfidfSteam}}  % val-selected best tfidf at n=8000
-\newcommand{\macroFOneEightKTfidfSteam}{\TBD{macroFOneEightKTfidfSteam}}  % its test macro-F1 (x100) at n=8000
-\newcommand{\bestEightKNeuralSteam}{\TBD{bestEightKNeuralSteam}}  % val-selected best neural at n=8000
-\newcommand{\macroFOneEightKNeuralSteam}{\TBD{macroFOneEightKNeuralSteam}}  % its test macro-F1 (x100) at n=8000
-\newcommand{\mambaFOneSteam}{\TBD{mambaFOneSteam}}  % Mamba test macro-F1 at n=8000
-\newcommand{\gainFirstSteam}{\TBD{gainFirstSteam}}  % best method's macro-F1 gain 500->1000 (points)
-\newcommand{\gainLastSteam}{\TBD{gainLastSteam}}  % best method's macro-F1 gain 4000->8000 (points)
+\newcommand{\ablationTfidfSteam}{TF-IDF + LR}  % ablation TF-IDF method
+\newcommand{\ablationNeuralSteam}{Emb + MLP}  % ablation neural method
+\newcommand{\ablationGapSmallSteam}{\ensuremath{-5.92 \pm 1.57}}  % gap with each family's best tokenizer at n=500
+\newcommand{\ablationGapLargeSteam}{\ensuremath{-1.12 \pm 0.24}}  % gap with each family's best tokenizer at n=8000
+\newcommand{\bestTokenizerTfidfSteam}{Kiwi}  % best TF-IDF tokenizer (validation) at n=8000
+\newcommand{\bestTokenizerNeuralSteam}{Kiwi}  % best neural tokenizer (validation) at n=8000
+\newcommand{\ablationHoldsSteam}{yes}  % does the main conclusion hold with the best tokenizers
+\newcommand{\crossoverSteam}{none up to 8{,}000}  % Steam crossover threshold (val-selected winners)
+\newcommand{\crossoverTestSelSteam}{none up to 8{,}000}  % Steam threshold with test-selected winners (sensitivity)
+\newcommand{\evalSizeSteam}{8{,}000}  % size used for the Pareto check
+\newcommand{\bestTfidfSteam}{TF-IDF + LR}  % best TF-IDF method at eval size
+\newcommand{\bestNeuralSteam}{Emb + MLP}  % best neural method at eval size
+\newcommand{\gapSteam}{\ensuremath{-1.12 \pm 0.24}}  % neural - TF-IDF test macro-F1 gap at eval size (points)
+\newcommand{\paretoSteam}{yes}  % is the neural winner Pareto-efficient vs the TF-IDF winner
+\newcommand{\latencyRatioSteam}{0.7\ensuremath{\times}}  % neural / TF-IDF latency ratio
+\newcommand{\fitRatioSteam}{11.4\ensuremath{\times}}  % neural / TF-IDF fit ratio
+\newcommand{\ramRatioSteam}{1.6\ensuremath{\times}}  % neural / TF-IDF ram ratio
+\newcommand{\tfidfLatencySteam}{1.165}  % TF-IDF winner CPU e2e ms
+\newcommand{\neuralLatencySteam}{0.826}  % neural winner CPU e2e ms
+\newcommand{\bestMethodSteam}{TF-IDF + LR}  % best method by test macro-F1 at n=8000
+\newcommand{\macroFOneBestSteam}{\ensuremath{75.95 \pm 0.00}}  % its test macro-F1 (x100) at n=8000
+\newcommand{\bestEightKTfidfSteam}{TF-IDF + LR}  % val-selected best tfidf at n=8000
+\newcommand{\macroFOneEightKTfidfSteam}{\ensuremath{75.95 \pm 0.00}}  % its test macro-F1 (x100) at n=8000
+\newcommand{\bestEightKNeuralSteam}{Emb + MLP}  % val-selected best neural at n=8000
+\newcommand{\macroFOneEightKNeuralSteam}{\ensuremath{74.83 \pm 0.24}}  % its test macro-F1 (x100) at n=8000
+\newcommand{\mambaFOneSteam}{\ensuremath{73.22 \pm 0.63}}  % Mamba test macro-F1 at n=8000
+\newcommand{\gainFirstSteam}{\ensuremath{1.81 \pm 0.61}}  % best method's macro-F1 gain 500->1000 (points)
+\newcommand{\gainLastSteam}{\ensuremath{1.62 \pm 0.48}}  % best method's macro-F1 gain 4000->8000 (points)
+\newcommand{\wallPilot}{0.17}  % C pilot: busy wall time (h)
+\newcommand{\gpuUtilPilot}{27\%}  % C pilot: mean GPU util
+\newcommand{\cpuUtilPilot}{2.7\%}  % C pilot: mean CPU util (all logical cores)
+\newcommand{\wallTuning}{1.65}  % D tuning: busy wall time (h)
+\newcommand{\gpuUtilTuning}{22\%}  % D tuning: mean GPU util
+\newcommand{\cpuUtilTuning}{2.8\%}  % D tuning: mean CPU util (all logical cores)
+\newcommand{\wallSweep}{1.54}  % E main sweep: busy wall time (h)
+\newcommand{\gpuUtilSweep}{88\%}  % E main sweep: mean GPU util
+\newcommand{\cpuUtilSweep}{6.4\%}  % E main sweep: mean CPU util (all logical cores)
+\newcommand{\wallAblation}{0.12}  % F ablation: busy wall time (h)
+\newcommand{\gpuUtilAblation}{75\%}  % F ablation: mean GPU util
+\newcommand{\cpuUtilAblation}{7.5\%}  % F ablation: mean CPU util (all logical cores)
+\newcommand{\wallCostPass}{1.72}  % G cost pass: busy wall time (h)
+\newcommand{\gpuUtilCostPass}{27\%}  % G cost pass: mean GPU util
+\newcommand{\cpuUtilCostPass}{3.1\%}  % G cost pass: mean CPU util (all logical cores)
+\newcommand{\wallTotal}{5.2}  % total busy wall time (h)
+\newcommand{\gpuJobHours}{8.8}  % summed duration of all GPU (neural) jobs (h)
+\newcommand{\fprTfidfNSMC}{15.9\%}  % Tfidf winner: negatives predicted positive (n=8000, pooled over seeds)
+\newcommand{\fnrTfidfNSMC}{17.1\%}  % Tfidf winner: positives predicted negative (n=8000, pooled over seeds)
+\newcommand{\fprNeuralNSMC}{17.9\%}  % Neural winner: negatives predicted positive (n=8000, pooled over seeds)
+\newcommand{\fnrNeuralNSMC}{16.0\%}  % Neural winner: positives predicted negative (n=8000, pooled over seeds)
+\newcommand{\neuralAccLatencyNSMC}{1.401}  % neural winner accelerator e2e latency (ms, batch 1)
+\newcommand{\gainLastNeuralNSMC}{\ensuremath{3.14 \pm 0.89}}  % neural winner's macro-F1 gain 4000->8000 (points)
+\newcommand{\fprTfidfShopping}{7.3\%}  % Tfidf winner: negatives predicted positive (n=8000, pooled over seeds)
+\newcommand{\fnrTfidfShopping}{11.8\%}  % Tfidf winner: positives predicted negative (n=8000, pooled over seeds)
+\newcommand{\fprNeuralShopping}{11.5\%}  % Neural winner: negatives predicted positive (n=8000, pooled over seeds)
+\newcommand{\fnrNeuralShopping}{8.6\%}  % Neural winner: positives predicted negative (n=8000, pooled over seeds)
+\newcommand{\neuralAccLatencyShopping}{1.621}  % neural winner accelerator e2e latency (ms, batch 1)
+\newcommand{\gainLastNeuralShopping}{\ensuremath{2.32 \pm 0.59}}  % neural winner's macro-F1 gain 4000->8000 (points)
+\newcommand{\fprTfidfSteam}{23.4\%}  % Tfidf winner: negatives predicted positive (n=8000, pooled over seeds)
+\newcommand{\fnrTfidfSteam}{24.7\%}  % Tfidf winner: positives predicted negative (n=8000, pooled over seeds)
+\newcommand{\fprNeuralSteam}{22.9\%}  % Neural winner: negatives predicted positive (n=8000, pooled over seeds)
+\newcommand{\fnrNeuralSteam}{27.4\%}  % Neural winner: positives predicted negative (n=8000, pooled over seeds)
+\newcommand{\neuralAccLatencySteam}{0.907}  % neural winner accelerator e2e latency (ms, batch 1)
+\newcommand{\gainLastNeuralSteam}{\ensuremath{2.49 \pm 0.47}}  % neural winner's macro-F1 gain 4000->8000 (points)
+\newcommand{\detRuns}{135}  % cost runs compared with quality runs
+\newcommand{\detIdentical}{135}  % cost runs with predictions identical to quality mode
+\newcommand{\detMaxDisagree}{0.0\%}  % max per-run disagreement of test predictions

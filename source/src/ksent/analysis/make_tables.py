@@ -14,7 +14,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from ksent.analysis.common import (AGG_DIR, MISSING, TABLE_DIR, count_fmt, datasets, dname, isnum, methods, mname,
+from ksent.analysis.common import (AGG_DIR, MISSING, TABLE_DIR, count_fmt, count_missing, datasets, dname, isnum, methods, mname,
                                    pm, read_csv, sig, sizes, summary_lookup, tex_escape)
 from ksent.config import NEURAL_METHODS, TFIDF_METHODS, family, frozen_path, global_cfg, load_yaml, path, search_space
 from ksent.utils import read_json
@@ -45,7 +45,7 @@ def wrap(body: str, colspec: str) -> str:
 def write(name: str, text: str) -> None:
     TABLE_DIR.mkdir(parents=True, exist_ok=True)
     (TABLE_DIR / f"{name}.tex").write_text(text, encoding="utf-8")
-    print(f"  wrote tables/{name}.tex  ({text.count(MISSING)} placeholders)")
+    print(f"  wrote tables/{name}.tex  ({count_missing(text)} placeholders)")
 
 
 def best_idx(values: list[float], higher: bool = True) -> int | None:

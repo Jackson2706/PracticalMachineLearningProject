@@ -43,9 +43,10 @@ highest validation macro-F1 (ties: lower fit time). The search covers
 regularisation for linear models, tree structure and sampling for RF, depth,
 learning rate and sampling for XGBoost (whose early-stopped number of rounds is
 frozen), and learning rate, dropout and width for neural models. The selected
-configuration is frozen for all sizes and seeds.
+configuration is frozen for all sizes and seeds; the validation macro-F1 of every tuning
+configuration is listed in \cref{tab:a2}.
 
-\begin{table}[t]
+\begin{sidewaystable}
   \centering
   \caption{Method configurations. ``Selected'' is the frozen configuration per
   dataset (RF: trees, depth, features, minimum leaf size, class weight; XGB: depth,
@@ -55,4 +56,4 @@ configuration is frozen for all sizes and seeds.
   ``Tune'' is the summed fit time of the ten tuning runs.}
   \label{tab:methods}
   \input{tables/table2}
-\end{table}
+\end{sidewaystable}

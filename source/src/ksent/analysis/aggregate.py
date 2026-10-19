@@ -196,7 +196,7 @@ def main() -> None:
     summarize(runs).to_csv(AGG_DIR / "summary_tokenizers.csv", index=False)
     confusion_8000(main_runs).to_csv(AGG_DIR / "confusion_n8000.csv", index=False)
     meta.update(
-        train_devices=sorted(runs.train_device.dropna().unique().tolist()),
+        train_devices=sorted(runs[runs.family == "neural"].train_device.dropna().unique().tolist()),  # neural only
         accelerator_devices=sorted(runs.acc_device.dropna().unique().tolist()) if "acc_device" in runs else [],
         mamba_backends=sorted(runs[runs.method == "small_mamba"].mamba_backend.dropna().unique().tolist()),
         precisions=sorted(runs.precision.dropna().unique().tolist()),

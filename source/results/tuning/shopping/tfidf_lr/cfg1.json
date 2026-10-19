@@ -1,0 +1,92 @@
+{
+  "status": "ok",
+  "mode": "tuning",
+  "dataset": "shopping",
+  "method": "tfidf_lr",
+  "family": "tfidf",
+  "tokenizer": "kiwi",
+  "size": 2000,
+  "seed": 0,
+  "config_id": 1,
+  "config_source": "search_space:cfg1",
+  "config": {
+    "solver": "liblinear",
+    "max_iter": 2000,
+    "C": 0.03,
+    "config_id": 1
+  },
+  "git_commit": "ddc27c4cd1c95c4da833cc7b8e0207942695ce22-dirty",
+  "timestamp": "2026-10-19T06:25:59+00:00",
+  "hostname": "c6fba5554810",
+  "n_threads": 8,
+  "train_device": "cpu",
+  "device_reason": "classical methods always run on CPU",
+  "precision": "fp32",
+  "timing_reportable": true,
+  "run_mode": "cost",
+  "train_threads": 8,
+  "hardware": {
+    "fingerprint": "cdc5011e44d8",
+    "os": "Linux-5.15.0-144-generic-x86_64-with-glibc2.39",
+    "cpu_model": "AMD EPYC 7C13 64-Core Processor",
+    "gpu_name": "NVIDIA RTX 6000 Ada Generation",
+    "cuda_version": "13.0",
+    "cudnn_version": 92400,
+    "torch": "2.14.1+cu130",
+    "n_threads": 8
+  },
+  "python": "3.12.15",
+  "data": {
+    "n_train": 2000,
+    "n_val": 2000,
+    "n_test": 2000,
+    "train_pct_positive": 50.0
+  },
+  "mamba_backend": null,
+  "implementation": {},
+  "fit": {
+    "featurize_time_s": 0.1440368479816243,
+    "n_features": 10000,
+    "classifier_time_s": 0.01028686499921605,
+    "tokenize_time_s": 0.23451573599595577
+  },
+  "history": null,
+  "cost": {
+    "fit_time_classifier_s": 0.01028686499921605,
+    "fit_time_end_to_end_s": 0.3888394489767961,
+    "tokenize_time_s": 0.23451573599595577,
+    "featurize_time_s": 0.1440368479816243,
+    "peak_accelerator_mem_train_mb": null,
+    "peak_rss_sampled_mb": 1423.67578125,
+    "peak_rss_mb": 1423.67578125,
+    "rss_before_fit_mb": 1412.57421875,
+    "peak_rss_delta_mb": 11.1015625
+  },
+  "val": {
+    "macro_f1": 0.8599172206170722,
+    "accuracy": 0.8605,
+    "macro_precision": 0.866600600594493,
+    "macro_recall": 0.8605,
+    "f1_per_class": [
+      0.868952559887271,
+      0.8508818813468734
+    ],
+    "confusion": [
+      [
+        925,
+        75
+      ],
+      [
+        204,
+        796
+      ]
+    ],
+    "n": 2000
+  },
+  "model_size": {
+    "n_coef": 10000,
+    "n_nonzero_coef": 10000,
+    "n_features": 10000
+  },
+  "wall_time_s": 5.231074234005064
+}

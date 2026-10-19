@@ -217,6 +217,51 @@ def build() -> Numbers:
                 if len(r):
                     val = _pm(r.gain_mean.iloc[0], r.gain_std.iloc[0])
             N.add(f"{nm}{X}", val, f"best method's macro-F1 gain {a}->{b} (points)")
+    # compute used per stage (ksent.analysis.compute_usage) and cost-vs-quality determinism
+    cu = read_csv(AGG_DIR / "compute_usage.csv")
+    stage_macro = {"C pilot": "Pilot", "D tuning": "Tuning", "E main sweep": "Sweep", "F ablation": "Ablation",
+                   "G cost pass": "CostPass"}
+    for st, nm in stage_macro.items():
+        r = cu[cu.stage == st] if cu is not None else None
+        ok = r is not None and len(r) > 0
+        N.add(f"wall{nm}", _f(r.busy_wall_h.iloc[0], 2) if ok else None, f"{st}: busy wall time (h)")
+        N.add(f"gpuUtil{nm}", _f(r.avg_gpu_util_pct.iloc[0], 0, r"\%") if ok else None, f"{st}: mean GPU util")
+        N.add(f"cpuUtil{nm}", _f(r.avg_cpu_util_pct.iloc[0], 1, r"\%") if ok else None,
+              f"{st}: mean CPU util (all logical cores)")
+    N.add("wallTotal", _f(cu.busy_wall_h.sum(), 1) if cu is not None else None, "total busy wall time (h)")
+    N.add("gpuJobHours", _f(cu.gpu_job_h.sum(), 1) if cu is not None else None,
+          "summed duration of all GPU (neural) jobs (h)")
+    # crossover winners at the evaluation size: class-specific error rates, accelerator latency, last gain
+    xo = read_csv(AGG_DIR / "crossover.csv")
+    conf = read_csv(AGG_DIR / "confusion_n8000.csv")
+    summ = read_csv(AGG_DIR / "summary.csv")
+    mgain = read_csv(AGG_DIR / "marginal_gains.csv")
+    for d in datasets():
+        X = SUFFIX[d]
+        r = xo[(xo.dataset == d) & (xo.selection == "val")] if xo is not None else None
+        win = {"Tfidf": r.best_tfidf.iloc[0], "Neural": r.best_neural.iloc[0]} if r is not None and len(r) else {}
+        for fam in ("Tfidf", "Neural"):
+            c = conf[(conf.dataset == d) & (conf.method == win[fam])] if conf is not None and fam in win else None
+            ok = c is not None and len(c) > 0 and {"fpr", "fnr"} <= set(c.columns)
+            N.add(f"fpr{fam}{X}", _f(c.fpr.iloc[0] * 100, 1, r"\%") if ok else None,
+                  f"{fam} winner: negatives predicted positive (n=8000, pooled over seeds)")
+            N.add(f"fnr{fam}{X}", _f(c.fnr.iloc[0] * 100, 1, r"\%") if ok else None,
+                  f"{fam} winner: positives predicted negative (n=8000, pooled over seeds)")
+        s = summ[(summ.dataset == d) & (summ["size"] == 8000) & (summ.method == win.get("Neural"))] \
+            if summ is not None else None
+        ok = s is not None and len(s) > 0 and "lat_acc_e2e_ms_mean" in s
+        N.add(f"neuralAccLatency{X}", _f(s.lat_acc_e2e_ms_mean.iloc[0], 3) if ok else None,
+              "neural winner accelerator e2e latency (ms, batch 1)")
+        g = mgain[(mgain.dataset == d) & (mgain.method == win.get("Neural")) & (mgain.from_size == 4000)] \
+            if mgain is not None else None
+        N.add(f"gainLastNeural{X}", _pm(g.gain_mean.iloc[0], g.gain_std.iloc[0]) if g is not None and len(g) else None,
+              "neural winner's macro-F1 gain 4000->8000 (points)")
+    det = read_csv(AGG_DIR / "determinism_by_method.csv")
+    N.add("detRuns", _n(det.runs.sum()) if det is not None else None, "cost runs compared with quality runs")
+    N.add("detIdentical", _n(det.identical_runs.sum()) if det is not None else None,
+          "cost runs with predictions identical to quality mode")
+    N.add("detMaxDisagree", _f(det.max_disagree_pct.max(), 1, r"\%") if det is not None else None,
+          "max per-run disagreement of test predictions")
     return N
 
 

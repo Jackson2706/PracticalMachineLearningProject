@@ -23,6 +23,7 @@ from ksent.analysis.make_numbers import build
 tbd = [n for n, v, _ in build().items if v is None]
 print(f"TBD macros remaining: {len(tbd)}" + (f" (e.g. {tbd[:5]})" if tbd else ""))
 import glob
-ph = [f for f in glob.glob("../submission/report/tables/*.tex") if "--" in open(f).read()]
+from ksent.analysis.common import count_missing
+ph = [f for f in glob.glob("../submission/report/tables/*.tex") if count_missing(open(f).read())]
 print(f"tables with '--' placeholders: {len(ph)}")
 PY

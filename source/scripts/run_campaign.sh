@@ -44,7 +44,8 @@ n=$(python -c "
 from ksent.config import frozen_path, global_cfg; g = global_cfg()
 print(sum(frozen_path(d, m).exists() for d in g['datasets'] for m in g['methods']))")
 [ "$n" -eq 27 ] || stop "only $n/27 frozen configs"
-git -C .. add source/configs/frozen && git -C .. commit -q -m "Freeze tuned configs (Stage D, route=$TROUTE)
+git -C .. add source/configs/frozen
+[ -z "$(git -C .. status --porcelain -- source/configs/frozen)" ] || git -C .. commit -q -m "Freeze tuned configs (Stage D, route=$TROUTE)
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 Claude-Session: https://claude.ai/code/session_015GxTjszoB2bncahqLuoT2c" -- source/configs/frozen || stop "git commit of frozen configs failed"

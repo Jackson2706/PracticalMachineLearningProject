@@ -224,7 +224,10 @@ class Scheduler:
                 return None
             need = _lookup(self.est, t.job.method, t.job.size, "peak_rss_mb", 2048)
             return "cpu" if self._ram_ok(need) else None
-        stats = {str(g["index"]): g for g in gpu_stats()}
+        # capacity first: skip the nvidia-smi query when every GPU lane is full
+        if all(sum(1 for r in running if r[3] == f"gpu:{g}") >= self.k_gpu for g in self.gpus):
+            return None
+        stats = {str(g["index"]): g for g in self._gpu_stats()}
         need_vram = _lookup(self.est, t.job.method, t.job.size, "peak_vram_mb", 1024)
         for gid in sorted(self.gpus, key=lambda g: sum(1 for r in running if r[3] == f"gpu:{g}")):
             on = [r for r in running if r[3] == f"gpu:{gid}"]
@@ -238,6 +241,12 @@ class Scheduler:
             if self._ram_ok(_lookup(self.est, t.job.method, t.job.size, "peak_rss_mb", 3072)):
                 return f"gpu:{gid}"
         return None
+
+    def _gpu_stats(self, max_age: float = 2.0) -> list[dict]:
+        """gpu_stats() cached for ``max_age`` seconds (one query per scheduling pass, not per queued job)."""
+        if time.time() - self._gpu_stats_ts > max_age:
+            self._gpu_stats_cache, self._gpu_stats_ts = gpu_stats(), time.time()
+        return self._gpu_stats_cache
 
     def _ram_ok(self, need_mb: float) -> bool:
         reserved = sum(_lookup(self.est, r[0].job.method, r[0].job.size, "peak_rss_mb", 2048)
@@ -385,6 +394,8 @@ class Scheduler:
         return 1 if self.failed else 0
 
     _queue_cost = 0.0
+    _gpu_stats_cache: list[dict] = []
+    _gpu_stats_ts = 0.0
 
 
 def _fmt(sec: float) -> str:

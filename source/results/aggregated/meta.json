@@ -1,4 +1,31 @@
 {
-  "fingerprints": [],
-  "mixed_hardware": false
+  "fingerprints": [
+    "cdc5011e44d8"
+  ],
+  "mixed_hardware": false,
+  "n_cost_runs": 135,
+  "train_devices": [
+    "cuda"
+  ],
+  "accelerator_devices": [
+    "cuda"
+  ],
+  "mamba_backends": [
+    "torch_ref"
+  ],
+  "precisions": [
+    "fp32"
+  ],
+  "n_threads": [
+    8
+  ],
+  "gpu_names": [
+    "NVIDIA RTX 6000 Ada Generation"
+  ],
+  "cpu_models": [
+    "AMD EPYC 7C13 64-Core Processor"
+  ],
+  "mps_fallback_runs": 0,
+  "n_main_runs": 675,
+  "n_ablation_runs": 120
 }

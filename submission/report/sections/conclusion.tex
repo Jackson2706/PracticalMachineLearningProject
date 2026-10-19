@@ -4,9 +4,16 @@
 We measured when neural sequence models trained from scratch overtake TF-IDF
 classifiers on Korean review sentiment. The crossover thresholds are
 \crossoverNSMC{} (NSMC), \crossoverShopping{} (Shopping) and \crossoverSteam{} (Steam).
-\TBD{final recommendation in two sentences}
+In other words, none of the three domains shows a neural crossover within the tested range:
+the best neural model never beats the best TF-IDF model by \crossoverMargin{} point, and at
+$n=8{,}000$ it is still \gapNSMC, \gapShopping{} and \gapSteam{} points behind. Teams in this
+regime should deploy a linear model on Kiwi-morpheme TF-IDF features and invest in more
+labels. Neural models trained from scratch close the gap as data grows, but only the
+extrapolation beyond 8{,}000 reviews, or a pretrained encoder, could justify their
+training cost.
 
 \paragraph{Reproducibility.}
 All code, configurations, per-run results and the scripts that regenerate every table,
 figure and number in this report are in the \texttt{source/} folder
-(\texttt{bash scripts/run\_everything.sh}).
+:
+\begin{center}\texttt{bash scripts/run\_everything.sh}\end{center}
