@@ -9,6 +9,12 @@
 
 Runs from different hardware fingerprints are refused unless ``--allow-mixed-hardware``
 (then a warning is printed and ``meta.json`` marks the tables as mixed).
+
+Quality/cost split: predictive metrics (val/test, confusion, OOV, epochs) come only from
+the quality runs in ``results/raw/``; every cost metric (fit time, latency, memory,
+serialized size) comes only from the exclusive cost runs in ``results/cost/raw/``, joined
+on (dataset, method, tokenizer, size, seed). Cells without a cost run have no cost values.
+``runs_cost.csv`` holds the cost runs on their own.
 """
 from __future__ import annotations
 
@@ -63,6 +69,26 @@ def flatten(r: dict) -> dict:
     f = r.get("fit") or {}
     row.update(best_epoch=f.get("best_epoch"), epochs_run=f.get("epochs_run"), wall_s=r.get("wall_time_s"))
     return row
+
+
+COST_COLS = ["fit_e2e_s", "fit_clf_s", "tokenize_s", "featurize_s", "peak_rss_mb", "peak_rss_delta_mb",
+             "serialized_mb", "peak_acc_mb", "lat_cpu_e2e_ms", "lat_cpu_e2e_p95_ms", "lat_cpu_clf_ms",
+             "lat_cpu_clf_p95_ms", "lat_acc_e2e_ms", "lat_acc_e2e_p95_ms", "lat_acc_clf_ms", "lat_acc_clf_p95_ms",
+             "acc_device"]
+JOIN = ["dataset", "method", "tokenizer", "size", "seed"]
+
+
+def merge_cost(quality: pd.DataFrame, cost: pd.DataFrame) -> pd.DataFrame:
+    """Quality rows with their cost columns replaced by the matching cost run's values."""
+    q = quality.drop(columns=[c for c in COST_COLS if c in quality], errors="ignore")
+    q["timing_reportable"] = False
+    if cost.empty:
+        return q
+    c = cost[JOIN + [k for k in COST_COLS if k in cost] + ["timing_reportable"]].copy()
+    c = c[c.timing_reportable.fillna(False).astype(bool)]
+    out = q.drop(columns=["timing_reportable"]).merge(c, on=JOIN, how="left")
+    out["timing_reportable"] = out["timing_reportable"].fillna(False).astype(bool)
+    return out
 
 
 def load_runs(root: str = "raw") -> pd.DataFrame:
@@ -146,8 +172,12 @@ def main() -> None:
     ap.add_argument("--allow-mixed-hardware", action="store_true")
     args = ap.parse_args()
     AGG_DIR.mkdir(parents=True, exist_ok=True)
-    runs, tuning, frozen = load_runs(), load_tuning(), load_frozen()
-    meta = hardware_check([runs, tuning], args.allow_mixed_hardware)
+    runs, cost, tuning, frozen = load_runs(), load_runs("cost/raw"), load_tuning(), load_frozen()
+    meta = hardware_check([runs, cost, tuning], args.allow_mixed_hardware)
+    cost.to_csv(AGG_DIR / "runs_cost.csv", index=False)
+    meta["n_cost_runs"] = int(len(cost))
+    if len(runs):
+        runs = merge_cost(runs, cost)
     tuning.to_csv(AGG_DIR / "tuning.csv", index=False)
     frozen.to_csv(AGG_DIR / "frozen.csv", index=False)
     print(f"tuning runs: {len(tuning)}  frozen configs: {len(frozen)}")
@@ -187,8 +217,8 @@ def main() -> None:
         zero = summary[(summary.n_seeds > 1) & (summary.test_macro_f1_std.fillna(1) == 0)]
         for _, r in zero.iterrows():
             print(f"  note: zero std  {r.dataset} {r.method} n={r['size']} (deterministic model on identical data)")
-    if not runs.timing_reportable.all():
-        print("  WARNING: some runs were executed in parallel - their timings are not reportable")
+    print(f"  cost runs: {len(cost)} (joined onto {int(runs.timing_reportable.sum())} quality runs; "
+          f"cost metrics of all other cells are empty by design)")
 
 
 if __name__ == "__main__":

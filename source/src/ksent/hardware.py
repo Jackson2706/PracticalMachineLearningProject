@@ -20,6 +20,7 @@ import subprocess
 import sys
 import warnings
 from collections.abc import Iterator
+from pathlib import Path
 from typing import Any
 
 import numpy as np
@@ -330,14 +331,51 @@ def resolve_mamba_backend(spec: str | None, device: str) -> str:
     return spec
 
 
+def machine_details() -> dict[str, Any]:
+    """Extra machine facts for ``results/env/hardware.json`` (not part of the fingerprint)."""
+    import re
+
+    d: dict[str, Any] = {}
+    try:
+        rel = dict(line.split("=", 1) for line in open("/etc/os-release").read().splitlines() if "=" in line)
+        d["os_pretty"] = rel.get("PRETTY_NAME", "").strip('"')
+    except OSError:
+        d["os_pretty"] = platform.platform()
+    d["disk_free_gb"] = {}
+    for mnt in ("/", "/dev/shm", str(Path(__file__).resolve().parents[2])):
+        if os.path.exists(mnt):
+            u = shutil.disk_usage(mnt)
+            d["disk_free_gb"][mnt] = {"total": round(u.total / 2**30, 1), "free": round(u.free / 2**30, 1)}
+    if shutil.which("nvidia-smi"):
+        rows = (_cmd(["nvidia-smi", "--query-gpu=index,name,memory.total,driver_version", "--format=csv,noheader"])
+                or "").strip().splitlines()
+        d["gpus"] = [dict(zip(("index", "name", "memory", "driver_version"), (x.strip() for x in r.split(","))))
+                     for r in rows]
+        d["gpu_count"] = len(rows)
+        d["driver_version"] = d["gpus"][0]["driver_version"] if rows else None
+        m = re.search(r"CUDA Version:\s*([0-9.]+)", _cmd(["nvidia-smi"]) or "")
+        d["driver_max_cuda"] = m.group(1) if m else None
+    else:
+        d.update(gpus=[], gpu_count=0, driver_version=None, driver_max_cuda=None)
+    nvcc = shutil.which("nvcc") or ("/usr/local/cuda/bin/nvcc" if os.path.exists("/usr/local/cuda/bin/nvcc") else None)
+    d["nvcc"] = {"path": nvcc, "version": (_cmd([nvcc, "--version"]) or "").strip().splitlines()[-1] if nvcc else None}
+    return d
+
+
 def dump_env(out_dir: str) -> dict[str, Any]:
     """Write hardware.json, conda_env.yaml and pip_freeze.txt."""
     import json
-    from pathlib import Path
 
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
-    info = hardware_info()
+    info = {**hardware_info(), **machine_details()}
+    torch = _torch()
+    (out / "torch_versions.json").write_text(json.dumps({
+        "torch": torch.__version__, "cuda": torch.version.cuda,
+        "cudnn": torch.backends.cudnn.version() if cuda_available() else None,
+        "cuda_available": cuda_available(), "device_count": torch.cuda.device_count() if cuda_available() else 0,
+        "mamba_backend_config": global_cfg().get("mamba_backend"), "mamba_ssm_available": mamba_ssm_available(),
+    }, indent=2))
     (out / "hardware.json").write_text(json.dumps(info, indent=2))
     (out / "conda_env.yaml").write_text((_cmd(["conda", "env", "export", "-n", "ML"]) or "") + "\n")
     (out / "pip_freeze.txt").write_text((_cmd([sys.executable, "-m", "pip", "freeze"]) or "") + "\n")

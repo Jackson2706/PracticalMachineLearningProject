@@ -16,7 +16,8 @@ METHODS = ["tfidf_lr", "tfidf_svm", "tfidf_rf", "tfidf_xgb", "emb_mlp", "emb_lst
            "small_transformer", "small_mamba"]
 
 
-def _fake_run(d: str, m: str, n: int, s: int, fp: str = "abc123", tok: str = "kiwi") -> dict:
+def _fake_run(d: str, m: str, n: int, s: int, fp: str = "abc123", tok: str = "kiwi", cost_scale: float = 1.0,
+              reportable: bool = True) -> dict:
     """TF-IDF LR is flat at 0.80; GRU starts lower and gains 2.5 pts per doubling.
     -> GRU - LR gap: 500:-4, 1000:-1.5, 2000:+1, ... => crossover at 2,000."""
     k = [500, 1000, 2000, 4000, 8000].index(n)
@@ -29,17 +30,18 @@ def _fake_run(d: str, m: str, n: int, s: int, fp: str = "abc123", tok: str = "ki
         f1 = 0.70 + jitter
     neural = m.startswith(("emb", "small"))
     return {"status": "ok", "dataset": d, "method": m, "family": "neural" if neural else "tfidf", "size": n,
-            "seed": s, "tokenizer": tok, "config_id": 0, "timing_reportable": True, "train_device": "cpu",
+            "seed": s, "tokenizer": tok, "config_id": 0, "timing_reportable": reportable, "train_device": "cpu",
             "precision": "fp32", "n_threads": 8, "hardware": {"fingerprint": fp, "cpu_model": "x", "gpu_name": None},
             "mamba_backend": "torch_ref" if m == "small_mamba" else None,
             "val": {"macro_f1": f1, "accuracy": f1, "macro_precision": f1, "macro_recall": f1,
                     "confusion": [[800, 200], [200, 800]]},
             "test": {"macro_f1": f1, "accuracy": f1, "macro_precision": f1, "macro_recall": f1,
                      "confusion": [[810, 190], [210, 790]]},
-            "cost": {"fit_time_end_to_end_s": 10.0 if neural else 1.0, "fit_time_classifier_s": 9.0 if neural else 0.5,
+            "cost": {"fit_time_end_to_end_s": (10.0 if neural else 1.0) * cost_scale,
+                     "fit_time_classifier_s": 9.0 if neural else 0.5,
                      "tokenize_time_s": 0.1, "featurize_time_s": 0.1, "peak_rss_mb": 900.0 if neural else 500.0,
                      "serialized_mb": 2.0},
-            "latency": {"cpu": {"end_to_end": {"median_ms": 2.0 if neural else 0.5, "p95_ms": 3.0},
+            "latency": {"cpu": {"end_to_end": {"median_ms": (2.0 if neural else 0.5) * cost_scale, "p95_ms": 3.0},
                                 "classifier_only": {"median_ms": 1.0, "p95_ms": 1.5}}},
             "model_size": {}, "fit": {"best_epoch": 3, "epochs_run": 8}, "wall_time_s": 20.0}
 
@@ -67,20 +69,32 @@ def test_tables_and_numbers_without_results(tmp_path: Path) -> None:
 
 
 def test_full_chain_on_synthetic_results(tmp_path: Path) -> None:
-    raw = tmp_path / "results" / "raw"
+    """Quality runs carry 100x inflated (parallel) costs; only the exclusive cost runs
+    (n=8,000 and the crossover size 2,000) may reach the tables."""
+    raw, cost = tmp_path / "results" / "raw", tmp_path / "results" / "cost" / "raw"
     for d in G["datasets"]:
         for m in METHODS:
             for n in G["sizes"]:
                 for s in G["seeds"]:
                     p = raw / d / m / "kiwi" / f"n{n}_s{s}.json"
                     p.parent.mkdir(parents=True, exist_ok=True)
-                    p.write_text(json.dumps(_fake_run(d, m, n, s)))
+                    p.write_text(json.dumps(_fake_run(d, m, n, s, cost_scale=100.0, reportable=False)))
+                    if n in (2000, 8000):
+                        c = cost / d / m / "kiwi" / f"n{n}_s{s}.json"
+                        c.parent.mkdir(parents=True, exist_ok=True)
+                        c.write_text(json.dumps(_fake_run(d, m, n, s)))
     env = _env(tmp_path)
     _run("ksent.analysis.aggregate", env)
     _run("ksent.analysis.crossover", env)
     agg = tmp_path / "results" / "aggregated"
     summary = pd.read_csv(agg / "summary.csv")
     assert len(summary) == 3 * 9 * 5 and (summary.n_seeds == 5).all()
+    lr = summary[summary.method == "tfidf_lr"].set_index(["dataset", "size"])
+    assert (lr.xs(8000, level="size").fit_e2e_s_mean == 1.0).all()            # from cost runs
+    assert (lr.xs(8000, level="size").lat_cpu_e2e_ms_mean == 0.5).all()
+    assert lr.xs(500, level="size").fit_e2e_s_mean.isna().all()               # no cost run -> no cost value
+    assert lr.xs(8000, level="size").all_timings_reportable.all()
+    assert not lr.xs(500, level="size").all_timings_reportable.any()
     ct = pd.read_csv(agg / "crossover.csv")
     v = ct[ct.selection == "val"].set_index("dataset")
     assert (v.threshold == 2000).all()
@@ -93,6 +107,11 @@ def test_full_chain_on_synthetic_results(tmp_path: Path) -> None:
     assert "2{,}000" in t5 and "Emb + GRU" in t5
     nums = (tmp_path / "report" / "generated" / "numbers.tex").read_text()
     assert r"\newcommand{\crossoverNSMC}{2{,}000}" in nums
+    out = subprocess.run([sys.executable, "-c", "from ksent.analysis.crossover import crossover_cost_jobs as f; "
+                          "j = f(); print(len(j), sorted({(x.method, x.size) for x in j}))"],
+                         env=env, capture_output=True, text=True)
+    assert out.returncode == 0, out.stderr
+    assert out.stdout.startswith("30 [('emb_gru', 2000), ('tfidf_lr', 2000)]")
 
 
 def test_mixed_hardware_refused(tmp_path: Path) -> None:

@@ -1,0 +1,9 @@
+{
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "cudnn": 92400,
+  "cuda_available": true,
+  "device_count": 1,
+  "mamba_backend_config": "torch_ref",
+  "mamba_ssm_available": false
+}

@@ -42,7 +42,7 @@
         "train_pool": {
           "n": 8000,
           "pct_positive": 49.825,
-          "tok_mean": 20.082,
+          "tok_mean": 20.08225,
           "tok_median": 15.0,
           "tok_p95": 60.0,
           "trunc_pct": 2.5250000000000004
@@ -108,7 +108,7 @@
         "train_pool": {
           "n": 8000,
           "pct_positive": 50.0,
-          "tok_mean": 22.510125,
+          "tok_mean": 22.51,
           "tok_median": 17.0,
           "tok_p95": 57.0,
           "trunc_pct": 1.2375
@@ -174,7 +174,7 @@
         "train_pool": {
           "n": 8000,
           "pct_positive": 50.0,
-          "tok_mean": 25.472125,
+          "tok_mean": 25.47175,
           "tok_median": 20.0,
           "tok_p95": 66.0,
           "trunc_pct": 2.225
@@ -182,7 +182,7 @@
         "val": {
           "n": 2000,
           "pct_positive": 50.0,
-          "tok_mean": 26.4565,
+          "tok_mean": 26.457,
           "tok_median": 21.0,
           "tok_p95": 66.0,
           "trunc_pct": 2.4
@@ -217,9 +217,9 @@
       "max_seq_len": 72,
       "longest_dataset": "steam",
       "mean_lengths": {
-        "nsmc": 20.082,
-        "shopping": 22.510125,
-        "steam": 25.472125
+        "nsmc": 20.08225,
+        "shopping": 22.51,
+        "steam": 25.47175
       }
     },
     "whitespace": {

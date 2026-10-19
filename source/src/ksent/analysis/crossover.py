@@ -113,6 +113,26 @@ def crossover_table(bs: pd.DataFrame, summary: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+def crossover_cost_jobs(seeds: list[int] | None = None) -> list:
+    """Cost-pass jobs for Table 5: for each dataset whose (validation-selection) crossover
+    threshold is below the largest size, the TF-IDF and neural winners at the threshold x seeds.
+    The n=8,000 cells are covered by the n=8,000 cost pass. Needs ``crossover.csv``."""
+    from ksent.sweep import Job
+
+    cx = read_csv("crossover.csv")
+    if cx is None:
+        raise SystemExit("crossover.csv missing - run aggregate + crossover on the quality results first")
+    g = global_cfg()
+    top = max(int(s) for s in g["sizes"])
+    jobs = []
+    for _, r in cx[cx.selection == "val"].iterrows():
+        if pd.isna(r.threshold) or int(r.threshold) >= top:
+            continue
+        for m in (r.best_tfidf, r.best_neural):
+            jobs += [Job(r.dataset, m, main_tokenizer(), int(r.threshold), int(s)) for s in (seeds or g["seeds"])]
+    return jobs
+
+
 def pareto_all(summary: pd.DataFrame) -> pd.DataFrame:
     """Pareto-efficient methods among all nine at every (dataset, size), on two
     objective sets: (F1, CPU latency) for Fig. 3 and the full four-objective set."""

@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 # Compile report and slides with XeLaTeX (needed for Korean text via kotex):
-# latexmk -xelatex if available, otherwise tectonic.
+# latexmk -xelatex if xelatex + kotex are installed, otherwise tectonic (conda-forge, in env ML).
 set -euo pipefail
 source "$(dirname "$0")/_common.sh"
 
 build() {  # $1 = directory, $2 = main .tex
   pushd "$1" >/dev/null
-  if command -v latexmk >/dev/null 2>&1; then
+  if command -v latexmk >/dev/null 2>&1 && command -v xelatex >/dev/null 2>&1 && kpsewhich kotex.sty >/dev/null 2>&1; then
     latexmk -xelatex -interaction=nonstopmode -halt-on-error "$2"
   elif command -v tectonic >/dev/null 2>&1; then
-    tectonic "$2"
+    tectonic --keep-logs --keep-intermediates "$2"
   else
     echo "Neither latexmk nor tectonic found (install TeX Live / MacTeX, or tectonic)"; exit 1
   fi

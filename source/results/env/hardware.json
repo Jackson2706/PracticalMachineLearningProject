@@ -1,19 +1,20 @@
 {
-  "os": "macOS-27.0.1-arm64-arm-64bit",
+  "os": "Linux-5.15.0-144-generic-x86_64-with-glibc2.39",
   "python": "3.12.15",
-  "cpu_model": "Apple M4",
-  "cpu_cores_physical": 10,
-  "cpu_cores_logical": 10,
-  "ram_gb": 16.0,
-  "torch": "2.14.1",
-  "cuda_available": false,
-  "cuda_version": null,
-  "cudnn_version": null,
-  "mps_available": true,
-  "gpu_name": "Apple M4 GPU (MPS)",
-  "gpu_memory_gb": null,
+  "cpu_model": "AMD EPYC 7C13 64-Core Processor",
+  "cpu_cores_physical": 64,
+  "cpu_cores_logical": 128,
+  "ram_gb": 503.5,
+  "torch": "2.14.1+cu130",
+  "cuda_available": true,
+  "cuda_version": "13.0",
+  "cudnn_version": 92400,
+  "mps_available": false,
+  "gpu_name": "NVIDIA RTX 6000 Ada Generation",
+  "gpu_memory_gb": 47.4,
   "cuda_visible_devices": null,
   "n_threads": 8,
+  "nvidia_smi": "NVIDIA RTX 6000 Ada Generation, 49140 MiB, 580.178.04",
   "sklearn": "1.9.1",
   "xgboost": "3.4.1",
   "kiwipiepy": "0.24.0",
@@ -21,5 +22,35 @@
   "pandas": "3.0.6",
   "gradio": "6.30.0",
   "mamba_ssm_available": false,
-  "fingerprint": "32826a52c2b7"
+  "fingerprint": "cdc5011e44d8",
+  "os_pretty": "Ubuntu 24.04.5 LTS",
+  "disk_free_gb": {
+    "/": {
+      "total": 32.0,
+      "free": 0.9
+    },
+    "/dev/shm": {
+      "total": 41.0,
+      "free": 40.8
+    },
+    "/workspace/PracticalMachineLearningProject/source": {
+      "total": 32.0,
+      "free": 0.9
+    }
+  },
+  "gpus": [
+    {
+      "index": "0",
+      "name": "NVIDIA RTX 6000 Ada Generation",
+      "memory": "49140 MiB",
+      "driver_version": "580.178.04"
+    }
+  ],
+  "gpu_count": 1,
+  "driver_version": "580.178.04",
+  "driver_max_cuda": "13.0",
+  "nvcc": {
+    "path": "/usr/local/cuda/bin/nvcc",
+    "version": "Build cuda_13.0.r13.0/compiler.36424714_0"
+  }
 }

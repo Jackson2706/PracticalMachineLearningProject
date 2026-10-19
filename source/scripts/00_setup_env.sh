@@ -9,7 +9,7 @@ if ! python -c "import torch" >/dev/null 2>&1; then
   echo "PyTorch is not installed in env ML. Install the build for your hardware, then re-run:"
   if command -v nvidia-smi >/dev/null 2>&1; then
     echo "  NVIDIA GPU detected (driver CUDA: $(nvidia-smi | grep -o 'CUDA Version: [0-9.]*' || echo unknown)):"
-    echo "    pip install torch --index-url https://download.pytorch.org/whl/cu124   # pick the cuXXX matching your driver"
+    echo "    pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cu130   # pick a cuXXX <= the driver CUDA version"
   elif [ "$(uname)" = "Darwin" ]; then
     echo "  macOS / Apple Silicon (MPS):"
     echo "    pip install torch"
@@ -37,7 +37,7 @@ fi
 
 if [ "$(uname)" = "Linux" ] && command -v nvidia-smi >/dev/null 2>&1; then
   echo "Linux + NVIDIA GPU -> trying mamba-ssm (failure is tolerated; torch_ref backend is the fallback)"
-  python -m pip install causal-conv1d mamba-ssm --no-build-isolation || echo "mamba-ssm install failed -> torch_ref only"
+  python -m pip install causal-conv1d mamba-ssm --no-build-isolation --only-binary=:all: || echo "no prebuilt mamba-ssm wheel for this torch -> torch_ref only"
 else
   echo "mamba-ssm skipped (needs Linux + CUDA); small_mamba will use the torch_ref backend"
 fi

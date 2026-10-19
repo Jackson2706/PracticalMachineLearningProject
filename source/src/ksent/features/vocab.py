@@ -1,6 +1,6 @@
 """Neural vocabulary: built on the training subset only.
 
-``min_freq=1``, capped at 20,000 most frequent tokens (ties broken
+``min_freq`` (global.yaml: 2), capped at 20,000 most frequent tokens (ties broken
 alphabetically for determinism) plus ``<pad>`` (0) and ``<unk>`` (1).
 """
 from __future__ import annotations

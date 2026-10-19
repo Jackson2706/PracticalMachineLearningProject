@@ -1,5 +1,5 @@
 dataset,tokenizer,split,max_seq_len,truncation_rate,len_mean
-nsmc,kiwi,train_pool,72,0.02525,20.082
+nsmc,kiwi,train_pool,72,0.02525,20.08225
 nsmc,kiwi,val,72,0.0335,20.88
 nsmc,kiwi,test,72,0.019,19.3945
 nsmc,whitespace,train_pool,32,0.006,7.714875
@@ -8,7 +8,7 @@ nsmc,whitespace,test,32,0.005,7.4225
 nsmc,char,train_pool,96,0.034375,28.56325
 nsmc,char,val,96,0.0415,29.58
 nsmc,char,test,96,0.0255,27.437
-shopping,kiwi,train_pool,72,0.012375,22.510125
+shopping,kiwi,train_pool,72,0.012375,22.51
 shopping,kiwi,val,72,0.007,21.833
 shopping,kiwi,test,72,0.017,22.9915
 shopping,whitespace,train_pool,32,0.003,8.53
@@ -17,8 +17,8 @@ shopping,whitespace,test,32,0.0035,8.735
 shopping,char,train_pool,96,0.01625,31.743
 shopping,char,val,96,0.013,30.737
 shopping,char,test,96,0.0195,32.3745
-steam,kiwi,train_pool,72,0.02225,25.472125
-steam,kiwi,val,72,0.024,26.4565
+steam,kiwi,train_pool,72,0.02225,25.47175
+steam,kiwi,val,72,0.024,26.457
 steam,kiwi,test,72,0.02,25.4435
 steam,whitespace,train_pool,32,0.009875,10.660375
 steam,whitespace,val,32,0.0115,11.1025

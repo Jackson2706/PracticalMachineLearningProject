@@ -20,3 +20,10 @@ submission/**/*.fdb_latexmk
 submission/**/*.bbl
 submission/**/*.blg
 submission/**/*.synctex.gz
+source/data/raw
+source/data/tokenized
+source/results/models
+source/results/predictions
+source/results/cost/predictions
+source/results/tuning_quality/
+source/logs/runs

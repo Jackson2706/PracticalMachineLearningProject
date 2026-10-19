@@ -18,6 +18,12 @@ export PYTHONHASHSEED=0
 export CUDA_VISIBLE_DEVICES="${CUDA_VISIBLE_DEVICES:-0}"   # single GPU
 export PYTORCH_ENABLE_MPS_FALLBACK=1                        # fallbacks are recorded per run
 export CUBLAS_WORKSPACE_CONFIG="${CUBLAS_WORKSPACE_CONFIG:-:4096:8}"
+# scratch/caches off the small overlay disk when /dev/shm is available (see logs/RUN_JOURNAL.md)
+if [ -d /dev/shm ] && [ -w /dev/shm ]; then
+  mkdir -p /dev/shm/ksent/tmp /dev/shm/ksent/cache
+  export TMPDIR="${TMPDIR:-/dev/shm/ksent/tmp}" TECTONIC_CACHE_DIR="${TECTONIC_CACHE_DIR:-/dev/shm/ksent/cache/tectonic}"
+  export MPLCONFIGDIR="${MPLCONFIGDIR:-/dev/shm/ksent/cache/matplotlib}"
+fi
 
 # Thread count (config or KSENT_THREADS, capped at the core count) - computed in Python.
 N_THREADS="$(python -c 'from ksent.hardware import configured_threads; print(configured_threads())' 2>/dev/null || echo 8)"
