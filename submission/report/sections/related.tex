@@ -12,8 +12,9 @@ word embeddings before an MLP and rival syntax-aware models; our \texttt{emb\_ml
 follows this design.
 
 \paragraph{Sequence backbones.}
-We compare gated recurrent networks (LSTM~\cite{hochreiter1997long},
-GRU~\cite{cho2014learning}), a small Transformer encoder~\cite{vaswani2017attention}
+We compare three recurrent cells (a plain Elman RNN~\cite{elman1990finding} and the gated
+LSTM~\cite{hochreiter1997long} and GRU~\cite{cho2014learning}), each unidirectional and
+bidirectional~\cite{schuster1997bidirectional}, a small Transformer encoder~\cite{vaswani2017attention}
 and a selective state-space model (Mamba~\cite{gu2023mamba}), all trained from
 scratch with matched non-embedding parameter budgets. Tree ensembles over TF-IDF
 features (Random Forest~\cite{breiman2001random}, XGBoost~\cite{chen2016xgboost})

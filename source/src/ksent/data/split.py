@@ -1,6 +1,10 @@
 """Fixed stratified train-pool / validation / test splits (data seed 2026).
 
-Usage: ``python -m ksent.data.split``  ->  data/processed/{dataset}/{train_pool,val,test}.parquet
+``train_extra`` holds every other clean review of the training source (text-disjoint from
+all three splits); it extends the training pool for sizes above ``splits.train_pool``
+without changing the train pool, validation or test split.
+
+Usage: ``python -m ksent.data.split``  ->  data/processed/{dataset}/{train_pool,val,test,train_extra}.parquet
 """
 from __future__ import annotations
 
@@ -15,6 +19,7 @@ from ksent.data.clean import load_clean
 from ksent.utils import write_json
 
 SPLITS: tuple[str, ...] = ("train_pool", "val", "test")
+EXTRA = "train_extra"
 
 
 def _stratified_take(df: pd.DataFrame, n: int, seed: int) -> tuple[pd.DataFrame, pd.DataFrame]:
@@ -35,12 +40,12 @@ def make_splits(dataset: str, seed: int | None = None) -> dict[str, pd.DataFrame
     for key, df in frames.items():
         df["review_id"] = [f"{dataset}-{key}-{r:07d}" for r in df["raw_row"]]
     if data_cfg()["datasets"][dataset]["test_source"] == "official_test":
-        pool_val, _ = _stratified_take(frames["train"], sizes["train_pool"] + sizes["val"], seed)
+        pool_val, extra = _stratified_take(frames["train"], sizes["train_pool"] + sizes["val"], seed)
         pool, val = _stratified_take(pool_val, sizes["train_pool"], seed)
         test, _ = _stratified_take(frames["test"], sizes["test"], seed)
     else:
         total = sizes["train_pool"] + sizes["val"] + sizes["test"]
-        sample, _ = _stratified_take(frames["all"], total, seed)
+        sample, extra = _stratified_take(frames["all"], total, seed)
         pool, rest = _stratified_take(sample, sizes["train_pool"], seed)
         val, test = _stratified_take(rest, sizes["val"], seed)
     out = {}
@@ -48,9 +53,15 @@ def make_splits(dataset: str, seed: int | None = None) -> dict[str, pd.DataFrame
         keep = ["review_id", "text_raw", "text", "label"] + [c for c in ("rating", "orig_id") if c in df]
         out[name] = df[keep].sort_values("review_id").reset_index(drop=True)
     check_disjoint(out)
+    extra = extra[~extra["text"].isin(set().union(*(set(df["text"]) for df in out.values())))]
+    if data_cfg()["splits"].get(EXTRA) != "all":
+        extra = extra.iloc[0:0]
+    keep = ["review_id", "text_raw", "text", "label"] + [c for c in ("rating", "orig_id") if c in extra]
+    extra = extra[keep].sort_values("review_id").reset_index(drop=True)
+    check_disjoint({**out, EXTRA: extra})
     out_dir = processed_dir(dataset)
     out_dir.mkdir(parents=True, exist_ok=True)
-    for name, df in out.items():
+    for name, df in {**out, EXTRA: extra}.items():
         df.to_parquet(out_dir / f"{name}.parquet", index=False)
     write_json(counts, out_dir / "cleaning_counts.json")
     # fixed latency reviews (same 200 for every method)
@@ -73,8 +84,11 @@ def check_disjoint(splits: dict[str, pd.DataFrame]) -> None:
 
 
 def load_split(dataset: str, split: str) -> pd.DataFrame:
-    """Load one processed split."""
-    return pd.read_parquet(processed_dir(dataset) / f"{split}.parquet")
+    """Load one processed split (``train_extra`` is empty when it was never built)."""
+    p = processed_dir(dataset) / f"{split}.parquet"
+    if split == EXTRA and not p.exists():
+        return pd.read_parquet(processed_dir(dataset) / "train_pool.parquet").iloc[0:0]
+    return pd.read_parquet(p)
 
 
 def main() -> None:
@@ -83,6 +97,7 @@ def main() -> None:
     args = ap.parse_args()
     for ds in args.datasets or global_cfg()["datasets"]:
         out = make_splits(ds)
+        out[EXTRA] = load_split(ds, EXTRA)
         desc = ", ".join(f"{k}={len(v)} ({v['label'].mean():.1%} pos)" for k, v in out.items())
         print(f"[{ds}] {desc}")
 

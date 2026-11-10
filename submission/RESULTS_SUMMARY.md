@@ -10,8 +10,8 @@ sensitivity check agrees: none up to 8,000 / none up to 8,000 / none up to 8,000
 
 | Dataset | Threshold | Winners at 8k (TF-IDF vs neural) | Gap @500 (pts) | Gap @8k (pts) | Fit time ratio | CPU latency ratio | RAM ratio | Neural Pareto-efficient |
 |---|---|---|---|---|---|---|---|---|
-| NSMC (movies) | none up to 8,000 | TF-IDF + SVM vs Emb + GRU | -4.71 ± 1.24 | -0.48 ± 0.49 | 54.4× | 1.2× | 1.6× | no |
-| Shopping | none up to 8,000 | TF-IDF + SVM vs Emb + LSTM | -4.60 ± 0.58 | -0.49 ± 0.39 | 61.3× | 1.4× | 1.7× | no |
+| NSMC (movies) | none up to 8,000 | TF-IDF + SVM vs Emb + BiGRU | -4.71 ± 1.24 | -0.48 ± 0.49 | 54.4× | 1.2× | 1.6× | no |
+| Shopping | none up to 8,000 | TF-IDF + SVM vs Emb + BiLSTM | -4.60 ± 0.58 | -0.49 ± 0.39 | 61.3× | 1.4× | 1.7× | no |
 | Steam (games) | none up to 8,000 | TF-IDF + LR vs Emb + MLP | -5.92 ± 1.57 | -1.12 ± 0.24 | 11.4× | 0.7× | 1.6× | yes |
 
 Gap = neural − TF-IDF, paired per seed, mean ± sample std over 5 seeds. Ratios = neural / TF-IDF winner at
@@ -21,7 +21,7 @@ n = 8,000 (exclusive cost runs). Steam's neural winner is Pareto-efficient only 
 ## Key numbers (test macro-F1 ×100, n = 8,000)
 
 - Best overall: NSMC TF-IDF + SVM 83.50 ± 0.00; Shopping TF-IDF + SVM 90.45 ± 0.00; Steam TF-IDF + LR 75.95 ± 0.00.
-- Best neural (val-selected): NSMC Emb + GRU 83.02 ± 0.49; Shopping Emb + LSTM 89.96 ± 0.39; Steam Emb + MLP 74.83 ± 0.24.
+- Best neural (val-selected): NSMC Emb + BiGRU 83.02 ± 0.49; Shopping Emb + BiLSTM 89.96 ± 0.39; Steam Emb + MLP 74.83 ± 0.24.
 - Mamba (weakest neural, `torch_ref` backend): 78.81 ± 0.87 / 87.20 ± 0.44 / 73.22 ± 0.63.
 - Gap closes with data but no method saturates: last doubling (4k→8k) adds 2.05 ± 0.39 / 1.28 ± 0.37 /
   1.62 ± 0.48 points for the TF-IDF winner and 3.14 ± 0.89 / 2.32 ± 0.59 /

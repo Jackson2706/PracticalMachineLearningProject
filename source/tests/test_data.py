@@ -7,13 +7,13 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from ksent.config import global_cfg, processed_dir
+from ksent.config import global_cfg, pool_size, processed_dir, resolve_sizes
 from ksent.data.clean import clean_frame
 from ksent.data.normalize import normalize
 from ksent.data.subsets import stratified_order
 
 DATASETS = global_cfg()["datasets"]
-SIZES = sorted(set(global_cfg()["sizes"]))
+SIZES = sorted({int(s) for s in global_cfg()["sizes"] if str(s).isdigit() and int(s) <= 8000})
 SEEDS = [int(global_cfg()["tuning_seed"])] + [int(s) for s in global_cfg()["seeds"]]
 
 
@@ -91,17 +91,22 @@ def test_subsets_nested_and_stratified(ds: str) -> None:
         pytest.skip("run scripts/01_prepare_data.sh first")
     from ksent.data.subsets import subset_ids
 
-    pool = pd.read_parquet(processed_dir(ds) / "train_pool.parquet").set_index("review_id")
+    core = pd.read_parquet(processed_dir(ds) / "train_pool.parquet").set_index("review_id")
+    extra = processed_dir(ds) / "train_extra.parquet"
+    pool = pd.concat([core, pd.read_parquet(extra).set_index("review_id")]) if extra.exists() else core
     p_all = pool.label.mean()
+    assert len(pool) == pool_size(ds)
     for seed in SEEDS:
         prev: set[str] = set()
-        for n in SIZES:
+        for n in resolve_sizes(ds):
             ids = subset_ids(ds, seed, n)
             assert len(ids) == len(set(ids)) == n
             assert prev <= set(ids), "subsets must be nested"
             assert abs(pool.loc[ids].label.mean() - p_all) <= 0.01
+            if n <= len(core):
+                assert set(ids) <= set(core.index), "sizes up to the train pool never use train_extra"
             prev = set(ids)
-        assert prev == set(pool.index)  # largest size uses the full pool
+        assert prev == set(pool.index)  # largest size ("full") uses every training review
     a, b = subset_ids(ds, SEEDS[1], 500), subset_ids(ds, SEEDS[2], 500)
     assert a != b
 
@@ -115,7 +120,7 @@ def test_split_determinism(ds: str) -> None:
 
     def digest() -> str:
         h = hashlib.sha256()
-        for s in ("train_pool", "val", "test"):
+        for s in ("train_pool", "val", "test", "train_extra"):
             df = pd.read_parquet(processed_dir(ds) / f"{s}.parquet")
             h.update(pd.util.hash_pandas_object(df, index=False).values.tobytes())
         return h.hexdigest()

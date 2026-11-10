@@ -3,7 +3,7 @@
 * ``runs.csv``             one row per (dataset, method, tokenizer, size, seed)
 * ``summary.csv``          main tokenizer only: mean and sample std (ddof=1) over seeds
 * ``summary_tokenizers.csv`` all tokenizers (used by the ablation)
-* ``confusion_n8000.csv``  main tokenizer, n=8,000: confusion counts summed over seeds + rates
+* ``confusion_n8000.csv``  main tokenizer, reference size (8,000): confusion counts summed over seeds + rates
 * ``tuning.csv`` / ``frozen.csv``  tuning runs and selected configs
 * ``meta.json``            hardware fingerprints, devices, Mamba backends, mixed-hardware flag
 
@@ -117,8 +117,8 @@ def summarize(runs: pd.DataFrame, keys: list[str] | None = None) -> pd.DataFrame
 
 
 def confusion_8000(runs: pd.DataFrame) -> pd.DataFrame:
-    """Confusion counts summed over seeds at the largest size, then row-normalised."""
-    n = max(int(s) for s in global_cfg()["sizes"])
+    """Confusion counts summed over seeds at the reference size, then row-normalised."""
+    n = int(global_cfg()["analysis"]["reference_size"])
     sub = runs[runs["size"] == n]
     if sub.empty or "test_tn" not in sub:
         return pd.DataFrame()

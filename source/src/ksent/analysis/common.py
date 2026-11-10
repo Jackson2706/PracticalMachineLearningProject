@@ -9,7 +9,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from ksent.config import ALL_METHODS, DATASET_DISPLAY, METHOD_DISPLAY, NEURAL_METHODS, TFIDF_METHODS, global_cfg, path
+from ksent.config import (ALL_METHODS, DATASET_DISPLAY, FULL_SIZE, METHOD_DISPLAY, NEURAL_METHODS, TFIDF_METHODS,
+                          global_cfg, path, resolve_sizes, size_label)
 
 AGG_DIR: Path = path("results") / "aggregated"
 REPORT_DIR: Path = path("report")
@@ -24,7 +25,8 @@ def count_missing(tex: str) -> int:
     """Number of table cells that are exactly the MISSING marker (not ``1--2-gram`` en-dashes)."""
     return len(_MISSING_CELL.findall(tex))
 
-# Colour = method identity (reference palette, 8 validated slots + neutral grey for the 9th).
+# Colour = method identity (reference palette, 8 validated slots + neutral grey + a light blue for BiRNN;
+# unidirectional recurrent nets reuse their bidirectional twin's colour with a dotted line).
 # Family is a second channel: TF-IDF dashed + hollow markers, neural solid + filled markers.
 METHOD_STYLE: dict[str, dict] = {
     "tfidf_lr":          {"color": "#008300", "marker": "o"},
@@ -32,6 +34,10 @@ METHOD_STYLE: dict[str, dict] = {
     "tfidf_rf":          {"color": "#eda100", "marker": "^"},
     "tfidf_xgb":         {"color": "#5f5e58", "marker": "D"},
     "emb_mlp":           {"color": "#1baf7a", "marker": "o"},
+    "emb_rnn_uni":       {"color": "#6da7ec", "marker": "P"},
+    "emb_lstm_uni":      {"color": "#2a78d6", "marker": "s"},
+    "emb_gru_uni":       {"color": "#4a3aa7", "marker": "^"},
+    "emb_rnn":           {"color": "#6da7ec", "marker": "P"},
     "emb_lstm":          {"color": "#2a78d6", "marker": "s"},
     "emb_gru":           {"color": "#4a3aa7", "marker": "^"},
     "small_transformer": {"color": "#eb6834", "marker": "D"},
@@ -41,14 +47,45 @@ for _m in TFIDF_METHODS:
     METHOD_STYLE[_m].update(linestyle="--", fill="none")
 for _m in NEURAL_METHODS:
     METHOD_STYLE[_m].update(linestyle="-", fill="full")
+for _m in ("emb_rnn_uni", "emb_lstm_uni", "emb_gru_uni"):  # same hue as the bidirectional twin, dotted
+    METHOD_STYLE[_m].update(linestyle=":")
 
 
 def datasets() -> list[str]:
     return list(global_cfg()["datasets"])
 
 
-def sizes() -> list[int]:
-    return [int(s) for s in global_cfg()["sizes"]]
+def sizes(dataset: str) -> list[int]:
+    """Training sizes of ``dataset``, ascending, with ``full`` resolved to its pool size."""
+    return resolve_sizes(dataset)
+
+
+def _column_sizes() -> list[int]:
+    """Numeric sizes used by any dataset (each dataset's ``full`` excluded), ascending."""
+    return sorted({n for d in datasets() for n in sizes(d) if size_label(d, n) != FULL_SIZE})
+
+
+def size_columns() -> list[str]:
+    """Column labels shared by all datasets: the union of their numeric sizes, then ``full``."""
+    return [f"{n:,}" for n in _column_sizes()] + [FULL_SIZE]
+
+
+def aligned_sizes(dataset: str) -> list[int | None]:
+    """``dataset``'s sizes laid out under ``size_columns()``; ``None`` where it has no such size."""
+    own = sizes(dataset)
+    full = [n for n in own if size_label(dataset, n) == FULL_SIZE]
+    return [n if n in own else None for n in _column_sizes()] + [full[0] if full else None]
+
+
+def ref_size() -> int:
+    """Size of the cost pass (all cost metrics exist only here and at crossover sizes)."""
+    return int(global_cfg()["analysis"]["reference_size"])
+
+
+def size_tex(dataset: str, n) -> str:
+    """LaTeX size label: ``8{,}000`` or ``full (95{,}774)``."""
+    lab = size_label(dataset, int(n))
+    return (f"full ({int(n):,})" if lab == FULL_SIZE else lab).replace(",", "{,}")
 
 
 def methods() -> list[str]:

@@ -2,6 +2,22 @@ emb_mlp:
   S: 167
   M: 386
   L: 644
+emb_rnn_uni:
+  S: 167
+  M: 386
+  L: 644
+emb_lstm_uni:
+  S: 64
+  M: 168
+  L: 294
+emb_gru_uni:
+  S: 79
+  M: 201
+  L: 348
+emb_rnn:
+  S: 105
+  M: 257
+  L: 438
 emb_lstm:
   S: 37
   M: 106

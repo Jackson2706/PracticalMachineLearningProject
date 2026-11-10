@@ -42,13 +42,14 @@ from pathlib import Path
 
 import psutil
 
-from ksent.config import SOURCE_DIR, family, global_cfg, path
+from ksent.config import SOURCE_DIR, family, global_cfg, path, resolve_size
 from ksent.run_one import default_out_root, is_done, result_path
 from ksent.sweep import Job, enumerate_jobs
 from ksent.utils import now_iso, read_json
 
 # relative cost of a method at equal size, used for longest-first ordering when no pilot exists
-_WEIGHT = {"tfidf_lr": 1, "tfidf_svm": 1, "tfidf_rf": 8, "tfidf_xgb": 8, "emb_mlp": 2, "emb_lstm": 4,
+_WEIGHT = {"tfidf_lr": 1, "tfidf_svm": 1, "tfidf_rf": 8, "tfidf_xgb": 8, "emb_mlp": 2, "emb_rnn_uni": 2, "emb_lstm_uni": 3,
+           "emb_gru_uni": 3, "emb_rnn": 3, "emb_lstm": 4,
            "emb_gru": 4, "small_transformer": 6, "small_mamba": 8}
 
 
@@ -236,7 +237,7 @@ class Scheduler:
             s = stats.get(gid)
             # reserve the estimated peak of jobs on this GPU that may not have allocated yet
             pending = sum(_lookup(self.est, r[0].job.method, r[0].job.size, "peak_vram_mb", 1024) for r in on)
-            if s and s["used_mb"] + max(need_vram, 0) + pending * 0.5 > self.vram_frac * s["total_mb"]:
+            if s and on and s["used_mb"] + max(need_vram, 0) + pending * 0.5 > self.vram_frac * s["total_mb"]:
                 continue
             if self._ram_ok(_lookup(self.est, t.job.method, t.job.size, "peak_rss_mb", 3072)):
                 return f"gpu:{gid}"
@@ -249,6 +250,8 @@ class Scheduler:
         return self._gpu_stats_cache
 
     def _ram_ok(self, need_mb: float) -> bool:
+        if not self.running:  # estimates are extrapolated above the pilot sizes: never block an idle machine
+            return True
         reserved = sum(_lookup(self.est, r[0].job.method, r[0].job.size, "peak_rss_mb", 2048)
                        for r in self.running.values()) * 0.5
         return psutil.virtual_memory().available / 2**20 - reserved - need_mb > self.ram_margin_mb
@@ -412,7 +415,8 @@ def build_jobs(args: argparse.Namespace) -> list[Job]:
     seeds = args.seeds or g["seeds"]
     if args.kind == "pilot":
         sizes = args.sizes or [int(g["tuning_size"])]
-        return [Job(args.pilot_dataset, m, g["tokenizer"], int(n), int(g["tuning_seed"])) for m in methods for n in sizes]
+        return [Job(args.pilot_dataset, m, g["tokenizer"], resolve_size(args.pilot_dataset, n), int(g["tuning_seed"]))
+                for m in methods for n in sizes]
     if args.kind == "crossover_cost":
         from ksent.analysis.crossover import crossover_cost_jobs
 
@@ -430,7 +434,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--stage", default=None, help="name for logs (default: <kind>_<run-mode>)")
     ap.add_argument("--dataset", nargs="*", default=None)
     ap.add_argument("--method", nargs="*", default=None)
-    ap.add_argument("--sizes", nargs="*", type=int, default=None)
+    ap.add_argument("--sizes", nargs="*", default=None, help="training sizes (integers or 'full')")
     ap.add_argument("--seeds", nargs="*", type=int, default=None)
     ap.add_argument("--pilot-dataset", default="nsmc")
     ap.add_argument("--device", default=None, help="cpu forces neural jobs onto the CPU (smoke test)")

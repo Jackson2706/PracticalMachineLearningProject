@@ -5,7 +5,7 @@ data_seed: 2026            # fixed seed for train-pool/val/test splits (independ
 tuning_seed: 0             # seed for the tuning subset and tuning fits
 tuning_size: 2000          # training size used for hyperparameter selection
 seeds: [13, 42, 87, 2024, 31337]
-sizes: [500, 1000, 2000, 4000, 8000]
+sizes: [500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 80000, 100000, 120000, 140000, 160000, 180000, full]   # full = train_pool + train_extra
 datasets: [nsmc, shopping, steam]
 methods:
   - tfidf_lr
@@ -13,6 +13,10 @@ methods:
   - tfidf_rf
   - tfidf_xgb
   - emb_mlp
+  - emb_rnn_uni
+  - emb_lstm_uni
+  - emb_gru_uni
+  - emb_rnn
   - emb_lstm
   - emb_gru
   - small_transformer
@@ -79,6 +83,7 @@ xgb_tuning:
 analysis:
   crossover_margin: 1.0    # macro-F1 points (x100 scale)
   pareto_size_fallback: 8000
+  reference_size: 8000     # size of the cost pass: Tables 2/4, Fig. 3/4, confusion matrices, n=8,000 macros
 
 ablation:
   tokenizers: [whitespace, kiwi, char]

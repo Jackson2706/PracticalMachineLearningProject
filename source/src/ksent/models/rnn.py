@@ -1,4 +1,4 @@
-"""Embedding -> (bi)LSTM / GRU -> masked mean or last-state pooling -> linear."""
+"""Embedding -> (bi)RNN / LSTM / GRU -> masked mean or last-state pooling -> linear."""
 from __future__ import annotations
 
 import torch
@@ -16,7 +16,7 @@ class EmbRNN(nn.Module):
                  pooling: str = "mean", n_classes: int = 2, **_: object) -> None:
         super().__init__()
         self.embedding = nn.Embedding(vocab_size, embed_dim, padding_idx=0)
-        rnn_cls = {"lstm": nn.LSTM, "gru": nn.GRU}[cell]
+        rnn_cls = {"rnn": nn.RNN, "lstm": nn.LSTM, "gru": nn.GRU}[cell]
         self.rnn = rnn_cls(embed_dim, width, num_layers=num_layers, batch_first=True,
                            bidirectional=bidirectional, dropout=dropout if num_layers > 1 else 0.0)
         self.cell, self.pooling, self.bidirectional = cell, pooling, bidirectional

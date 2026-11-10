@@ -22,11 +22,14 @@ import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
 from matplotlib.lines import Line2D  # noqa: E402
 
-from ksent.analysis.common import FIG_DIR, METHOD_STYLE, datasets, dname, methods, mname, read_csv, sizes  # noqa: E402
+from ksent.analysis.common import (FIG_DIR, METHOD_STYLE, datasets, dname, methods, mname, read_csv,  # noqa: E402
+                                   ref_size, sizes)
+from ksent.config import size_label  # noqa: E402
 from ksent.config import NEURAL_METHODS, family  # noqa: E402
 
 ABBR = {"tfidf_lr": "LR", "tfidf_svm": "SVM", "tfidf_rf": "RF", "tfidf_xgb": "XGB", "emb_mlp": "MLP",
-        "emb_lstm": "LSTM", "emb_gru": "GRU", "small_transformer": "Trf", "small_mamba": "Mamba"}
+        "emb_rnn_uni": "RNN", "emb_lstm_uni": "LSTM", "emb_gru_uni": "GRU", "emb_rnn": "BiRNN",
+        "emb_lstm": "BiLSTM", "emb_gru": "BiGRU", "small_transformer": "Trf", "small_mamba": "Mamba"}
 INK, INK2, GRID = "#1f1f1e", "#5f5e58", "#e4e3dc"
 BLUES = ["#f4f8fd", "#cde2fb", "#9ec5f4", "#6da7ec", "#3987e5", "#2a78d6", "#1c5cab", "#104281"]
 
@@ -48,7 +51,7 @@ def dummy_summary(seed: int = 0) -> pd.DataFrame:
             base = 0.70 + 0.04 * di + 0.01 * (mi % 4)
             slope = 0.025 if family(m) == "tfidf" else 0.04
             lat = (0.4 + 0.3 * mi) if family(m) == "tfidf" else (0.8 + 1.5 * (mi - 3))
-            for n in sizes():
+            for n in sizes(d):
                 k = np.log2(n / 500)
                 f1 = min(0.95, base + slope * k - (0.03 if family(m) == "neural" and k < 1.5 else 0))
                 rows.append({"dataset": d, "method": m, "family": family(m), "size": n,
@@ -61,7 +64,7 @@ def dummy_summary(seed: int = 0) -> pd.DataFrame:
 
 
 def dummy_confusion(summary: pd.DataFrame) -> pd.DataFrame:
-    n = max(sizes())
+    n = ref_size()
     s = summary[summary["size"] == n]
     rows = []
     for _, r in s.iterrows():
@@ -101,6 +104,26 @@ def method_handles() -> list[Line2D]:
     return hs
 
 
+def size_axis(ax, d: str) -> None:
+    """Log2 x-axis with one tick per training size of ``d``. Labels (500, 1k, ..., full) only on ticks at
+    least 1.5x apart so the dense 64k+ range stays legible; ``full`` is always labelled."""
+    ns = sizes(d)
+    ax.set_xscale("log", base=2)
+    ax.set_xticks(ns)
+    labels = [f"{n // 1000}k" if n >= 1000 else str(n) for n in ns]
+    has_full = size_label(d, ns[-1]) == "full"
+    if has_full:
+        labels[-1] = "full"
+    keep, last = [False] * len(ns), None
+    for i in range(len(ns) - 1, -1, -1) if has_full else ():  # walk down from full
+        if last is None or last >= 1.5 * ns[i]:
+            keep[i], last = True, ns[i]
+    if not has_full:
+        keep = [True] * len(ns)
+    ax.set_xticklabels([lab if k else "" for lab, k in zip(labels, keep)], rotation=45 if sum(keep) > 6 else 0)
+    ax.minorticks_off()
+
+
 def _cell(summary, d, m, col):
     s = summary[(summary.dataset == d) & (summary.method == m)].sort_values("size")
     return s["size"].to_numpy(), s.get(f"{col}_mean", pd.Series(dtype=float)).to_numpy(), \
@@ -127,10 +150,7 @@ def fig2_learning_curves(summary: pd.DataFrame, ct: pd.DataFrame | None, placeho
                 ax.axvline(t, color=INK2, linestyle=":", linewidth=1.0)
                 ax.text(t, 1.0, " crossover", transform=ax.get_xaxis_transform(), fontsize=6.5, color=INK2,
                         va="top", ha="left")
-        ax.set_xscale("log", base=2)
-        ax.set_xticks(sizes())
-        ax.set_xticklabels([f"{n:,}" for n in sizes()])
-        ax.minorticks_off()
+        size_axis(ax, d)
         ax.set_title(dname(d), color=INK)
         ax.set_xlabel("Training reviews (log scale)")
     np.atleast_1d(axes)[0].set_ylabel("Test macro-F1 (×100)")
@@ -151,7 +171,7 @@ def pareto_front(points: list[tuple[float, float]]) -> list[tuple[float, float]]
 
 
 def fig3_quality_cost(summary: pd.DataFrame, placeholder: bool) -> None:
-    n = max(sizes())
+    n = ref_size()
     s = summary[summary["size"] == n]
     ds = datasets()
     fig, axes = plt.subplots(1, len(ds), figsize=(7.0, 2.6))
@@ -262,9 +282,10 @@ def figA1_oov(oov: pd.DataFrame, placeholder: bool) -> None:
                         markersize=4, capsize=1.5, linewidth=1.2, label=dname(d))
             ax.annotate(dname(d), (g["size"].iloc[-1], g["mean"].iloc[-1] * 100), xytext=(4, 0),
                         textcoords="offset points", fontsize=6, color=shades[i], va="center")
+        shared = sorted({n for d in datasets() for n in sizes(d) if size_label(d, n) != "full"})
         ax.set_xscale("log", base=2)
-        ax.set_xticks(sizes())
-        ax.set_xticklabels([f"{n:,}" for n in sizes()])
+        ax.set_xticks(shared)  # each dataset's full pool is the last point of its curve
+        ax.set_xticklabels([f"{n // 1000}k" if n >= 1000 else str(n) for n in shared])
         ax.minorticks_off()
         ax.set_title(title, color=INK)
         ax.set_xlabel("Training reviews (log scale)")
@@ -277,7 +298,7 @@ def figA1_oov(oov: pd.DataFrame, placeholder: bool) -> None:
 def dummy_oov() -> pd.DataFrame:
     rows = []
     for i, d in enumerate(datasets()):
-        for n in sizes():
+        for n in sizes(d):
             for s in range(3):
                 r = 0.2 * (500 / n) ** 0.45 + 0.01 * i + 0.002 * s
                 rows.append({"dataset": d, "tokenizer": "kiwi", "size": n, "seed": s, "oov_token_rate": r,

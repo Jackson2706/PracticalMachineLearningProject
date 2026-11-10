@@ -95,19 +95,28 @@ def cache_path(dataset: str, name: str):
 
 
 def build_cache(dataset: str, name: str, force: bool = False) -> dict:
-    """Tokenise every split of ``dataset`` once; return timing info."""
-    from ksent.data.split import SPLITS, load_split
+    """Tokenise every split of ``dataset`` once; return timing info. An existing cache
+    that lacks some reviews (e.g. ``train_extra`` added later) is extended, not rebuilt."""
+    from ksent.data.split import EXTRA, SPLITS, load_split
 
     p = cache_path(dataset, name)
+    df = pd.concat([load_split(dataset, s)[["review_id", "text"]] for s in (*SPLITS, EXTRA)], ignore_index=True)
+    old = None
     if p.exists() and not force:
-        return {"cached": True}
-    df = pd.concat([load_split(dataset, s)[["review_id", "text"]] for s in SPLITS], ignore_index=True)
+        old = pd.read_parquet(p)
+        df = df[~df["review_id"].isin(set(old["review_id"]))]
+        if df.empty:
+            return {"cached": True}
     t0 = time.perf_counter()
     df["tokens"] = tokenize_many(df["text"], name)
     elapsed = time.perf_counter() - t0
     empty = int((df["tokens"].map(len) == 0).sum())
     p.parent.mkdir(parents=True, exist_ok=True)
-    df[["review_id", "tokens"]].to_parquet(p, index=False)
+    out = df[["review_id", "tokens"]] if old is None else pd.concat([old, df[["review_id", "tokens"]]], ignore_index=True)
+    out.to_parquet(p, index=False)
+    if old is not None:
+        _load_cache.cache_clear()
+        return {"extended": True, "n_new_docs": len(df), "seconds": elapsed, "n_empty": empty}
     info = {"tokenizer": name, "n_docs": len(df), "seconds": elapsed, "docs_per_s": len(df) / max(elapsed, 1e-9),
             "n_empty": empty}
     write_json(info, p.with_suffix(".timing.json"))
@@ -125,7 +134,11 @@ def cached_tokens(dataset: str, ids: Iterable[str], name: str | None = None) -> 
     name = name or main_tokenizer()
     if not cache_path(dataset, name).exists():
         build_cache(dataset, name)
+    ids = list(ids)
     cache = _load_cache(dataset, name)
+    if any(i not in cache for i in ids):
+        build_cache(dataset, name)
+        cache = _load_cache(dataset, name)
     return [cache[i] for i in ids]
 
 

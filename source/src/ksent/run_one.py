@@ -40,7 +40,7 @@ import numpy as np
 import pandas as pd
 
 from ksent.config import (SOURCE_DIR, family, frozen_config, global_cfg, main_tokenizer, max_seq_len, path,
-                          processed_dir, resolve_config, search_space)
+                          processed_dir, resolve_config, resolve_size, search_space)
 from ksent.data.normalize import normalize
 from ksent.data.split import load_split
 from ksent.data.subsets import load_subset
@@ -284,7 +284,7 @@ def build_parser() -> argparse.ArgumentParser:
     ap.add_argument("--dataset", required=True)
     ap.add_argument("--method", required=True)
     ap.add_argument("--tokenizer", default=None, help="kiwi (main) | whitespace | char")
-    ap.add_argument("--size", type=int, required=True)
+    ap.add_argument("--size", required=True, help="training size or 'full'")
     ap.add_argument("--seed", type=int, required=True)
     ap.add_argument("--config-id", type=int, default=None)
     ap.add_argument("--mode", choices=["final", "tuning", "smoke", "pilot"], default="final")
@@ -306,6 +306,7 @@ def main(argv: list[str] | None = None) -> int:
     ap = build_parser()
     args = ap.parse_args(argv)
     args.tokenizer = args.tokenizer or main_tokenizer()
+    args.size = resolve_size(args.dataset, args.size)
     if args.mode == "tuning":
         if args.config_id is None:
             ap.error("--mode tuning requires --config-id")

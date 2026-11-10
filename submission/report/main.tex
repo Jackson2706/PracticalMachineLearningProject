@@ -36,8 +36,9 @@
 \begin{abstract}
 A small team building a Korean review classifier must decide whether to label more
 data or adopt a more complex model. We measure, on three Korean review domains
-(movies, shopping, games), the smallest training size among 500, 1{,}000, 2{,}000,
-4{,}000 and 8{,}000 reviews at which the best of five neural sequence classifiers
+(movies, shopping, games), the smallest training size among 10--14 sizes per dataset from 500 reviews
+(doubling to 64{,}000, then steps of 20{,}000) up to the full training set (\nFullSteam--\nFullShopping{} reviews) at which
+the best of nine neural sequence classifiers
 trained from scratch beats the best of four TF-IDF classifiers by at least
 \crossoverMargin{} macro-F1 point, and whether that neural model remains competitive
 in training time, inference latency and memory. Across \nFinalFits{} final fits

@@ -1,7 +1,7 @@
 \section{Methods}
 \label{sec:methods}
 
-All nine pipelines share the same normalized text, the same Kiwi morpheme tokens
+All thirteen pipelines share the same normalized text, the same Kiwi morpheme tokens
 (\cref{sec:preprocessing}) and the same training subsets. Every data-dependent
 transform---TF-IDF vocabulary and IDF weights, the neural vocabulary---is fitted on
 the current training subset only. Because the two families use different
@@ -12,23 +12,150 @@ Morpheme unigrams and bigrams, at most 10{,}000 features, sublinear term frequen
 $\ell_2$ normalisation, sparse matrices; all four run on the CPU. Four classifiers:
 logistic regression (\textbf{LR}) and a linear SVM (\textbf{SVM}) from scikit-learn~\cite{pedregosa2011scikit},
 Random Forest~\cite{breiman2001random} (\textbf{RF}) and
-XGBoost~\cite{chen2016xgboost} (\textbf{XGB}, histogram trees).
+XGBoost~\cite{chen2016xgboost} (\textbf{XGB}, histogram trees). LR uses the
+\texttt{liblinear} solver with an $\ell_2$ penalty, SVM is a linear SVM with squared hinge loss
+(\texttt{LinearSVC}), RF averages fully grown or depth-limited trees over random feature
+subsets, and XGB grows boosted trees with the logistic loss, row and column subsampling, and a number
+of rounds fixed by early stopping during tuning.
 
-\paragraph{Neural family.}
-A vocabulary of at most 20{,}000 training morphemes with frequency $\ge2$ (plus
-padding/unknown), 128-dimensional embeddings learned from scratch and a maximum length
-of \maxSeqLenKiwi{} morphemes (\cref{sec:preprocessing}). Five backbones:
-\textbf{MLP} (masked mean of embeddings $\to$ two-layer MLP, DAN-style~\cite{iyyer2015deep});
-\textbf{LSTM} and \textbf{GRU} (one bidirectional layer, masked mean pooling);
-\textbf{Transformer} (learned positional embeddings, two pre-norm encoder layers,
-four heads); and \textbf{Mamba} (two residual selective state-space
-blocks~\cite{gu2023mamba}). Mamba has two interchangeable implementations with identical
+\subsection{Neural architectures}
+\label{sec:arch}
+
+\paragraph{Shared template.}
+All nine neural classifiers follow the same template (\cref{fig:arch}) and differ only in
+the backbone. A review is a sequence of Kiwi morpheme ids $x_1,\dots,x_\ell$, truncated
+to $L=\maxSeqLenKiwi{}$ and right-padded with id~0. The vocabulary holds at most
+20{,}000 morphemes of the current training subset with frequency $\ge2$, plus
+\texttt{<pad>} and \texttt{<unk>}. Each id is mapped to a 128-dimensional embedding
+$\mathbf{e}_t=\mathbf{E}x_t$ learned from scratch (no pre-trained vectors; the padding row is
+fixed at zero). The backbone turns $\mathbf{e}_{1:\ell}$ into hidden states
+$\mathbf{h}_{1:\ell}$, which are averaged over the \emph{valid} positions only,
+\begin{equation}
+  \bar{\mathbf{h}} = \frac{1}{\ell}\sum_{t=1}^{\ell}\mathbf{h}_t ,
+  \qquad
+  \hat{\mathbf{y}} = \operatorname{softmax}\!\bigl(\mathbf{W}_o\,\operatorname{Dropout}(\bar{\mathbf{h}}) + \mathbf{b}_o\bigr) \in \mathbb{R}^2 ,
+  \label{eq:pool}
+\end{equation}
+and a linear layer produces the two class logits. Masked mean pooling is used by every
+backbone, so differences between models come from how $\mathbf{h}_t$ is computed, not
+from the readout. Dropout with the tuned rate $p$ is applied to the backbone input and
+to $\bar{\mathbf{h}}$. With $|V|\approx20{,}000$ the embedding table alone has
+$\approx2.56$M parameters for every model; we therefore match the \emph{non-embedding}
+parameters across architectures (below).
+
+\begin{figure}[t]
+  \centering
+  \begin{tikzpicture}[
+      node distance=4mm and 5mm,
+      box/.style={draw, rounded corners=2pt, minimum height=7mm, align=center, font=\small, inner sep=3pt},
+      bb/.style={box, fill=black!6, text width=33mm, minimum height=6mm, font=\footnotesize},
+      arr/.style={-{Stealth[length=2mm]}, thick}]
+    \node[box] (in) {Kiwi morphemes\\$x_1,\dots,x_\ell$};
+    \node[box, right=of in] (emb) {Embedding\\$128$-d, from scratch};
+    \node[bb, right=8mm of emb, yshift=11mm] (mlp) {MLP (identity)};
+    \node[bb, below=1.5mm of mlp] (rnn) {(Bi)RNN / (Bi)LSTM /\\ (Bi)GRU};
+    \node[bb, below=1.5mm of rnn] (trf) {Transformer $\times2$};
+    \node[bb, below=1.5mm of trf] (mam) {Mamba $\times2$};
+    \node[draw, dashed, rounded corners=3pt, fit=(mlp)(rnn)(trf)(mam), inner sep=2.5pt,
+          label={[font=\scriptsize]above:backbone $\mathbf{h}_{1:\ell}$}] (back) {};
+    \node[box, right=8mm of back] (pool) {Masked\\mean pool};
+    \node[box, right=of pool] (head) {Dropout +\\Linear $\to2$};
+    \draw[arr] (in) -- (emb);
+    \draw[arr] (emb.east) -- (back.west |- emb.east);
+    \draw[arr] (back.east |- pool.west) -- (pool);
+    \draw[arr] (pool) -- (head);
+  \end{tikzpicture}
+  \caption{Shared template of the nine neural classifiers. Only the backbone differs; the
+  input, the 128-d embedding, masked mean pooling over valid tokens and the linear head are
+  identical. For the MLP the backbone is the identity and the two-layer MLP is applied after
+  pooling (deep averaging network).}
+  \label{fig:arch}
+\end{figure}
+
+\paragraph{MLP (deep averaging network).}
+Following DAN~\cite{iyyer2015deep}, the embeddings are pooled first and the pooled vector
+passes through two hidden layers of width $w$:
+$\mathbf{z}_0=\bar{\mathbf{e}}$, $\mathbf{z}_k=\operatorname{Dropout}(\operatorname{ReLU}(\mathbf{W}_k\mathbf{z}_{k-1}+\mathbf{b}_k))$
+for $k=1,2$, followed by the linear head. It ignores word order completely and is the
+neural counterpart of a bag-of-words model.
+
+\paragraph{Recurrent networks (RNN, LSTM, GRU and their bidirectional versions).}
+Each recurrent model has one layer. The \emph{unidirectional} RNN, LSTM and GRU read the
+sequence left-to-right only, $\mathbf{h}_t=\overrightarrow{\mathbf{h}}_t\in\mathbb{R}^{w}$, so
+the state at position $t$ has seen only the prefix $x_{1:t}$. The \emph{bidirectional}
+BiRNN, BiLSTM and BiGRU add a second, independent layer that reads right-to-left~\cite{schuster1997bidirectional};
+$w$ is then the hidden size per direction and
+$\mathbf{h}_t=[\overrightarrow{\mathbf{h}}_t;\overleftarrow{\mathbf{h}}_t]\in\mathbb{R}^{2w}$, so
+every position sees the whole review. Comparing each pair isolates the value of
+right-to-left context at equal parameter count. Sequences are packed, so padding never
+enters the recurrence. Within each direction setting the three variants differ only in
+the cell (written below for the forward direction). The \textbf{RNN}/\textbf{BiRNN} use the plain Elman cell~\cite{elman1990finding},
+$\overrightarrow{\mathbf{h}}_t=\tanh(\mathbf{W}\mathbf{e}_t+\mathbf{U}\overrightarrow{\mathbf{h}}_{t-1}+\mathbf{b})$,
+which has no gates and is the baseline for what gating adds.
+The \textbf{LSTM}/\textbf{BiLSTM}~\cite{hochreiter1997long} add input, forget and output gates and a
+separate memory cell,
+$\mathbf{c}_t=\mathbf{f}_t\odot\mathbf{c}_{t-1}+\mathbf{i}_t\odot\tanh(\mathbf{W}_c\mathbf{e}_t+\mathbf{U}_c\mathbf{h}_{t-1}+\mathbf{b}_c)$,
+$\mathbf{h}_t=\mathbf{o}_t\odot\tanh(\mathbf{c}_t)$, with each gate
+$\sigma(\mathbf{W}_g\mathbf{e}_t+\mathbf{U}_g\mathbf{h}_{t-1}+\mathbf{b}_g)$.
+The \textbf{GRU}/\textbf{BiGRU}~\cite{cho2014learning} merge memory and state and use an update
+gate $\mathbf{u}_t$ and a reset gate $\mathbf{r}_t$:
+$\tilde{\mathbf{h}}_t=\tanh(\mathbf{W}\mathbf{e}_t+\mathbf{U}(\mathbf{r}_t\odot\mathbf{h}_{t-1})+\mathbf{b})$,
+$\mathbf{h}_t=(1-\mathbf{u}_t)\odot\mathbf{h}_{t-1}+\mathbf{u}_t\odot\tilde{\mathbf{h}}_t$.
+Per direction, an RNN, GRU and LSTM layer has one, three and four weight blocks of
+size $w(128+w+2)$ respectively, so at equal budget the plain RNN is the widest, and a
+unidirectional model is wider than its bidirectional twin, which splits the budget over
+two directions (\cref{tab:arch}).
+
+\paragraph{Transformer encoder.}
+The embedding is projected to $d=w$ dimensions and a learned positional embedding
+$\mathbf{p}_t$ ($L$ positions) is added: $\mathbf{u}_t=\mathbf{W}_p\mathbf{e}_t+\mathbf{p}_t$.
+Two pre-norm encoder layers~\cite{vaswani2017attention} follow, each
+$\mathbf{a}=\mathbf{u}+\operatorname{MHSA}(\operatorname{LN}(\mathbf{u}))$,
+$\mathbf{u}'=\mathbf{a}+\mathbf{W}_2\operatorname{GELU}(\mathbf{W}_1\operatorname{LN}(\mathbf{a}))$,
+with four attention heads, a feed-forward width of $2d$, dropout $p$ inside both
+sub-layers, and a key-padding mask so that attention ignores padding. A final
+LayerNorm~\cite{ba2016layer} precedes pooling. Positional embeddings are counted as
+embedding parameters.
+
+\paragraph{Mamba.}
+The embedding is projected to $d=w$ and passed through two pre-norm residual blocks
+$\mathbf{x}\leftarrow\mathbf{x}+\operatorname{Mixer}(\operatorname{RMSNorm}(\mathbf{x}))$~\cite{zhang2019root}.
+The mixer is the selective state-space layer of \citet{gu2023mamba} with expansion 2
+($d_\text{in}=2d$), a causal depthwise convolution of width 4 and state size $N=16$:
+$[\tilde{\mathbf{x}},\mathbf{z}]=\mathbf{W}_\text{in}\mathbf{x}$,
+$\tilde{\mathbf{x}}\leftarrow\operatorname{SiLU}(\operatorname{conv}(\tilde{\mathbf{x}}))$, and for every
+channel
+\begin{equation}
+  \mathbf{s}_t=\exp(\Delta_t\mathbf{A})\odot\mathbf{s}_{t-1}+\Delta_t\mathbf{B}_t\tilde{x}_t,\qquad
+  y_t=\mathbf{C}_t^{\top}\mathbf{s}_t+D\,\tilde{x}_t ,
+\end{equation}
+where the step size $\Delta_t=\operatorname{softplus}(\cdot)$ (rank $\lceil d/16\rceil$) and
+$\mathbf{B}_t,\mathbf{C}_t\in\mathbb{R}^{N}$ are computed from $\tilde{\mathbf{x}}_t$: this
+input dependence (``selection'') lets the model decide per token what to keep in its
+state. The output is $\mathbf{W}_\text{out}(\mathbf{y}\odot\operatorname{SiLU}(\mathbf{z}))$.
+The scan is causal, so right padding cannot affect valid positions; a final RMSNorm
+precedes pooling. Mamba has two interchangeable implementations with identical
 parameters: the fused CUDA kernels of \texttt{mamba-ssm} and a pure-PyTorch reference
 selective scan (\texttt{torch\_ref}); all reported Mamba results use \mambaBackend{}, and CPU
 latency always uses \texttt{torch\_ref}.
-Each architecture has three width levels (S/M/L) chosen so that non-embedding
-parameter counts are approximately 50k/200k/500k ($\pm$15\%; actual counts are in
-\cref{tab:methods}).
+
+\paragraph{Parameter matching.}
+Each architecture has three width levels S/M/L. For every architecture and level we
+search the width $w$ whose non-embedding parameter count is closest to 50k, 200k and
+500k respectively; all resulting models lie within $\pm3\%$ of the target
+(\cref{tab:arch}). The width level is a tuned hyperparameter (\cref{sec:methods}), so
+each dataset may select a different level.
+
+\begin{table}[t]
+  \centering
+  \caption{Neural architectures. ``Width'' is the size that is varied to meet the
+  parameter budget; S/M/L give the width and, in parentheses, the resulting number of
+  non-embedding parameters (target in the header). All models additionally have a
+  $|V|\times128$ embedding table ($\approx$2.56M parameters at $|V|\approx20$k) and a
+  linear output layer.}
+  \label{tab:arch}
+  \input{tables/table_arch}
+\end{table}
 
 \paragraph{Fixed neural training rules.}
 AdamW~\cite{loshchilov2019decoupled} (weight decay 0.01), batch size 64, at most 30

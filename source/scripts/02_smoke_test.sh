@@ -13,7 +13,7 @@ SMOKE="--kind smoke --max-epochs 2 --allow-fallback --progress-every 60"
 # shellcheck disable=SC2086
 python -m ksent.scheduler $SMOKE --run-mode cost --no-exclusive-check --device cpu \
   --out-root results_smoke/cpu --stage smoke_cpu
-NEURAL="emb_mlp emb_lstm emb_gru small_transformer small_mamba"
+NEURAL="emb_mlp emb_rnn_uni emb_lstm_uni emb_gru_uni emb_rnn emb_lstm emb_gru small_transformer small_mamba"
 ACCELS="$(python -m ksent.hardware --accelerators)"
 for acc in $ACCELS; do
   echo "=== smoke test on accelerator: $acc ==="

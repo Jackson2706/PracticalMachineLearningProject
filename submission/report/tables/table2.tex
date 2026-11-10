@@ -12,8 +12,12 @@ TF-IDF + RF & TF-IDF & TF-IDF 1--2-gram & trees, depth, feat., leaf, weight (10/
 TF-IDF + XGBoost & TF-IDF & TF-IDF 1--2-gram & depth, $\eta$, sampling (10/18); rounds by ES & d6, $\eta$=0.05, s1, R=505 & 16.9k & 169 & d4, $\eta$=0.1, s1, R=331 & 6,146 & 174 & d4, $\eta$=0.05, s0.8, R=488 & 9,829 & 133 \\
 \midrule
 Emb + MLP & Neural & Emb.\ mean pool & lr, dropout, width S/M/L (10/27) & S, lr=2e-3, p=0.5 & 49.9k / 671.5k & 36.1 & S, lr=2e-3, p=0.5 & 49.9k / 591.6k & 43.1 & M, lr=1e-3, p=0.5 & 199.9k / 753.9k & 37.9 \\
-Emb + LSTM & Neural & Emb.\ + BiLSTM & lr, dropout, width S/M/L (10/27) & S, lr=2e-3, p=0.5 & 49.6k / 671.5k & 157 & M, lr=1e-3, p=0.5 & 200.6k / 591.6k & 147 & M, lr=3e-4, p=0.3 & 200.6k / 753.9k & 147 \\
-Emb + GRU & Neural & Emb.\ + BiGRU & lr, dropout, width S/M/L (10/27) & S, lr=2e-3, p=0.5 & 50.1k / 671.5k & 155 & M, lr=1e-3, p=0.3 & 201.0k / 591.6k & 125 & S, lr=1e-3, p=0.3 & 50.1k / 753.9k & 151 \\
+Emb + RNN & Neural & Emb.\ + RNN & lr, dropout, width S/M/L (10/27) & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
+Emb + LSTM & Neural & Emb.\ + LSTM & lr, dropout, width S/M/L (10/27) & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
+Emb + GRU & Neural & Emb.\ + GRU & lr, dropout, width S/M/L (10/27) & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
+Emb + BiRNN & Neural & Emb.\ + BiRNN & lr, dropout, width S/M/L (10/27) & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
+Emb + BiLSTM & Neural & Emb.\ + BiLSTM & lr, dropout, width S/M/L (10/27) & S, lr=2e-3, p=0.5 & 49.6k / 671.5k & 157 & M, lr=1e-3, p=0.5 & 200.6k / 591.6k & 147 & M, lr=3e-4, p=0.3 & 200.6k / 753.9k & 147 \\
+Emb + BiGRU & Neural & Emb.\ + BiGRU & lr, dropout, width S/M/L (10/27) & S, lr=2e-3, p=0.5 & 50.1k / 671.5k & 155 & M, lr=1e-3, p=0.3 & 201.0k / 591.6k & 125 & S, lr=1e-3, p=0.3 & 50.1k / 753.9k & 151 \\
 Transformer & Neural & Emb.\ + 2-layer encoder & lr, dropout, width S/M/L (10/27) & S, lr=2e-3, p=0.5 & 51.3k / 675.2k & 104 & S, lr=2e-3, p=0.5 & 51.3k / 595.4k & 85.6 & M, lr=1e-3, p=0.5 & 203.4k / 761.7k & 106 \\
 Mamba & Neural & Emb.\ + 2 Mamba blocks & lr, dropout, width S/M/L (10/27) & L, lr=1e-3, p=0.1 & 498.9k / 671.5k & 558 & M, lr=2e-3, p=0.1 & 196.4k / 591.6k & 421 & S, lr=2e-3, p=0.5 & 49.3k / 753.9k & 466 \\
 \bottomrule

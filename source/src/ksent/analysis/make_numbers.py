@@ -14,9 +14,9 @@ import argparse
 import numpy as np
 import pandas as pd
 
-from ksent.analysis.common import (AGG_DIR, GEN_DIR, datasets, dname, isnum, mname, read_csv, sizes, summary_lookup,
+from ksent.analysis.common import (AGG_DIR, GEN_DIR, datasets, dname, isnum, mname, read_csv, ref_size, sizes, summary_lookup,
                                    tex_escape)
-from ksent.config import NEURAL_METHODS, TFIDF_METHODS, global_cfg, path
+from ksent.config import NEURAL_METHODS, TFIDF_METHODS, global_cfg, path, resolve_sizes
 from ksent.utils import read_json
 
 SUFFIX = {"nsmc": "NSMC", "shopping": "Shopping", "steam": "Steam"}
@@ -68,12 +68,13 @@ def build() -> Numbers:
     stats = read_json(stats_p) if stats_p.exists() else {"datasets": {}}
     hw_p = path("results") / "env" / "hardware.json"
     hw = read_json(hw_p) if hw_p.exists() else {}
-    nmax = max(sizes())
+    nmax = ref_size()  # the "n = 8,000" macros (bestEightK..., macroFOneBest...) stay at the cost-pass size
+    bs = read_csv("crossover_by_size.csv")
 
     # ---- design constants (from configs)
     N.add("nSeeds", str(len(g["seeds"])), "experiment seeds")
     N.add("seedList", ", ".join(str(s) for s in g["seeds"]), "seed values")
-    n_final = len(g["datasets"]) * len(g["methods"]) * len(g["sizes"]) * len(g["seeds"])
+    n_final = sum(len(resolve_sizes(d)) for d in g["datasets"]) * len(g["methods"]) * len(g["seeds"])
     N.add("nFinalFits", _n(n_final), "planned final fits")
     N.add("nTuningFits", _n(len(g["datasets"]) * len(g["methods"]) * 10), "planned tuning fits")
     N.add("nThreads", str(g["n_threads"]), "CPU threads")
@@ -130,7 +131,7 @@ def build() -> Numbers:
         N.add(f"truncKiwi{X}", _f(sp.get("trunc_pct"), 1, r"\%") if sp.get("trunc_pct") is not None else None,
               f"{dname(d)} train-pool reviews truncated (Kiwi)")
         oov_df = read_csv("diagnostics_oov.csv")
-        for n_, nm in ((min(sizes()), "Small"), (max(sizes()), "Large")):
+        for n_, nm in ((sizes(d)[0], "Small"), (nmax, "Large"), (sizes(d)[-1], "Full")):
             o = None if oov_df is None else oov_df[(oov_df.dataset == d) & (oov_df.tokenizer == "kiwi")
                                                    & (oov_df["size"] == n_)]
             N.add(f"oov{nm}{X}", _f(o.oov_token_rate.mean() * 100, 1, r"\%") if o is not None and len(o) else None,
@@ -209,8 +210,25 @@ def build() -> Numbers:
         mam = summary_lookup(summary, d, "small_mamba", nmax, "test_macro_f1")
         N.add(f"mambaFOne{X}", _pm(*mam, 100), f"Mamba test macro-F1 at n={nmax}")
 
-        # marginal gains of the overall best method
-        for a, b, nm in ((sizes()[0], sizes()[1], "gainFirst"), (sizes()[-2], sizes()[-1], "gainLast")):
+        # full training pool: size, val-selected family winners and their paired gap
+        nfull = sizes(d)[-1]
+        N.add(f"nFull{X}", _n(nfull), f"{dname(d)} full training pool (train_pool + train_extra)")
+        cell = summary[(summary.dataset == d) & (summary["size"] == nfull)] if summary is not None else None
+        for fam, ms, nm in (("tfidf", TFIDF_METHODS, "Tfidf"), ("neural", NEURAL_METHODS, "Neural")):
+            fc = cell[cell.method.isin(ms)].dropna(subset=["val_macro_f1_mean"]) if cell is not None else None
+            fb = fc.sort_values("val_macro_f1_mean", ascending=False).iloc[0] if fc is not None and len(fc) else None
+            N.add(f"bestFull{nm}{X}", mname(fb.method) if fb is not None else None, f"val-selected best {fam} at full")
+            N.add(f"macroFOneFull{nm}{X}", _pm(fb.test_macro_f1_mean, fb.test_macro_f1_std, 100) if fb is not None
+                  else None, f"its test macro-F1 (x100) at full")
+        r = bs[(bs.dataset == d) & (bs.selection == "val") & (bs["size"] == nfull)] if bs is not None else None
+        N.add(f"gapFull{X}", _pm(r.gap_mean.iloc[0], r.gap_std.iloc[0]) if r is not None and len(r) else None,
+              "neural - TF-IDF test macro-F1 gap at full (points)")
+
+        # marginal gains of the overall best method (gainLast ends at the reference size)
+        sz = sizes(d)
+        i_ref = sz.index(nmax) if nmax in sz else len(sz) - 1
+        for a, b, nm in ((sz[0], sz[1], "gainFirst"), (sz[i_ref - 1], sz[i_ref], "gainLast"),
+                         (sz[-2], sz[-1], "gainToFull")):
             val = None
             if mg is not None and best_m:
                 r = mg[(mg.dataset == d) & (mg.method == best_m) & (mg.from_size == a)]
@@ -247,15 +265,15 @@ def build() -> Numbers:
                   f"{fam} winner: negatives predicted positive (n=8000, pooled over seeds)")
             N.add(f"fnr{fam}{X}", _f(c.fnr.iloc[0] * 100, 1, r"\%") if ok else None,
                   f"{fam} winner: positives predicted negative (n=8000, pooled over seeds)")
-        s = summ[(summ.dataset == d) & (summ["size"] == 8000) & (summ.method == win.get("Neural"))] \
+        s = summ[(summ.dataset == d) & (summ["size"] == ref_size()) & (summ.method == win.get("Neural"))] \
             if summ is not None else None
         ok = s is not None and len(s) > 0 and "lat_acc_e2e_ms_mean" in s
         N.add(f"neuralAccLatency{X}", _f(s.lat_acc_e2e_ms_mean.iloc[0], 3) if ok else None,
               "neural winner accelerator e2e latency (ms, batch 1)")
-        g = mgain[(mgain.dataset == d) & (mgain.method == win.get("Neural")) & (mgain.from_size == 4000)] \
+        g = mgain[(mgain.dataset == d) & (mgain.method == win.get("Neural")) & (mgain.to_size == ref_size())] \
             if mgain is not None else None
         N.add(f"gainLastNeural{X}", _pm(g.gain_mean.iloc[0], g.gain_std.iloc[0]) if g is not None and len(g) else None,
-              "neural winner's macro-F1 gain 4000->8000 (points)")
+              "neural winner's macro-F1 gain into the reference size (points)")
     det = read_csv(AGG_DIR / "determinism_by_method.csv")
     N.add("detRuns", _n(det.runs.sum()) if det is not None else None, "cost runs compared with quality runs")
     N.add("detIdentical", _n(det.identical_runs.sum()) if det is not None else None,

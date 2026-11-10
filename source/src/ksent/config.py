@@ -17,7 +17,8 @@ SOURCE_DIR: Path = Path(__file__).resolve().parents[2]
 CONFIG_DIR: Path = SOURCE_DIR / "configs"
 
 TFIDF_METHODS: tuple[str, ...] = ("tfidf_lr", "tfidf_svm", "tfidf_rf", "tfidf_xgb")
-NEURAL_METHODS: tuple[str, ...] = ("emb_mlp", "emb_lstm", "emb_gru", "small_transformer", "small_mamba")
+NEURAL_METHODS: tuple[str, ...] = ("emb_mlp", "emb_rnn_uni", "emb_lstm_uni", "emb_gru_uni",
+                                  "emb_rnn", "emb_lstm", "emb_gru", "small_transformer", "small_mamba")
 ALL_METHODS: tuple[str, ...] = TFIDF_METHODS + NEURAL_METHODS
 
 METHOD_DISPLAY: dict[str, str] = {
@@ -26,8 +27,12 @@ METHOD_DISPLAY: dict[str, str] = {
     "tfidf_rf": "TF-IDF + RF",
     "tfidf_xgb": "TF-IDF + XGBoost",
     "emb_mlp": "Emb + MLP",
-    "emb_lstm": "Emb + LSTM",
-    "emb_gru": "Emb + GRU",
+    "emb_rnn_uni": "Emb + RNN",
+    "emb_lstm_uni": "Emb + LSTM",
+    "emb_gru_uni": "Emb + GRU",
+    "emb_rnn": "Emb + BiRNN",
+    "emb_lstm": "Emb + BiLSTM",
+    "emb_gru": "Emb + BiGRU",
     "small_transformer": "Transformer",
     "small_mamba": "Mamba",
 }
@@ -116,6 +121,42 @@ def frozen_config(dataset: str, method: str) -> dict[str, Any]:
     if not p.exists():
         raise FileNotFoundError(f"{p} missing - run scripts/04_tune.sh first")
     return load_yaml(p)["params"]
+
+
+FULL_SIZE = "full"
+_NEAR_FULL = 0.9  # numeric sizes above this fraction of the pool are covered by "full"
+
+
+@functools.lru_cache(maxsize=None)
+def pool_size(dataset: str) -> int:
+    """Number of reviews available for training (``train_pool`` + ``train_extra``)."""
+    import pyarrow.parquet as pq
+
+    d = processed_dir(dataset)
+    return sum(pq.ParquetFile(d / f"{s}.parquet").metadata.num_rows
+               for s in ("train_pool", "train_extra") if (d / f"{s}.parquet").exists())
+
+
+def resolve_size(dataset: str, size: int | str) -> int:
+    """Concrete training size; ``"full"`` is every available training review of ``dataset``."""
+    return pool_size(dataset) if str(size) == FULL_SIZE else int(size)
+
+
+def resolve_sizes(dataset: str, sizes: list | None = None) -> list[int]:
+    """``global.yaml: sizes`` (or ``sizes``) for ``dataset``, ascending, ``full`` resolved.
+    Sizes above the available pool are dropped, and so are sizes within 10% below it
+    (e.g. 140k for NSMC's 143,640): they would nearly duplicate the ``full`` run."""
+    n = pool_size(dataset)
+    raw = global_cfg()["sizes"] if sizes is None else sizes
+    if not n:  # data not prepared (e.g. analysis tests): numeric sizes only
+        return sorted({int(x) for x in raw if str(x) != FULL_SIZE})
+    return sorted({s for s in (resolve_size(dataset, x) for x in raw) if s == n or s <= _NEAR_FULL * n})
+
+
+def size_label(dataset: str, size: int) -> str:
+    """``"full"`` for the full pool of ``dataset``, else the size with thousands separators."""
+    return FULL_SIZE if FULL_SIZE in map(str, global_cfg()["sizes"]) and int(size) == pool_size(dataset) \
+        else f"{int(size):,}"
 
 
 def main_tokenizer() -> str:

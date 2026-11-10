@@ -26,7 +26,7 @@ import sys
 import time
 from dataclasses import dataclass
 
-from ksent.config import SOURCE_DIR, family, global_cfg, main_tokenizer, search_space
+from ksent.config import SOURCE_DIR, family, global_cfg, main_tokenizer, resolve_sizes, search_space
 from ksent.run_one import default_out_root, is_done, result_path
 
 
@@ -44,15 +44,16 @@ class Job:
         return f"{self.dataset} {self.method} {self.tokenizer} n={self.size} seed={self.seed}{cfg}"
 
 
-def enumerate_jobs(mode: str, datasets: list[str], methods: list[str], sizes: list[int], seeds: list[int],
+def enumerate_jobs(mode: str, datasets: list[str], methods: list[str], sizes: list, seeds: list[int],
                    pilot_dataset: str = "nsmc") -> list[Job]:
-    """All jobs of ``mode`` in loop order dataset -> method -> (tokenizer) -> size -> seed."""
+    """All jobs of ``mode`` in loop order dataset -> method -> (tokenizer) -> size -> seed.
+    ``sizes`` may contain ``"full"``; it is resolved per dataset."""
     g, tok = global_cfg(), main_tokenizer()
     if mode == "tuning":
         return [Job(d, m, tok, int(g["tuning_size"]), int(g["tuning_seed"]), int(c["id"]))
                 for d in datasets for m in methods for c in search_space(m)["configs"]]
     if mode == "smoke":
-        return [Job(d, m, tok, min(g["sizes"]), int(g["seeds"][0])) for d in datasets for m in methods]
+        return [Job(d, m, tok, resolve_sizes(d)[0], int(g["seeds"][0])) for d in datasets for m in methods]
     if mode == "pilot":
         return [Job(pilot_dataset, m, tok, int(g["tuning_size"]), int(g["tuning_seed"])) for m in methods]
     if mode == "ablation":
@@ -62,7 +63,7 @@ def enumerate_jobs(mode: str, datasets: list[str], methods: list[str], sizes: li
         ab = g["ablation"]
         return [Job(d, m, t, int(n), int(s)) for d in datasets for m in chosen.get(d, []) if m in methods
                 for t in ab["tokenizers"] for n in ab["sizes"] for s in seeds]
-    return [Job(d, m, tok, n, s) for d in datasets for m in methods for n in sizes for s in seeds]
+    return [Job(d, m, tok, n, s) for d in datasets for m in methods for n in resolve_sizes(d, sizes) for s in seeds]
 
 
 def _cmd(job: Job, mode: str, extra: list[str]) -> list[str]:
@@ -86,7 +87,7 @@ def main() -> int:
     ap.add_argument("--mode", choices=["final", "tuning", "ablation", "smoke", "pilot"], default="final")
     ap.add_argument("--dataset", nargs="*", default=None)
     ap.add_argument("--method", nargs="*", default=None)
-    ap.add_argument("--sizes", nargs="*", type=int, default=None)
+    ap.add_argument("--sizes", nargs="*", default=None, help="training sizes (integers or 'full')")
     ap.add_argument("--seeds", nargs="*", type=int, default=None)
     ap.add_argument("--pilot-dataset", default="nsmc")
     ap.add_argument("--device", default=None, help="passed to every neural run (default: config/KSENT_DEVICE)")

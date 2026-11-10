@@ -18,7 +18,7 @@ import unicodedata
 import numpy as np
 import pandas as pd
 
-from ksent.config import global_cfg, main_tokenizer, path, processed_dir, write_max_seq_len
+from ksent.config import global_cfg, main_tokenizer, path, processed_dir, write_max_seq_len, resolve_sizes
 from ksent.data.split import SPLITS, load_split
 from ksent.data.subsets import subset_ids
 from ksent.features.tokenize import cached_tokens, surface
@@ -109,7 +109,7 @@ def oov_diagnostics() -> pd.DataFrame:
         for tok in global_cfg()["tokenizers"]:
             test_docs = cached_tokens(d, test["review_id"], tok)
             for seed in global_cfg()["seeds"]:
-                for n in global_cfg()["sizes"]:
+                for n in resolve_sizes(d):
                     vocab = Vocab.build(cached_tokens(d, subset_ids(d, seed, n), tok))
                     oov = [[t not in vocab.stoi for t in doc] for doc in test_docs]
                     n_tok = sum(len(o) for o in oov)

@@ -6,7 +6,7 @@ from __future__ import annotations
 
 import argparse
 
-from ksent.config import global_cfg, main_tokenizer, path
+from ksent.config import global_cfg, main_tokenizer, path, resolve_sizes
 from ksent.run_one import is_done, result_path
 
 
@@ -23,7 +23,7 @@ def main() -> int:
         expected = [(d, m, t, n, s) for d, ms in ablation_methods().items() for m in ms for t in ab["tokenizers"]
                     if t != main_tokenizer() for n in ab["sizes"] for s in g["seeds"]]
     else:
-        expected = [(d, m, main_tokenizer(), n, s) for d in g["datasets"] for m in g["methods"] for n in g["sizes"]
+        expected = [(d, m, main_tokenizer(), n, s) for d in g["datasets"] for m in g["methods"] for n in resolve_sizes(d)
                     for s in g["seeds"]]
     missing, failed = [], []
     for d, m, t, n, s in expected:

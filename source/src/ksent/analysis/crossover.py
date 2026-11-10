@@ -21,7 +21,7 @@ import numpy as np
 import pandas as pd
 
 from ksent.analysis.common import AGG_DIR, read_csv
-from ksent.config import NEURAL_METHODS, TFIDF_METHODS, global_cfg, main_tokenizer
+from ksent.config import NEURAL_METHODS, TFIDF_METHODS, global_cfg, main_tokenizer, resolve_sizes
 
 # objective -> +1 maximise, -1 minimise
 PARETO_OBJECTIVES: dict[str, int] = {"test_macro_f1": +1, "lat_cpu_e2e_ms": -1, "fit_e2e_s": -1, "peak_rss_mb": -1}
@@ -48,7 +48,7 @@ def by_size(runs: pd.DataFrame, summary: pd.DataFrame, selection: str) -> pd.Dat
     by = "val_macro_f1" if selection == "val" else "test_macro_f1"
     rows = []
     for d in global_cfg()["datasets"]:
-        for n in global_cfg()["sizes"]:
+        for n in resolve_sizes(d):
             t, nn = _best(summary, d, n, TFIDF_METHODS, by), _best(summary, d, n, NEURAL_METHODS, by)
             if t is None or nn is None:
                 continue
@@ -93,7 +93,7 @@ def crossover_table(bs: pd.DataFrame, summary: pd.DataFrame) -> pd.DataFrame:
         n_eval = thr if thr is not None else fallback
         at = grp[grp["size"] == n_eval]
         row = {"dataset": d, "selection": sel, "threshold": thr, "eval_size": n_eval,
-               "sizes_available": len(grp), "complete": len(grp) == len(global_cfg()["sizes"])}
+               "sizes_available": len(grp), "complete": len(grp) == len(resolve_sizes(d))}
         if len(at):
             a = at.iloc[0]
             row.update(best_tfidf=a.best_tfidf, best_neural=a.best_neural, gap_mean=a.gap_mean, gap_std=a.gap_std,
@@ -115,18 +115,18 @@ def crossover_table(bs: pd.DataFrame, summary: pd.DataFrame) -> pd.DataFrame:
 
 def crossover_cost_jobs(seeds: list[int] | None = None) -> list:
     """Cost-pass jobs for Table 5: for each dataset whose (validation-selection) crossover
-    threshold is below the largest size, the TF-IDF and neural winners at the threshold x seeds.
-    The n=8,000 cells are covered by the n=8,000 cost pass. Needs ``crossover.csv``."""
+    threshold differs from the reference size, the TF-IDF and neural winners at the threshold
+    x seeds. Reference-size cells are covered by the main cost pass. Needs ``crossover.csv``."""
     from ksent.sweep import Job
 
     cx = read_csv("crossover.csv")
     if cx is None:
         raise SystemExit("crossover.csv missing - run aggregate + crossover on the quality results first")
     g = global_cfg()
-    top = max(int(s) for s in g["sizes"])
+    ref = int(g["analysis"]["reference_size"])
     jobs = []
     for _, r in cx[cx.selection == "val"].iterrows():
-        if pd.isna(r.threshold) or int(r.threshold) >= top:
+        if pd.isna(r.threshold) or int(r.threshold) == ref:
             continue
         for m in (r.best_tfidf, r.best_neural):
             jobs += [Job(r.dataset, m, main_tokenizer(), int(r.threshold), int(s)) for s in (seeds or g["seeds"])]
@@ -150,9 +150,9 @@ def pareto_all(summary: pd.DataFrame) -> pd.DataFrame:
 
 def marginal_gains(runs: pd.DataFrame) -> pd.DataFrame:
     """Per-seed test macro-F1 gain (points) between adjacent sizes (nested subsets -> paired)."""
-    sizes = sorted(int(s) for s in global_cfg()["sizes"])
     rows = []
     for (d, m), grp in runs.groupby(["dataset", "method"]):
+        sizes = resolve_sizes(d)
         piv = grp.pivot_table(index="seed", columns="size", values="test_macro_f1")
         for a, b in zip(sizes[:-1], sizes[1:]):
             if a in piv and b in piv:
@@ -182,7 +182,7 @@ def main() -> None:
     pareto_all(summary).to_csv(AGG_DIR / "pareto_all.csv", index=False)
     marginal_gains(runs).to_csv(AGG_DIR / "marginal_gains.csv", index=False)
     for _, r in ct.iterrows():
-        thr = r.threshold if pd.notna(r.threshold) else "none <= 8000"
+        thr = r.threshold if pd.notna(r.threshold) else "none up to full"
         print(f"[{r.dataset:8s}] selection={r.selection:4s} threshold={thr}  "
               f"{r.get('best_neural')} vs {r.get('best_tfidf')} gap={r.get('gap_mean', np.nan):.2f}"
               f"±{r.get('gap_std', np.nan):.2f}  pareto={r.get('neural_pareto_efficient')}")

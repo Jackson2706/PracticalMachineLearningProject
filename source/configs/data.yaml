@@ -32,6 +32,9 @@ splits:
   train_pool: 8000
   val: 2000
   test: 2000
+  # Every remaining clean review of the training source (text-disjoint from val/test) goes to
+  # train_extra; subsets larger than train_pool are train_pool + a prefix of train_extra.
+  train_extra: all
 
 # Fixed rule-based normalization (src/ksent/data/normalize.py), applied in this order:
 #   1 html.unescape  2 Unicode NFC (NOT NFKC: it remaps compatibility jamo ㅋ ㅠ ㅎ)

@@ -17,14 +17,14 @@ deployment decision for Korean reviews.
 
 \paragraph{Research question.}
 \emph{For each Korean review dataset, what is the minimum training size among
-500, 1{,}000, 2{,}000, 4{,}000 and 8{,}000 reviews at which the best neural sequence
+500, 1{,}000, 2{,}000, \dots, 64{,}000, 80{,}000, 100{,}000, \dots{} reviews and the full training set at which the best neural sequence
 model exceeds the best TF-IDF baseline by at least \crossoverMargin{} macro-F1
 point? At that threshold, does the neural model remain competitive in training
 time, inference latency and memory use?}
 
 \paragraph{Contributions.}
 \begin{itemize}
-  \item A controlled learning-curve comparison of four TF-IDF and five neural
+  \item A controlled learning-curve comparison of four TF-IDF and nine neural
         pipelines on three Korean review domains with identical nested training
         subsets, fixed validation/test sets and equal tuning budgets.
   \item A crossover threshold per dataset, with paired per-seed gaps and a

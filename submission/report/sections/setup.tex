@@ -12,7 +12,7 @@
 
 \paragraph{Protocol.}
 \Cref{fig:pipeline} summarises the protocol. Every final condition
-(3 datasets $\times$ 9 methods $\times$ 5 sizes) is repeated with \nSeeds{} seeds
+(3 datasets $\times$ 13 methods $\times$ 10--14 sizes per dataset) is repeated with \nSeeds{} seeds
 (\seedList), giving \nFinalFits{} final fits plus \nTuningFits{} tuning fits.
 The seed controls the nested training subset and all model randomness, so the
 TF-IDF and neural runs with the same seed see exactly the same reviews.
@@ -29,9 +29,9 @@ At every size we select the best TF-IDF and the best neural method by mean
 \emph{validation} macro-F1, compute the test macro-F1 gap (neural minus TF-IDF)
 per seed---paired, because both saw the same subset---and average it. The
 threshold is the smallest size whose mean gap is at least \crossoverMargin{} point;
-otherwise we report ``no observed crossover up to 8{,}000''. As a sensitivity check we
+otherwise we report ``no observed crossover up to the full training set''. As a sensitivity check we
 repeat the procedure with winners selected by test macro-F1 (\cref{tab:a4}). At the
-threshold (or at 8{,}000 if there is none) we check whether the neural winner is
+threshold (or at the cost-pass size 8{,}000 if there is none) we check whether the neural winner is
 Pareto-efficient against the TF-IDF winner on test macro-F1, CPU end-to-end latency,
 fit time and peak RAM.
 
@@ -85,3 +85,12 @@ training size.
 therefore probably higher than the fused kernels would give.
 (vii) Because no crossover was observed, no additional cost runs at a crossover size were
 needed; all cost figures refer to $n=8{,}000$.
+(viii) The size grid is extended beyond the proposal's maximum of 8{,}000 reviews with
+16{,}000, 32{,}000, 64{,}000, steps of 20{,}000 up to 160{,}000 and the full training set
+(\cref{sec:data}), so the learning
+curves reach the point where all available labels are used. Cost runs stay at
+$n=8{,}000$ (plus any crossover size).
+(ix) Three recurrent baselines are added: a plain bidirectional Elman RNN (BiRNN), which
+separates the effect of recurrence from that of gating in the BiLSTM and BiGRU, and
+unidirectional RNN, LSTM and GRU, which isolate the effect of bidirectionality
+(\cref{sec:arch}); the proposal's LSTM and GRU are the bidirectional ones.

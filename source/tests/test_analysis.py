@@ -12,7 +12,7 @@ import pandas as pd
 SRC = Path(__file__).resolve().parents[1] / "src"
 G = {"datasets": ["nsmc", "shopping", "steam"], "sizes": [500, 1000, 2000, 4000, 8000],
      "seeds": [13, 42, 87, 2024, 31337]}
-METHODS = ["tfidf_lr", "tfidf_svm", "tfidf_rf", "tfidf_xgb", "emb_mlp", "emb_lstm", "emb_gru",
+METHODS = ["tfidf_lr", "tfidf_svm", "tfidf_rf", "tfidf_xgb", "emb_mlp", "emb_rnn_uni", "emb_lstm_uni", "emb_gru_uni", "emb_rnn", "emb_lstm", "emb_gru",
            "small_transformer", "small_mamba"]
 
 
@@ -88,7 +88,7 @@ def test_full_chain_on_synthetic_results(tmp_path: Path) -> None:
     _run("ksent.analysis.crossover", env)
     agg = tmp_path / "results" / "aggregated"
     summary = pd.read_csv(agg / "summary.csv")
-    assert len(summary) == 3 * 9 * 5 and (summary.n_seeds == 5).all()
+    assert len(summary) == 3 * len(METHODS) * 5 and (summary.n_seeds == 5).all()
     lr = summary[summary.method == "tfidf_lr"].set_index(["dataset", "size"])
     assert (lr.xs(8000, level="size").fit_e2e_s_mean == 1.0).all()            # from cost runs
     assert (lr.xs(8000, level="size").lat_cpu_e2e_ms_mean == 0.5).all()
@@ -104,7 +104,7 @@ def test_full_chain_on_synthetic_results(tmp_path: Path) -> None:
     _run("ksent.analysis.make_tables", env)
     _run("ksent.analysis.make_numbers", env)
     t5 = (tmp_path / "report" / "tables" / "table5.tex").read_text()
-    assert "2{,}000" in t5 and "Emb + GRU" in t5
+    assert "2{,}000" in t5 and "Emb + BiGRU" in t5
     nums = (tmp_path / "report" / "generated" / "numbers.tex").read_text()
     assert r"\newcommand{\crossoverNSMC}{2{,}000}" in nums
     out = subprocess.run([sys.executable, "-c", "from ksent.analysis.crossover import crossover_cost_jobs as f; "
