@@ -1,0 +1,11 @@
+configs:
+  - {id: lr01, C: 0.05, solver: liblinear, max_iter: 3000}
+  - {id: lr02, C: 0.1, solver: liblinear, max_iter: 3000}
+  - {id: lr03, C: 0.25, solver: liblinear, max_iter: 3000}
+  - {id: lr04, C: 0.5, solver: liblinear, max_iter: 3000}
+  - {id: lr05, C: 1.0, solver: liblinear, max_iter: 3000}
+  - {id: lr06, C: 2.0, solver: liblinear, max_iter: 3000}
+  - {id: lr07, C: 4.0, solver: liblinear, max_iter: 3000}
+  - {id: lr08, C: 8.0, solver: liblinear, max_iter: 3000}
+  - {id: lr09, C: 16.0, solver: liblinear, max_iter: 3000}
+  - {id: lr10, C: 32.0, solver: liblinear, max_iter: 3000}

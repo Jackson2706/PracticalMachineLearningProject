@@ -1,0 +1,11 @@
+configs:
+  - {id: gru01, learning_rate: 0.001, dropout: 0.10, embedding_dim: 96, hidden_dim: 112, num_layers: 1}
+  - {id: gru02, learning_rate: 0.001, dropout: 0.30, embedding_dim: 96, hidden_dim: 112, num_layers: 1}
+  - {id: gru03, learning_rate: 0.0005, dropout: 0.20, embedding_dim: 96, hidden_dim: 112, num_layers: 1}
+  - {id: gru04, learning_rate: 0.002, dropout: 0.20, embedding_dim: 96, hidden_dim: 112, num_layers: 1}
+  - {id: gru05, learning_rate: 0.001, dropout: 0.20, embedding_dim: 128, hidden_dim: 128, num_layers: 1}
+  - {id: gru06, learning_rate: 0.0005, dropout: 0.30, embedding_dim: 128, hidden_dim: 128, num_layers: 2}
+  - {id: gru07, learning_rate: 0.001, dropout: 0.40, embedding_dim: 128, hidden_dim: 128, num_layers: 2}
+  - {id: gru08, learning_rate: 0.002, dropout: 0.30, embedding_dim: 128, hidden_dim: 128, num_layers: 2}
+  - {id: gru09, learning_rate: 0.0003, dropout: 0.20, embedding_dim: 128, hidden_dim: 144, num_layers: 2}
+  - {id: gru10, learning_rate: 0.001, dropout: 0.20, embedding_dim: 128, hidden_dim: 144, num_layers: 2}

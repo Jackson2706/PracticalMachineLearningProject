@@ -1,0 +1,11 @@
+configs:
+  - {id: svm01, C: 0.01}
+  - {id: svm02, C: 0.025}
+  - {id: svm03, C: 0.05}
+  - {id: svm04, C: 0.1}
+  - {id: svm05, C: 0.25}
+  - {id: svm06, C: 0.5}
+  - {id: svm07, C: 1.0}
+  - {id: svm08, C: 2.0}
+  - {id: svm09, C: 4.0}
+  - {id: svm10, C: 8.0}

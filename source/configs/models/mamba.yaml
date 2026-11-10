@@ -1,0 +1,11 @@
+configs:
+  - {id: mb01, learning_rate: 0.001, dropout: 0.10, embedding_dim: 96, hidden_dim: 96, num_layers: 1, d_state: 16, d_conv: 4, expand: 2}
+  - {id: mb02, learning_rate: 0.001, dropout: 0.30, embedding_dim: 96, hidden_dim: 96, num_layers: 1, d_state: 16, d_conv: 4, expand: 2}
+  - {id: mb03, learning_rate: 0.0005, dropout: 0.20, embedding_dim: 96, hidden_dim: 96, num_layers: 1, d_state: 16, d_conv: 4, expand: 2}
+  - {id: mb04, learning_rate: 0.002, dropout: 0.20, embedding_dim: 96, hidden_dim: 96, num_layers: 1, d_state: 16, d_conv: 4, expand: 2}
+  - {id: mb05, learning_rate: 0.001, dropout: 0.20, embedding_dim: 128, hidden_dim: 128, num_layers: 2, d_state: 16, d_conv: 4, expand: 2}
+  - {id: mb06, learning_rate: 0.0005, dropout: 0.30, embedding_dim: 128, hidden_dim: 128, num_layers: 2, d_state: 24, d_conv: 4, expand: 2}
+  - {id: mb07, learning_rate: 0.001, dropout: 0.40, embedding_dim: 128, hidden_dim: 128, num_layers: 2, d_state: 16, d_conv: 3, expand: 2}
+  - {id: mb08, learning_rate: 0.002, dropout: 0.30, embedding_dim: 128, hidden_dim: 128, num_layers: 2, d_state: 16, d_conv: 4, expand: 2}
+  - {id: mb09, learning_rate: 0.0003, dropout: 0.20, embedding_dim: 160, hidden_dim: 160, num_layers: 2, d_state: 24, d_conv: 4, expand: 2}
+  - {id: mb10, learning_rate: 0.001, dropout: 0.20, embedding_dim: 160, hidden_dim: 160, num_layers: 3, d_state: 16, d_conv: 4, expand: 2}

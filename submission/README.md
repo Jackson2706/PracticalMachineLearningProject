@@ -1,4 +1,8 @@
-# Submission: report and slides
+# Submission workspace
+
+This directory is reserved for the later report and presentation stage. The benchmark implementation does not generate figures, LaTeX tables, report prose, slides, or a web demo. Existing report and slide files in this working copy predate the new `Source/` implementation and were left unchanged.
+
+## Existing report and slides
 
 * `report/main.tex`: the written report (sections in `report/sections/`: intro, related, data, preprocessing, methods, setup, results, ablation, discussion, limitations, conclusion, appendix).
 * `slides/slides.tex`: the Beamer presentation. It reuses the report's tables, figures and numbers through the symlinks `slides/tables`, `slides/figures` and `slides/generated`.

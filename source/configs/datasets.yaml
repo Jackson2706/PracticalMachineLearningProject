@@ -1,0 +1,34 @@
+split_seed: 2026
+candidate_sizes: [200, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 128000, 256000]
+datasets:
+  nsmc:
+    display_name: NSMC
+    label_rule: binary
+    split_rule: official_test
+    files:
+      train:
+        name: ratings_train.txt
+        url: https://raw.githubusercontent.com/e9t/nsmc/master/ratings_train.txt
+        schema: nsmc
+      test:
+        name: ratings_test.txt
+        url: https://raw.githubusercontent.com/e9t/nsmc/master/ratings_test.txt
+        schema: nsmc
+  shopping:
+    display_name: Naver Shopping
+    label_rule: rating
+    split_rule: stratified_80_10_10
+    files:
+      all:
+        name: naver_shopping.txt
+        url: https://raw.githubusercontent.com/bab2min/corpus/master/sentiment/naver_shopping.txt
+        schema: rating_text
+  steam:
+    display_name: Korean Steam
+    label_rule: binary
+    split_rule: stratified_80_10_10
+    files:
+      all:
+        name: steam.txt
+        url: https://raw.githubusercontent.com/bab2min/corpus/master/sentiment/steam.txt
+        schema: binary_text

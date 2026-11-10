@@ -1,0 +1,11 @@
+configs:
+  - {id: mlp01, learning_rate: 0.001, dropout: 0.10, embedding_dim: 96, hidden_dim: 256, num_layers: 2}
+  - {id: mlp02, learning_rate: 0.001, dropout: 0.30, embedding_dim: 96, hidden_dim: 256, num_layers: 2}
+  - {id: mlp03, learning_rate: 0.0005, dropout: 0.20, embedding_dim: 96, hidden_dim: 256, num_layers: 2}
+  - {id: mlp04, learning_rate: 0.002, dropout: 0.20, embedding_dim: 96, hidden_dim: 256, num_layers: 2}
+  - {id: mlp05, learning_rate: 0.001, dropout: 0.20, embedding_dim: 128, hidden_dim: 256, num_layers: 2}
+  - {id: mlp06, learning_rate: 0.0005, dropout: 0.30, embedding_dim: 128, hidden_dim: 288, num_layers: 2}
+  - {id: mlp07, learning_rate: 0.001, dropout: 0.40, embedding_dim: 128, hidden_dim: 288, num_layers: 2}
+  - {id: mlp08, learning_rate: 0.002, dropout: 0.30, embedding_dim: 128, hidden_dim: 288, num_layers: 2}
+  - {id: mlp09, learning_rate: 0.0003, dropout: 0.20, embedding_dim: 160, hidden_dim: 320, num_layers: 2}
+  - {id: mlp10, learning_rate: 0.001, dropout: 0.20, embedding_dim: 160, hidden_dim: 320, num_layers: 2}

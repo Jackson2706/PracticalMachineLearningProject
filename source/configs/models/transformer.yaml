@@ -1,0 +1,11 @@
+configs:
+  - {id: tr01, learning_rate: 0.001, dropout: 0.10, embedding_dim: 96, hidden_dim: 96, num_layers: 1, num_heads: 4, ff_multiplier: 2}
+  - {id: tr02, learning_rate: 0.001, dropout: 0.30, embedding_dim: 96, hidden_dim: 96, num_layers: 1, num_heads: 4, ff_multiplier: 2}
+  - {id: tr03, learning_rate: 0.0005, dropout: 0.20, embedding_dim: 96, hidden_dim: 96, num_layers: 1, num_heads: 4, ff_multiplier: 3}
+  - {id: tr04, learning_rate: 0.002, dropout: 0.20, embedding_dim: 96, hidden_dim: 96, num_layers: 1, num_heads: 4, ff_multiplier: 2}
+  - {id: tr05, learning_rate: 0.001, dropout: 0.20, embedding_dim: 128, hidden_dim: 128, num_layers: 2, num_heads: 4, ff_multiplier: 2}
+  - {id: tr06, learning_rate: 0.0005, dropout: 0.30, embedding_dim: 128, hidden_dim: 128, num_layers: 2, num_heads: 4, ff_multiplier: 3}
+  - {id: tr07, learning_rate: 0.001, dropout: 0.40, embedding_dim: 128, hidden_dim: 128, num_layers: 2, num_heads: 4, ff_multiplier: 2}
+  - {id: tr08, learning_rate: 0.002, dropout: 0.30, embedding_dim: 128, hidden_dim: 128, num_layers: 2, num_heads: 8, ff_multiplier: 2}
+  - {id: tr09, learning_rate: 0.0003, dropout: 0.20, embedding_dim: 160, hidden_dim: 160, num_layers: 2, num_heads: 8, ff_multiplier: 2}
+  - {id: tr10, learning_rate: 0.001, dropout: 0.20, embedding_dim: 160, hidden_dim: 160, num_layers: 3, num_heads: 8, ff_multiplier: 2}

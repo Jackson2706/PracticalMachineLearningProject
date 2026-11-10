@@ -1,0 +1,11 @@
+configs:
+  - {id: lstm01, learning_rate: 0.001, dropout: 0.10, embedding_dim: 96, hidden_dim: 96, num_layers: 1}
+  - {id: lstm02, learning_rate: 0.001, dropout: 0.30, embedding_dim: 96, hidden_dim: 96, num_layers: 1}
+  - {id: lstm03, learning_rate: 0.0005, dropout: 0.20, embedding_dim: 96, hidden_dim: 96, num_layers: 1}
+  - {id: lstm04, learning_rate: 0.002, dropout: 0.20, embedding_dim: 96, hidden_dim: 96, num_layers: 1}
+  - {id: lstm05, learning_rate: 0.001, dropout: 0.20, embedding_dim: 128, hidden_dim: 112, num_layers: 1}
+  - {id: lstm06, learning_rate: 0.0005, dropout: 0.30, embedding_dim: 128, hidden_dim: 112, num_layers: 2}
+  - {id: lstm07, learning_rate: 0.001, dropout: 0.40, embedding_dim: 128, hidden_dim: 112, num_layers: 2}
+  - {id: lstm08, learning_rate: 0.002, dropout: 0.30, embedding_dim: 128, hidden_dim: 112, num_layers: 2}
+  - {id: lstm09, learning_rate: 0.0003, dropout: 0.20, embedding_dim: 128, hidden_dim: 128, num_layers: 2}
+  - {id: lstm10, learning_rate: 0.001, dropout: 0.20, embedding_dim: 128, hidden_dim: 128, num_layers: 2}
