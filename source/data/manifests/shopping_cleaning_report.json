@@ -1,0 +1,37 @@
+{
+  "dataset": "shopping",
+  "n_full": 159918,
+  "schedule": [
+    200,
+    500,
+    1000,
+    2000,
+    4000,
+    8000,
+    16000,
+    32000,
+    64000,
+    128000,
+    159918
+  ],
+  "sources": {
+    "all": {
+      "clean_rows": 199898,
+      "conflicting_keys_removed": 10,
+      "conflicting_occurrences_removed": 20,
+      "duplicate_pairs_removed": 82,
+      "empty_removed": 0,
+      "malformed_rows": 0,
+      "negative_rows": 99950,
+      "neutral_rating_rows": 0,
+      "parsed_rows": 200000,
+      "positive_rows": 99948,
+      "raw_rows": 200000
+    }
+  },
+  "splits": {
+    "test_rows": 19990,
+    "train_rows": 159918,
+    "validation_rows": 19990
+  }
+}

@@ -1,0 +1,21 @@
+Collecting mamba-ssm==2.2.6.post3
+  Downloading mamba_ssm-2.2.6.post3.tar.gz (113 kB)
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: mamba-ssm
+  Building wheel for mamba-ssm (pyproject.toml): started
+  Building wheel for mamba-ssm (pyproject.toml): still running...
+  Building wheel for mamba-ssm (pyproject.toml): still running...
+  Building wheel for mamba-ssm (pyproject.toml): still running...
+  Building wheel for mamba-ssm (pyproject.toml): still running...
+  Building wheel for mamba-ssm (pyproject.toml): still running...
+  Building wheel for mamba-ssm (pyproject.toml): finished with status 'done'
+  Created wheel for mamba-ssm: filename=mamba_ssm-2.2.6.post3-cp311-cp311-linux_x86_64.whl size=367623413 sha256=08b1fb7b547d7b38e210f8f7b4d6ab995f03555a667ce72464f60e44fd3a0286
+  Stored in directory: /tmp/pip-ephem-wheel-cache-bkeutj4u/wheels/20/8d/74/9442d773e32cab307c5261b5e4a2c585f76f3e6fba6808e0b2
+Successfully built mamba-ssm
+Installing collected packages: mamba-ssm
+  Attempting uninstall: mamba-ssm
+    Found existing installation: mamba-ssm 2.2.6.post3
+    Uninstalling mamba-ssm-2.2.6.post3:
+      Successfully uninstalled mamba-ssm-2.2.6.post3
+Successfully installed mamba-ssm-2.2.6.post3

@@ -1,0 +1,162 @@
+{
+  "latency": {
+    "classifier": {
+      "mean": 1.85954048,
+      "median": 1.8566125,
+      "p95": 1.8970716,
+      "std": 0.022483011385701867,
+      "timed_repeat_count": 50,
+      "warmup_count": 10
+    },
+    "end_to_end": {
+      "mean": 1.9464586600000002,
+      "median": 1.9408045,
+      "p95": 1.9970393499999999,
+      "std": 0.031217521779032992,
+      "timed_repeat_count": 50,
+      "warmup_count": 10
+    },
+    "throughput_batch_size": 128,
+    "throughput_samples_per_sec": 30762.53869078566
+  },
+  "training": {
+    "batch_sampler": "shuffle",
+    "best_epoch": 17,
+    "fit_time_sec": 27.62843189801788,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.6825348510742187,
+        "validation_macro_f1": 0.6209383246235836
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.6419622497558594,
+        "validation_macro_f1": 0.6452614509507508
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.5921314086914062,
+        "validation_macro_f1": 0.6658318075290977
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.5184900970458984,
+        "validation_macro_f1": 0.682375223823128
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.4571811752319336,
+        "validation_macro_f1": 0.7054683194900007
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.39795455360412596,
+        "validation_macro_f1": 0.6930647467880808
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.3497926263809204,
+        "validation_macro_f1": 0.705369222349066
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.3025751495361328,
+        "validation_macro_f1": 0.7185557259836876
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.2665919337272644,
+        "validation_macro_f1": 0.7177739079609275
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.22837810468673705,
+        "validation_macro_f1": 0.7166955647041535
+      },
+      {
+        "epoch": 11,
+        "train_loss": 0.2018261468410492,
+        "validation_macro_f1": 0.7279316763219561
+      },
+      {
+        "epoch": 12,
+        "train_loss": 0.17934910917282104,
+        "validation_macro_f1": 0.7140059790526063
+      },
+      {
+        "epoch": 13,
+        "train_loss": 0.17167010164260865,
+        "validation_macro_f1": 0.7189637706455301
+      },
+      {
+        "epoch": 14,
+        "train_loss": 0.15951696848869323,
+        "validation_macro_f1": 0.7286405119465742
+      },
+      {
+        "epoch": 15,
+        "train_loss": 0.13639944779872895,
+        "validation_macro_f1": 0.7274383332539265
+      },
+      {
+        "epoch": 16,
+        "train_loss": 0.12280930262804031,
+        "validation_macro_f1": 0.7222492688697
+      },
+      {
+        "epoch": 17,
+        "train_loss": 0.11416424244642258,
+        "validation_macro_f1": 0.7312446258207838
+      },
+      {
+        "epoch": 18,
+        "train_loss": 0.10943110859394073,
+        "validation_macro_f1": 0.7266269397946004
+      },
+      {
+        "epoch": 19,
+        "train_loss": 0.09960416325926781,
+        "validation_macro_f1": 0.7220583704715616
+      },
+      {
+        "epoch": 20,
+        "train_loss": 0.08826378086209297,
+        "validation_macro_f1": 0.7274851608335418
+      }
+    ],
+    "optimizer_steps": 2500,
+    "peak_gpu_memory_mb": 334.63818359375,
+    "peak_gpu_reserved_mb": 704.0,
+    "physical_batch_size": 64,
+    "precision": "bf16",
+    "sampler": null,
+    "validation_macro_f1": 0.7312446258207838
+  },
+  "validation": {
+    "accuracy": 0.7312508600522912,
+    "confusion_matrix": [
+      [
+        5279,
+        2012
+      ],
+      [
+        1894,
+        5349
+      ]
+    ],
+    "f1_negative": 0.729950221238938,
+    "f1_positive": 0.7325390304026295,
+    "fn": 1894,
+    "fp": 2012,
+    "macro_f1": 0.7312446258207838,
+    "macro_precision": 0.7313109226543946,
+    "macro_recall": 0.7312747424842563,
+    "precision_negative": 0.7359542729680747,
+    "precision_positive": 0.7266675723407146,
+    "recall_negative": 0.7240433411054725,
+    "recall_positive": 0.7385061438630401,
+    "tn": 5279,
+    "tp": 5349
+  }
+}

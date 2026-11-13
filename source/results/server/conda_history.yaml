@@ -1,0 +1,11 @@
+name: ML
+channels:
+  - defaults
+dependencies:
+  - python=3.11
+  - setuptools
+  - wheel
+  - cuda-cudart-dev=12.1
+  - cuda-nvcc=12.1
+  - cuda-cccl=12.1
+prefix: /home/dung/miniconda3/envs/ML

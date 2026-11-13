@@ -1,0 +1,3 @@
+# Mamba binary compatibility blocker
+
+The installed upstream 2.2.6.post3 wheel requires GLIBC_2.32; this Ubuntu 20.04 host supplies glibc 2.31. Import failed before any experiment. The system nvcc is 10.1 and cannot build the selected stack. CUDA 12.1 compiler, cudart development headers and CCCL were installed into ML from the official nvidia/label/cuda-12.1.1 channel. Rebuild uses the same maintained Mamba version with MAMBA_FORCE_BUILD=TRUE, no build isolation and no dependency replacement. No OS libraries, drivers, model sizes or scientific budgets are changed. Logs: install_cuda121_compiler.log and mamba_source_build.log.

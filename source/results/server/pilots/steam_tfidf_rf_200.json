@@ -1,0 +1,41 @@
+{
+  "cpu_process_sec": 3.0826975249999995,
+  "dataset": "steam",
+  "device": "cpu",
+  "duration_sec": 3.467528649023734,
+  "id": "steam_tfidf_rf_200",
+  "latency": {
+    "classifier": {
+      "mean": 21.75245262,
+      "median": 21.686662499999997,
+      "p95": 22.2647678,
+      "std": 0.2557263769419877,
+      "timed_repeat_count": 50,
+      "warmup_count": 10
+    },
+    "end_to_end": {
+      "mean": 22.087217179999996,
+      "median": 22.10985,
+      "p95": 22.47544755,
+      "std": 0.2657269789053939,
+      "timed_repeat_count": 50,
+      "warmup_count": 10
+    },
+    "throughput_batch_size": 128,
+    "throughput_samples_per_sec": 5538.311555235178
+  },
+  "model": "tfidf_rf",
+  "note": "Non-scientific pilot: two neural epochs, config candidate 1, seed777; no test evaluation, no selected configuration.",
+  "objective": "ce",
+  "peak_host_ram_mb": 552.41015625,
+  "production_result": false,
+  "serialized_size_mb": 0.6794843673706055,
+  "size": 200,
+  "training": {
+    "best_epoch": null,
+    "feature_count": 3755,
+    "history": []
+  },
+  "validation_evaluation_sec": 0.13352505600778386,
+  "validation_macro_f1": 0.54307117749337
+}

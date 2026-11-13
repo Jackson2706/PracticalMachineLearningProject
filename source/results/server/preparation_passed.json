@@ -1,0 +1,6 @@
+{
+  "plans": "verified dependency preview",
+  "preflight": "cloud-neural",
+  "tests": "documented suite plus server safety tests",
+  "utc": "2026-11-12T00:38:33.248226+00:00"
+}

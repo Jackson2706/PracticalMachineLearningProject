@@ -1,0 +1,17 @@
+{
+  "artifact_directory": "/home/dung/PracticalMachineLearningProject/source/results/run_records/bonus-b02ecd69b16b29d988d2",
+  "best_epoch": 8,
+  "config_hash": "d9ec28cb68d692092a5380a75da12e5191f043be81fa601d8433009fe4783b03",
+  "cpu_threads": 4,
+  "data_manifest_hash": "7dc24428211cfe790a5c99d88b05317714d909883bb775e33826535f144344e7",
+  "device": "cuda",
+  "duration_sec": 19.242687001999002,
+  "exact_command": "/home/dung/PracticalMachineLearningProject/source/src/korean_sentiment/cli.py bonus-full --fail-fast",
+  "finished_at": "2026-11-12T16:16:29.293847+00:00",
+  "fit_time_sec": 14.789398932014592,
+  "hardware_id": "8b5663550ab8bee2",
+  "precision": "bf16",
+  "run_id": "bonus-b02ecd69b16b29d988d2",
+  "serialized_size_mb": 11.271207809448242,
+  "started_at": "2026-11-12T16:16:10.051176+00:00"
+}

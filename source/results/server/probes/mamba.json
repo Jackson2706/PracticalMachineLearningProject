@@ -1,0 +1,18 @@
+{
+  "effective_batch_size": 64,
+  "finite_validation_macro_f1": 0.625,
+  "fit": true,
+  "metrics": true,
+  "optimizer_steps": 3,
+  "peak_allocated_mib": 236.22412109375,
+  "peak_reserved_mib": 242.0,
+  "physical_batch_size": 64,
+  "pipeline": "mamba",
+  "precision": "bf16",
+  "prediction": true,
+  "reload": true,
+  "resumption": true,
+  "run_record": true,
+  "serialization": true,
+  "status": "passed"
+}

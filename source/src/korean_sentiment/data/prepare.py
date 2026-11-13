@@ -296,7 +296,7 @@ def preprocess_all() -> list[dict[str, Any]]:
 
 def load_split(dataset: str, split: str) -> pd.DataFrame:
     path = data_dir() / "processed" / dataset / f"{split}.csv"
-    return pd.read_csv(path, dtype={"example_id": str, "source_row_id": str})
+    return pd.read_csv(path, dtype={"example_id": str, "source_row_id": str}, keep_default_na=False)
 
 
 def load_subset(dataset: str, seed: int, size: int) -> pd.DataFrame:

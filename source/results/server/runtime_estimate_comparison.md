@@ -1,0 +1,9 @@
+# Measured ETA versus initial planning range
+
+Initial planning assumption: 5–9 days. The measured-pilot estimate at 2026-11-12T00:48:12.844931+00:00 is low 3.17, central 18.22, high 86.15 hours remaining. These are scenario estimates, not statistical confidence bounds.
+
+The estimate uses 72 measured profiles across all nine model families and three domains, small/medium training sizes, full cleaned pools for Random Forest/Transformer/Mamba, and pooled CE/SupCon/DB-CDSupCon with 500 target labels. A separate documented repository pilot is a completed Part 1 tuning run and is reused, not double-counted.
+
+Measured runs were faster than the initial planning assumption. Configurations are small learned-from-scratch networks (96–160-wide Transformer/Mamba candidates, maximum sequence length 128); production neural precision is validated CUDA BF16. Largest-architecture synthetic batch probes reserved at most 568 MiB, with physical/effective batches 64 for Part 1 and 48 for pooled objectives. All 1,251 planned conditions remain in scope. Full-pool pilot durations and model-by-model observations are in pilot_timings.csv; no global average was used.
+
+Unknown early-stopping behavior and unfrozen architecture selections dominate uncertainty. Forecasts separate measured per-epoch training/validation cost from loading/serialization overhead, use size curves per dataset/model/objective, configuration-based cost proxies and 5/12/20-epoch scenarios. Those proxies and epoch scenarios are assumptions, not measured production outcomes. Larger/deeper winners or late stopping can approach the high scenario. Twelve-hour progress reports revise remaining time using observed completion durations. The central estimate is below 24 hours, but monitoring is enabled because the high scenario exceeds 24 hours.

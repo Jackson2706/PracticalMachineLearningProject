@@ -1,0 +1,8 @@
+{
+  "error_message": null,
+  "error_type": null,
+  "model": "mamba",
+  "phase": "smoke",
+  "run_id": "smoke-mamba",
+  "status": "completed"
+}

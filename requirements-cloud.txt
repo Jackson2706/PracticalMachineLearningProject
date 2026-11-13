@@ -1,5 +1,5 @@
 # setup_cloud.sh installs a CUDA PyTorch wheel before this layer.
 ninja>=1.11,<2
 packaging>=23,<27
-causal-conv1d>=1.4,<2
+causal-conv1d>=1.6,<2
 # setup_cloud.sh installs mamba-ssm separately with its required CUDA build flags.

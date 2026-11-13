@@ -1,0 +1,8 @@
+{
+  "error_message": null,
+  "error_type": null,
+  "model": "pooled_ce",
+  "phase": "smoke",
+  "run_id": "smoke-pooled_ce",
+  "status": "completed"
+}

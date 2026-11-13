@@ -1,0 +1,50 @@
+{
+  "dataset": "nsmc",
+  "n_full": 130797,
+  "schedule": [
+    200,
+    500,
+    1000,
+    2000,
+    4000,
+    8000,
+    16000,
+    32000,
+    64000,
+    130797
+  ],
+  "sources": {
+    "test": {
+      "clean_rows": 49110,
+      "conflicting_keys_removed": 47,
+      "conflicting_occurrences_removed": 306,
+      "duplicate_pairs_removed": 581,
+      "empty_removed": 3,
+      "malformed_rows": 0,
+      "negative_rows": 24423,
+      "neutral_rating_rows": 0,
+      "parsed_rows": 50000,
+      "positive_rows": 24687,
+      "raw_rows": 50000
+    },
+    "train": {
+      "clean_rows": 146025,
+      "conflicting_keys_removed": 157,
+      "conflicting_occurrences_removed": 1451,
+      "duplicate_pairs_removed": 2519,
+      "empty_removed": 5,
+      "malformed_rows": 0,
+      "negative_rows": 73272,
+      "neutral_rating_rows": 0,
+      "parsed_rows": 150000,
+      "positive_rows": 72753,
+      "raw_rows": 150000
+    }
+  },
+  "splits": {
+    "official_cross_partition_train_rows_removed": 694,
+    "test_rows": 49110,
+    "train_rows": 130797,
+    "validation_rows": 14534
+  }
+}

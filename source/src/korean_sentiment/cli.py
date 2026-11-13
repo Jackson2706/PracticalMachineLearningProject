@@ -126,6 +126,9 @@ def main(argv: list[str] | None = None) -> None:
     else:
         raise AssertionError(arguments.command)
     print(json.dumps(result, ensure_ascii=False, indent=2, default=str))
+    if arguments.command in {"tune", "full", "bonus-tune", "bonus-full", "pilot", "smoke"}:
+        if any(item.get("status") in {"failed", "blocked", "blocked_on_mac"} for item in result):
+            raise SystemExit(1)
 
 
 if __name__ == "__main__":

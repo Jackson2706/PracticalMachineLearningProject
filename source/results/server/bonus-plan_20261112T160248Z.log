@@ -1,0 +1,9 @@
+{
+  "tuning_jobs": 36,
+  "final_jobs": 108,
+  "new_jobs": 144,
+  "reused_reference_rows": 72,
+  "expected_tuning_jobs": 36,
+  "expected_final_jobs": 108,
+  "expected_complete_project_jobs": 1251
+}

@@ -1,0 +1,8 @@
+{
+  "error_message": null,
+  "error_type": null,
+  "model": "transformer",
+  "phase": "smoke",
+  "run_id": "smoke-transformer",
+  "status": "completed"
+}

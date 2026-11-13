@@ -1,0 +1,157 @@
+{
+  "latency": {
+    "classifier": {
+      "mean": 0.57932174,
+      "median": 0.5641510000000001,
+      "p95": 0.6459760999999999,
+      "std": 0.039645177775265425,
+      "timed_repeat_count": 50,
+      "warmup_count": 10
+    },
+    "end_to_end": {
+      "mean": 0.65023492,
+      "median": 0.641681,
+      "p95": 0.6873196,
+      "std": 0.02373609067714394,
+      "timed_repeat_count": 50,
+      "warmup_count": 10
+    },
+    "throughput_batch_size": 128,
+    "throughput_samples_per_sec": 68649.89791914963
+  },
+  "training": {
+    "batch_sampler": "shuffle",
+    "best_epoch": 15,
+    "fit_time_sec": 8.12876570300432,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.6883204345703124,
+        "validation_macro_f1": 0.5796304105688608
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.6631189880371093,
+        "validation_macro_f1": 0.5662677482028562
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.627322395324707,
+        "validation_macro_f1": 0.6167593915174601
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.5780173358917237,
+        "validation_macro_f1": 0.6139142280986685
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.5258922734260559,
+        "validation_macro_f1": 0.6295420559065794
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.4647626690864563,
+        "validation_macro_f1": 0.6524235305070221
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.4050695095062256,
+        "validation_macro_f1": 0.6574903082142294
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.3456229239702225,
+        "validation_macro_f1": 0.6445817885495073
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.2965310792922974,
+        "validation_macro_f1": 0.6649572485961136
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.24761241245269774,
+        "validation_macro_f1": 0.6636001923986607
+      },
+      {
+        "epoch": 11,
+        "train_loss": 0.21483556365966797,
+        "validation_macro_f1": 0.6686851752880385
+      },
+      {
+        "epoch": 12,
+        "train_loss": 0.18304009485244752,
+        "validation_macro_f1": 0.6692511129635044
+      },
+      {
+        "epoch": 13,
+        "train_loss": 0.1527249785065651,
+        "validation_macro_f1": 0.6680976237603851
+      },
+      {
+        "epoch": 14,
+        "train_loss": 0.1242519722878933,
+        "validation_macro_f1": 0.6578805574369334
+      },
+      {
+        "epoch": 15,
+        "train_loss": 0.10623424543440342,
+        "validation_macro_f1": 0.6702073163892033
+      },
+      {
+        "epoch": 16,
+        "train_loss": 0.09557905265688896,
+        "validation_macro_f1": 0.6661769354670573
+      },
+      {
+        "epoch": 17,
+        "train_loss": 0.08562966452538967,
+        "validation_macro_f1": 0.6665528487820636
+      },
+      {
+        "epoch": 18,
+        "train_loss": 0.07136248262226581,
+        "validation_macro_f1": 0.6648914872450414
+      },
+      {
+        "epoch": 19,
+        "train_loss": 0.06965884880721569,
+        "validation_macro_f1": 0.66266172503523
+      }
+    ],
+    "optimizer_steps": 2375,
+    "peak_gpu_memory_mb": 121.39892578125,
+    "peak_gpu_reserved_mb": 960.0,
+    "physical_batch_size": 64,
+    "precision": "bf16",
+    "sampler": null,
+    "validation_macro_f1": 0.6702073163892033
+  },
+  "validation": {
+    "accuracy": 0.670207435614791,
+    "confusion_matrix": [
+      [
+        3347,
+        1643
+      ],
+      [
+        1648,
+        3341
+      ]
+    ],
+    "f1_negative": 0.670405608412619,
+    "f1_positive": 0.6700090243657876,
+    "fn": 1648,
+    "fp": 1643,
+    "macro_f1": 0.6702073163892033,
+    "macro_precision": 0.6702075872019693,
+    "macro_recall": 0.6702073820923065,
+    "precision_negative": 0.67007007007007,
+    "precision_positive": 0.6703451043338684,
+    "recall_negative": 0.6707414829659318,
+    "recall_positive": 0.6696732812186811,
+    "tn": 3347,
+    "tp": 3341
+  }
+}

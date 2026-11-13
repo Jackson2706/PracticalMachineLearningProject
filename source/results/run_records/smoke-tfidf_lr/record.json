@@ -1,0 +1,8 @@
+{
+  "error_message": null,
+  "error_type": null,
+  "model": "tfidf_lr",
+  "phase": "smoke",
+  "run_id": "smoke-tfidf_lr",
+  "status": "completed"
+}

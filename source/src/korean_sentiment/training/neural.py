@@ -138,7 +138,7 @@ def train_neural(
                 ce_loss = criterion(logits, labels)
                 loss = ce_loss
                 if pipeline.projection is not None:
-                    projections = pipeline.projection(representations)
+                    projections = pipeline.projection(representations).float()
                     alpha = cross_domain_weight if objective == "db_cdsupcon" else 1.0
                     contrastive = supervised_contrastive_loss(
                         projections, labels, batch_domains, contrastive_temperature, alpha
@@ -194,6 +194,9 @@ def train_neural(
         "fit_time_sec": elapsed,
         "optimizer_steps": optimizer_steps,
         "peak_gpu_memory_mb": peak_gpu,
+        "peak_gpu_reserved_mb": torch.cuda.max_memory_reserved(pipeline.device) / 1024**2 if pipeline.device.startswith("cuda") else None,
+        "physical_batch_size": int(effective_batch_size or settings["batch_size"]),
+        "precision": precision,
         "batch_sampler": "domain_label_balanced" if sampler else "shuffle",
         "sampler": sampler_statistics,
     }

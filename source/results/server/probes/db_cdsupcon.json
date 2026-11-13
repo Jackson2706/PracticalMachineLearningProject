@@ -1,0 +1,18 @@
+{
+  "effective_batch_size": 48,
+  "finite_validation_macro_f1": 0.6666666666666666,
+  "fit": true,
+  "metrics": true,
+  "optimizer_steps": 8,
+  "peak_allocated_mib": 408.15625,
+  "peak_reserved_mib": 460.0,
+  "physical_batch_size": 48,
+  "pipeline": "db_cdsupcon",
+  "precision": "bf16",
+  "prediction": true,
+  "reload": true,
+  "resumption": true,
+  "run_record": true,
+  "serialization": true,
+  "status": "passed"
+}

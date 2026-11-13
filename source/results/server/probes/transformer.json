@@ -1,0 +1,18 @@
+{
+  "effective_batch_size": 64,
+  "finite_validation_macro_f1": 0.3333333333333333,
+  "fit": true,
+  "metrics": true,
+  "optimizer_steps": 3,
+  "peak_allocated_mib": 507.7041015625,
+  "peak_reserved_mib": 568.0,
+  "physical_batch_size": 64,
+  "pipeline": "transformer",
+  "precision": "bf16",
+  "prediction": true,
+  "reload": true,
+  "resumption": true,
+  "run_record": true,
+  "serialization": true,
+  "status": "passed"
+}

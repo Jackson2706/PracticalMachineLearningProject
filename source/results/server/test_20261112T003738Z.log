@@ -1,0 +1,13 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.18, pytest-9.2.0, pluggy-1.7.0
+rootdir: /home/dung/PracticalMachineLearningProject/source
+configfile: pytest.ini
+plugins: cov-7.1.0
+collected 41 items
+
+source/tests/test_ks_data.py ...........                                 [ 26%]
+source/tests/test_models.py ...............                              [ 63%]
+source/tests/test_contrastive.py ........                                [ 82%]
+source/tests/test_orchestration.py .......                               [100%]
+
+============================== 41 passed in 3.07s ==============================

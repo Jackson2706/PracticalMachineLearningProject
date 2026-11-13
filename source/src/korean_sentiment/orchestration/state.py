@@ -12,6 +12,7 @@ from korean_sentiment.config import results_dir
 from korean_sentiment.utils.io import atomic_write_json, read_json
 
 REQUIRED_COMPLETED = (
+    "record.json",
     "resolved_config.json",
     "run_metadata.json",
     "status.json",
@@ -37,9 +38,12 @@ def validate_completed(path: Path, data_hash: str | None = None, config_hash: st
         status = read_json(path / "status.json")
         metadata = read_json(path / "run_metadata.json")
         metrics = read_json(path / "metrics.json")
+        record = read_json(path / "record.json")
     except (OSError, json.JSONDecodeError):
         return False
     if status.get("status") != "completed" or not isinstance(metrics, dict):
+        return False
+    if record.get("status") != "completed" or record.get("run_id") != path.name:
         return False
     if data_hash is not None and metadata.get("data_manifest_hash") != data_hash:
         atomic_write_json(path / "status.json", {**status, "status": "stale", "stale_at": now()})

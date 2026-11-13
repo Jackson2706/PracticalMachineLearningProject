@@ -1,0 +1,158 @@
+{
+  "latency": {
+    "classifier": {
+      "mean": 1.8161498800000002,
+      "median": 1.809774,
+      "p95": 1.8897455499999998,
+      "std": 0.055547417178349545,
+      "timed_repeat_count": 50,
+      "warmup_count": 10
+    },
+    "end_to_end": {
+      "mean": 1.90663082,
+      "median": 1.8885779999999999,
+      "p95": 1.9997063999999998,
+      "std": 0.04626358014278185,
+      "timed_repeat_count": 50,
+      "warmup_count": 10
+    },
+    "throughput_batch_size": 128,
+    "throughput_samples_per_sec": 33636.96821803598
+  },
+  "test": {
+    "accuracy": 0.6760537568723274,
+    "confusion_matrix": [
+      [
+        13255,
+        11168
+      ],
+      [
+        4741,
+        19946
+      ]
+    ],
+    "f1_negative": 0.6249557981093378,
+    "f1_positive": 0.7148975824806008,
+    "fn": 4741,
+    "fp": 11168,
+    "macro_f1": 0.6699266902949692,
+    "macro_precision": 0.6888072343160172,
+    "macro_recall": 0.6753408614932782,
+    "precision_negative": 0.7365525672371638,
+    "precision_positive": 0.6410619013948705,
+    "recall_negative": 0.5427261188224215,
+    "recall_positive": 0.8079556041641349,
+    "tn": 13255,
+    "tp": 19946
+  },
+  "training": {
+    "batch_sampler": "shuffle",
+    "best_epoch": 10,
+    "fit_time_sec": 11.903462781978305,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.7032579345703125,
+        "validation_macro_f1": 0.5232977155837881
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.686615234375,
+        "validation_macro_f1": 0.5671497105691877
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.6684814453125,
+        "validation_macro_f1": 0.5892796118293959
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.6448989868164062,
+        "validation_macro_f1": 0.616333584900729
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.6143666381835937,
+        "validation_macro_f1": 0.5631461299005974
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.5768092041015624,
+        "validation_macro_f1": 0.6278721202142383
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.5399141540527344,
+        "validation_macro_f1": 0.5850877164155063
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.508386703491211,
+        "validation_macro_f1": 0.649312794179592
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.4585871276855469,
+        "validation_macro_f1": 0.6167556083730806
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.4146900329589844,
+        "validation_macro_f1": 0.6662845920807731
+      },
+      {
+        "epoch": 11,
+        "train_loss": 0.3790786590576172,
+        "validation_macro_f1": 0.6204829808863122
+      },
+      {
+        "epoch": 12,
+        "train_loss": 0.3575137634277344,
+        "validation_macro_f1": 0.6556599780372754
+      },
+      {
+        "epoch": 13,
+        "train_loss": 0.3344952354431152,
+        "validation_macro_f1": 0.6041834768061152
+      },
+      {
+        "epoch": 14,
+        "train_loss": 0.29943912506103515,
+        "validation_macro_f1": 0.6439845484184239
+      }
+    ],
+    "optimizer_steps": 882,
+    "peak_gpu_memory_mb": 329.4521484375,
+    "peak_gpu_reserved_mb": 500.0,
+    "physical_batch_size": 64,
+    "precision": "bf16",
+    "sampler": null,
+    "validation_macro_f1": 0.6662845920807731
+  },
+  "validation": {
+    "accuracy": 0.6722856749690381,
+    "confusion_matrix": [
+      [
+        3911,
+        3380
+      ],
+      [
+        1383,
+        5860
+      ]
+    ],
+    "f1_negative": 0.621533571712356,
+    "f1_positive": 0.7110356124491901,
+    "fn": 1383,
+    "fp": 3380,
+    "macro_f1": 0.6662845920807731,
+    "macro_precision": 0.6864799977758044,
+    "macro_recall": 0.6727358892461552,
+    "precision_negative": 0.7387608613524745,
+    "precision_positive": 0.6341991341991342,
+    "recall_negative": 0.5364147579207241,
+    "recall_positive": 0.8090570205715863,
+    "tn": 3911,
+    "tp": 5860
+  }
+}

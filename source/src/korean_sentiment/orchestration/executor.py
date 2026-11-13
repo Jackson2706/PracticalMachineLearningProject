@@ -4,6 +4,7 @@ import csv
 import json
 import os
 import socket
+import shutil
 import tempfile
 import time
 import traceback
@@ -109,6 +110,7 @@ def _resource_record(hardware: dict[str, Any], peak_host: float, training: dict[
     return {
         "peak_host_ram_mb": peak_host,
         "peak_gpu_memory_mb": training.get("peak_gpu_memory_mb"),
+        "peak_gpu_reserved_mb": training.get("peak_gpu_reserved_mb"),
         "hardware": hardware,
     }
 
@@ -212,6 +214,9 @@ def execute_job(row: dict[str, str], force: bool = False) -> dict[str, Any]:
     directory = run_directory(row["run_id"])
     if not force and validate_completed(directory, row["data_manifest_hash"], row["config_hash"]):
         return {"run_id": row["run_id"], "status": "skipped"}
+    minimum_free = float(os.environ.get("KS_MIN_FREE_GIB", "0")) * 1024**3
+    if shutil.disk_usage(results_dir()).free < minimum_free:
+        raise RuntimeError("free disk is below the validated reserve; production is paused")
     lock_seconds = int(experiment_config()["orchestration"]["stale_lock_seconds"])
     try:
         lock = RunLock(directory, lock_seconds)
@@ -236,7 +241,11 @@ def execute_job(row: dict[str, str], force: bool = False) -> dict[str, Any]:
             raise RuntimeError(f"job is not executable: {row.get('planning_state')}; regenerate the plan after tuning")
         config, objective = _resolve(row)
         config_without_id = {key: value for key, value in config.items() if key != "id"}
-        resolved = {"plan": row, "model": config, "objective": objective}
+        resolved = {"plan": row, "model": config, "objective": objective,
+                    "experiment": experiment_config(),
+                    "bonus": bonus_config() if row["phase"].startswith("bonus") else None,
+                    "runtime": {name: os.environ.get(name) for name in
+                                ("KS_PRECISION", "KS_CPU_THREADS", "KS_NUM_WORKERS", "CUBLAS_WORKSPACE_CONFIG")}}
         atomic_write_json(directory / "resolved_config.json", resolved)
         cpu_threads = configure_threads()
         requested = "cpu" if row["model_family"] == "tfidf" else None
@@ -245,7 +254,7 @@ def execute_job(row: dict[str, str], force: bool = False) -> dict[str, Any]:
         metadata.update(
             {
                 "device": device,
-                "precision": os.environ.get("KS_PRECISION", "fp32"),
+                "precision": "fp32_features" if row["model_family"] == "tfidf" else os.environ.get("KS_PRECISION", "fp32"),
                 "cpu_threads": cpu_threads,
                 "hardware_id": hardware["hardware_id"],
                 "artifact_directory": str(directory),
@@ -410,6 +419,8 @@ def execute_plan(
     rows = [row for row in _read_csv(path) if _matches(row, filters or {})]
     if maximum_jobs is not None:
         rows = rows[:maximum_jobs]
+    if parallelism > 1 and any(row.get("model_family") != "tfidf" for row in rows):
+        raise ValueError("parallel execution requires a CPU-only plan; neural jobs must run sequentially")
     if parallelism <= 1:
         results = []
         for row in rows:

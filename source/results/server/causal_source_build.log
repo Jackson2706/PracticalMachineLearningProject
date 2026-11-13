@@ -1,0 +1,17 @@
+Collecting causal-conv1d==1.6.0
+  Downloading causal_conv1d-1.6.0.tar.gz (29 kB)
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: causal-conv1d
+  Building wheel for causal-conv1d (pyproject.toml): started
+  Building wheel for causal-conv1d (pyproject.toml): still running...
+  Building wheel for causal-conv1d (pyproject.toml): finished with status 'done'
+  Created wheel for causal-conv1d: filename=causal_conv1d-1.6.0-cp311-cp311-linux_x86_64.whl size=189854610 sha256=08684ec522d150bb8c72cddef6b51190051d2f39f98aa239a1de903174fe2591
+  Stored in directory: /tmp/pip-ephem-wheel-cache-6gq64mia/wheels/75/b4/7b/e4de7391a15ba0f6630965f72132affd6077b2b439562daf42
+Successfully built causal-conv1d
+Installing collected packages: causal-conv1d
+  Attempting uninstall: causal-conv1d
+    Found existing installation: causal-conv1d 1.5.0.post8
+    Uninstalling causal-conv1d-1.5.0.post8:
+      Successfully uninstalled causal-conv1d-1.5.0.post8
+Successfully installed causal-conv1d-1.6.0

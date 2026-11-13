@@ -1,0 +1,57 @@
+{
+  "conda_environment": "ML",
+  "python_executable": "/home/dung/miniconda3/envs/ML/bin/python",
+  "python_version": "3.11.18",
+  "packages": {
+    "torch": true,
+    "sklearn": true,
+    "xgboost": true,
+    "pandas": true,
+    "numpy": true,
+    "scipy": true,
+    "yaml": true,
+    "psutil": true,
+    "joblib": true,
+    "filelock": true
+  },
+  "hardware": {
+    "hostname": "master-node",
+    "os": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+    "machine": "x86_64",
+    "processor": "x86_64",
+    "python": "3.11.18",
+    "cpu_count": 20,
+    "ram_bytes": 33405169664,
+    "disk_free_bytes": 230456905728,
+    "gpu": {
+      "available": true,
+      "name": "NVIDIA GeForce RTX 4070",
+      "count": 1,
+      "vram_bytes": 12592218112,
+      "torch_cuda": "12.1"
+    },
+    "mps_available": false,
+    "packages": {
+      "torch": "2.5.1+cu121",
+      "numpy": "2.4.6",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.9.1",
+      "xgboost": "3.2.0",
+      "mamba-ssm": "2.2.6.post3"
+    },
+    "git_commit": "370e1407a80d4b49fdbed7f76af3b9ae06afc23b",
+    "dirty_worktree": true,
+    "hardware_id": "8b5663550ab8bee2"
+  },
+  "nvidia_smi": "NVIDIA GeForce RTX 4070, 535.230.02, 12282 MiB",
+  "mamba_smoke": {
+    "shape": [
+      2,
+      8,
+      32
+    ],
+    "device": "cuda:0"
+  },
+  "errors": [],
+  "ok": true
+}

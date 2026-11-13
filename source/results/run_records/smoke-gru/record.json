@@ -1,0 +1,8 @@
+{
+  "error_message": null,
+  "error_type": null,
+  "model": "gru",
+  "phase": "smoke",
+  "run_id": "smoke-gru",
+  "status": "completed"
+}

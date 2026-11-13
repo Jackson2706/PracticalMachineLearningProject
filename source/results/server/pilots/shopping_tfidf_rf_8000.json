@@ -1,0 +1,41 @@
+{
+  "cpu_process_sec": 4.406851068,
+  "dataset": "shopping",
+  "device": "cpu",
+  "duration_sec": 4.244208616029937,
+  "id": "shopping_tfidf_rf_8000",
+  "latency": {
+    "classifier": {
+      "mean": 21.52094834,
+      "median": 21.509162500000002,
+      "p95": 21.8039377,
+      "std": 0.16590951904223103,
+      "timed_repeat_count": 50,
+      "warmup_count": 10
+    },
+    "end_to_end": {
+      "mean": 21.93426422,
+      "median": 21.912828,
+      "p95": 22.1461616,
+      "std": 0.16911954360916315,
+      "timed_repeat_count": 50,
+      "warmup_count": 10
+    },
+    "throughput_batch_size": 128,
+    "throughput_samples_per_sec": 5547.359965150738
+  },
+  "model": "tfidf_rf",
+  "note": "Non-scientific pilot: two neural epochs, config candidate 1, seed777; no test evaluation, no selected configuration.",
+  "objective": "ce",
+  "peak_host_ram_mb": 600.63671875,
+  "production_result": false,
+  "serialized_size_mb": 2.2676191329956055,
+  "size": 8000,
+  "training": {
+    "best_epoch": null,
+    "feature_count": 10000,
+    "history": []
+  },
+  "validation_evaluation_sec": 0.2213261760189198,
+  "validation_macro_f1": 0.7877719509457131
+}

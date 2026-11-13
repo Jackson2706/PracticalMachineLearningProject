@@ -1,0 +1,506 @@
+[
+  {
+    "dataset": "nsmc",
+    "id": "nsmc_tfidf_lr_200",
+    "model": "tfidf_lr",
+    "objective": "ce",
+    "size": 200
+  },
+  {
+    "dataset": "nsmc",
+    "id": "nsmc_tfidf_lr_8000",
+    "model": "tfidf_lr",
+    "objective": "ce",
+    "size": 8000
+  },
+  {
+    "dataset": "nsmc",
+    "id": "nsmc_tfidf_svm_200",
+    "model": "tfidf_svm",
+    "objective": "ce",
+    "size": 200
+  },
+  {
+    "dataset": "nsmc",
+    "id": "nsmc_tfidf_svm_8000",
+    "model": "tfidf_svm",
+    "objective": "ce",
+    "size": 8000
+  },
+  {
+    "dataset": "nsmc",
+    "id": "nsmc_tfidf_rf_200",
+    "model": "tfidf_rf",
+    "objective": "ce",
+    "size": 200
+  },
+  {
+    "dataset": "nsmc",
+    "id": "nsmc_tfidf_rf_8000",
+    "model": "tfidf_rf",
+    "objective": "ce",
+    "size": 8000
+  },
+  {
+    "dataset": "nsmc",
+    "id": "nsmc_tfidf_rf_130797",
+    "model": "tfidf_rf",
+    "objective": "ce",
+    "size": 130797
+  },
+  {
+    "dataset": "nsmc",
+    "id": "nsmc_tfidf_xgb_200",
+    "model": "tfidf_xgb",
+    "objective": "ce",
+    "size": 200
+  },
+  {
+    "dataset": "nsmc",
+    "id": "nsmc_tfidf_xgb_8000",
+    "model": "tfidf_xgb",
+    "objective": "ce",
+    "size": 8000
+  },
+  {
+    "dataset": "nsmc",
+    "id": "nsmc_avg_mlp_200",
+    "model": "avg_mlp",
+    "objective": "ce",
+    "size": 200
+  },
+  {
+    "dataset": "nsmc",
+    "id": "nsmc_avg_mlp_8000",
+    "model": "avg_mlp",
+    "objective": "ce",
+    "size": 8000
+  },
+  {
+    "dataset": "nsmc",
+    "id": "nsmc_lstm_200",
+    "model": "lstm",
+    "objective": "ce",
+    "size": 200
+  },
+  {
+    "dataset": "nsmc",
+    "id": "nsmc_lstm_8000",
+    "model": "lstm",
+    "objective": "ce",
+    "size": 8000
+  },
+  {
+    "dataset": "nsmc",
+    "id": "nsmc_gru_200",
+    "model": "gru",
+    "objective": "ce",
+    "size": 200
+  },
+  {
+    "dataset": "nsmc",
+    "id": "nsmc_gru_8000",
+    "model": "gru",
+    "objective": "ce",
+    "size": 8000
+  },
+  {
+    "dataset": "nsmc",
+    "id": "nsmc_transformer_200",
+    "model": "transformer",
+    "objective": "ce",
+    "size": 200
+  },
+  {
+    "dataset": "nsmc",
+    "id": "nsmc_transformer_8000",
+    "model": "transformer",
+    "objective": "ce",
+    "size": 8000
+  },
+  {
+    "dataset": "nsmc",
+    "id": "nsmc_transformer_130797",
+    "model": "transformer",
+    "objective": "ce",
+    "size": 130797
+  },
+  {
+    "dataset": "nsmc",
+    "id": "nsmc_mamba_200",
+    "model": "mamba",
+    "objective": "ce",
+    "size": 200
+  },
+  {
+    "dataset": "nsmc",
+    "id": "nsmc_mamba_8000",
+    "model": "mamba",
+    "objective": "ce",
+    "size": 8000
+  },
+  {
+    "dataset": "nsmc",
+    "id": "nsmc_mamba_130797",
+    "model": "mamba",
+    "objective": "ce",
+    "size": 130797
+  },
+  {
+    "dataset": "nsmc",
+    "id": "nsmc_pooled_ce_500",
+    "model": "transformer",
+    "objective": "pooled_ce",
+    "size": 500
+  },
+  {
+    "dataset": "nsmc",
+    "id": "nsmc_supcon_500",
+    "model": "transformer",
+    "objective": "supcon",
+    "size": 500
+  },
+  {
+    "dataset": "nsmc",
+    "id": "nsmc_db_cdsupcon_500",
+    "model": "transformer",
+    "objective": "db_cdsupcon",
+    "size": 500
+  },
+  {
+    "dataset": "shopping",
+    "id": "shopping_tfidf_lr_200",
+    "model": "tfidf_lr",
+    "objective": "ce",
+    "size": 200
+  },
+  {
+    "dataset": "shopping",
+    "id": "shopping_tfidf_lr_8000",
+    "model": "tfidf_lr",
+    "objective": "ce",
+    "size": 8000
+  },
+  {
+    "dataset": "shopping",
+    "id": "shopping_tfidf_svm_200",
+    "model": "tfidf_svm",
+    "objective": "ce",
+    "size": 200
+  },
+  {
+    "dataset": "shopping",
+    "id": "shopping_tfidf_svm_8000",
+    "model": "tfidf_svm",
+    "objective": "ce",
+    "size": 8000
+  },
+  {
+    "dataset": "shopping",
+    "id": "shopping_tfidf_rf_200",
+    "model": "tfidf_rf",
+    "objective": "ce",
+    "size": 200
+  },
+  {
+    "dataset": "shopping",
+    "id": "shopping_tfidf_rf_8000",
+    "model": "tfidf_rf",
+    "objective": "ce",
+    "size": 8000
+  },
+  {
+    "dataset": "shopping",
+    "id": "shopping_tfidf_rf_159918",
+    "model": "tfidf_rf",
+    "objective": "ce",
+    "size": 159918
+  },
+  {
+    "dataset": "shopping",
+    "id": "shopping_tfidf_xgb_200",
+    "model": "tfidf_xgb",
+    "objective": "ce",
+    "size": 200
+  },
+  {
+    "dataset": "shopping",
+    "id": "shopping_tfidf_xgb_8000",
+    "model": "tfidf_xgb",
+    "objective": "ce",
+    "size": 8000
+  },
+  {
+    "dataset": "shopping",
+    "id": "shopping_avg_mlp_200",
+    "model": "avg_mlp",
+    "objective": "ce",
+    "size": 200
+  },
+  {
+    "dataset": "shopping",
+    "id": "shopping_avg_mlp_8000",
+    "model": "avg_mlp",
+    "objective": "ce",
+    "size": 8000
+  },
+  {
+    "dataset": "shopping",
+    "id": "shopping_lstm_200",
+    "model": "lstm",
+    "objective": "ce",
+    "size": 200
+  },
+  {
+    "dataset": "shopping",
+    "id": "shopping_lstm_8000",
+    "model": "lstm",
+    "objective": "ce",
+    "size": 8000
+  },
+  {
+    "dataset": "shopping",
+    "id": "shopping_gru_200",
+    "model": "gru",
+    "objective": "ce",
+    "size": 200
+  },
+  {
+    "dataset": "shopping",
+    "id": "shopping_gru_8000",
+    "model": "gru",
+    "objective": "ce",
+    "size": 8000
+  },
+  {
+    "dataset": "shopping",
+    "id": "shopping_transformer_200",
+    "model": "transformer",
+    "objective": "ce",
+    "size": 200
+  },
+  {
+    "dataset": "shopping",
+    "id": "shopping_transformer_8000",
+    "model": "transformer",
+    "objective": "ce",
+    "size": 8000
+  },
+  {
+    "dataset": "shopping",
+    "id": "shopping_transformer_159918",
+    "model": "transformer",
+    "objective": "ce",
+    "size": 159918
+  },
+  {
+    "dataset": "shopping",
+    "id": "shopping_mamba_200",
+    "model": "mamba",
+    "objective": "ce",
+    "size": 200
+  },
+  {
+    "dataset": "shopping",
+    "id": "shopping_mamba_8000",
+    "model": "mamba",
+    "objective": "ce",
+    "size": 8000
+  },
+  {
+    "dataset": "shopping",
+    "id": "shopping_mamba_159918",
+    "model": "mamba",
+    "objective": "ce",
+    "size": 159918
+  },
+  {
+    "dataset": "shopping",
+    "id": "shopping_pooled_ce_500",
+    "model": "transformer",
+    "objective": "pooled_ce",
+    "size": 500
+  },
+  {
+    "dataset": "shopping",
+    "id": "shopping_supcon_500",
+    "model": "transformer",
+    "objective": "supcon",
+    "size": 500
+  },
+  {
+    "dataset": "shopping",
+    "id": "shopping_db_cdsupcon_500",
+    "model": "transformer",
+    "objective": "db_cdsupcon",
+    "size": 500
+  },
+  {
+    "dataset": "steam",
+    "id": "steam_tfidf_lr_200",
+    "model": "tfidf_lr",
+    "objective": "ce",
+    "size": 200
+  },
+  {
+    "dataset": "steam",
+    "id": "steam_tfidf_lr_8000",
+    "model": "tfidf_lr",
+    "objective": "ce",
+    "size": 8000
+  },
+  {
+    "dataset": "steam",
+    "id": "steam_tfidf_svm_200",
+    "model": "tfidf_svm",
+    "objective": "ce",
+    "size": 200
+  },
+  {
+    "dataset": "steam",
+    "id": "steam_tfidf_svm_8000",
+    "model": "tfidf_svm",
+    "objective": "ce",
+    "size": 8000
+  },
+  {
+    "dataset": "steam",
+    "id": "steam_tfidf_rf_200",
+    "model": "tfidf_rf",
+    "objective": "ce",
+    "size": 200
+  },
+  {
+    "dataset": "steam",
+    "id": "steam_tfidf_rf_8000",
+    "model": "tfidf_rf",
+    "objective": "ce",
+    "size": 8000
+  },
+  {
+    "dataset": "steam",
+    "id": "steam_tfidf_rf_79828",
+    "model": "tfidf_rf",
+    "objective": "ce",
+    "size": 79828
+  },
+  {
+    "dataset": "steam",
+    "id": "steam_tfidf_xgb_200",
+    "model": "tfidf_xgb",
+    "objective": "ce",
+    "size": 200
+  },
+  {
+    "dataset": "steam",
+    "id": "steam_tfidf_xgb_8000",
+    "model": "tfidf_xgb",
+    "objective": "ce",
+    "size": 8000
+  },
+  {
+    "dataset": "steam",
+    "id": "steam_avg_mlp_200",
+    "model": "avg_mlp",
+    "objective": "ce",
+    "size": 200
+  },
+  {
+    "dataset": "steam",
+    "id": "steam_avg_mlp_8000",
+    "model": "avg_mlp",
+    "objective": "ce",
+    "size": 8000
+  },
+  {
+    "dataset": "steam",
+    "id": "steam_lstm_200",
+    "model": "lstm",
+    "objective": "ce",
+    "size": 200
+  },
+  {
+    "dataset": "steam",
+    "id": "steam_lstm_8000",
+    "model": "lstm",
+    "objective": "ce",
+    "size": 8000
+  },
+  {
+    "dataset": "steam",
+    "id": "steam_gru_200",
+    "model": "gru",
+    "objective": "ce",
+    "size": 200
+  },
+  {
+    "dataset": "steam",
+    "id": "steam_gru_8000",
+    "model": "gru",
+    "objective": "ce",
+    "size": 8000
+  },
+  {
+    "dataset": "steam",
+    "id": "steam_transformer_200",
+    "model": "transformer",
+    "objective": "ce",
+    "size": 200
+  },
+  {
+    "dataset": "steam",
+    "id": "steam_transformer_8000",
+    "model": "transformer",
+    "objective": "ce",
+    "size": 8000
+  },
+  {
+    "dataset": "steam",
+    "id": "steam_transformer_79828",
+    "model": "transformer",
+    "objective": "ce",
+    "size": 79828
+  },
+  {
+    "dataset": "steam",
+    "id": "steam_mamba_200",
+    "model": "mamba",
+    "objective": "ce",
+    "size": 200
+  },
+  {
+    "dataset": "steam",
+    "id": "steam_mamba_8000",
+    "model": "mamba",
+    "objective": "ce",
+    "size": 8000
+  },
+  {
+    "dataset": "steam",
+    "id": "steam_mamba_79828",
+    "model": "mamba",
+    "objective": "ce",
+    "size": 79828
+  },
+  {
+    "dataset": "steam",
+    "id": "steam_pooled_ce_500",
+    "model": "transformer",
+    "objective": "pooled_ce",
+    "size": 500
+  },
+  {
+    "dataset": "steam",
+    "id": "steam_supcon_500",
+    "model": "transformer",
+    "objective": "supcon",
+    "size": 500
+  },
+  {
+    "dataset": "steam",
+    "id": "steam_db_cdsupcon_500",
+    "model": "transformer",
+    "objective": "db_cdsupcon",
+    "size": 500
+  }
+]

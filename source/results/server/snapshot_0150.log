@@ -1,0 +1,593 @@
+# Execution progress
+
+UTC: 2026-11-12T01:51:55.395581+00:00
+
+Asia/Seoul: 2026-11-12T10:51:55.395581+09:00
+
+Phase: full; elapsed 1.24 hours.
+
+Jobs: {"completed": 371, "running": 1, "pending": 879, "failed": 0, "blocked": 0, "stale": 0, "interrupted": 0}; total 1251; completed 29.656274980015986 percent.
+
+Preceding 12 hours: 371 completions, 0 failures; observed throughput 299.348 jobs/hour.
+
+Current jobs and elapsed seconds: [{"run_id": "part1-544fa319489b05cf59b8", "elapsed_sec": 0.068613}]
+
+GPU utilization, used/total VRAM, temperature, power: 0 %, 332 MiB, 12282 MiB, 32, 2.91 W
+
+CPU load: [3.2, 3.39, 2.46]; RAM used 7.74 GiB of 31.11; disk free 210.74 GiB.
+
+Remaining seconds (low/central/high): {'low': 19115.197846745035, 'central': 62768.63092104837, 'high': 152981.81216450874}
+
+Completion in Asia/Seoul: {'low': '2026-11-12T16:10:30.593428+09:00', 'central': '2026-11-13T04:18:04.026502+09:00', 'high': '2026-11-14T05:21:37.207746+09:00'}
+
+Blockers/failure signatures: {}
+
+Status: `./run_all.sh status`
+
+Progress: `sed -n '1,240p' source/results/progress/latest.md`
+
+Attach: `tmux attach -t korean-sentiment-all`
+
+Resume validated stages: `conda run --no-capture-output -n ML python scripts/server_execution.py run`
+
+Detailed counts and forecast calibration:
+
+```json
+{
+  "utc": "2026-11-12T01:51:55.395581+00:00",
+  "asia_seoul": "2026-11-12T10:51:55.395581+09:00",
+  "phase": "full",
+  "elapsed_sec": 4461.702504634857,
+  "counts": {
+    "completed": 371,
+    "running": 1,
+    "pending": 879,
+    "failed": 0,
+    "blocked": 0,
+    "stale": 0,
+    "interrupted": 0
+  },
+  "total": 1251,
+  "percent": 29.656274980015986,
+  "counts_by_part_domain_model_size_group": {
+    "part1_tuning:nsmc:tfidf_lr:medium": {
+      "completed": 10
+    },
+    "part1_tuning:nsmc:tfidf_svm:medium": {
+      "completed": 10
+    },
+    "part1_tuning:nsmc:tfidf_rf:medium": {
+      "completed": 10
+    },
+    "part1_tuning:nsmc:tfidf_xgb:medium": {
+      "completed": 10
+    },
+    "part1_tuning:nsmc:avg_mlp:medium": {
+      "completed": 10
+    },
+    "part1_tuning:nsmc:lstm:medium": {
+      "completed": 10
+    },
+    "part1_tuning:nsmc:gru:medium": {
+      "completed": 10
+    },
+    "part1_tuning:nsmc:transformer:medium": {
+      "completed": 10
+    },
+    "part1_tuning:nsmc:mamba:medium": {
+      "completed": 10
+    },
+    "part1_tuning:shopping:tfidf_lr:medium": {
+      "completed": 10
+    },
+    "part1_tuning:shopping:tfidf_svm:medium": {
+      "completed": 10
+    },
+    "part1_tuning:shopping:tfidf_rf:medium": {
+      "completed": 10
+    },
+    "part1_tuning:shopping:tfidf_xgb:medium": {
+      "completed": 10
+    },
+    "part1_tuning:shopping:avg_mlp:medium": {
+      "completed": 10
+    },
+    "part1_tuning:shopping:lstm:medium": {
+      "completed": 10
+    },
+    "part1_tuning:shopping:gru:medium": {
+      "completed": 10
+    },
+    "part1_tuning:shopping:transformer:medium": {
+      "completed": 10
+    },
+    "part1_tuning:shopping:mamba:medium": {
+      "completed": 10
+    },
+    "part1_tuning:steam:tfidf_lr:medium": {
+      "completed": 10
+    },
+    "part1_tuning:steam:tfidf_svm:medium": {
+      "completed": 10
+    },
+    "part1_tuning:steam:tfidf_rf:medium": {
+      "completed": 10
+    },
+    "part1_tuning:steam:tfidf_xgb:medium": {
+      "completed": 10
+    },
+    "part1_tuning:steam:avg_mlp:medium": {
+      "completed": 10
+    },
+    "part1_tuning:steam:lstm:medium": {
+      "completed": 10
+    },
+    "part1_tuning:steam:gru:medium": {
+      "completed": 10
+    },
+    "part1_tuning:steam:transformer:medium": {
+      "completed": 10
+    },
+    "part1_tuning:steam:mamba:medium": {
+      "completed": 10
+    },
+    "part1_final:nsmc:tfidf_lr:small": {
+      "completed": 12
+    },
+    "part1_final:nsmc:tfidf_lr:medium": {
+      "completed": 9
+    },
+    "part1_final:nsmc:tfidf_lr:large": {
+      "completed": 9
+    },
+    "part1_final:nsmc:tfidf_svm:small": {
+      "completed": 12
+    },
+    "part1_final:nsmc:tfidf_svm:medium": {
+      "completed": 9
+    },
+    "part1_final:nsmc:tfidf_svm:large": {
+      "completed": 9
+    },
+    "part1_final:nsmc:tfidf_rf:small": {
+      "completed": 12
+    },
+    "part1_final:nsmc:tfidf_rf:medium": {
+      "completed": 9
+    },
+    "part1_final:nsmc:tfidf_rf:large": {
+      "completed": 9
+    },
+    "part1_final:nsmc:tfidf_xgb:small": {
+      "completed": 11,
+      "running": 1
+    },
+    "part1_final:nsmc:tfidf_xgb:medium": {
+      "pending": 9
+    },
+    "part1_final:nsmc:tfidf_xgb:large": {
+      "pending": 9
+    },
+    "part1_final:nsmc:avg_mlp:small": {
+      "pending": 12
+    },
+    "part1_final:nsmc:avg_mlp:medium": {
+      "pending": 9
+    },
+    "part1_final:nsmc:avg_mlp:large": {
+      "pending": 9
+    },
+    "part1_final:nsmc:lstm:small": {
+      "pending": 12
+    },
+    "part1_final:nsmc:lstm:medium": {
+      "pending": 9
+    },
+    "part1_final:nsmc:lstm:large": {
+      "pending": 9
+    },
+    "part1_final:nsmc:gru:small": {
+      "pending": 12
+    },
+    "part1_final:nsmc:gru:medium": {
+      "pending": 9
+    },
+    "part1_final:nsmc:gru:large": {
+      "pending": 9
+    },
+    "part1_final:nsmc:transformer:small": {
+      "pending": 12
+    },
+    "part1_final:nsmc:transformer:medium": {
+      "pending": 9
+    },
+    "part1_final:nsmc:transformer:large": {
+      "pending": 9
+    },
+    "part1_final:nsmc:mamba:small": {
+      "pending": 12
+    },
+    "part1_final:nsmc:mamba:medium": {
+      "pending": 9
+    },
+    "part1_final:nsmc:mamba:large": {
+      "pending": 9
+    },
+    "part1_final:shopping:tfidf_lr:small": {
+      "pending": 12
+    },
+    "part1_final:shopping:tfidf_lr:medium": {
+      "pending": 9
+    },
+    "part1_final:shopping:tfidf_lr:large": {
+      "pending": 12
+    },
+    "part1_final:shopping:tfidf_svm:small": {
+      "pending": 12
+    },
+    "part1_final:shopping:tfidf_svm:medium": {
+      "pending": 9
+    },
+    "part1_final:shopping:tfidf_svm:large": {
+      "pending": 12
+    },
+    "part1_final:shopping:tfidf_rf:small": {
+      "pending": 12
+    },
+    "part1_final:shopping:tfidf_rf:medium": {
+      "pending": 9
+    },
+    "part1_final:shopping:tfidf_rf:large": {
+      "pending": 12
+    },
+    "part1_final:shopping:tfidf_xgb:small": {
+      "pending": 12
+    },
+    "part1_final:shopping:tfidf_xgb:medium": {
+      "pending": 9
+    },
+    "part1_final:shopping:tfidf_xgb:large": {
+      "pending": 12
+    },
+    "part1_final:shopping:avg_mlp:small": {
+      "pending": 12
+    },
+    "part1_final:shopping:avg_mlp:medium": {
+      "pending": 9
+    },
+    "part1_final:shopping:avg_mlp:large": {
+      "pending": 12
+    },
+    "part1_final:shopping:lstm:small": {
+      "pending": 12
+    },
+    "part1_final:shopping:lstm:medium": {
+      "pending": 9
+    },
+    "part1_final:shopping:lstm:large": {
+      "pending": 12
+    },
+    "part1_final:shopping:gru:small": {
+      "pending": 12
+    },
+    "part1_final:shopping:gru:medium": {
+      "pending": 9
+    },
+    "part1_final:shopping:gru:large": {
+      "pending": 12
+    },
+    "part1_final:shopping:transformer:small": {
+      "pending": 12
+    },
+    "part1_final:shopping:transformer:medium": {
+      "pending": 9
+    },
+    "part1_final:shopping:transformer:large": {
+      "pending": 12
+    },
+    "part1_final:shopping:mamba:small": {
+      "pending": 12
+    },
+    "part1_final:shopping:mamba:medium": {
+      "pending": 9
+    },
+    "part1_final:shopping:mamba:large": {
+      "pending": 12
+    },
+    "part1_final:steam:tfidf_lr:small": {
+      "pending": 12
+    },
+    "part1_final:steam:tfidf_lr:medium": {
+      "pending": 9
+    },
+    "part1_final:steam:tfidf_lr:large": {
+      "pending": 9
+    },
+    "part1_final:steam:tfidf_svm:small": {
+      "pending": 12
+    },
+    "part1_final:steam:tfidf_svm:medium": {
+      "pending": 9
+    },
+    "part1_final:steam:tfidf_svm:large": {
+      "pending": 9
+    },
+    "part1_final:steam:tfidf_rf:small": {
+      "pending": 12
+    },
+    "part1_final:steam:tfidf_rf:medium": {
+      "pending": 9
+    },
+    "part1_final:steam:tfidf_rf:large": {
+      "pending": 9
+    },
+    "part1_final:steam:tfidf_xgb:small": {
+      "pending": 12
+    },
+    "part1_final:steam:tfidf_xgb:medium": {
+      "pending": 9
+    },
+    "part1_final:steam:tfidf_xgb:large": {
+      "pending": 9
+    },
+    "part1_final:steam:avg_mlp:small": {
+      "pending": 12
+    },
+    "part1_final:steam:avg_mlp:medium": {
+      "pending": 9
+    },
+    "part1_final:steam:avg_mlp:large": {
+      "pending": 9
+    },
+    "part1_final:steam:lstm:small": {
+      "pending": 12
+    },
+    "part1_final:steam:lstm:medium": {
+      "pending": 9
+    },
+    "part1_final:steam:lstm:large": {
+      "pending": 9
+    },
+    "part1_final:steam:gru:small": {
+      "pending": 12
+    },
+    "part1_final:steam:gru:medium": {
+      "pending": 9
+    },
+    "part1_final:steam:gru:large": {
+      "pending": 9
+    },
+    "part1_final:steam:transformer:small": {
+      "pending": 12
+    },
+    "part1_final:steam:transformer:medium": {
+      "pending": 9
+    },
+    "part1_final:steam:transformer:large": {
+      "pending": 9
+    },
+    "part1_final:steam:mamba:small": {
+      "pending": 12
+    },
+    "part1_final:steam:mamba:medium": {
+      "pending": 9
+    },
+    "part1_final:steam:mamba:large": {
+      "pending": 9
+    },
+    "bonus_tuning:nsmc:supcon:medium": {
+      "pending": 4
+    },
+    "bonus_tuning:nsmc:db_cdsupcon:medium": {
+      "pending": 8
+    },
+    "bonus_tuning:shopping:supcon:medium": {
+      "pending": 4
+    },
+    "bonus_tuning:shopping:db_cdsupcon:medium": {
+      "pending": 8
+    },
+    "bonus_tuning:steam:supcon:medium": {
+      "pending": 4
+    },
+    "bonus_tuning:steam:db_cdsupcon:medium": {
+      "pending": 8
+    },
+    "bonus_final:nsmc:pooled_ce:medium": {
+      "pending": 12
+    },
+    "bonus_final:nsmc:supcon:medium": {
+      "pending": 12
+    },
+    "bonus_final:nsmc:db_cdsupcon:medium": {
+      "pending": 12
+    },
+    "bonus_final:shopping:pooled_ce:medium": {
+      "pending": 12
+    },
+    "bonus_final:shopping:supcon:medium": {
+      "pending": 12
+    },
+    "bonus_final:shopping:db_cdsupcon:medium": {
+      "pending": 12
+    },
+    "bonus_final:steam:pooled_ce:medium": {
+      "pending": 12
+    },
+    "bonus_final:steam:supcon:medium": {
+      "pending": 12
+    },
+    "bonus_final:steam:db_cdsupcon:medium": {
+      "pending": 12
+    }
+  },
+  "new_completed_last_12h": 371,
+  "new_failed_last_12h": 0,
+  "observed_jobs_per_hour_last_12h": 299.34761236913107,
+  "current_jobs": [
+    {
+      "run_id": "part1-544fa319489b05cf59b8",
+      "elapsed_sec": 0.068613
+    }
+  ],
+  "load_average": [
+    3.2,
+    3.39,
+    2.46
+  ],
+  "ram": {
+    "total": 33405169664,
+    "available": 25095942144,
+    "percent": 24.9,
+    "used": 8309227520,
+    "free": 3965157376,
+    "active": 10628096000,
+    "inactive": 15696056320,
+    "buffers": 2449461248,
+    "cached": 19199946752,
+    "shared": 38895616,
+    "slab": 2625097728
+  },
+  "disk_free_bytes": 226277109760,
+  "remaining_seconds": {
+    "low": 19115.197846745035,
+    "central": 62768.63092104837,
+    "high": 152981.81216450874
+  },
+  "estimated_completion_asia_seoul": {
+    "low": "2026-11-12T16:10:30.593428+09:00",
+    "central": "2026-11-13T04:18:04.026502+09:00",
+    "high": "2026-11-14T05:21:37.207746+09:00"
+  },
+  "remaining_time_calibration": {
+    "part1_tuning:nsmc:tfidf_lr:ce": {
+      "median_observed_to_pilot_ratio": 0.785314710073933,
+      "completed_samples": 10
+    },
+    "part1_tuning:nsmc:tfidf_svm:ce": {
+      "median_observed_to_pilot_ratio": 0.8123723730169705,
+      "completed_samples": 10
+    },
+    "part1_tuning:nsmc:tfidf_rf:ce": {
+      "median_observed_to_pilot_ratio": 0.7652079446592068,
+      "completed_samples": 10
+    },
+    "part1_tuning:nsmc:tfidf_xgb:ce": {
+      "median_observed_to_pilot_ratio": 0.6617745529702553,
+      "completed_samples": 10
+    },
+    "part1_tuning:nsmc:avg_mlp:ce": {
+      "median_observed_to_pilot_ratio": 0.6206596665791443,
+      "completed_samples": 10
+    },
+    "part1_tuning:nsmc:lstm:ce": {
+      "median_observed_to_pilot_ratio": 0.36243731701595494,
+      "completed_samples": 10
+    },
+    "part1_tuning:nsmc:gru:ce": {
+      "median_observed_to_pilot_ratio": 0.36868109034931784,
+      "completed_samples": 10
+    },
+    "part1_tuning:nsmc:transformer:ce": {
+      "median_observed_to_pilot_ratio": 0.6399576096698827,
+      "completed_samples": 10
+    },
+    "part1_tuning:nsmc:mamba:ce": {
+      "median_observed_to_pilot_ratio": 0.2242132921911728,
+      "completed_samples": 10
+    },
+    "part1_tuning:shopping:tfidf_lr:ce": {
+      "median_observed_to_pilot_ratio": 0.7734693551636513,
+      "completed_samples": 10
+    },
+    "part1_tuning:shopping:tfidf_svm:ce": {
+      "median_observed_to_pilot_ratio": 0.8008840187011025,
+      "completed_samples": 10
+    },
+    "part1_tuning:shopping:tfidf_rf:ce": {
+      "median_observed_to_pilot_ratio": 0.7613868535259165,
+      "completed_samples": 10
+    },
+    "part1_tuning:shopping:tfidf_xgb:ce": {
+      "median_observed_to_pilot_ratio": 0.6651448560796573,
+      "completed_samples": 10
+    },
+    "part1_tuning:shopping:avg_mlp:ce": {
+      "median_observed_to_pilot_ratio": 0.5218298069680596,
+      "completed_samples": 10
+    },
+    "part1_tuning:shopping:lstm:ce": {
+      "median_observed_to_pilot_ratio": 0.3599599872495479,
+      "completed_samples": 10
+    },
+    "part1_tuning:shopping:gru:ce": {
+      "median_observed_to_pilot_ratio": 0.3267961448968537,
+      "completed_samples": 10
+    },
+    "part1_tuning:shopping:transformer:ce": {
+      "median_observed_to_pilot_ratio": 0.6120886306412294,
+      "completed_samples": 10
+    },
+    "part1_tuning:shopping:mamba:ce": {
+      "median_observed_to_pilot_ratio": 0.2105233934825654,
+      "completed_samples": 10
+    },
+    "part1_tuning:steam:tfidf_lr:ce": {
+      "median_observed_to_pilot_ratio": 0.8387489680865499,
+      "completed_samples": 10
+    },
+    "part1_tuning:steam:tfidf_svm:ce": {
+      "median_observed_to_pilot_ratio": 0.8549826262035308,
+      "completed_samples": 10
+    },
+    "part1_tuning:steam:tfidf_rf:ce": {
+      "median_observed_to_pilot_ratio": 0.8094738127602408,
+      "completed_samples": 10
+    },
+    "part1_tuning:steam:tfidf_xgb:ce": {
+      "median_observed_to_pilot_ratio": 0.720655559689224,
+      "completed_samples": 10
+    },
+    "part1_tuning:steam:avg_mlp:ce": {
+      "median_observed_to_pilot_ratio": 0.5572939734164873,
+      "completed_samples": 10
+    },
+    "part1_tuning:steam:lstm:ce": {
+      "median_observed_to_pilot_ratio": 0.4174358047005022,
+      "completed_samples": 10
+    },
+    "part1_tuning:steam:gru:ce": {
+      "median_observed_to_pilot_ratio": 0.4031665619691066,
+      "completed_samples": 10
+    },
+    "part1_tuning:steam:transformer:ce": {
+      "median_observed_to_pilot_ratio": 0.5786426528491604,
+      "completed_samples": 10
+    },
+    "part1_tuning:steam:mamba:ce": {
+      "median_observed_to_pilot_ratio": 0.20338234923339968,
+      "completed_samples": 10
+    },
+    "part1_final:nsmc:tfidf_lr:ce": {
+      "median_observed_to_pilot_ratio": 1.1283426223243123,
+      "completed_samples": 30
+    },
+    "part1_final:nsmc:tfidf_svm:ce": {
+      "median_observed_to_pilot_ratio": 1.179678604884455,
+      "completed_samples": 30
+    },
+    "part1_final:nsmc:tfidf_rf:ce": {
+      "median_observed_to_pilot_ratio": 0.8634042758954013,
+      "completed_samples": 30
+    },
+    "part1_final:nsmc:tfidf_xgb:ce": {
+      "median_observed_to_pilot_ratio": 0.715362570131088,
+      "completed_samples": 11
+    }
+  },
+  "failure_signatures": {},
+  "final_update": false,
+  "gpu_util_vram_temperature_power": "0 %, 332 MiB, 12282 MiB, 32, 2.91 W"
+}
+```
+

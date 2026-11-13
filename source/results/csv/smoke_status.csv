@@ -1,0 +1,13 @@
+pipeline,status,duration_sec,reason
+tfidf_lr,completed,0.08806222397834063,
+tfidf_svm,completed,0.04520888900151476,
+tfidf_rf,completed,0.08427901903633028,
+tfidf_xgb,completed,0.11018432403216138,
+avg_mlp,completed,1.1391083279740997,
+lstm,completed,0.18994759302586317,
+gru,completed,0.0677227700361982,
+transformer,completed,0.10471908503677696,
+mamba,completed,0.6754857150372118,
+pooled_ce,completed,0.07542050100164488,
+supcon,completed,0.1168219749815762,
+db_cdsupcon,completed,0.08338455902412534,

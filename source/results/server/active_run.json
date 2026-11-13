@@ -1,0 +1,14 @@
+{
+  "command": "bash scripts/server_resume_after_crash.sh",
+  "current_worker_pid": 1652683,
+  "launcher_pid": 1367089,
+  "phase": "completed",
+  "primary_log": "source/results/server/workflow.log",
+  "production_started": true,
+  "recovery_log": "source/results/server/crash_reproduction.log",
+  "resume_time": "2026-11-12T13:49:09.709710+00:00",
+  "setup_gate": "CUDA/Mamba validated; 48 tests passed",
+  "start_time": "2026-11-12T00:28:55.540000+00:00",
+  "tmux_session": "korean-sentiment-all",
+  "updated_at": "2026-11-12T17:06:27.797600+00:00"
+}

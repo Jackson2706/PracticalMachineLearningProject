@@ -1,0 +1,26 @@
+{
+  "accuracy": 0.5,
+  "confusion_matrix": [
+    [
+      2,
+      0
+    ],
+    [
+      2,
+      0
+    ]
+  ],
+  "f1_negative": 0.6666666666666666,
+  "f1_positive": 0.0,
+  "fn": 2,
+  "fp": 0,
+  "macro_f1": 0.3333333333333333,
+  "macro_precision": 0.25,
+  "macro_recall": 0.5,
+  "precision_negative": 0.5,
+  "precision_positive": 0.0,
+  "recall_negative": 1.0,
+  "recall_positive": 0.0,
+  "tn": 2,
+  "tp": 0
+}

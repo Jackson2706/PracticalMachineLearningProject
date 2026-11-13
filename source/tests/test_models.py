@@ -32,10 +32,24 @@ def test_neural_forward_shapes(model):
     assert torch.isfinite(logits).all()
 
 
-def test_mamba_is_explicitly_blocked_without_linux_cuda():
+def test_mamba_is_explicitly_blocked_without_linux_cuda(monkeypatch):
+    monkeypatch.setattr(torch.cuda, "is_available", lambda: False)
     config = {**BASE, "d_state": 8, "d_conv": 4, "expand": 2}
     with pytest.raises(RuntimeError, match="mamba requires Linux"):
         SmallMamba(30, config, 10)
+
+
+@pytest.mark.cuda
+def test_mamba_cuda_forward_backward_uses_maintained_implementation():
+    config = {**BASE, "d_state": 8, "d_conv": 4, "expand": 2}
+    model = SmallMamba(30, config, 10).cuda()
+    ids = torch.randint(0, 30, (4, 10), device="cuda")
+    lengths = torch.tensor([10, 8, 5, 2], device="cuda")
+    logits = model(ids, lengths)
+    logits.sum().backward()
+    assert logits.shape == (4, 2)
+    assert torch.isfinite(logits).all()
+    assert all(torch.isfinite(p.grad).all() for p in model.parameters() if p.grad is not None)
 
 
 @pytest.mark.parametrize(

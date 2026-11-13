@@ -1,0 +1,142 @@
+{
+  "bonus": {
+    "db_cdsupcon": {
+      "alphas": [
+        2.0,
+        4.0
+      ],
+      "lambdas": [
+        0.1,
+        0.5
+      ],
+      "temperatures": [
+        0.07,
+        0.1
+      ]
+    },
+    "effective_batch_size": 48,
+    "examples_per_cell": 8,
+    "objectives": [
+      "pooled_ce",
+      "supcon",
+      "db_cdsupcon"
+    ],
+    "projection_dim": 64,
+    "projection_hidden_dim": 128,
+    "source_size_per_domain": 2000,
+    "standard_supcon": {
+      "lambdas": [
+        0.1,
+        0.5
+      ],
+      "temperatures": [
+        0.07,
+        0.1
+      ]
+    },
+    "target_sizes": [
+      200,
+      500,
+      1000,
+      2000
+    ]
+  },
+  "experiment": {
+    "artifacts": {
+      "representation_pair_count": 2000,
+      "representation_sample_per_cell": 100,
+      "representation_seed": 9102,
+      "retain_embeddings": false,
+      "retain_models": true
+    },
+    "final_seeds": [
+      13,
+      42,
+      2026
+    ],
+    "models": [
+      "tfidf_lr",
+      "tfidf_svm",
+      "tfidf_rf",
+      "tfidf_xgb",
+      "avg_mlp",
+      "lstm",
+      "gru",
+      "transformer",
+      "mamba"
+    ],
+    "neural": {
+      "batch_size": 64,
+      "gradient_clip": 1.0,
+      "latency_repeats": 50,
+      "latency_warmup": 10,
+      "max_epochs": 20,
+      "max_sequence_length": 128,
+      "min_frequency": 1,
+      "patience": 4,
+      "throughput_batch_size": 128,
+      "tokenizer": "unicode_words",
+      "vocab_cap": 20000,
+      "weight_decay": 0.01
+    },
+    "orchestration": {
+      "continue_on_error": true,
+      "stale_lock_seconds": 21600
+    },
+    "project_seed": 2026,
+    "tfidf": {
+      "max_features": 10000,
+      "ngram_range": [
+        1,
+        2
+      ],
+      "sublinear_tf": true
+    },
+    "tuning_seed": 777,
+    "tuning_size": 8000
+  },
+  "model": {
+    "dropout": 0.4,
+    "embedding_dim": 128,
+    "ff_multiplier": 2,
+    "hidden_dim": 128,
+    "id": "tr07",
+    "learning_rate": 0.001,
+    "num_heads": 4,
+    "num_layers": 2
+  },
+  "objective": {
+    "contrastive_lambda": 0.1,
+    "contrastive_temperature": 0.07,
+    "cross_domain_weight": 4.0,
+    "objective": "db_cdsupcon"
+  },
+  "plan": {
+    "config_hash": "d9873c23bd048a9e069383d1451f08d011ad734a2b5cac6e19ba6184b05b921d",
+    "config_id": "db_l0.1_t0.07_a4.0",
+    "contrastive_lambda": "0.1",
+    "contrastive_temperature": "0.07",
+    "cross_domain_weight_alpha": "4.0",
+    "data_manifest_hash": "7dc24428211cfe790a5c99d88b05317714d909883bb775e33826535f144344e7",
+    "dataset": "shopping",
+    "model": "transformer",
+    "model_family": "neural",
+    "objective": "db_cdsupcon",
+    "phase": "bonus_tuning",
+    "planning_state": "ready",
+    "run_id": "bonus-2dc1b66d3a5979dd9ae7",
+    "seed": "777",
+    "source_domains": "nsmc,steam",
+    "source_size_per_domain": "2000",
+    "target_domain": "shopping",
+    "target_train_size": "500",
+    "train_fraction": "",
+    "train_size": "4500"
+  },
+  "runtime": {
+    "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+    "KS_CPU_THREADS": "4",
+    "KS_NUM_WORKERS": "0",
+    "KS_PRECISION": "bf16"
+  }
+}

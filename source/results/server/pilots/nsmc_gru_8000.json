@@ -1,0 +1,60 @@
+{
+  "cpu_process_sec": 5.092508338,
+  "dataset": "nsmc",
+  "device": "cuda",
+  "duration_sec": 4.841149384039454,
+  "id": "nsmc_gru_8000",
+  "latency": {
+    "classifier": {
+      "mean": 0.9299813,
+      "median": 0.9123330000000001,
+      "p95": 0.98681955,
+      "std": 0.03862183036897656,
+      "timed_repeat_count": 50,
+      "warmup_count": 10
+    },
+    "end_to_end": {
+      "mean": 1.0088529800000001,
+      "median": 0.9926895,
+      "p95": 1.0708424,
+      "std": 0.040607309725954506,
+      "timed_repeat_count": 50,
+      "warmup_count": 10
+    },
+    "throughput_batch_size": 128,
+    "throughput_samples_per_sec": 45349.17579522105
+  },
+  "model": "gru",
+  "note": "Non-scientific pilot: two neural epochs, config candidate 1, seed777; no test evaluation, no selected configuration.",
+  "objective": "ce",
+  "peak_host_ram_mb": 1551.00390625,
+  "production_result": false,
+  "serialized_size_mb": 8.284460067749023,
+  "size": 8000,
+  "training": {
+    "batch_sampler": "shuffle",
+    "best_epoch": 2,
+    "fit_time_sec": 2.947717656963505,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.6603416748046875,
+        "validation_macro_f1": 0.6117137921227978
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.5831504096984863,
+        "validation_macro_f1": 0.6730313786059685
+      }
+    ],
+    "optimizer_steps": 250,
+    "peak_gpu_memory_mb": 155.82470703125,
+    "peak_gpu_reserved_mb": 230.0,
+    "physical_batch_size": 64,
+    "precision": "bf16",
+    "sampler": null,
+    "validation_macro_f1": 0.6730313786059685
+  },
+  "validation_evaluation_sec": 0.31729886500397697,
+  "validation_macro_f1": 0.6730313786059685
+}

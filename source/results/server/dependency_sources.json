@@ -1,0 +1,13 @@
+{
+  "causal_conv1d": "https://github.com/Dao-AILab/causal-conv1d/releases/tag/v1.5.0.post8",
+  "causal_conv1d_installation": "1.6.0 locally rebuilt; required cpp_functions API",
+  "installed_and_verified": true,
+  "mamba": "https://github.com/state-spaces/mamba/releases/tag/v2.2.6.post3",
+  "mamba_installation": "2.2.6.post3 locally rebuilt with CUDA 12.1 for glibc 2.31",
+  "mamba_wheel_sha256": "80c6af253aa52ba2155228964946b823a61186790aad51c55616c86887f7e59e",
+  "source_build_logs": [
+    "mamba_source_build.log",
+    "causal_source_build.log"
+  ],
+  "torch": "https://pytorch.org/get-started/previous-versions/"
+}

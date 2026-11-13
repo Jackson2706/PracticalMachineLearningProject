@@ -1,0 +1,148 @@
+/home/dung/miniconda3/envs/ML/lib/python3.11/site-packages/torch/autograd/graph.py:825: UserWarning: Memory Efficient attention defaults to a non-deterministic algorithm. To explicitly enable determinism call torch.use_deterministic_algorithms(True, warn_only=False). (Triggered internally at ../aten/src/ATen/native/transformers/cuda/attention_backward.cu:655.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+[
+  {
+    "run_id": "bonus-cd5943eae2d4e1f887b5",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-6ba52b54dd942e55d886",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-0b101f447e173eedd878",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-b49fcd48318277605478",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-5fd1e23c8f98b50d8dcb",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-ba9a05584fca0d25e6e3",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-5e073ee02048059a8f74",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-801b5e3775c3edb5065a",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-835c113db0193ec1e7e7",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-57a47543b0b98e052593",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-3d0be0d4c8582e2c487d",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-9540d6981a92a92bed90",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-d37295ce427b5ae4d329",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-9a2ec4fb9e9fd66ba48b",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-a2d97c19ff8b95de319b",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-28bd903a8b61341131a5",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-8c6df4ce63571729ad9b",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-2dc1b66d3a5979dd9ae7",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-6956b60f19aed5e943f0",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-1175cd2346d6697345ab",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-b22bca18fdd81ded2180",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-ac786aaf1063c3e8ca2e",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-877055b13f4bc21f2d1e",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-59278c899194fa2987fc",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-4978daa86ca557c96710",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-abbbd1e65c4a9941c343",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-8015d7e19c92f67d60bb",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-3d5c6fbbd8cfb7d41179",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-20eb0bad36ce62f878be",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-8e413a700f63faab9733",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-aeeb3f19545bcffcfc63",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-f14135daee65b9ebd191",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-628dde15bfb558e80d53",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-649bf3cba73f192d42d9",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-5b883be526b0913a4f67",
+    "status": "completed"
+  },
+  {
+    "run_id": "bonus-4d755ec1ca3ae148342e",
+    "status": "completed"
+  }
+]

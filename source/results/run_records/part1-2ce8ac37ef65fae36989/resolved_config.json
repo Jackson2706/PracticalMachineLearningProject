@@ -1,0 +1,100 @@
+{
+  "bonus": null,
+  "experiment": {
+    "artifacts": {
+      "representation_pair_count": 2000,
+      "representation_sample_per_cell": 100,
+      "representation_seed": 9102,
+      "retain_embeddings": false,
+      "retain_models": true
+    },
+    "final_seeds": [
+      13,
+      42,
+      2026
+    ],
+    "models": [
+      "tfidf_lr",
+      "tfidf_svm",
+      "tfidf_rf",
+      "tfidf_xgb",
+      "avg_mlp",
+      "lstm",
+      "gru",
+      "transformer",
+      "mamba"
+    ],
+    "neural": {
+      "batch_size": 64,
+      "gradient_clip": 1.0,
+      "latency_repeats": 50,
+      "latency_warmup": 10,
+      "max_epochs": 20,
+      "max_sequence_length": 128,
+      "min_frequency": 1,
+      "patience": 4,
+      "throughput_batch_size": 128,
+      "tokenizer": "unicode_words",
+      "vocab_cap": 20000,
+      "weight_decay": 0.01
+    },
+    "orchestration": {
+      "continue_on_error": true,
+      "stale_lock_seconds": 21600
+    },
+    "project_seed": 2026,
+    "tfidf": {
+      "max_features": 10000,
+      "ngram_range": [
+        1,
+        2
+      ],
+      "sublinear_tf": true
+    },
+    "tuning_seed": 777,
+    "tuning_size": 8000
+  },
+  "model": {
+    "colsample_bytree": 0.7,
+    "id": "xgb07",
+    "learning_rate": 0.05,
+    "max_depth": 6,
+    "n_estimators": 250,
+    "reg_lambda": 4.0,
+    "subsample": 0.8
+  },
+  "objective": {
+    "contrastive_lambda": 0.0,
+    "contrastive_temperature": 0.07,
+    "cross_domain_weight": 1.0,
+    "objective": "ce"
+  },
+  "plan": {
+    "config_hash": "a32ff53306048dd8d5af84a71a268df34e018e9f150ac7a7c9b8e8489e5be4cf",
+    "config_id": "xgb07",
+    "contrastive_lambda": "",
+    "contrastive_temperature": "",
+    "cross_domain_weight_alpha": "",
+    "data_manifest_hash": "7dc24428211cfe790a5c99d88b05317714d909883bb775e33826535f144344e7",
+    "dataset": "steam",
+    "model": "tfidf_xgb",
+    "model_family": "tfidf",
+    "objective": "ce",
+    "phase": "part1_tuning",
+    "planning_state": "ready",
+    "run_id": "part1-2ce8ac37ef65fae36989",
+    "seed": "777",
+    "source_domains": "",
+    "source_size_per_domain": "",
+    "target_domain": "",
+    "target_train_size": "",
+    "train_fraction": "0.10021546324597885",
+    "train_size": "8000"
+  },
+  "runtime": {
+    "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+    "KS_CPU_THREADS": "4",
+    "KS_NUM_WORKERS": "0",
+    "KS_PRECISION": "bf16"
+  }
+}

@@ -1,0 +1,144 @@
+# Server inventory
+
+UTC: 2026-11-11T13:25:00.558090+00:00
+
+Asia/Seoul: 2026-11-11T22:25:00.558090+09:00
+
+## os
+
+```
+Linux master-node 5.15.0-139-generic #149~20.04.1-Ubuntu SMP Wed Apr 16 08:29:56 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+```
+
+## cpu
+
+```
+Architecture:                         x86_64
+CPU op-mode(s):                       32-bit, 64-bit
+Byte Order:                           Little Endian
+Address sizes:                        39 bits physical, 48 bits virtual
+CPU(s):                               20
+On-line CPU(s) list:                  0-19
+Thread(s) per core:                   2
+Core(s) per socket:                   10
+Socket(s):                            1
+NUMA node(s):                         1
+Vendor ID:                            GenuineIntel
+CPU family:                           6
+Model:                                165
+Model name:                           Intel(R) Core(TM) i9-10900K CPU @ 3.70GHz
+Stepping:                             5
+CPU MHz:                              4923.162
+CPU max MHz:                          5300.0000
+CPU min MHz:                          800.0000
+BogoMIPS:                             7399.70
+Virtualization:                       VT-x
+L1d cache:                            320 KiB
+L1i cache:                            320 KiB
+L2 cache:                             2.5 MiB
+L3 cache:                             20 MiB
+NUMA node0 CPU(s):                    0-19
+Vulnerability Gather data sampling:   Mitigation; Microcode
+Vulnerability Itlb multihit:          KVM: Mitigation: VMX disabled
+Vulnerability L1tf:                   Not affected
+Vulnerability Mds:                    Not affected
+Vulnerability Meltdown:               Not affected
+Vulnerability Mmio stale data:        Mitigation; Clear CPU buffers; SMT vulnerable
+Vulnerability Reg file data sampling: Not affected
+Vulnerability Retbleed:               Mitigation; Enhanced IBRS
+Vulnerability Spec rstack overflow:   Not affected
+Vulnerability Spec store bypass:      Mitigation; Speculative Store Bypass disabled via prctl and seccomp
+Vulnerability Spectre v1:             Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+Vulnerability Spectre v2:             Mitigation; Enhanced / Automatic IBRS; IBPB conditional; RSB filling; PBRSB-eIBRS SW sequence; BHI SW loop, KVM SW loop
+Vulnerability Srbds:                  Mitigation; Microcode
+Vulnerability Tsx async abort:        Not affected
+Flags:                                fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp pku ospke md_clear flush_l1d arch_capabilities
+```
+
+## ram
+
+```
+total        used        free      shared  buff/cache   available
+Mem:    33405169664  5229002752  7553900544    24043520 20622266368 27672363008
+Swap:             0           0           0
+```
+
+## disk
+
+```
+Filesystem         1B-blocks         Used    Available Use% Mounted on
+/dev/nvme0n1p2 1006450962432 720060985344 235189637120  76% /home/dung/PracticalMachineLearningProject
+```
+
+## gpu
+
+```
+NVIDIA-SMI has failed because it couldn't communicate with the NVIDIA driver. Make sure that the latest NVIDIA driver is installed and running.
+```
+
+## pci
+
+```
+00:00.0 Host bridge [0600]: Intel Corporation Device [8086:9b33] (rev 05)
+00:01.0 PCI bridge [0604]: Intel Corporation Xeon E3-1200 v5/E3-1500 v5/6th Gen Core Processor PCIe Controller (x16) [8086:1901] (rev 05)
+00:02.0 Display controller [0380]: Intel Corporation Device [8086:9bc5] (rev 05)
+00:14.0 USB controller [0c03]: Intel Corporation Comet Lake USB 3.1 xHCI Host Controller [8086:06ed]
+00:14.2 RAM memory [0500]: Intel Corporation Comet Lake PCH Shared SRAM [8086:06ef]
+00:16.0 Communication controller [0780]: Intel Corporation Comet Lake HECI Controller [8086:06e0]
+00:17.0 SATA controller [0106]: Intel Corporation Device [8086:06d2]
+00:1b.0 PCI bridge [0604]: Intel Corporation Comet Lake PCI Express Root Port #17 [8086:06c0] (rev f0)
+00:1c.0 PCI bridge [0604]: Intel Corporation Device [8086:06b8] (rev f0)
+00:1c.4 PCI bridge [0604]: Intel Corporation Device [8086:06bc] (rev f0)
+00:1c.6 PCI bridge [0604]: Intel Corporation Device [8086:06be] (rev f0)
+00:1d.0 PCI bridge [0604]: Intel Corporation Comet Lake PCI Express Root Port #9 [8086:06b0] (rev f0)
+00:1f.0 ISA bridge [0601]: Intel Corporation Device [8086:0697]
+00:1f.3 Audio device [0403]: Intel Corporation Comet Lake PCH cAVS [8086:06c8]
+00:1f.4 SMBus [0c05]: Intel Corporation Comet Lake PCH SMBus Controller [8086:06a3]
+00:1f.5 Serial bus controller [0c80]: Intel Corporation Comet Lake PCH SPI Controller [8086:06a4]
+00:1f.6 Ethernet controller [0200]: Intel Corporation Ethernet Connection (11) I219-LM [8086:0d4c]
+01:00.0 VGA compatible controller [0300]: NVIDIA Corporation Device [10de:2786] (rev a1)
+01:00.1 Audio device [0403]: NVIDIA Corporation Device [10de:22bc] (rev a1)
+04:00.0 USB controller [0c03]: ASMedia Technology Inc. ASM2142 USB 3.1 Host Controller [1b21:2142]
+05:00.0 Ethernet controller [0200]: Intel Corporation Device [8086:15f2] (rev 02)
+06:00.0 Non-Volatile memory controller [0108]: Samsung Electronics Co Ltd NVMe SSD Controller SM981/PM981/PM983 [144d:a808]
+```
+
+## commit
+
+```
+370e1407a80d4b49fdbed7f76af3b9ae06afc23b
+```
+
+## worktree
+
+```
+
+```
+
+## conda
+
+```
+# conda environments:
+#
+# * -> active
+# + -> frozen
+base                     /home/dung/miniconda3
+ML                   *   /home/dung/miniconda3/envs/ML
+```
+
+## python
+
+```
+Python 3.11.18
+```
+
+Experiment processes (matching markers only): []
+
+Tools: {"conda": "/home/dung/miniconda3/condabin/conda", "python": "/home/dung/miniconda3/envs/ML/bin/python", "python3": "/home/dung/miniconda3/envs/ML/bin/python3", "nvidia-smi": "/usr/bin/nvidia-smi", "tmux": "/usr/bin/tmux", "screen": null, "nohup": "/usr/bin/nohup", "rsync": "/usr/bin/rsync", "scp": "/usr/bin/scp"}
+
+GPU model, count, VRAM and utilization remain unverified. No NVIDIA device nodes exist.
+
+
+## Host-access correction
+
+Initial GPU check was sandbox restricted. Host GPU verified using escalated conda run -n ML nvidia-smi: RTX 4070, driver 535.230.02, 12282 MiB. Host driver repair is not indicated; installed torch cu132 is incompatible.

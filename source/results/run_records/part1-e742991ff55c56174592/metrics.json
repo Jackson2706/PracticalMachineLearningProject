@@ -1,0 +1,158 @@
+{
+  "latency": {
+    "classifier": {
+      "mean": 1.0114829,
+      "median": 1.0005815,
+      "p95": 1.0469686999999999,
+      "std": 0.019626800348757814,
+      "timed_repeat_count": 50,
+      "warmup_count": 10
+    },
+    "end_to_end": {
+      "mean": 1.08277406,
+      "median": 1.068234,
+      "p95": 1.1205383,
+      "std": 0.024072211368638317,
+      "timed_repeat_count": 50,
+      "warmup_count": 10
+    },
+    "throughput_batch_size": 128,
+    "throughput_samples_per_sec": 36907.85989884265
+  },
+  "test": {
+    "accuracy": 0.6565788155125765,
+    "confusion_matrix": [
+      [
+        3336,
+        1654
+      ],
+      [
+        1773,
+        3216
+      ]
+    ],
+    "f1_negative": 0.6606594712347758,
+    "f1_positive": 0.6523988234100822,
+    "fn": 1773,
+    "fp": 1654,
+    "macro_f1": 0.656529147322429,
+    "macro_precision": 0.6566674825558472,
+    "macro_recall": 0.6565776170500954,
+    "precision_negative": 0.6529653552554316,
+    "precision_positive": 0.6603696098562628,
+    "recall_negative": 0.6685370741482966,
+    "recall_positive": 0.6446181599518942,
+    "tn": 3336,
+    "tp": 3216
+  },
+  "training": {
+    "batch_sampler": "shuffle",
+    "best_epoch": 10,
+    "fit_time_sec": 12.433369442005642,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.679094970703125,
+        "validation_macro_f1": 0.6170729012219182
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.545550033569336,
+        "validation_macro_f1": 0.6317983574578366
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.3247954330444336,
+        "validation_macro_f1": 0.6333404138481709
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.15421301078796387,
+        "validation_macro_f1": 0.6193498521082788
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.06054831475019455,
+        "validation_macro_f1": 0.6420382212978561
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.038451010435819624,
+        "validation_macro_f1": 0.6276572728089815
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.013420776695013046,
+        "validation_macro_f1": 0.6178355860617675
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.0077943246066570285,
+        "validation_macro_f1": 0.6436210486466023
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.004758728355169296,
+        "validation_macro_f1": 0.6431250385329397
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.00407744362950325,
+        "validation_macro_f1": 0.6502803017454328
+      },
+      {
+        "epoch": 11,
+        "train_loss": 0.0034852181673049928,
+        "validation_macro_f1": 0.6259879149922548
+      },
+      {
+        "epoch": 12,
+        "train_loss": 0.0028829360008239746,
+        "validation_macro_f1": 0.646998842189566
+      },
+      {
+        "epoch": 13,
+        "train_loss": 0.0034749252796173096,
+        "validation_macro_f1": 0.5970630813970786
+      },
+      {
+        "epoch": 14,
+        "train_loss": 0.009769596338272095,
+        "validation_macro_f1": 0.627216972446349
+      }
+    ],
+    "optimizer_steps": 882,
+    "peak_gpu_memory_mb": 175.7998046875,
+    "peak_gpu_reserved_mb": 494.0,
+    "physical_batch_size": 64,
+    "precision": "bf16",
+    "sampler": null,
+    "validation_macro_f1": 0.6502803017454328
+  },
+  "validation": {
+    "accuracy": 0.6503657681130374,
+    "confusion_matrix": [
+      [
+        3323,
+        1667
+      ],
+      [
+        1822,
+        3167
+      ]
+    ],
+    "f1_negative": 0.6557474099654662,
+    "f1_positive": 0.6448131935253996,
+    "fn": 1822,
+    "fp": 1667,
+    "macro_f1": 0.6502803017454328,
+    "macro_precision": 0.6505103950676553,
+    "macro_recall": 0.6503642080713843,
+    "precision_negative": 0.6458697764820214,
+    "precision_positive": 0.6551510136532892,
+    "recall_negative": 0.6659318637274549,
+    "recall_positive": 0.6347965524153137,
+    "tn": 3323,
+    "tp": 3167
+  }
+}

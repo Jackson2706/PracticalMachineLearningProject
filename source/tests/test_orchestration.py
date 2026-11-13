@@ -61,6 +61,7 @@ def test_completed_validation_and_stale_hash(isolated_paths: Path):
         atomic_write_json(directory / name, {})
     atomic_write_json(directory / "run_metadata.json", {"data_manifest_hash": "a", "config_hash": "b"})
     atomic_write_json(directory / "status.json", {"status": "completed"})
+    atomic_write_json(directory / "record.json", {"status": "completed", "run_id": "complete"})
     atomic_write_text(directory / "SUCCESS", "ok\n")
     assert validate_completed(directory, "a", "b")
     assert not validate_completed(directory, "changed", "b")

@@ -1,0 +1,19 @@
+/home/dung/miniconda3/envs/ML/lib/python3.11/site-packages/torch/cuda/__init__.py:241: UserWarning: CUDA initialization: The NVIDIA driver on your system is too old (found version 12020). Please update your GPU driver by downloading and installing a new version from the URL: http://www.nvidia.com/Download/index.aspx Alternatively, go to: https://pytorch.org to install a PyTorch version that has been compiled with your version of the CUDA driver. (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/dung/miniconda3/envs/ML/lib/python3.11/site-packages/torch/cuda/__init__.py:1264: UserWarning: Can't initialize NVML
+  raw_cnt = _raw_device_count_nvml()
+{
+  "python": "3.11.18 (main, Oct 26 2026, 18:19:35) [GCC 14.3.0]",
+  "executable": "/home/dung/miniconda3/envs/ML/bin/python",
+  "modules": {
+    "torch": true,
+    "xgboost": false,
+    "sklearn": false,
+    "mamba_ssm": false,
+    "pytest": false,
+    "pandas": false,
+    "psutil": false,
+    "yaml": false
+  }
+}
+torch 2.15.0+cu132 cuda_build 13.2 cuda_available False device_count 0

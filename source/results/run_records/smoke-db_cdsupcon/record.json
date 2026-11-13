@@ -1,0 +1,8 @@
+{
+  "error_message": null,
+  "error_type": null,
+  "model": "db_cdsupcon",
+  "phase": "smoke",
+  "run_id": "smoke-db_cdsupcon",
+  "status": "completed"
+}

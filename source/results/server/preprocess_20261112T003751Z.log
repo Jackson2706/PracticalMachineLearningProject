@@ -1,0 +1,26 @@
+[
+  {
+    "dataset": "nsmc",
+    "train_rows": 130797,
+    "validation_rows": 14534,
+    "test_rows": 49110,
+    "n_full": 130797,
+    "training_sizes": "[200, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 130797]"
+  },
+  {
+    "dataset": "shopping",
+    "train_rows": 159918,
+    "validation_rows": 19990,
+    "test_rows": 19990,
+    "n_full": 159918,
+    "training_sizes": "[200, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 128000, 159918]"
+  },
+  {
+    "dataset": "steam",
+    "train_rows": 79828,
+    "validation_rows": 9979,
+    "test_rows": 9979,
+    "n_full": 79828,
+    "training_sizes": "[200, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 79828]"
+  }
+]

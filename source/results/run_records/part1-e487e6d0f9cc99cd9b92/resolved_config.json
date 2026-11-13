@@ -1,0 +1,98 @@
+{
+  "bonus": null,
+  "experiment": {
+    "artifacts": {
+      "representation_pair_count": 2000,
+      "representation_sample_per_cell": 100,
+      "representation_seed": 9102,
+      "retain_embeddings": false,
+      "retain_models": true
+    },
+    "final_seeds": [
+      13,
+      42,
+      2026
+    ],
+    "models": [
+      "tfidf_lr",
+      "tfidf_svm",
+      "tfidf_rf",
+      "tfidf_xgb",
+      "avg_mlp",
+      "lstm",
+      "gru",
+      "transformer",
+      "mamba"
+    ],
+    "neural": {
+      "batch_size": 64,
+      "gradient_clip": 1.0,
+      "latency_repeats": 50,
+      "latency_warmup": 10,
+      "max_epochs": 20,
+      "max_sequence_length": 128,
+      "min_frequency": 1,
+      "patience": 4,
+      "throughput_batch_size": 128,
+      "tokenizer": "unicode_words",
+      "vocab_cap": 20000,
+      "weight_decay": 0.01
+    },
+    "orchestration": {
+      "continue_on_error": true,
+      "stale_lock_seconds": 21600
+    },
+    "project_seed": 2026,
+    "tfidf": {
+      "max_features": 10000,
+      "ngram_range": [
+        1,
+        2
+      ],
+      "sublinear_tf": true
+    },
+    "tuning_seed": 777,
+    "tuning_size": 8000
+  },
+  "model": {
+    "id": "rf09",
+    "max_depth": null,
+    "max_features": "sqrt",
+    "min_samples_leaf": 2,
+    "n_estimators": 700
+  },
+  "objective": {
+    "contrastive_lambda": 0.0,
+    "contrastive_temperature": 0.07,
+    "cross_domain_weight": 1.0,
+    "objective": "ce"
+  },
+  "plan": {
+    "config_hash": "20482e9a51f6834877b6cd677d4fde47e1f8850714ac8557b4e052f19cffdbc1",
+    "config_id": "rf09",
+    "contrastive_lambda": "",
+    "contrastive_temperature": "",
+    "cross_domain_weight_alpha": "",
+    "data_manifest_hash": "7dc24428211cfe790a5c99d88b05317714d909883bb775e33826535f144344e7",
+    "dataset": "steam",
+    "model": "tfidf_rf",
+    "model_family": "tfidf",
+    "objective": "ce",
+    "phase": "part1_tuning",
+    "planning_state": "ready",
+    "run_id": "part1-e487e6d0f9cc99cd9b92",
+    "seed": "777",
+    "source_domains": "",
+    "source_size_per_domain": "",
+    "target_domain": "",
+    "target_train_size": "",
+    "train_fraction": "0.10021546324597885",
+    "train_size": "8000"
+  },
+  "runtime": {
+    "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+    "KS_CPU_THREADS": "4",
+    "KS_NUM_WORKERS": "0",
+    "KS_PRECISION": "bf16"
+  }
+}

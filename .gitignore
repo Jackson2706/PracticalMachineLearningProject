@@ -63,3 +63,19 @@ source/results/archives/*
 !source/data/**/.gitkeep
 !source/checkpoints/.gitkeep
 !source/results/**/.gitkeep
+
+# Server execution artifacts: publish results and metadata, retain datasets/weights locally.
+source/data/processed/**/*.csv
+source/results/server/*.lock
+source/results/server/__pycache__/
+!source/data/manifests/*.json
+!source/data/manifests/*.csv
+!source/data/splits/*.csv
+!source/results/csv/*.csv
+!source/results/plans/*.csv
+!source/results/plans/*.json
+!source/results/run_records/*/
+source/results/run_records/*/*
+!source/results/run_records/*/*.json
+!source/results/run_records/*/*.log
+!source/results/run_records/*/SUCCESS

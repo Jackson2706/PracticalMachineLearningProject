@@ -1,0 +1,157 @@
+{
+  "latency": {
+    "classifier": {
+      "mean": 1.17938346,
+      "median": 1.1661325,
+      "p95": 1.2369736,
+      "std": 0.036532322286550574,
+      "timed_repeat_count": 50,
+      "warmup_count": 10
+    },
+    "end_to_end": {
+      "mean": 1.24907362,
+      "median": 1.2322575,
+      "p95": 1.2919167,
+      "std": 0.07165157241565324,
+      "timed_repeat_count": 50,
+      "warmup_count": 10
+    },
+    "throughput_batch_size": 128,
+    "throughput_samples_per_sec": 48460.67271896384
+  },
+  "training": {
+    "batch_sampler": "shuffle",
+    "best_epoch": 15,
+    "fit_time_sec": 15.418988196994178,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.6969661254882813,
+        "validation_macro_f1": 0.5508919388660254
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.682987060546875,
+        "validation_macro_f1": 0.5540947588325904
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.6664300231933594,
+        "validation_macro_f1": 0.600298925891547
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.6464961242675781,
+        "validation_macro_f1": 0.5853225572221059
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.6185123672485352,
+        "validation_macro_f1": 0.6158231648152226
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.5840656623840332,
+        "validation_macro_f1": 0.6359322598616053
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.5454521179199219,
+        "validation_macro_f1": 0.6378108037517553
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.516358793258667,
+        "validation_macro_f1": 0.6430335193495875
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.479476131439209,
+        "validation_macro_f1": 0.6607755346359572
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.4551131286621094,
+        "validation_macro_f1": 0.6599797578223657
+      },
+      {
+        "epoch": 11,
+        "train_loss": 0.4237434558868408,
+        "validation_macro_f1": 0.6616821142226819
+      },
+      {
+        "epoch": 12,
+        "train_loss": 0.4051046943664551,
+        "validation_macro_f1": 0.6662516356714379
+      },
+      {
+        "epoch": 13,
+        "train_loss": 0.377783842086792,
+        "validation_macro_f1": 0.6576781226049793
+      },
+      {
+        "epoch": 14,
+        "train_loss": 0.3502778754234314,
+        "validation_macro_f1": 0.6697797170906337
+      },
+      {
+        "epoch": 15,
+        "train_loss": 0.3382131814956665,
+        "validation_macro_f1": 0.6732942993784956
+      },
+      {
+        "epoch": 16,
+        "train_loss": 0.31996262741088866,
+        "validation_macro_f1": 0.6685026164636564
+      },
+      {
+        "epoch": 17,
+        "train_loss": 0.29952581679821016,
+        "validation_macro_f1": 0.6659408400590163
+      },
+      {
+        "epoch": 18,
+        "train_loss": 0.28360308694839476,
+        "validation_macro_f1": 0.6730083255984024
+      },
+      {
+        "epoch": 19,
+        "train_loss": 0.2612016278505325,
+        "validation_macro_f1": 0.6701131756300491
+      }
+    ],
+    "optimizer_steps": 2375,
+    "peak_gpu_memory_mb": 285.72021484375,
+    "peak_gpu_reserved_mb": 960.0,
+    "physical_batch_size": 64,
+    "precision": "bf16",
+    "sampler": null,
+    "validation_macro_f1": 0.6732942993784956
+  },
+  "validation": {
+    "accuracy": 0.6735143801984167,
+    "confusion_matrix": [
+      [
+        3490,
+        1500
+      ],
+      [
+        1758,
+        3231
+      ]
+    ],
+    "f1_negative": 0.6817737839421762,
+    "f1_positive": 0.6648148148148149,
+    "fn": 1758,
+    "fp": 1500,
+    "macro_f1": 0.6732942993784956,
+    "macro_precision": 0.6739787697001098,
+    "macro_recall": 0.6735117860495495,
+    "precision_negative": 0.665015243902439,
+    "precision_positive": 0.6829422954977806,
+    "recall_negative": 0.6993987975951904,
+    "recall_positive": 0.6476247745039087,
+    "tn": 3490,
+    "tp": 3231
+  }
+}

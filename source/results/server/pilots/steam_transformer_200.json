@@ -1,0 +1,60 @@
+{
+  "cpu_process_sec": 2.354151672,
+  "dataset": "steam",
+  "device": "cuda",
+  "duration_sec": 2.1915714999777265,
+  "id": "steam_transformer_200",
+  "latency": {
+    "classifier": {
+      "mean": 1.14993226,
+      "median": 1.132815,
+      "p95": 1.19732875,
+      "std": 0.030328147482370237,
+      "timed_repeat_count": 50,
+      "warmup_count": 10
+    },
+    "end_to_end": {
+      "mean": 1.21532544,
+      "median": 1.1997475,
+      "p95": 1.26902085,
+      "std": 0.029359313365376935,
+      "timed_repeat_count": 50,
+      "warmup_count": 10
+    },
+    "throughput_batch_size": 128,
+    "throughput_samples_per_sec": 54989.17058758146
+  },
+  "model": "transformer",
+  "note": "Non-scientific pilot: two neural epochs, config candidate 1, seed777; no test evaluation, no selected configuration.",
+  "objective": "ce",
+  "peak_host_ram_mb": 1295.70703125,
+  "production_result": false,
+  "serialized_size_mb": 0.9814395904541016,
+  "size": 200,
+  "training": {
+    "batch_sampler": "shuffle",
+    "best_epoch": 2,
+    "fit_time_sec": 0.8226882669841871,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.70224609375,
+        "validation_macro_f1": 0.3441188364346024
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.67369140625,
+        "validation_macro_f1": 0.37142656481307695
+      }
+    ],
+    "optimizer_steps": 8,
+    "peak_gpu_memory_mb": 256.26806640625,
+    "peak_gpu_reserved_mb": 344.0,
+    "physical_batch_size": 64,
+    "precision": "bf16",
+    "sampler": null,
+    "validation_macro_f1": 0.37142656481307695
+  },
+  "validation_evaluation_sec": 0.1820504330098629,
+  "validation_macro_f1": 0.37142656481307695
+}

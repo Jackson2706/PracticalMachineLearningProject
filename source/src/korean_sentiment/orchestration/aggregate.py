@@ -53,7 +53,7 @@ def _status_rows(plan: list[dict[str, str]], records: dict[str, dict[str, Any]])
 def _mean_std(values: list[float]) -> tuple[float | None, float | None]:
     if not values:
         return None, None
-    return float(np.mean(values)), float(np.std(values, ddof=1)) if len(values) > 1 else 0.0
+    return float(np.mean(values)), float(np.std(values, ddof=1)) if len(values) > 1 else None
 
 
 def _part1_summary(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:

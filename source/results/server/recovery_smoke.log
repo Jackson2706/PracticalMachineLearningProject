@@ -1,0 +1,64 @@
+/home/dung/miniconda3/envs/ML/lib/python3.11/site-packages/torch/autograd/graph.py:825: UserWarning: Memory Efficient attention defaults to a non-deterministic algorithm. To explicitly enable determinism call torch.use_deterministic_algorithms(True, warn_only=False). (Triggered internally at ../aten/src/ATen/native/transformers/cuda/attention_backward.cu:655.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+[
+  {
+    "pipeline": "tfidf_lr",
+    "status": "completed",
+    "duration_sec": 0.08806222397834063
+  },
+  {
+    "pipeline": "tfidf_svm",
+    "status": "completed",
+    "duration_sec": 0.04520888900151476
+  },
+  {
+    "pipeline": "tfidf_rf",
+    "status": "completed",
+    "duration_sec": 0.08427901903633028
+  },
+  {
+    "pipeline": "tfidf_xgb",
+    "status": "completed",
+    "duration_sec": 0.11018432403216138
+  },
+  {
+    "pipeline": "avg_mlp",
+    "status": "completed",
+    "duration_sec": 1.1391083279740997
+  },
+  {
+    "pipeline": "lstm",
+    "status": "completed",
+    "duration_sec": 0.18994759302586317
+  },
+  {
+    "pipeline": "gru",
+    "status": "completed",
+    "duration_sec": 0.0677227700361982
+  },
+  {
+    "pipeline": "transformer",
+    "status": "completed",
+    "duration_sec": 0.10471908503677696
+  },
+  {
+    "pipeline": "mamba",
+    "status": "completed",
+    "duration_sec": 0.6754857150372118
+  },
+  {
+    "pipeline": "pooled_ce",
+    "status": "completed",
+    "duration_sec": 0.07542050100164488
+  },
+  {
+    "pipeline": "supcon",
+    "status": "completed",
+    "duration_sec": 0.1168219749815762
+  },
+  {
+    "pipeline": "db_cdsupcon",
+    "status": "completed",
+    "duration_sec": 0.08338455902412534
+  }
+]

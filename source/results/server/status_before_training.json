@@ -1,0 +1,215 @@
+{
+  "overall": {
+    "missing": 1251,
+    "pending": 1251
+  },
+  "groups": {
+    "bonus_final:nsmc:db_cdsupcon": {
+      "pending": 12
+    },
+    "bonus_final:nsmc:pooled_ce": {
+      "pending": 12
+    },
+    "bonus_final:nsmc:supcon": {
+      "pending": 12
+    },
+    "bonus_final:shopping:db_cdsupcon": {
+      "pending": 12
+    },
+    "bonus_final:shopping:pooled_ce": {
+      "pending": 12
+    },
+    "bonus_final:shopping:supcon": {
+      "pending": 12
+    },
+    "bonus_final:steam:db_cdsupcon": {
+      "pending": 12
+    },
+    "bonus_final:steam:pooled_ce": {
+      "pending": 12
+    },
+    "bonus_final:steam:supcon": {
+      "pending": 12
+    },
+    "bonus_tuning:nsmc:db_cdsupcon": {
+      "pending": 8
+    },
+    "bonus_tuning:nsmc:supcon": {
+      "pending": 4
+    },
+    "bonus_tuning:shopping:db_cdsupcon": {
+      "pending": 8
+    },
+    "bonus_tuning:shopping:supcon": {
+      "pending": 4
+    },
+    "bonus_tuning:steam:db_cdsupcon": {
+      "pending": 8
+    },
+    "bonus_tuning:steam:supcon": {
+      "pending": 4
+    },
+    "part1_final:nsmc:avg_mlp": {
+      "pending": 30
+    },
+    "part1_final:nsmc:gru": {
+      "pending": 30
+    },
+    "part1_final:nsmc:lstm": {
+      "pending": 30
+    },
+    "part1_final:nsmc:mamba": {
+      "pending": 30
+    },
+    "part1_final:nsmc:tfidf_lr": {
+      "pending": 30
+    },
+    "part1_final:nsmc:tfidf_rf": {
+      "pending": 30
+    },
+    "part1_final:nsmc:tfidf_svm": {
+      "pending": 30
+    },
+    "part1_final:nsmc:tfidf_xgb": {
+      "pending": 30
+    },
+    "part1_final:nsmc:transformer": {
+      "pending": 30
+    },
+    "part1_final:shopping:avg_mlp": {
+      "pending": 33
+    },
+    "part1_final:shopping:gru": {
+      "pending": 33
+    },
+    "part1_final:shopping:lstm": {
+      "pending": 33
+    },
+    "part1_final:shopping:mamba": {
+      "pending": 33
+    },
+    "part1_final:shopping:tfidf_lr": {
+      "pending": 33
+    },
+    "part1_final:shopping:tfidf_rf": {
+      "pending": 33
+    },
+    "part1_final:shopping:tfidf_svm": {
+      "pending": 33
+    },
+    "part1_final:shopping:tfidf_xgb": {
+      "pending": 33
+    },
+    "part1_final:shopping:transformer": {
+      "pending": 33
+    },
+    "part1_final:steam:avg_mlp": {
+      "pending": 30
+    },
+    "part1_final:steam:gru": {
+      "pending": 30
+    },
+    "part1_final:steam:lstm": {
+      "pending": 30
+    },
+    "part1_final:steam:mamba": {
+      "pending": 30
+    },
+    "part1_final:steam:tfidf_lr": {
+      "pending": 30
+    },
+    "part1_final:steam:tfidf_rf": {
+      "pending": 30
+    },
+    "part1_final:steam:tfidf_svm": {
+      "pending": 30
+    },
+    "part1_final:steam:tfidf_xgb": {
+      "pending": 30
+    },
+    "part1_final:steam:transformer": {
+      "pending": 30
+    },
+    "part1_tuning:nsmc:avg_mlp": {
+      "pending": 10
+    },
+    "part1_tuning:nsmc:gru": {
+      "pending": 10
+    },
+    "part1_tuning:nsmc:lstm": {
+      "pending": 10
+    },
+    "part1_tuning:nsmc:mamba": {
+      "pending": 10
+    },
+    "part1_tuning:nsmc:tfidf_lr": {
+      "pending": 10
+    },
+    "part1_tuning:nsmc:tfidf_rf": {
+      "pending": 10
+    },
+    "part1_tuning:nsmc:tfidf_svm": {
+      "pending": 10
+    },
+    "part1_tuning:nsmc:tfidf_xgb": {
+      "pending": 10
+    },
+    "part1_tuning:nsmc:transformer": {
+      "pending": 10
+    },
+    "part1_tuning:shopping:avg_mlp": {
+      "pending": 10
+    },
+    "part1_tuning:shopping:gru": {
+      "pending": 10
+    },
+    "part1_tuning:shopping:lstm": {
+      "pending": 10
+    },
+    "part1_tuning:shopping:mamba": {
+      "pending": 10
+    },
+    "part1_tuning:shopping:tfidf_lr": {
+      "pending": 10
+    },
+    "part1_tuning:shopping:tfidf_rf": {
+      "pending": 10
+    },
+    "part1_tuning:shopping:tfidf_svm": {
+      "pending": 10
+    },
+    "part1_tuning:shopping:tfidf_xgb": {
+      "pending": 10
+    },
+    "part1_tuning:shopping:transformer": {
+      "pending": 10
+    },
+    "part1_tuning:steam:avg_mlp": {
+      "pending": 10
+    },
+    "part1_tuning:steam:gru": {
+      "pending": 10
+    },
+    "part1_tuning:steam:lstm": {
+      "pending": 10
+    },
+    "part1_tuning:steam:mamba": {
+      "pending": 10
+    },
+    "part1_tuning:steam:tfidf_lr": {
+      "pending": 10
+    },
+    "part1_tuning:steam:tfidf_rf": {
+      "pending": 10
+    },
+    "part1_tuning:steam:tfidf_svm": {
+      "pending": 10
+    },
+    "part1_tuning:steam:tfidf_xgb": {
+      "pending": 10
+    },
+    "part1_tuning:steam:transformer": {
+      "pending": 10
+    }
+  }
+}

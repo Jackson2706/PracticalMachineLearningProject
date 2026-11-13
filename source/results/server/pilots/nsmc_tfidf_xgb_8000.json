@@ -1,0 +1,41 @@
+{
+  "cpu_process_sec": 3.200180305,
+  "dataset": "nsmc",
+  "device": "cpu",
+  "duration_sec": 1.5337241090019234,
+  "id": "nsmc_tfidf_xgb_8000",
+  "latency": {
+    "classifier": {
+      "mean": 0.30195412,
+      "median": 0.2964995,
+      "p95": 0.32226604999999997,
+      "std": 0.016932974186054855,
+      "timed_repeat_count": 50,
+      "warmup_count": 10
+    },
+    "end_to_end": {
+      "mean": 0.6979748600000001,
+      "median": 0.6840280000000001,
+      "p95": 0.7988417499999999,
+      "std": 0.03890038692147419,
+      "timed_repeat_count": 50,
+      "warmup_count": 10
+    },
+    "throughput_batch_size": 128,
+    "throughput_samples_per_sec": 50045.295305015796
+  },
+  "model": "tfidf_xgb",
+  "note": "Non-scientific pilot: two neural epochs, config candidate 1, seed777; no test evaluation, no selected configuration.",
+  "objective": "ce",
+  "peak_host_ram_mb": 698.44921875,
+  "production_result": false,
+  "serialized_size_mb": 0.549468994140625,
+  "size": 8000,
+  "training": {
+    "best_epoch": null,
+    "feature_count": 10000,
+    "history": []
+  },
+  "validation_evaluation_sec": 0.1435171510092914,
+  "validation_macro_f1": 0.6611303394925598
+}

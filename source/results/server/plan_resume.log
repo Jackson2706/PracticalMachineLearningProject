@@ -1,0 +1,52 @@
+{
+  "dataset_full_sizes": {
+    "nsmc": 130797,
+    "shopping": 159918,
+    "steam": 79828
+  },
+  "dataset_schedules": {
+    "nsmc": [
+      200,
+      500,
+      1000,
+      2000,
+      4000,
+      8000,
+      16000,
+      32000,
+      64000,
+      130797
+    ],
+    "shopping": [
+      200,
+      500,
+      1000,
+      2000,
+      4000,
+      8000,
+      16000,
+      32000,
+      64000,
+      128000,
+      159918
+    ],
+    "steam": [
+      200,
+      500,
+      1000,
+      2000,
+      4000,
+      8000,
+      16000,
+      32000,
+      64000,
+      79828
+    ]
+  },
+  "tuning_jobs": 270,
+  "final_jobs": 837,
+  "total_jobs": 1107,
+  "expected_tuning_jobs": 270,
+  "expected_final_jobs": 837,
+  "difference_explanation": "matches the expected cleaned-pool schedules"
+}

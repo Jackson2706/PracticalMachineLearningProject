@@ -1,0 +1,163 @@
+{
+  "latency": {
+    "classifier": {
+      "mean": 0.56423766,
+      "median": 0.559771,
+      "p95": 0.5946355,
+      "std": 0.014211081692271003,
+      "timed_repeat_count": 50,
+      "warmup_count": 10
+    },
+    "end_to_end": {
+      "mean": 0.6310699799999999,
+      "median": 0.624816,
+      "p95": 0.668805,
+      "std": 0.016285439426051724,
+      "timed_repeat_count": 50,
+      "warmup_count": 10
+    },
+    "throughput_batch_size": 128,
+    "throughput_samples_per_sec": 84883.90234355067
+  },
+  "test": {
+    "accuracy": 0.5516584828139092,
+    "confusion_matrix": [
+      [
+        1812,
+        3178
+      ],
+      [
+        1296,
+        3693
+      ]
+    ],
+    "f1_negative": 0.4475179056557175,
+    "f1_positive": 0.6227655986509275,
+    "fn": 1296,
+    "fp": 3178,
+    "macro_f1": 0.5351417521533225,
+    "macro_precision": 0.5602439664439374,
+    "macro_recall": 0.5516773776054815,
+    "precision_negative": 0.583011583011583,
+    "precision_positive": 0.5374763498762917,
+    "recall_negative": 0.36312625250501,
+    "recall_positive": 0.7402285027059531,
+    "tn": 1812,
+    "tp": 3693
+  },
+  "training": {
+    "batch_sampler": "shuffle",
+    "best_epoch": 11,
+    "fit_time_sec": 0.5953186900005676,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.70181640625,
+        "validation_macro_f1": 0.3408864040951997
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.65369140625,
+        "validation_macro_f1": 0.3434161255695515
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.618818359375,
+        "validation_macro_f1": 0.34406998174130493
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.56668701171875,
+        "validation_macro_f1": 0.4025636514370393
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.48137451171875,
+        "validation_macro_f1": 0.5085142443447642
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.37319366455078123,
+        "validation_macro_f1": 0.45647792551260147
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.24696703910827636,
+        "validation_macro_f1": 0.4698355222472598
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.14639466762542724,
+        "validation_macro_f1": 0.5380549629731595
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.08705880403518677,
+        "validation_macro_f1": 0.5060742906473655
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.04380203247070313,
+        "validation_macro_f1": 0.5133152317530786
+      },
+      {
+        "epoch": 11,
+        "train_loss": 0.016130619645118714,
+        "validation_macro_f1": 0.5401197208079026
+      },
+      {
+        "epoch": 12,
+        "train_loss": 0.00652450680732727,
+        "validation_macro_f1": 0.5364635057251858
+      },
+      {
+        "epoch": 13,
+        "train_loss": 0.007229395508766175,
+        "validation_macro_f1": 0.508358194843985
+      },
+      {
+        "epoch": 14,
+        "train_loss": 0.0023366808891296387,
+        "validation_macro_f1": 0.4826263770114969
+      },
+      {
+        "epoch": 15,
+        "train_loss": 0.0022178202867507934,
+        "validation_macro_f1": 0.47279004736346075
+      }
+    ],
+    "optimizer_steps": 60,
+    "peak_gpu_memory_mb": 101.5634765625,
+    "peak_gpu_reserved_mb": 494.0,
+    "physical_batch_size": 64,
+    "precision": "bf16",
+    "sampler": null,
+    "validation_macro_f1": 0.5401197208079026
+  },
+  "validation": {
+    "accuracy": 0.555266058723319,
+    "confusion_matrix": [
+      [
+        1865,
+        3125
+      ],
+      [
+        1313,
+        3676
+      ]
+    ],
+    "f1_negative": 0.4566601371204701,
+    "f1_positive": 0.623579304495335,
+    "fn": 1313,
+    "fp": 3125,
+    "macro_f1": 0.5401197208079026,
+    "macro_precision": 0.5636779111723196,
+    "macro_recall": 0.555284250601825,
+    "precision_negative": 0.5868470736312146,
+    "precision_positive": 0.5405087487134245,
+    "recall_negative": 0.37374749498997994,
+    "recall_positive": 0.7368210062136701,
+    "tn": 1865,
+    "tp": 3676
+  }
+}

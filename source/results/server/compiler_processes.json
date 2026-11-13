@@ -1,0 +1,32 @@
+{
+  "utc": "2026-11-12T00:36:38.914070+00:00",
+  "compiler_processes": [
+    {
+      "pid": 1367131,
+      "name": "nvcc",
+      "status": "sleeping",
+      "cpu_seconds": 0.02,
+      "rss_bytes": 4268032,
+      "started_at": "2026-11-12T00:28:59.920000+00:00",
+      "source_files": [
+        "causal_conv1d_bwd.o.d",
+        "causal_conv1d_bwd.cu",
+        "causal_conv1d_bwd.o",
+        "-DTORCH_EXTENSION_NAME=causal_conv1d_cuda"
+      ]
+    },
+    {
+      "pid": 1368698,
+      "name": "ptxas",
+      "status": "running",
+      "cpu_seconds": 64.93,
+      "rss_bytes": 2067496960,
+      "started_at": "2026-11-12T00:35:33.900000+00:00",
+      "source_files": [
+        "tmpxft_0014dc5b_00000000-8_causal_conv1d_bwd.compute_80.ptx",
+        "tmpxft_0014dc5b_00000000-24_causal_conv1d_bwd.compute_80.cubin"
+      ]
+    }
+  ],
+  "ram_available": 25321496576
+}

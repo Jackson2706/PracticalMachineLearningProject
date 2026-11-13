@@ -1,0 +1,42 @@
+[
+  {
+    "dataset": "nsmc",
+    "source": "test",
+    "file": "/home/dung/PracticalMachineLearningProject/source/data/raw/nsmc/ratings_test.txt",
+    "source_url": "https://raw.githubusercontent.com/e9t/nsmc/master/ratings_test.txt",
+    "retrieved_at": "2026-11-12T00:28:39.841753+00:00",
+    "byte_size": 4893335,
+    "row_count": 50000,
+    "sha256": "8ac9f64052f11dbf6ae0acb5e038f03d90a76f0eda7820cfb3a92d02edfcebda"
+  },
+  {
+    "dataset": "nsmc",
+    "source": "train",
+    "file": "/home/dung/PracticalMachineLearningProject/source/data/raw/nsmc/ratings_train.txt",
+    "source_url": "https://raw.githubusercontent.com/e9t/nsmc/master/ratings_train.txt",
+    "retrieved_at": "2026-11-12T00:28:24.721721+00:00",
+    "byte_size": 14628807,
+    "row_count": 150000,
+    "sha256": "e03b7d14e9e41be8d464a28057cd25d7396c53e67aa7fd5f7e552c59b0ee2940"
+  },
+  {
+    "dataset": "shopping",
+    "source": "all",
+    "file": "/home/dung/PracticalMachineLearningProject/source/data/raw/shopping/naver_shopping.txt",
+    "source_url": "https://raw.githubusercontent.com/bab2min/corpus/master/sentiment/naver_shopping.txt",
+    "retrieved_at": "2026-11-12T00:29:37.957898+00:00",
+    "byte_size": 20623547,
+    "row_count": 200000,
+    "sha256": "dc4d1aca0a148671cbe80bcb81962eee297370acab42be93c1617ce9336479c0"
+  },
+  {
+    "dataset": "steam",
+    "source": "all",
+    "file": "/home/dung/PracticalMachineLearningProject/source/data/raw/steam/steam.txt",
+    "source_url": "https://raw.githubusercontent.com/bab2min/corpus/master/sentiment/steam.txt",
+    "retrieved_at": "2026-11-12T00:30:10.565994+00:00",
+    "byte_size": 11631607,
+    "row_count": 100000,
+    "sha256": "5c5438a1c8c819127e57735101331a9ba67a40c0ccb85ca25cbd12f19ae15fe8"
+  }
+]

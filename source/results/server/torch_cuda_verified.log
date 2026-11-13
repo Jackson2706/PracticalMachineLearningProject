@@ -1,0 +1,7 @@
+executable: /home/dung/miniconda3/envs/ML/bin/python
+torch: 2.5.1+cu121
+CUDA build: 12.1
+CUDA available: True
+GPU count: 1
+GPU: NVIDIA GeForce RTX 4070
+CUDA forward/backward finite: True

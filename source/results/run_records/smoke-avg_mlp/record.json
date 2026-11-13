@@ -1,0 +1,8 @@
+{
+  "error_message": null,
+  "error_type": null,
+  "model": "avg_mlp",
+  "phase": "smoke",
+  "run_id": "smoke-avg_mlp",
+  "status": "completed"
+}

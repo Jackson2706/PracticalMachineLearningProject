@@ -1,0 +1,11 @@
+{
+  "allocated_study_bytes": 20445675520,
+  "disk_free_bytes": 207870373888,
+  "first_sample_at": "2026-11-12T01:22:53.965219+00:00",
+  "interval_seconds": 300,
+  "minimum_sampled_disk_free_bytes": 207870373888,
+  "peak_sampled_study_bytes": 20445675520,
+  "scan_wall_seconds": 0.12122327298857272,
+  "scope": "Allocated file blocks under source/data, source/results and source/checkpoints; archives and installed environment excluded; hard links deduplicated. Discrete samples can miss brief temporary peaks. Filesystem free space includes unrelated filesystem use.",
+  "utc": "2026-11-12T17:09:18.239749+00:00"
+}

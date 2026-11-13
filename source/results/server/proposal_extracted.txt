@@ -1,0 +1,127 @@
+Training Data Thresholds for Cost Effective Korean Sentiment Analysis
+Topic proposal  •  Movie reviews, product reviews, and game reviews
+This project identifies when neural sequence models provide enough improvement over TF-IDF baselines to justify their additional computational cost on Korean review classification.
+1 Research question
+For each Korean review dataset, what is the minimum training size among 500, 1,000, 2,000, 4,000, and 8,000 reviews at which the best neural sequence model exceeds the best TF-IDF baseline by at least 1 macro-F1 point? At that threshold, does the neural model remain competitive in training time, inference latency, and memory use?
+2 Why this question is interesting
+A small team must decide whether to label more reviews or use a more complex model. Prior work shows that the preferred text classifier can change with data scale and efficiency requirements [1-4]. By estimating a clear crossover threshold on three Korean review domains, this project turns model comparison into a practical data-collection and deployment decision.
+3 Data source and how you will obtain it
+Dataset and source
+Labels and acquisition
+Planned subset
+Naver Sentiment Movie CorpusNSMC [5, 6]
+Download ratings_train.txt and ratings_test.txt. Use the supplied binary labels: 0 negative, 1 positive.
+8,000 train pool2,000 validation2,000 test
+Naver Shopping Reviewsbab2min/corpus [6]
+Download naver_shopping.txt. Map ratings 1–2 to negative and 4–5 to positive; exclude 3 if present.
+8,000 train pool2,000 validation2,000 test
+Korean Steam Reviewsbab2min/corpus [7]
+Download steam.txt. Use the supplied binary labels: 0 negative, 1 positive.
+8,000 train pool2,000 validation2,000 test
+All three datasets are public. We will select 12,000 cleaned reviews from each: 8,000 for the training pool, 2,000 for validation, and 2,000 for testing. Equal sample sizes make learning curves easier to compare, although rating-based labels are imperfect sentiment proxies.
+Remove empty texts and conflicting duplicates, and prevent overlap across splits. Use the official NSMC test file; create stratified splits for Shopping and Steam. Preserve sentiment cues, but exclude ratings, recommendation flags, and IDs from model inputs.
+4 Techniques to use
+The primary comparison is between two method families: TF-IDF classifiers and neural sequence classifiers. Four ML and five neural implementations provide candidates for finding the best pipeline within each family.
+Method
+Role and reason for inclusion
+TF-IDF + Logistic Regression
+ML: a linear classifier that tests whether weighted lexical cues are sufficient.
+TF-IDF + linear SVM
+ML: a margin-based linear comparator using the same features as Logistic Regression.
+TF-IDF + Random Forest [8]
+ML: an ensemble of randomized decision trees that tests nonlinear combinations of lexical features.
+TF-IDF + XGBoost [9]
+ML: boosted decision trees that complement Random Forest with a different ensemble strategy.
+Average embeddings + MLP
+Neural: a simple baseline inspired by deep averaging networks [2], with embeddings learned from scratch.
+Embeddings + LSTM
+DL: a gated recurrent backbone that models token order and sequential context.
+Embeddings + GRU
+DL: a second gated recurrent design for comparison with LSTM.
+Small Transformer encoder
+DL: self-attention with positional information for contextual token interactions.
+Small Mamba classifier
+DL: a selective state space backbone offering another approach to sequence modeling.
+All methods use the same cleaned reviews and split IDs. Fit tokenization, vocabulary, TF-IDF, and other data-dependent transformations only on the current training subset. The four ML methods share token unigram/bigram TF-IDF features with L2 normalization and at most 10,000 features.
+The neural methods share a training-only vocabulary, embedding size, and sequence limit, with embeddings learned from scratch. Match their non-embedding parameter budgets approximately and report actual counts. ML-versus-DL results compare complete pipelines because their representations differ.
+Fairness comes from identical data, validation rules, and tuning opportunities. Report computational cost separately, and pilot Random Forest, XGBoost, and Mamba before freezing versions and resource limits.
+Experimental protocol
+Use nested, stratified training subsets of 500, 1,000, 2,000, 4,000, and 8,000 reviews. Each method receives identical review IDs for every dataset, size, and seed; validation and test sets stay fixed.
+At 2,000 reviews, evaluate 10 predefined configurations per method and dataset using one tuning seed and validation macro-F1. Search regularization for linear models; tree structure and sampling for Random Forest; depth, learning rate, and rounds for XGBoost; and learning rate, dropout, and width for neural methods.
+Freeze the selected configuration across training sizes within each dataset. Use fixed neural training rules and validation-based checkpoint selection. Freeze XGBoost rounds after tuning. Report tuning time because equal trial counts can require different computation.
+Repeat every final condition with three predefined seeds. This gives 3 datasets × 9 methods × 5 sizes × 3 seeds = 405 final fits, plus 270 tuning fits. Report mean ± standard deviation; three seeds measure variability but do not establish statistical significance.
+Evaluate frozen pipelines once on untouched test sets. Compare rankings within each domain and then their consistency across domains. Pretrained models and cross-domain transfer are outside the study.
+Use one machine with fixed CPU thread limits and documented CPU/GPU assignments. Report end-to-end and classifier-only time, peak host RAM, GPU memory when applicable, serialized size, neural parameter counts, and tree/node counts.
+5 Expected output
+The Week 13 submission will include presentation slides, documented source code, five result tables, four figures, and an interactive demo comparing nine methods across three datasets.
+Evaluation metrics
+Macro-F1 is the primary metric; accuracy, macro-precision, and macro-recall are secondary. Report mean ± standard deviation and confusion matrices. The macro-F1 gain between adjacent data sizes will measure the value of additional labels.
+Report fit and tuning time, serialized size, peak host/GPU memory, and batch-1 inference latency after warm-up. Measure both classifier-only and end-to-end latency, and document hardware, thread count, precision, and device.
+Conclusions supported by the experiments
+The primary conclusion will be the crossover threshold for each dataset: the smallest tested training size where the best neural model exceeds the best TF-IDF model by at least 1 macro-F1 point. If no tested size reaches that margin, the result will be reported as no observed crossover up to 8,000 reviews. At each crossover, cost measurements will determine whether the neural model is Pareto-efficient. Secondary analyses will describe saturation, cross-domain consistency, and difficult classes. Conclusions will be limited to the tested datasets, model families, and protocol.
+Planned tables
+No
+Table title
+Contents and purpose
+1
+Dataset Statistics and Data Splits
+Counts after cleaning, class balance, token lengths, and split sizes for all three datasets; documents the evaluation data.
+2
+Baseline and Backbone Configurations
+All nine methods, representations, linear/tree/neural settings, model sizes, and tuning spaces; supports reproducibility.
+3
+Sentiment Performance Across Training Data Sizes
+Macro-F1 mean ± std for every method at all five budgets, grouped by dataset; directly answers the main question.
+4
+Predictive Quality and Computational Cost at 8000 Reviews
+Predictive metrics, fit time, latency, storage, and host/GPU memory. Use separate quality and cost panels; report tuning cost alongside them.
+5
+Crossover Threshold and Cost by Dataset
+Minimum size where the best neural model exceeds the best TF-IDF baseline by at least 1 macro-F1 point, or no crossover; includes fit time, latency, and memory at that size.
+Planned figures
+No
+Figure title
+Purpose and layout
+1
+Experimental Pipeline
+Show cleaning, fixed splits, nested training subsets, model fitting, and final evaluation; make the protocol clear.
+2
+Learning Curves by Dataset
+Three panels, one per dataset: training size versus test macro-F1, with nine lines and ±1 std bands. Reveal data efficiency and diminishing gains.
+3
+Predictive Quality Versus Inference Cost
+Three dataset panels at 8,000 training reviews: end-to-end latency versus macro-F1. Label methods and devices to show measured practical trade-offs.
+4
+Confusion Matrices by Dataset and Method
+One panel per dataset, each with nine method matrices at 8,000 reviews. Sum counts across three runs, then row-normalize to compare class-specific errors.
+6 Project plan
+Period
+Main tasks
+Output
+Weeks 7-8
+Download and clean the datasets, verify labels and split integrity, and pilot all nine pipelines.
+Fixed datasets and pilot results
+Weeks 9-10
+Implement the complete pipelines, define search spaces, tune at 2,000 reviews, and freeze configurations.
+Frozen models and settings
+Weeks 11-12
+Run the full training-size sweep, collect predictive and cost metrics, and generate tables and figures.
+Complete experimental results
+Week 13
+Interpret results and limitations, finalize slides and source code, and prepare the interactive demo.
+Final submission
+References
+[1] Xiang Zhang, Junbo Zhao, and Yann LeCun. 2015. Character-level Convolutional Networks for Text Classification. Advances in Neural Information Processing Systems 28 (NeurIPS, then NIPS), pp. 649–657.https://papers.nips.cc/paper_files/paper/2015/hash/250cf8b51c773f3f8dc8b4be867a9a02-Abstract.html
+[2] Mohit Iyyer, Varun Manjunatha, Jordan Boyd-Graber, and Hal Daumé III. 2015. Deep Unordered Composition Rivals Syntactic Methods for Text Classification. ACL-IJCNLP, Long Papers, pp. 1681–1691.https://aclanthology.org/P15-1162/
+[3] Armand Joulin, Edouard Grave, Piotr Bojanowski, and Tomas Mikolov. 2017. Bag of Tricks for Efficient Text Classification. EACL, Short Papers, pp. 427–431.https://aclanthology.org/E17-2068/
+[4] Prasanth Kolachina, Nicola Cancedda, Marc Dymetman, and Sriram Venkatapathy. 2012. Prediction of Learning Curves in Machine Translation. ACL, Long Papers, pp. 22–30.https://aclanthology.org/P12-1003/
+[5] Dongjun Jang, Jinwoong Kim, and Hyopil Shin. 2024. Enhancing Self-Attention via Knowledge Fusion: Deriving Sentiment Lexical Attention from Semantic-Polarity Scores. *SEM 2024, pp. 334–344.https://aclanthology.org/2024.starsem-1.27/
+[6] Janghoon Han, Changho Lee, Joongbo Shin, Stanley Jungkyu Choi, Honglak Lee, and Kyunghoon Bae. 2024. Deep Exploration of Cross-Lingual Zero-Shot Generalization in Instruction Tuning. Findings of ACL, pp. 15436–15452.https://aclanthology.org/2024.findings-acl.912/
+[7] San-Hee Park, Kang-Min Kim, O-Joun Lee, Youjin Kang, Jaewon Lee, Su-Min Lee, and SangKeun Lee. 2023. “Why do I feel offended?” - Korean Dataset for Offensive Language Identification. Findings of EACL, pp. 1142–1153.https://aclanthology.org/2023.findings-eacl.85/
+[8] Leo Breiman. 2001. Random Forests. Machine Learning 45, pp. 5–32.https://doi.org/10.1023/A:1010933404324
+[9] Tianqi Chen and Carlos Guestrin. 2016. XGBoost: A Scalable Tree Boosting System. ACM SIGKDD, pp. 785–794.https://doi.org/10.1145/2939672.2939785
+Original dataset sources
+NSMC: https://github.com/e9t/nsmc
+Naver Shopping: https://github.com/bab2min/corpus/blob/master/sentiment/naver_shopping.txt
+Korean Steam: https://github.com/bab2min/corpus/blob/master/sentiment/steam.txt
+Official source mapping for [6]: https://github.com/CHLee0801/KORANI-Instruction-Tuning

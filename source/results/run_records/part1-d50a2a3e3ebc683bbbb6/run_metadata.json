@@ -1,0 +1,17 @@
+{
+  "artifact_directory": "/home/dung/PracticalMachineLearningProject/source/results/run_records/part1-d50a2a3e3ebc683bbbb6",
+  "best_epoch": null,
+  "config_hash": "d8157241be3de51493ccf1a3860084db4fda852bcc2c44e8621278c273c7f317",
+  "cpu_threads": 4,
+  "data_manifest_hash": "7dc24428211cfe790a5c99d88b05317714d909883bb775e33826535f144344e7",
+  "device": "cpu",
+  "duration_sec": 4.610861042048782,
+  "exact_command": "/home/dung/PracticalMachineLearningProject/source/src/korean_sentiment/cli.py tune --fail-fast",
+  "finished_at": "2026-11-12T01:22:11.572171+00:00",
+  "fit_time_sec": 4.250083493941929,
+  "hardware_id": "8b5663550ab8bee2",
+  "precision": "fp32_features",
+  "run_id": "part1-d50a2a3e3ebc683bbbb6",
+  "serialized_size_mb": 0.9549989700317383,
+  "started_at": "2026-11-12T01:22:06.961320+00:00"
+}

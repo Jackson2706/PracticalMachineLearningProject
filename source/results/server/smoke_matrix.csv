@@ -1,0 +1,13 @@
+pipeline,status,fit,prediction,metrics,serialization,reload,resumption,run_record,peak_allocated_mib,peak_reserved_mib,memory_measurement,effective_batch_size,finite_validation_macro_f1,optimizer_steps,physical_batch_size,precision
+tfidf_lr,passed,True,True,True,True,True,True,True,,,CPU pipeline; GPU not applicable,,,,,
+tfidf_svm,passed,True,True,True,True,True,True,True,,,CPU pipeline; GPU not applicable,,,,,
+tfidf_rf,passed,True,True,True,True,True,True,True,,,CPU pipeline; GPU not applicable,,,,,
+tfidf_xgb,passed,True,True,True,True,True,True,True,,,CPU pipeline; GPU not applicable,,,,,
+avg_mlp,passed,True,True,True,True,True,True,True,128.09814453125,152.0,,64,0.7482517482517483,3,64,bf16
+lstm,passed,True,True,True,True,True,True,True,220.61474609375,246.0,,64,0.3333333333333333,3,64,bf16
+gru,passed,True,True,True,True,True,True,True,234.14208984375,260.0,,64,0.916083916083916,3,64,bf16
+transformer,passed,True,True,True,True,True,True,True,507.7041015625,568.0,,64,0.3333333333333333,3,64,bf16
+mamba,passed,True,True,True,True,True,True,True,236.22412109375,242.0,,64,0.625,3,64,bf16
+pooled_ce,passed,True,True,True,True,True,True,True,407.7021484375,460.0,,48,0.4857142857142857,8,48,bf16
+supcon,passed,True,True,True,True,True,True,True,408.15625,460.0,,48,0.5804195804195804,8,48,bf16
+db_cdsupcon,passed,True,True,True,True,True,True,True,408.15625,460.0,,48,0.6666666666666666,8,48,bf16

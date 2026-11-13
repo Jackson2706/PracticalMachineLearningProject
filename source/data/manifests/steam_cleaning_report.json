@@ -1,0 +1,36 @@
+{
+  "dataset": "steam",
+  "n_full": 79828,
+  "schedule": [
+    200,
+    500,
+    1000,
+    2000,
+    4000,
+    8000,
+    16000,
+    32000,
+    64000,
+    79828
+  ],
+  "sources": {
+    "all": {
+      "clean_rows": 99786,
+      "conflicting_keys_removed": 107,
+      "conflicting_occurrences_removed": 214,
+      "duplicate_pairs_removed": 0,
+      "empty_removed": 0,
+      "malformed_rows": 0,
+      "negative_rows": 49897,
+      "neutral_rating_rows": 0,
+      "parsed_rows": 100000,
+      "positive_rows": 49889,
+      "raw_rows": 100000
+    }
+  },
+  "splits": {
+    "test_rows": 9979,
+    "train_rows": 79828,
+    "validation_rows": 9979
+  }
+}

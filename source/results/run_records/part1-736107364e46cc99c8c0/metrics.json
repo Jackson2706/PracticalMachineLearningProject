@@ -1,0 +1,157 @@
+{
+  "latency": {
+    "classifier": {
+      "mean": 1.84094406,
+      "median": 1.8279915,
+      "p95": 1.9322583,
+      "std": 0.04847858206771728,
+      "timed_repeat_count": 50,
+      "warmup_count": 10
+    },
+    "end_to_end": {
+      "mean": 1.96921758,
+      "median": 1.89446,
+      "p95": 2.4005274499999985,
+      "std": 0.2686708362810589,
+      "timed_repeat_count": 50,
+      "warmup_count": 10
+    },
+    "throughput_batch_size": 128,
+    "throughput_samples_per_sec": 32400.207723830208
+  },
+  "training": {
+    "batch_sampler": "shuffle",
+    "best_epoch": 15,
+    "fit_time_sec": 24.8161294599995,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.7045980529785156,
+        "validation_macro_f1": 0.5534722737956572
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.6876975708007812,
+        "validation_macro_f1": 0.5304476690271233
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.6701844482421875,
+        "validation_macro_f1": 0.5967515613027135
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.6422549133300781,
+        "validation_macro_f1": 0.6471292426194682
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.6010257873535156,
+        "validation_macro_f1": 0.6322138204846479
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.5553807678222656,
+        "validation_macro_f1": 0.6683985563295312
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.5182012329101563,
+        "validation_macro_f1": 0.6732429021313668
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.47515221405029295,
+        "validation_macro_f1": 0.6601118724139754
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.44623555755615235,
+        "validation_macro_f1": 0.6868917744738366
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.41828039169311526,
+        "validation_macro_f1": 0.6889774514554923
+      },
+      {
+        "epoch": 11,
+        "train_loss": 0.399836669921875,
+        "validation_macro_f1": 0.6871073068475684
+      },
+      {
+        "epoch": 12,
+        "train_loss": 0.3659144706726074,
+        "validation_macro_f1": 0.6893679912864179
+      },
+      {
+        "epoch": 13,
+        "train_loss": 0.34636582946777345,
+        "validation_macro_f1": 0.6953529111438626
+      },
+      {
+        "epoch": 14,
+        "train_loss": 0.3332547731399536,
+        "validation_macro_f1": 0.6933978138935146
+      },
+      {
+        "epoch": 15,
+        "train_loss": 0.3099139051437378,
+        "validation_macro_f1": 0.6981168640132042
+      },
+      {
+        "epoch": 16,
+        "train_loss": 0.29333531999588014,
+        "validation_macro_f1": 0.6919573627395028
+      },
+      {
+        "epoch": 17,
+        "train_loss": 0.2801917390823364,
+        "validation_macro_f1": 0.6955361309987498
+      },
+      {
+        "epoch": 18,
+        "train_loss": 0.2736504831314087,
+        "validation_macro_f1": 0.6932677938574435
+      },
+      {
+        "epoch": 19,
+        "train_loss": 0.24497860217094422,
+        "validation_macro_f1": 0.6962271207045041
+      }
+    ],
+    "optimizer_steps": 2375,
+    "peak_gpu_memory_mb": 334.63818359375,
+    "peak_gpu_reserved_mb": 960.0,
+    "physical_batch_size": 64,
+    "precision": "bf16",
+    "sampler": null,
+    "validation_macro_f1": 0.6981168640132042
+  },
+  "validation": {
+    "accuracy": 0.6983665697965729,
+    "confusion_matrix": [
+      [
+        3628,
+        1362
+      ],
+      [
+        1648,
+        3341
+      ]
+    ],
+    "f1_negative": 0.7067991428014806,
+    "f1_positive": 0.6894345852249277,
+    "fn": 1648,
+    "fp": 1362,
+    "macro_f1": 0.6981168640132042,
+    "macro_precision": 0.6990198858438398,
+    "macro_recall": 0.698363694717557,
+    "precision_negative": 0.6876421531463229,
+    "precision_positive": 0.7103976185413566,
+    "recall_negative": 0.7270541082164329,
+    "recall_positive": 0.6696732812186811,
+    "tn": 3628,
+    "tp": 3341
+  }
+}
