@@ -32,6 +32,7 @@ package-dir = {"" = "source/src"}
 
 [tool.setuptools.packages.find]
 where = ["source/src"]
+include = ["korean_sentiment*"]
 
 [tool.pytest.ini_options]
 testpaths = ["source/tests"]
