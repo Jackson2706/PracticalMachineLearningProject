@@ -1,22 +1,22 @@
-"""Pytest setup for the legacy and current benchmark suites."""
+"""Pytest setup for the benchmark suite."""
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-import ksent  # noqa: E402,F401  (imports xgboost before torch)
+import xgboost  # noqa: E402,F401  (import before torch to avoid an OpenMP clash)
 import pytest  # noqa: E402
 
 
 def pytest_collection_modifyitems(config, items):
-    from ksent.hardware import cuda_available, mps_available
+    import torch
 
     skip_cuda = pytest.mark.skip(reason="no CUDA device")
     skip_mps = pytest.mark.skip(reason="no Apple MPS device")
     for item in items:
-        if "cuda" in item.keywords and not cuda_available():
+        if "cuda" in item.keywords and not torch.cuda.is_available():
             item.add_marker(skip_cuda)
-        if "mps" in item.keywords and not mps_available():
+        if "mps" in item.keywords and not torch.backends.mps.is_available():
             item.add_marker(skip_mps)
 
 

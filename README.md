@@ -2,8 +2,6 @@
 
 This repository runs two linked experiments with Korean review data. Part 1 measures how nine classifiers change as the labeled training set grows. Part 2 asks whether 2,000 labeled examples from each of two existing domains reduce the number of new labels needed in a third target domain. All representations are learned from scratch.
 
-The new implementation lives under `Source/`. This working copy already had a lowercase `source/` tree. On the case-insensitive Mac filesystem, both names resolve to the same directory, so the prior files remain in place beside the new `korean_sentiment` package. The setup and run scripts detect either spelling for Linux copies and clones. The existing report is not used by the commands below.
-
 ## Study design
 
 The datasets are NSMC movie reviews, Naver Shopping reviews, and Korean Steam reviews. NSMC uses its supplied binary label and official test set. Shopping ratings 1 and 2 map to negative, ratings 4 and 5 map to positive, and rating 3 is excluded if present. Steam uses the published binary recommendation field only as the target.
@@ -58,7 +56,7 @@ conda create -n ML python=3.11 -y
 conda activate ML
 ```
 
-The setup scripts are idempotent, so the explicit `conda create` command is only needed when `ML` does not exist. Noninteractive scripts locate Conda and use `conda run -n ML`; they do not assume activation survives another shell invocation. After setup, they save a from-history Conda export, an explicit package list, a pip freeze, and a hardware manifest under `Source/results/artifacts/`.
+The setup scripts are idempotent, so the explicit `conda create` command is only needed when `ML` does not exist. Noninteractive scripts locate Conda and use `conda run -n ML`; they do not assume activation survives another shell invocation. After setup, they save a from-history Conda export, an explicit package list, a pip freeze, and a hardware manifest under `source/results/artifacts/`.
 
 Supported overrides are `KS_DEVICE`, `KS_DATA_DIR`, `KS_RESULTS_DIR`, `KS_NUM_WORKERS`, `KS_CPU_THREADS`, `KS_MAX_PARALLEL_CPU_JOBS`, `KS_MAX_PARALLEL_GPU_JOBS`, and `KS_PRECISION`. Copy `.env.example` values into your shell or job script. The code does not read or store credentials.
 
@@ -75,7 +73,7 @@ conda activate ML
 ./run_all.sh plan
 ```
 
-The Mac setup supports CPU and MPS. The smoke command records Mamba as `blocked_on_mac` and still verifies the other eight pipelines plus pooled CE, SupCon, and DB-CDSupCon. Do not run a production grid on the Mac. Inspect `Source/results/csv/experiment_plan.csv`, then commit or copy source and configuration files only. Generated data, environments, checkpoints, logs, and results are ignored.
+The Mac setup supports CPU and MPS. The smoke command records Mamba as `blocked_on_mac` and still verifies the other eight pipelines plus pooled CE, SupCon, and DB-CDSupCon. Do not run a production grid on the Mac. Inspect `source/results/csv/experiment_plan.csv`, then commit or copy source and configuration files only. Generated data, environments, checkpoints, logs, and results are ignored.
 
 ### Linux/NVIDIA cloud
 
@@ -164,32 +162,43 @@ One neural process per GPU is enforced by default. Increase concurrency only aft
 
 ## Resumption and failures
 
-Each run owns `Source/results/run_records/<run_id>/`. The run ID includes phase, data role, model, objective, sizes, seed, configuration ID, data-manifest hash, and configuration hash. A lock prevents duplicate execution. A dead local PID or expired remote lock is marked interrupted and recovered. A completed run is skipped only when all required files and the final `SUCCESS` marker validate. Changed data or configuration hashes mark an old run stale. Partial directories are never treated as completed, and normal resumption never deletes datasets, checkpoints, logs, or results.
+Each run owns `source/results/run_records/<run_id>/`. The run ID includes phase, data role, model, objective, sizes, seed, configuration ID, data-manifest hash, and configuration hash. A lock prevents duplicate execution. A dead local PID or expired remote lock is marked interrupted and recovered. A completed run is skipped only when all required files and the final `SUCCESS` marker validate. Changed data or configuration hashes mark an old run stale. Partial directories are never treated as completed, and normal resumption never deletes datasets, checkpoints, logs, or results.
 
 The full grid continues after an individual failure unless `--fail-fast` is supplied. Inspect failures with:
 
 ```bash
 ./run_all.sh status
-find Source/results/run_records -name error.json -print
+find source/results/run_records -name error.json -print
 ```
 
 Resume with the same command. Add filters to narrow the retry. `--force` reruns an otherwise valid completed job without deleting its existing directory.
 
 Run directories contain resolved configuration, metadata, status, a timestamped log, metrics, resources, confusion matrix, optional model and embedding artifacts, and an error traceback when applicable. The success marker appears only after required artifacts pass validation.
 
+## Data
+
+The repository ships the split and subset manifests (`source/data/splits/*.csv`, `source/data/manifests/`), dataset statistics, configurations, and the aggregated result CSVs. Raw downloads, processed review files, checkpoints, model artifacts, and embeddings are not committed. Recreate the data with:
+
+```bash
+./run_all.sh download     # fetch and validate the raw files into source/data/raw/
+./run_all.sh preprocess   # rebuild source/data/processed/ plus the split and subset manifests
+```
+
+Preprocessing is deterministic, so the regenerated manifests match the committed ones.
+
 ## Data and result locations
 
-- `Source/data/raw/`: verified immutable downloads
-- `Source/data/processed/`: model-ready fixed splits
-- `Source/data/splits/`: immutable split manifests
-- `Source/data/manifests/`: download, cleaning, subset, and content-hash manifests
-- `Source/results/plans/`: tuning, final, bonus, and reference plans
-- `Source/results/run_records/`: atomic per-run records and failures
-- `Source/results/artifacts/`: retained models and environment/hardware snapshots
-- `Source/results/embeddings/`: optional deterministic representation samples
-- `Source/results/csv/`: rebuilt master tables
-- `Source/results/archives/`: timestamped result packages
-- `Source/logs/`: shell and run logs
+- `source/data/raw/`: verified immutable downloads
+- `source/data/processed/`: model-ready fixed splits
+- `source/data/splits/`: immutable split manifests
+- `source/data/manifests/`: download, cleaning, subset, and content-hash manifests
+- `source/results/plans/`: tuning, final, bonus, and reference plans
+- `source/results/run_records/`: atomic per-run records and failures
+- `source/results/artifacts/`: retained models and environment/hardware snapshots
+- `source/results/embeddings/`: optional deterministic representation samples
+- `source/results/csv/`: rebuilt master tables
+- `source/results/archives/`: timestamped result packages
+- `source/logs/`: shell and run logs
 
 Parallel workers never append to a shared CSV. Rebuild tables at any time with:
 
@@ -200,28 +209,26 @@ Parallel workers never append to a shared CSV. Rebuild tables at any time with:
 
 The CSV directory includes dataset statistics, plans, tuning trials, frozen selections, run-level metrics, three-seed summaries, crossovers, resources, statuses, bonus label efficiency, and representation diagnostics. A condition with fewer than three completed seeds is marked incomplete. Raw numerical precision is retained.
 
-Monitor storage with portable commands such as `du -sh Source/data Source/results Source/checkpoints`. `archive-results` includes configurations, manifests, CSVs, logs, and small run metadata. It excludes raw data, retained model artifacts, embeddings, and checkpoints.
+Monitor storage with portable commands such as `du -sh source/data source/results source/checkpoints`. `archive-results` includes configurations, manifests, CSVs, logs, and small run metadata. It excludes raw data, retained model artifacts, embeddings, and checkpoints.
 
 Copy code to a cloud host with placeholders:
 
 ```bash
-rsync -av --exclude 'Source/data/raw/' --exclude 'Source/results/' ./ USER@HOST:/PATH/PROJECT/
-scp -r ./Source ./scripts ./run_all.sh USER@HOST:/PATH/PROJECT/
+rsync -av --exclude 'source/data/raw/' --exclude 'source/results/' ./ USER@HOST:/PATH/PROJECT/
+scp -r ./source ./scripts ./run_all.sh USER@HOST:/PATH/PROJECT/
 ```
 
 Copy the result archive back:
 
 ```bash
-rsync -av USER@HOST:/PATH/PROJECT/Source/results/archives/ ./Source/results/archives/
-scp USER@HOST:/PATH/PROJECT/Source/results/archives/korean_sentiment_results_TIMESTAMP.tar.gz ./
+rsync -av USER@HOST:/PATH/PROJECT/source/results/archives/ ./source/results/archives/
+scp USER@HOST:/PATH/PROJECT/source/results/archives/korean_sentiment_results_TIMESTAMP.tar.gz ./
 ```
 
-If a dataset host is temporarily unavailable, download the exact file URL from `Source/configs/datasets.yaml` in a browser or with another trusted machine, copy it to `Source/data/raw/<dataset>/<filename>`, and rerun `./run_all.sh download`. The downloader validates the schema and records the observed SHA-256; the repository does not contain an unverified hard-coded checksum.
+If a dataset host is temporarily unavailable, download the exact file URL from `source/configs/datasets.yaml` in a browser or with another trusted machine, copy it to `source/data/raw/<dataset>/<filename>`, and rerun `./run_all.sh download`. The downloader validates the schema and records the observed SHA-256; the repository does not contain an unverified hard-coded checksum.
 
 ## Interpretation and limitations
 
 The crossover output asks when the best complete neural mean exceeds the best complete TF-IDF mean by at least 0.01 macro-F1. It records the first observed crossover and the first sustained crossover, defined as satisfying the criterion at that size and every larger tested size. A missing or unobserved threshold stays explicit. Three seeds describe variation but do not establish statistical significance.
 
 Ratings and recommendation flags are noisy sentiment labels. The three domains differ in vocabulary, review style, and label mechanism. Learned-from-scratch token representations may need more data than pretrained language models, which are outside this study. TF-IDF and neural timing fields name whether preprocessing is included; they should not be treated as the same measurement without that distinction. Mamba adds Linux/CUDA build constraints. The complete 1,251-job protocol is computationally expensive.
-
-Ponytail was available and used for implementation, dependency choices, tests, and review. It kept the new code on standard library, scikit-learn, PyTorch, and existing project patterns while retaining validation and reproducibility checks. Humanizer was available and applied only to this README, the submission note, and the final handoff. It did not alter source code, commands, configuration, mathematics, CSV values, logs, or error text.

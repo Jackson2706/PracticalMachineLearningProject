@@ -1,1 +1,0 @@
-"""ksent.data subpackage."""

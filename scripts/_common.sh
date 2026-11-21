@@ -3,11 +3,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
-if [ -d "${REPO_ROOT}/Source/src/korean_sentiment" ]; then
-  SOURCE_ROOT="${REPO_ROOT}/Source"
-else
-  SOURCE_ROOT="${REPO_ROOT}/source"
-fi
+SOURCE_ROOT="${REPO_ROOT}/source"
 
 find_conda() {
   if [ -n "${CONDA_EXE:-}" ] && [ -x "${CONDA_EXE}" ]; then
