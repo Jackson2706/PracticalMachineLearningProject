@@ -175,6 +175,17 @@ Resume with the same command. Add filters to narrow the retry. `--force` reruns 
 
 Run directories contain resolved configuration, metadata, status, a timestamped log, metrics, resources, confusion matrix, optional model and embedding artifacts, and an error traceback when applicable. The success marker appears only after required artifacts pass validation.
 
+## Data
+
+The repository ships the split and subset manifests (`source/data/splits/*.csv`, `source/data/manifests/`), dataset statistics, configurations, and the aggregated result CSVs. Raw downloads, processed review files, checkpoints, model artifacts, and embeddings are not committed. Recreate the data with:
+
+```bash
+./run_all.sh download     # fetch and validate the raw files into source/data/raw/
+./run_all.sh preprocess   # rebuild source/data/processed/ plus the split and subset manifests
+```
+
+Preprocessing is deterministic, so the regenerated manifests match the committed ones.
+
 ## Data and result locations
 
 - `source/data/raw/`: verified immutable downloads
