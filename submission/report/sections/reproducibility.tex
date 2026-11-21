@@ -1,8 +1,0 @@
-\section{Reproducibility statement}
-
-The frozen manifest records the repository state and SHA-256 hashes for plans, data manifests, selected configurations, atomic run artifacts, result CSVs, and relevant logs. Generated CSVs retain run IDs for every aggregate. The reporting audit, evidence memo, traceability map, tables, and figure data live under \texttt{Source/results/reporting/}. One command rebuilds the derived analyses, both image formats, report, and presentation:
-\begin{verbatim}
-cd submission
-./build_all.sh
-\end{verbatim}
-The script uses the existing Conda environment \texttt{ML}, runs reporting tests, rejects untraceable values and placeholders, and fails on LaTeX errors.
