@@ -66,3 +66,15 @@ source/results/run_records/*/*
 !source/results/run_records/*/*.json
 !source/results/run_records/*/*.log
 !source/results/run_records/*/SUCCESS
+
+# Regenerable or heavy artifacts: kept on disk, never committed.
+*.parquet
+**/.cache/
+*.tar.gz
+*.xdv
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.npy
+*.npz
