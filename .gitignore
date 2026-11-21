@@ -28,40 +28,27 @@ source/results/predictions
 source/results/cost/predictions
 source/results/tuning_quality/
 source/logs/runs
-Source/data/raw/*
-Source/data/interim/*
-Source/data/processed/*
-Source/data/splits/*
-Source/data/manifests/*
-Source/checkpoints/*
-Source/logs/*
-Source/results/plans/*
-Source/results/run_records/*
-Source/results/artifacts/*
-Source/results/embeddings/*
-Source/results/csv/*
-Source/results/archives/*
-Source/**/*.part
-Source/**/*.lock
-.env
-
-# Keep empty generated directories in the repository.
-!Source/data/**/.gitkeep
-!Source/checkpoints/.gitkeep
-!Source/logs/.gitkeep
-!Source/results/**/.gitkeep
+source/data/raw/*
 source/data/interim/*
-source/data/manifests/*
+source/data/processed/*
 source/data/splits/*
+source/data/manifests/*
 source/checkpoints/*
+source/logs/*
 source/results/plans/*
 source/results/run_records/*
 source/results/artifacts/*
 source/results/embeddings/*
 source/results/csv/*
 source/results/archives/*
+source/**/*.part
+source/**/*.lock
+.env
+
+# Keep empty generated directories in the repository.
 !source/data/**/.gitkeep
 !source/checkpoints/.gitkeep
+!source/logs/.gitkeep
 !source/results/**/.gitkeep
 
 # Server execution artifacts: publish results and metadata, retain datasets/weights locally.

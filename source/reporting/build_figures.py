@@ -82,8 +82,8 @@ def dataset_overview(manifest: dict) -> None:
     fig.tight_layout()
     _save(fig, "dataset_overview")
     manifest["dataset_overview"] = {
-        "data": "Source/results/reporting/figure_data/dataset_overview.csv",
-        "source": "Source/data/splits/*_splits.csv",
+        "data": "source/results/reporting/figure_data/dataset_overview.csv",
+        "source": "source/data/splits/*_splits.csv",
         "rule": "count labels by dataset and fixed split",
     }
 
@@ -121,8 +121,8 @@ def part1_learning_curves(manifest: dict) -> None:
     fig.tight_layout(rect=(0, 0.09, 1, 1))
     _save(fig, "part1_learning_curves")
     manifest["part1_learning_curves"] = {
-        "data": "Source/results/reporting/figure_data/part1_learning_curves.csv",
-        "source": "Source/results/reporting/derived_metrics/part1_summary.csv",
+        "data": "source/results/reporting/figure_data/part1_learning_curves.csv",
+        "source": "source/results/reporting/derived_metrics/part1_summary.csv",
         "rule": "mean with sample-SD error bars across three final seeds",
     }
 
@@ -149,8 +149,8 @@ def part1_crossover(manifest: dict) -> None:
     fig.tight_layout()
     _save(fig, "part1_crossover")
     manifest["part1_crossover"] = {
-        "data": "Source/results/reporting/figure_data/part1_crossover.csv",
-        "source": "Source/results/reporting/derived_metrics/part1_best_by_size.csv",
+        "data": "source/results/reporting/figure_data/part1_crossover.csv",
+        "source": "source/results/reporting/derived_metrics/part1_best_by_size.csv",
         "rule": "best complete neural mean minus best complete TF-IDF mean at each size",
     }
 
@@ -171,8 +171,8 @@ def full_data_comparison(manifest: dict) -> None:
     fig.tight_layout()
     _save(fig, "full_data_comparison")
     manifest["full_data_comparison"] = {
-        "data": "Source/results/reporting/figure_data/full_data_comparison.csv",
-        "source": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+        "data": "source/results/reporting/figure_data/full_data_comparison.csv",
+        "source": "source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
         "rule": "full-data mean and sample SD across three final seeds",
     }
 
@@ -202,8 +202,8 @@ def efficiency_pareto(manifest: dict) -> None:
     fig.tight_layout()
     _save(fig, "efficiency_pareto")
     manifest["efficiency_pareto"] = {
-        "data": "Source/results/reporting/figure_data/efficiency_pareto.csv",
-        "source": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+        "data": "source/results/reporting/figure_data/efficiency_pareto.csv",
+        "source": "source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
         "rule": "mean across three seeds; outlined points are non-dominated on quality versus fit time",
     }
 
@@ -238,8 +238,8 @@ def bonus_learning_curves(manifest: dict) -> None:
     fig.tight_layout(rect=(0, 0.09, 1, 1))
     _save(fig, "bonus_learning_curves")
     manifest["bonus_learning_curves"] = {
-        "data": "Source/results/reporting/figure_data/bonus_learning_curves.csv",
-        "source": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+        "data": "source/results/reporting/figure_data/bonus_learning_curves.csv",
+        "source": "source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
         "rule": "fixed Part 1 TF-IDF model per target/size; mean and sample SD across aligned seeds",
     }
 
@@ -266,8 +266,8 @@ def bonus_crossover_status(manifest: dict) -> None:
     fig.tight_layout()
     _save(fig, "bonus_crossover_status")
     manifest["bonus_crossover_status"] = {
-        "data": "Source/results/reporting/figure_data/bonus_crossover_status.csv",
-        "source": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+        "data": "source/results/reporting/figure_data/bonus_crossover_status.csv",
+        "source": "source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
         "rule": "first target size with method mean at least 0.01 above fixed best-TF-IDF mean",
     }
 
@@ -306,8 +306,8 @@ def bonus_transfer(manifest: dict) -> None:
     fig.tight_layout()
     _save(fig, "bonus_transfer")
     manifest["bonus_transfer"] = {
-        "data": "Source/results/reporting/figure_data/bonus_transfer.csv",
-        "source": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+        "data": "source/results/reporting/figure_data/bonus_transfer.csv",
+        "source": "source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
         "rule": "method mean minus matched pooled-CE mean; labels are target-label counts",
     }
 
@@ -341,8 +341,8 @@ def bonus_representation(manifest: dict) -> None:
     fig.tight_layout()
     _save(fig, "bonus_representation")
     manifest["bonus_representation"] = {
-        "data": "Source/results/reporting/figure_data/bonus_representation.csv",
-        "source": "Source/results/reporting/derived_metrics/bonus_representation_diagnostics.csv",
+        "data": "source/results/reporting/figure_data/bonus_representation.csv",
+        "source": "source/results/reporting/derived_metrics/bonus_representation_diagnostics.csv",
         "rule": "mean over three seeds, then mean and SD across four target-label sizes",
     }
 
@@ -408,8 +408,8 @@ def confusion_comparison(manifest: dict) -> None:
     fig.tight_layout()
     _save(fig, "confusion_comparison")
     manifest["confusion_comparison"] = {
-        "data": "Source/results/reporting/figure_data/confusion_comparison.csv",
-        "source": "Source/results/csv/run_records.csv",
+        "data": "source/results/reporting/figure_data/confusion_comparison.csv",
+        "source": "source/results/csv/run_records.csv",
         "rule": "sum three seed confusion counts, then normalize within actual class",
     }
 

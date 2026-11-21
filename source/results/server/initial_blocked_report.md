@@ -2,7 +2,7 @@
 
 Inspection UTC: 2026-11-11T13:25:00.558090+00:00
 
-Repository commit: `370e1407a80d4b49fdbed7f76af3b9ae06afc23b`. The worktree was clean at initial inspection; this session added diagnostic files only. The Linux tree is `source/`, so all generated paths use that spelling rather than creating a second `Source/` tree.
+Repository commit: `370e1407a80d4b49fdbed7f76af3b9ae06afc23b`. The worktree was clean at initial inspection; this session added diagnostic files only. The Linux tree is `source/`, so all generated paths use that spelling rather than creating a second, capitalized tree.
 
 The machine runs Ubuntu 20.04.6 on x86_64, with an Intel i9-10900K (10 physical, 20 logical cores), about 31 GiB RAM and 220 GiB free disk. NVIDIA PCI hardware is visible, but its expected RTX 4070 model, GPU count and 12 GB VRAM could not be verified. `nvidia-smi` fails and no `/dev/nvidia*` nodes exist. PyTorch 2.15.0+cu132 reports an older driver interface (12020), CUDA unavailable and zero usable devices. This requires server administrator/provider repair of GPU driver/device access and subsequent selection of a compatible PyTorch build; installing Python dependencies cannot repair kernel/device access.
 

@@ -12,7 +12,7 @@ import numpy as np
 
 
 ROOT = Path(__file__).resolve().parents[2]
-SOURCE = ROOT / "Source"
+SOURCE = ROOT / "source"
 RESULTS = SOURCE / "results"
 REPORTING_RESULTS = RESULTS / "reporting"
 SUBMISSION = ROOT / "submission"

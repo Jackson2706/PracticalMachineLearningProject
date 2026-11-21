@@ -108,7 +108,7 @@ def _dataset_stats(trace: Trace) -> pd.DataFrame:
                 f"dataset_{row['dataset']}_{field}",
                 row[field],
                 f"{row[field]:,}",
-                "Source/results/csv/dataset_statistics.csv",
+                "source/results/csv/dataset_statistics.csv",
                 row["dataset"],
                 "direct field",
                 "table_dataset_stats",
@@ -238,7 +238,7 @@ def _part1(
             f"part1_crossover_{row['dataset']}",
             row["first_sustained_crossover"],
             display,
-            "Source/results/reporting/derived_metrics/part1_best_by_size.csv",
+            "source/results/reporting/derived_metrics/part1_best_by_size.csv",
             row["dataset"],
             "first size with best-neural minus best-TF-IDF mean macro-F1 >= 0.01 at all larger tested sizes",
             "table_part1_crossover,report,slides",
@@ -474,7 +474,7 @@ def _bonus(
             f"bonus_labels_saved_{target}",
             None if pd.isna(row.new_target_labels_saved) else row.new_target_labels_saved,
             display,
-            "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+            "source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
             f"{target}/db_cdsupcon",
             "reference and candidate crossovers must both be observed",
             "table_bonus_label_efficiency,report,slides",
@@ -607,7 +607,7 @@ def _write_tables(
         ):
             trace.add(
                 f"table_dataset_{row.dataset}_{field}", row[field], display,
-                "Source/results/reporting/derived_metrics/dataset_statistics.csv", row.dataset,
+                "source/results/reporting/derived_metrics/dataset_statistics.csv", row.dataset,
                 "direct generated table cell", "table_dataset_stats",
             )
         lines.append(
@@ -674,7 +674,7 @@ def _write_tables(
                 f"full_{dataset}_{row.model}_macro_f1",
                 row.macro_f1_mean,
                 row.display,
-                "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+                "source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
                 row.run_ids,
                 "mean and sample SD across final seeds",
                 "table_part1_full_data",
@@ -718,12 +718,12 @@ def _write_tables(
         )
         trace.add(
             f"table_crossover_{row.dataset}_observed", row.first_observed, observed,
-            "Source/results/reporting/derived_metrics/part1_crossover_summary.csv", row.dataset,
+            "source/results/reporting/derived_metrics/part1_crossover_summary.csv", row.dataset,
             "first observed threshold", "table_part1_crossover",
         )
         trace.add(
             f"table_crossover_{row.dataset}_sustained", row.first_sustained, sustained,
-            "Source/results/reporting/derived_metrics/part1_crossover_summary.csv", row.dataset,
+            "source/results/reporting/derived_metrics/part1_crossover_summary.csv", row.dataset,
             "first sustained threshold", "table_part1_crossover",
         )
         lines.append(f"{DISPLAY[row.dataset]} & {observed} & {sustained} \\\\")
@@ -774,7 +774,7 @@ def _write_tables(
         ):
             trace.add(
                 f"table_efficiency_{row.dataset}_{row.model}_{field}", value, display,
-                "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv", row.run_ids,
+                "source/results/reporting/derived_metrics/part1_efficiency_full_data.csv", row.run_ids,
                 "generated representative best-family cell", "table_part1_efficiency",
             )
     lines += [r"\bottomrule", r"\end{tabular}", r"\end{table*}"]
@@ -813,7 +813,7 @@ def _write_tables(
                 source = group.loc[size]
                 trace.add(
                     f"table_bonus_{target}_{method}_{size}", source.target_macro_f1_mean, cell,
-                    "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv", source.run_ids,
+                    "source/results/reporting/derived_metrics/bonus_summary_corrected.csv", source.run_ids,
                     "mean and sample SD across three aligned seeds", "table_bonus_performance",
                 )
             prefix = DISPLAY[target] if method == methods[0] else ""
@@ -856,12 +856,12 @@ def _write_tables(
             )
             trace.add(
                 f"table_bonus_labels_{target}_{method}_crossover", row.crossover_threshold_size, threshold,
-                "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv", f"{target}/{method}",
+                "source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv", f"{target}/{method}",
                 "first target-size threshold; missing stays not observed", "table_bonus_label_efficiency",
             )
             trace.add(
                 f"table_bonus_labels_{target}_{method}_saved", row.new_target_labels_saved, saved,
-                "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv", f"{target}/{method}",
+                "source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv", f"{target}/{method}",
                 "target-only threshold minus candidate threshold; requires both observed", "table_bonus_label_efficiency",
             )
             lines.append(
@@ -896,14 +896,14 @@ def _write_tables(
             trace.add(
                 f"table_bonus_diagnostics_{target}_{method}_retention", retention_value,
                 f"{retention_value:+.3f}",
-                "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+                "source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
                 f"{target}/{method}", "mean source retention across four target sizes",
                 "table_bonus_diagnostics",
             )
             trace.add(
                 f"table_bonus_diagnostics_{target}_{method}_separation", gap_value,
                 f"{gap_value:.3f}",
-                "Source/results/reporting/derived_metrics/bonus_representation_diagnostics.csv",
+                "source/results/reporting/derived_metrics/bonus_representation_diagnostics.csv",
                 f"{target}/{method}", "mean separation gap across four target sizes",
                 "table_bonus_diagnostics",
             )
@@ -942,7 +942,7 @@ def _write_tables(
     ):
         trace.add(
             f"table_completeness_{phase}", value, f"{value:,}",
-            "Source/results/reporting/frozen_result_manifest.json", f"counts/{phase}",
+            "source/results/reporting/frozen_result_manifest.json", f"counts/{phase}",
             "completed and expected plan count", "table_completeness",
         )
 
@@ -962,7 +962,7 @@ def _write_tables(
         trace.add(
             f"table_config_{row.dataset}_{row.model}", row.config_id,
             f"{row.config_id}: {row.model_config}",
-            "Source/results/reporting/derived_metrics/selected_configurations.csv",
+            "source/results/reporting/derived_metrics/selected_configurations.csv",
             f"{row.dataset}/{row.model}", "frozen selected configuration row",
             "table_selected_configs",
         )
@@ -1088,7 +1088,7 @@ def _evidence_memo(
 
 
 def _result_macros(trace: Trace) -> None:
-    macros = ["% Generated by Source/reporting/build_analysis_tables.py"]
+    macros = ["% Generated by source/reporting/build_analysis_tables.py"]
     for row in sorted(trace.rows, key=lambda row: row["value_id"]):
         macros.append(
             rf"\expandafter\def\csname result@{row['value_id']}\endcsname{{{row['display']}}}"
@@ -1111,26 +1111,26 @@ def _story_values(
         trace.add(
             f"story_full_best_neural_{dataset}", neural.macro_f1_mean,
             f"{100*neural.macro_f1_mean:.2f}",
-            "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+            "source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
             neural.run_ids, "best neural full-data mean across three seeds, shown as percentage points", "report,slides",
         )
         trace.add(
             f"story_full_best_tfidf_{dataset}", tfidf.macro_f1_mean,
             f"{100*tfidf.macro_f1_mean:.2f}",
-            "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+            "source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
             tfidf.run_ids, "best TF-IDF full-data mean across three seeds, shown as percentage points", "report,slides",
         )
         trace.add(
             f"story_full_gap_{dataset}", neural.macro_f1_mean - tfidf.macro_f1_mean,
             f"{100*(neural.macro_f1_mean-tfidf.macro_f1_mean):.2f}",
-            "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+            "source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
             f"{neural.run_ids};{tfidf.run_ids}", "best-neural minus best-TF-IDF full-data mean, percentage points", "report,slides",
         )
         cost = efficiency[efficiency.dataset.eq(dataset)].set_index("model")
         trace.add(
             f"story_fit_ratio_{dataset}", cost.loc[neural.model].fit_time_sec_mean / cost.loc[tfidf.model].fit_time_sec_mean,
             f"{cost.loc[neural.model].fit_time_sec_mean/cost.loc[tfidf.model].fit_time_sec_mean:.1f}",
-            "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+            "source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
             f"{neural.model};{tfidf.model}", "ratio of mean full-data fit times", "report,slides",
         )
 
@@ -1143,7 +1143,7 @@ def _story_values(
             value = cell.loc[left].target_macro_f1_mean - cell.loc[right].target_macro_f1_mean
             trace.add(
                 f"story_bonus_{key}_{dataset}_200", value, f"{100*value:+.2f}",
-                "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+                "source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
                 f"{cell.loc[left].run_ids};{cell.loc[right].run_ids}",
                 f"{left} minus {right} target mean at 200 labels, percentage points", "report,slides",
             )
@@ -1151,28 +1151,28 @@ def _story_values(
         trace.add(
             f"story_db_cost_ratio_{dataset}", db_cost.fit_time_ratio_vs_pooled_ce.mean(),
             f"{db_cost.fit_time_ratio_vs_pooled_ce.mean():.2f}",
-            "Source/results/reporting/derived_metrics/bonus_costs.csv", ",".join(db_cost.run_ids),
+            "source/results/reporting/derived_metrics/bonus_costs.csv", ",".join(db_cost.run_ids),
             "mean of matched DB-CDSupCon-to-pooled-CE fit-time ratios across target sizes", "report,slides",
         )
         db_gap = diagnostics[diagnostics.target_domain.eq(dataset) & diagnostics.method.eq("db_cdsupcon")].separation_gap_mean.mean()
         pooled_gap = diagnostics[diagnostics.target_domain.eq(dataset) & diagnostics.method.eq("pooled_ce")].separation_gap_mean.mean()
         trace.add(
             f"story_db_separation_change_{dataset}", db_gap - pooled_gap, f"{db_gap-pooled_gap:+.3f}",
-            "Source/results/reporting/derived_metrics/bonus_representation_diagnostics.csv", dataset,
+            "source/results/reporting/derived_metrics/bonus_representation_diagnostics.csv", dataset,
             "DB-CDSupCon minus pooled-CE separation gap, averaged across target sizes", "report,slides",
         )
     trace.add(
-        "bonus_source_labels", 4000, "4,000", "Source/configs/bonus.yaml", "source_size_per_domain",
+        "bonus_source_labels", 4000, "4,000", "source/configs/bonus.yaml", "source_size_per_domain",
         "2,000 labels from each of two source domains", "report,slides",
     )
     trace.add(
         "bonus_projection_parameters", int(costs.projection_parameters_mean.max()), f"{int(costs.projection_parameters_mean.max()):,}",
-        "Source/results/reporting/derived_metrics/bonus_costs.csv", "SupCon and DB-CDSupCon rows",
+        "source/results/reporting/derived_metrics/bonus_costs.csv", "SupCon and DB-CDSupCon rows",
         "training-only projection-head parameter count", "report,slides",
     )
     trace.add(
         "bonus_deployed_parameters", int(costs.deployed_parameter_count_mean.max()), f"{int(costs.deployed_parameter_count_mean.max()):,}",
-        "Source/results/reporting/derived_metrics/bonus_costs.csv", "all bonus objectives",
+        "source/results/reporting/derived_metrics/bonus_costs.csv", "all bonus objectives",
         "deployed Transformer parameter count; projection head excluded", "report,slides",
     )
 
@@ -1205,7 +1205,7 @@ def main() -> None:
         "audit_jobs",
         audit_manifest["counts"]["planned"],
         f"{audit_manifest['counts']['planned']:,}",
-        "Source/results/reporting/frozen_result_manifest.json",
+        "source/results/reporting/frozen_result_manifest.json",
         "counts.planned",
         "direct field",
         "report,slides",
@@ -1214,7 +1214,7 @@ def main() -> None:
         "audit_final_seeds",
         len(FINAL_SEEDS),
         str(len(FINAL_SEEDS)),
-        "Source/configs/experiment.yaml",
+        "source/configs/experiment.yaml",
         "final_seeds",
         "list length",
         "report,slides",
