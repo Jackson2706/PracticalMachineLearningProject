@@ -1,0 +1,17 @@
+\section{Experimental protocol}
+
+\paragraph{Schedules and selection.}
+Part~1 sizes begin at 200 and grow geometrically until the exact full cleaned pool. Each dataset-model pair receives ten predefined configurations at 8,000 labels with tuning seed 777. Selection maximizes validation macro-F1, then prefers lower validation inference latency and smaller serialized size. The selected configuration is frozen across final sizes and seeds. Test metrics are absent from tuning records.
+
+The bonus tunes four SupCon and eight DB-CDSupCon settings per target domain. The primary selector is target validation macro-F1, followed by mean source validation macro-F1 and fit time. Pooled CE has no contrastive hyperparameters. The final seeds are 13, 42, and 2026.
+
+\paragraph{Metrics and crossover.}
+Macro-F1 is primary. We report mean, sample standard deviation, and seed count for every condition. A Part~1 crossover occurs when the best complete neural mean exceeds the best complete TF-IDF mean by at least 0.01. A sustained crossover satisfies the criterion at that size and every larger tested size. Bonus crossovers apply the same margin against one fixed Part~1 TF-IDF model selected by three-seed mean at each target and size. New target-label savings are reported only when both the target-only and candidate thresholds are observed.
+
+Learning-curve area is the trapezoidal integral over $\log_2$ training size, divided by the tested log-size range. Pareto efficiency uses measured macro-F1 with either fit time or end-to-end latency. Pairwise bonus effects use aligned seed differences and remain descriptive.
+
+\paragraph{Cost measurement.}
+The completed \Result{audit_jobs} planned jobs ran on one hardware ID: an NVIDIA RTX 4070 host with an Intel i9-10900K and 31\,GiB RAM. Classical fits used four CPU threads; neural fits used CUDA BF16 autocast with FP32 parameters and optimizer state. Inference ran outside training autocast. Latency uses ten warm-ups and fifty timed calls. Classifier-only latency starts from prepared features; end-to-end latency includes tokenization or encoding. CPU TF-IDF and CUDA neural latency therefore answer a deployment question, not a same-device microbenchmark.
+
+\paragraph{Audit.}
+All planned jobs completed, every final cell contains \Result{audit_final_seeds} seeds, and run IDs are unique. The reporting audit found one derived-data exception: the original bonus aggregate selected a TF-IDF winner independently within each seed. The reporting rebuild instead selects one TF-IDF model by the three-seed Part~1 mean, then reuses its aligned seed rows. Atomic measurements are unchanged.

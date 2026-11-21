@@ -1,0 +1,2387 @@
+{
+  "audit_final_seeds": {
+    "artifact": "report,slides",
+    "derivation": "list length",
+    "display": "3",
+    "source_file": "Source/configs/experiment.yaml",
+    "source_rows": "final_seeds",
+    "value": 3,
+    "value_id": "audit_final_seeds"
+  },
+  "audit_jobs": {
+    "artifact": "report,slides",
+    "derivation": "direct field",
+    "display": "1,251",
+    "source_file": "Source/results/reporting/frozen_result_manifest.json",
+    "source_rows": "counts.planned",
+    "value": 1251,
+    "value_id": "audit_jobs"
+  },
+  "bonus_deployed_parameters": {
+    "artifact": "report,slides",
+    "derivation": "deployed Transformer parameter count; projection head excluded",
+    "display": "2,841,858",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_costs.csv",
+    "source_rows": "all bonus objectives",
+    "value": 2841858,
+    "value_id": "bonus_deployed_parameters"
+  },
+  "bonus_labels_saved_nsmc": {
+    "artifact": "table_bonus_label_efficiency,report,slides",
+    "derivation": "reference and candidate crossovers must both be observed",
+    "display": "not estimable",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+    "source_rows": "nsmc/db_cdsupcon",
+    "value": null,
+    "value_id": "bonus_labels_saved_nsmc"
+  },
+  "bonus_labels_saved_shopping": {
+    "artifact": "table_bonus_label_efficiency,report,slides",
+    "derivation": "reference and candidate crossovers must both be observed",
+    "display": "not estimable",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+    "source_rows": "shopping/db_cdsupcon",
+    "value": null,
+    "value_id": "bonus_labels_saved_shopping"
+  },
+  "bonus_labels_saved_steam": {
+    "artifact": "table_bonus_label_efficiency,report,slides",
+    "derivation": "reference and candidate crossovers must both be observed",
+    "display": "not estimable",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+    "source_rows": "steam/db_cdsupcon",
+    "value": null,
+    "value_id": "bonus_labels_saved_steam"
+  },
+  "bonus_projection_parameters": {
+    "artifact": "report,slides",
+    "derivation": "training-only projection-head parameter count",
+    "display": "24,768",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_costs.csv",
+    "source_rows": "SupCon and DB-CDSupCon rows",
+    "value": 24768,
+    "value_id": "bonus_projection_parameters"
+  },
+  "bonus_source_labels": {
+    "artifact": "report,slides",
+    "derivation": "2,000 labels from each of two source domains",
+    "display": "4,000",
+    "source_file": "Source/configs/bonus.yaml",
+    "source_rows": "source_size_per_domain",
+    "value": 4000,
+    "value_id": "bonus_source_labels"
+  },
+  "dataset_nsmc_test_rows": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct field",
+    "display": "49,110",
+    "source_file": "Source/results/csv/dataset_statistics.csv",
+    "source_rows": "nsmc",
+    "value": 49110,
+    "value_id": "dataset_nsmc_test_rows"
+  },
+  "dataset_nsmc_train_rows": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct field",
+    "display": "130,797",
+    "source_file": "Source/results/csv/dataset_statistics.csv",
+    "source_rows": "nsmc",
+    "value": 130797,
+    "value_id": "dataset_nsmc_train_rows"
+  },
+  "dataset_nsmc_validation_rows": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct field",
+    "display": "14,534",
+    "source_file": "Source/results/csv/dataset_statistics.csv",
+    "source_rows": "nsmc",
+    "value": 14534,
+    "value_id": "dataset_nsmc_validation_rows"
+  },
+  "dataset_shopping_test_rows": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct field",
+    "display": "19,990",
+    "source_file": "Source/results/csv/dataset_statistics.csv",
+    "source_rows": "shopping",
+    "value": 19990,
+    "value_id": "dataset_shopping_test_rows"
+  },
+  "dataset_shopping_train_rows": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct field",
+    "display": "159,918",
+    "source_file": "Source/results/csv/dataset_statistics.csv",
+    "source_rows": "shopping",
+    "value": 159918,
+    "value_id": "dataset_shopping_train_rows"
+  },
+  "dataset_shopping_validation_rows": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct field",
+    "display": "19,990",
+    "source_file": "Source/results/csv/dataset_statistics.csv",
+    "source_rows": "shopping",
+    "value": 19990,
+    "value_id": "dataset_shopping_validation_rows"
+  },
+  "dataset_steam_test_rows": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct field",
+    "display": "9,979",
+    "source_file": "Source/results/csv/dataset_statistics.csv",
+    "source_rows": "steam",
+    "value": 9979,
+    "value_id": "dataset_steam_test_rows"
+  },
+  "dataset_steam_train_rows": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct field",
+    "display": "79,828",
+    "source_file": "Source/results/csv/dataset_statistics.csv",
+    "source_rows": "steam",
+    "value": 79828,
+    "value_id": "dataset_steam_train_rows"
+  },
+  "dataset_steam_validation_rows": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct field",
+    "display": "9,979",
+    "source_file": "Source/results/csv/dataset_statistics.csv",
+    "source_rows": "steam",
+    "value": 9979,
+    "value_id": "dataset_steam_validation_rows"
+  },
+  "full_nsmc_avg_mlp_macro_f1": {
+    "artifact": "table_part1_full_data",
+    "derivation": "mean and sample SD across final seeds",
+    "display": "81.36 $\\pm$ 0.03 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-4a0de1abcb480f659ba1,part1-038d9aa95ffedc1ccca6,part1-61b45a1544ea55771f66",
+    "value": 0.8136135975219613,
+    "value_id": "full_nsmc_avg_mlp_macro_f1"
+  },
+  "full_nsmc_gru_macro_f1": {
+    "artifact": "table_part1_full_data",
+    "derivation": "mean and sample SD across final seeds",
+    "display": "81.80 $\\pm$ 0.02 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-4ea2409ec6a2ff16693d,part1-fe855bd2d17f9be2faf2,part1-504730dfad47fb1ba1a7",
+    "value": 0.8179764757998219,
+    "value_id": "full_nsmc_gru_macro_f1"
+  },
+  "full_nsmc_lstm_macro_f1": {
+    "artifact": "table_part1_full_data",
+    "derivation": "mean and sample SD across final seeds",
+    "display": "81.64 $\\pm$ 0.36 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-6fee9a07ed96b1be8117,part1-62fcf73b4bb16b9afbdc,part1-cf78d148c07ca73f4ea2",
+    "value": 0.8163558192322323,
+    "value_id": "full_nsmc_lstm_macro_f1"
+  },
+  "full_nsmc_mamba_macro_f1": {
+    "artifact": "table_part1_full_data",
+    "derivation": "mean and sample SD across final seeds",
+    "display": "80.72 $\\pm$ 0.12 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-4980ed0a673eb462dcd7,part1-cdacd99e852a2ca53d0c,part1-c17c132b9b808ab6e076",
+    "value": 0.8071915343789882,
+    "value_id": "full_nsmc_mamba_macro_f1"
+  },
+  "full_nsmc_tfidf_lr_macro_f1": {
+    "artifact": "table_part1_full_data",
+    "derivation": "mean and sample SD across final seeds",
+    "display": "80.07 $\\pm$ 0.00 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-63637ea3b406d7cffd4b,part1-34653f49ff826ecb2fea,part1-d909983ea256588408d0",
+    "value": 0.8007402243662917,
+    "value_id": "full_nsmc_tfidf_lr_macro_f1"
+  },
+  "full_nsmc_tfidf_rf_macro_f1": {
+    "artifact": "table_part1_full_data",
+    "derivation": "mean and sample SD across final seeds",
+    "display": "75.39 $\\pm$ 0.01 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-db66ddde9d491ecc4729,part1-d100cf103b535b21ff6e,part1-880bb08127c3ce72f417",
+    "value": 0.7538721982444109,
+    "value_id": "full_nsmc_tfidf_rf_macro_f1"
+  },
+  "full_nsmc_tfidf_svm_macro_f1": {
+    "artifact": "table_part1_full_data",
+    "derivation": "mean and sample SD across final seeds",
+    "display": "80.04 $\\pm$ 0.00 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-383f6e4127552fccf2c3,part1-9ea7042f2d1b53b95ad5,part1-e8f38c8785d9e06e8f9d",
+    "value": 0.8004275286718996,
+    "value_id": "full_nsmc_tfidf_svm_macro_f1"
+  },
+  "full_nsmc_tfidf_xgb_macro_f1": {
+    "artifact": "table_part1_full_data",
+    "derivation": "mean and sample SD across final seeds",
+    "display": "68.94 $\\pm$ 0.03 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-ccaa8f2f0d36459de76a,part1-ba37160b659164f4062d,part1-e435eb77de2cc7415fbb",
+    "value": 0.6893642896020822,
+    "value_id": "full_nsmc_tfidf_xgb_macro_f1"
+  },
+  "full_nsmc_transformer_macro_f1": {
+    "artifact": "table_part1_full_data",
+    "derivation": "mean and sample SD across final seeds",
+    "display": "81.85 $\\pm$ 0.02 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-7d4e35fe1c88bb6690c7,part1-8831c7ce7edf48330631,part1-9109096505a657d0c506",
+    "value": 0.8184593834760818,
+    "value_id": "full_nsmc_transformer_macro_f1"
+  },
+  "full_shopping_avg_mlp_macro_f1": {
+    "artifact": "table_part1_full_data",
+    "derivation": "mean and sample SD across final seeds",
+    "display": "88.62 $\\pm$ 0.19 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-00ea7410375b68f7a4ef,part1-bade7d9c65762c68b5a0,part1-8c38a5d5a6beb6cf0283",
+    "value": 0.8861661353487132,
+    "value_id": "full_shopping_avg_mlp_macro_f1"
+  },
+  "full_shopping_gru_macro_f1": {
+    "artifact": "table_part1_full_data",
+    "derivation": "mean and sample SD across final seeds",
+    "display": "89.04 $\\pm$ 0.21 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-7619b4808edde676fbc7,part1-dcdef66d310910e191ae,part1-f1525d8886a79f414a1d",
+    "value": 0.8903781651502373,
+    "value_id": "full_shopping_gru_macro_f1"
+  },
+  "full_shopping_lstm_macro_f1": {
+    "artifact": "table_part1_full_data",
+    "derivation": "mean and sample SD across final seeds",
+    "display": "88.97 $\\pm$ 0.13 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-8d1de5cf9b992eee48f6,part1-f8142607a0ff1d96b900,part1-992e5752dded65363a5c",
+    "value": 0.8896995509652275,
+    "value_id": "full_shopping_lstm_macro_f1"
+  },
+  "full_shopping_mamba_macro_f1": {
+    "artifact": "table_part1_full_data",
+    "derivation": "mean and sample SD across final seeds",
+    "display": "88.09 $\\pm$ 0.08 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-f10fe02b7fa87973b50f,part1-20ee7e37c79898f21fb3,part1-75b61e174650a718d2de",
+    "value": 0.8808979052102667,
+    "value_id": "full_shopping_mamba_macro_f1"
+  },
+  "full_shopping_tfidf_lr_macro_f1": {
+    "artifact": "table_part1_full_data",
+    "derivation": "mean and sample SD across final seeds",
+    "display": "88.34 $\\pm$ 0.00 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-efbe7c38e37cb972ba81,part1-f9ee678d63083bbc224c,part1-4d2c00295496ce7566fa",
+    "value": 0.8833722158552328,
+    "value_id": "full_shopping_tfidf_lr_macro_f1"
+  },
+  "full_shopping_tfidf_rf_macro_f1": {
+    "artifact": "table_part1_full_data",
+    "derivation": "mean and sample SD across final seeds",
+    "display": "85.09 $\\pm$ 0.02 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-33a952c9eca2a97fe878,part1-3c525743984f78987e9e,part1-58caf2e53bf3ccd2bfc5",
+    "value": 0.8508823075608293,
+    "value_id": "full_shopping_tfidf_rf_macro_f1"
+  },
+  "full_shopping_tfidf_svm_macro_f1": {
+    "artifact": "table_part1_full_data",
+    "derivation": "mean and sample SD across final seeds",
+    "display": "88.30 $\\pm$ 0.00 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-ff111e26537e1f40d456,part1-854434e6988df8fe99fc,part1-ef7aaed01739f7e72efe",
+    "value": 0.8830156989207262,
+    "value_id": "full_shopping_tfidf_svm_macro_f1"
+  },
+  "full_shopping_tfidf_xgb_macro_f1": {
+    "artifact": "table_part1_full_data",
+    "derivation": "mean and sample SD across final seeds",
+    "display": "80.37 $\\pm$ 0.05 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-4bc50fed33c58b4062db,part1-fe8e0201809c0ec29ac7,part1-5faedc2cefe4ba9910cc",
+    "value": 0.8036820871517275,
+    "value_id": "full_shopping_tfidf_xgb_macro_f1"
+  },
+  "full_shopping_transformer_macro_f1": {
+    "artifact": "table_part1_full_data",
+    "derivation": "mean and sample SD across final seeds",
+    "display": "89.14 $\\pm$ 0.11 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-d368b513aabd606b91d5,part1-59f3d85b1e3e053331c0,part1-a5311999412138a4a912",
+    "value": 0.8914432446001092,
+    "value_id": "full_shopping_transformer_macro_f1"
+  },
+  "full_steam_avg_mlp_macro_f1": {
+    "artifact": "table_part1_full_data",
+    "derivation": "mean and sample SD across final seeds",
+    "display": "76.39 $\\pm$ 0.14 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-8d7e9b9d3cf91335c279,part1-d5a719a465288d11dd50,part1-9dace4a9476328b564af",
+    "value": 0.763888188380065,
+    "value_id": "full_steam_avg_mlp_macro_f1"
+  },
+  "full_steam_gru_macro_f1": {
+    "artifact": "table_part1_full_data",
+    "derivation": "mean and sample SD across final seeds",
+    "display": "76.60 $\\pm$ 0.42 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-5dad5158c31fa3bbd1cb,part1-9d701e1f5a51d9e0ce70,part1-8fd9f3d1b4e725dc0f75",
+    "value": 0.7660321056141242,
+    "value_id": "full_steam_gru_macro_f1"
+  },
+  "full_steam_lstm_macro_f1": {
+    "artifact": "table_part1_full_data",
+    "derivation": "mean and sample SD across final seeds",
+    "display": "76.68 $\\pm$ 0.44 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-f6a06a7c417dcd8ddcfe,part1-075f3091cd978b0e68aa,part1-6705f8461833dabfe89d",
+    "value": 0.7667925024787868,
+    "value_id": "full_steam_lstm_macro_f1"
+  },
+  "full_steam_mamba_macro_f1": {
+    "artifact": "table_part1_full_data",
+    "derivation": "mean and sample SD across final seeds",
+    "display": "75.39 $\\pm$ 0.14 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-02b86849d7b4cf26c544,part1-982e7adfd4d2d07dbf69,part1-0b1d9a30d4b14e3c03e8",
+    "value": 0.7539113820998216,
+    "value_id": "full_steam_mamba_macro_f1"
+  },
+  "full_steam_tfidf_lr_macro_f1": {
+    "artifact": "table_part1_full_data",
+    "derivation": "mean and sample SD across final seeds",
+    "display": "75.82 $\\pm$ 0.00 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-454e20f7139bc922c9e1,part1-863ceca6402a7c614035,part1-f736334785ff4793ecee",
+    "value": 0.7582433080047869,
+    "value_id": "full_steam_tfidf_lr_macro_f1"
+  },
+  "full_steam_tfidf_rf_macro_f1": {
+    "artifact": "table_part1_full_data",
+    "derivation": "mean and sample SD across final seeds",
+    "display": "72.48 $\\pm$ 0.04 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-d60fe5e3d5e37de21ba2,part1-98cdf9c3d6f9f8f38a9e,part1-383405dcd71c9632297f",
+    "value": 0.724818441989183,
+    "value_id": "full_steam_tfidf_rf_macro_f1"
+  },
+  "full_steam_tfidf_svm_macro_f1": {
+    "artifact": "table_part1_full_data",
+    "derivation": "mean and sample SD across final seeds",
+    "display": "75.67 $\\pm$ 0.00 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-645a03bcefec795463f8,part1-5e53e70cdd57b217e00d,part1-179df645c21c4fa59303",
+    "value": 0.7567100404996635,
+    "value_id": "full_steam_tfidf_svm_macro_f1"
+  },
+  "full_steam_tfidf_xgb_macro_f1": {
+    "artifact": "table_part1_full_data",
+    "derivation": "mean and sample SD across final seeds",
+    "display": "68.21 $\\pm$ 0.09 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-b7aac5c0026f64fca39a,part1-53823d73362f3c6886d7,part1-3fe991bbc13b79397a9e",
+    "value": 0.6821147718811752,
+    "value_id": "full_steam_tfidf_xgb_macro_f1"
+  },
+  "full_steam_transformer_macro_f1": {
+    "artifact": "table_part1_full_data",
+    "derivation": "mean and sample SD across final seeds",
+    "display": "76.64 $\\pm$ 0.21 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-8bbf6e788cd0edd63efd,part1-f5fc19c91b8232862eba,part1-ad08ce6e3e3cab64818c",
+    "value": 0.7663853698263328,
+    "value_id": "full_steam_transformer_macro_f1"
+  },
+  "part1_crossover_nsmc": {
+    "artifact": "table_part1_crossover,report,slides",
+    "derivation": "first size with best-neural minus best-TF-IDF mean macro-F1 >= 0.01 at all larger tested sizes",
+    "display": "64,000",
+    "source_file": "Source/results/reporting/derived_metrics/part1_best_by_size.csv",
+    "source_rows": "nsmc",
+    "value": 64000,
+    "value_id": "part1_crossover_nsmc"
+  },
+  "part1_crossover_shopping": {
+    "artifact": "table_part1_crossover,report,slides",
+    "derivation": "first size with best-neural minus best-TF-IDF mean macro-F1 >= 0.01 at all larger tested sizes",
+    "display": "not observed through 159,918",
+    "source_file": "Source/results/reporting/derived_metrics/part1_best_by_size.csv",
+    "source_rows": "shopping",
+    "value": null,
+    "value_id": "part1_crossover_shopping"
+  },
+  "part1_crossover_steam": {
+    "artifact": "table_part1_crossover,report,slides",
+    "derivation": "first size with best-neural minus best-TF-IDF mean macro-F1 >= 0.01 at all larger tested sizes",
+    "display": "not observed through 79,828",
+    "source_file": "Source/results/reporting/derived_metrics/part1_best_by_size.csv",
+    "source_rows": "steam",
+    "value": null,
+    "value_id": "part1_crossover_steam"
+  },
+  "story_bonus_db_vs_pool_nsmc_200": {
+    "artifact": "report,slides",
+    "derivation": "db_cdsupcon minus pooled_ce target mean at 200 labels, percentage points",
+    "display": "+0.77",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-39f9b86fabef434555e5,bonus-f541273685c799a8bee5,bonus-a38715e7e1d639451b37;bonus-1377de92fe4780256a92,bonus-b02ecd69b16b29d988d2,bonus-8b289c2f58a2007e482d",
+    "value": 0.007704945028507271,
+    "value_id": "story_bonus_db_vs_pool_nsmc_200"
+  },
+  "story_bonus_db_vs_pool_shopping_200": {
+    "artifact": "report,slides",
+    "derivation": "db_cdsupcon minus pooled_ce target mean at 200 labels, percentage points",
+    "display": "+0.61",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-eba1f54805bee981cb56,bonus-b859352f690736fafa45,bonus-7368d6043d487dd387b1;bonus-b747c35916eaffb358c7,bonus-35487a894fd9d221998d,bonus-1788757d7a4fe076d08c",
+    "value": 0.0061153636312201165,
+    "value_id": "story_bonus_db_vs_pool_shopping_200"
+  },
+  "story_bonus_db_vs_pool_steam_200": {
+    "artifact": "report,slides",
+    "derivation": "db_cdsupcon minus pooled_ce target mean at 200 labels, percentage points",
+    "display": "+0.07",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-4d813ce9a9bc11d28e3d,bonus-7b33ba063fe602c19ea0,bonus-554da98fa2098ebe38a5;bonus-387726b8b69c5b79394a,bonus-d5d98d5ac10897ba08ae,bonus-8326620cb3331d00ef68",
+    "value": 0.0007131549018994932,
+    "value_id": "story_bonus_db_vs_pool_steam_200"
+  },
+  "story_bonus_pool_vs_target_nsmc_200": {
+    "artifact": "report,slides",
+    "derivation": "pooled_ce minus target_transformer target mean at 200 labels, percentage points",
+    "display": "+12.05",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-1377de92fe4780256a92,bonus-b02ecd69b16b29d988d2,bonus-8b289c2f58a2007e482d;part1-ddf7f413b188a8337b32,part1-d4338cb2c99373e67b95,part1-dfc7a9458990507ce01c",
+    "value": 0.12052773850241438,
+    "value_id": "story_bonus_pool_vs_target_nsmc_200"
+  },
+  "story_bonus_pool_vs_target_shopping_200": {
+    "artifact": "report,slides",
+    "derivation": "pooled_ce minus target_transformer target mean at 200 labels, percentage points",
+    "display": "+5.19",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-b747c35916eaffb358c7,bonus-35487a894fd9d221998d,bonus-1788757d7a4fe076d08c;part1-9d0dfa394254c10078ba,part1-f70d9f72858dbe1b03e3,part1-ec6f9091233a2040c373",
+    "value": 0.051935118846293205,
+    "value_id": "story_bonus_pool_vs_target_shopping_200"
+  },
+  "story_bonus_pool_vs_target_steam_200": {
+    "artifact": "report,slides",
+    "derivation": "pooled_ce minus target_transformer target mean at 200 labels, percentage points",
+    "display": "+13.54",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-387726b8b69c5b79394a,bonus-d5d98d5ac10897ba08ae,bonus-8326620cb3331d00ef68;part1-643bf11b18c08857d606,part1-1d674a4b68911100361e,part1-21359e2f4262f9b87011",
+    "value": 0.13535101913713238,
+    "value_id": "story_bonus_pool_vs_target_steam_200"
+  },
+  "story_bonus_pool_vs_tfidf_nsmc_200": {
+    "artifact": "report,slides",
+    "derivation": "pooled_ce minus best_tfidf target mean at 200 labels, percentage points",
+    "display": "+2.20",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-1377de92fe4780256a92,bonus-b02ecd69b16b29d988d2,bonus-8b289c2f58a2007e482d;part1-bdd99c8b71b538cb9ad6,part1-6339253e1794804a1f9f,part1-6e271339b53c126ae44f",
+    "value": 0.021955670647392123,
+    "value_id": "story_bonus_pool_vs_tfidf_nsmc_200"
+  },
+  "story_bonus_pool_vs_tfidf_shopping_200": {
+    "artifact": "report,slides",
+    "derivation": "pooled_ce minus best_tfidf target mean at 200 labels, percentage points",
+    "display": "-2.81",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-b747c35916eaffb358c7,bonus-35487a894fd9d221998d,bonus-1788757d7a4fe076d08c;part1-3908f537653227fde2aa,part1-bfacca769f8c7c0ab306,part1-5564765461429230de15",
+    "value": -0.028139196138220468,
+    "value_id": "story_bonus_pool_vs_tfidf_shopping_200"
+  },
+  "story_bonus_pool_vs_tfidf_steam_200": {
+    "artifact": "report,slides",
+    "derivation": "pooled_ce minus best_tfidf target mean at 200 labels, percentage points",
+    "display": "+2.21",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-387726b8b69c5b79394a,bonus-d5d98d5ac10897ba08ae,bonus-8326620cb3331d00ef68;part1-481e5aa9b9f9c12d936c,part1-d83f5b6c51ad9a403353,part1-f5372460fe8d3629387d",
+    "value": 0.022072667615798958,
+    "value_id": "story_bonus_pool_vs_tfidf_steam_200"
+  },
+  "story_db_cost_ratio_nsmc": {
+    "artifact": "report,slides",
+    "derivation": "mean of matched DB-CDSupCon-to-pooled-CE fit-time ratios across target sizes",
+    "display": "1.27",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_costs.csv",
+    "source_rows": "bonus-39f9b86fabef434555e5,bonus-a38715e7e1d639451b37,bonus-f541273685c799a8bee5,bonus-0fcc8bcc634c5d50b08d,bonus-baac94e42153af2c6fd3,bonus-c43335418713c9029253,bonus-08b5ac2c8c1fe759823e,bonus-60c76955e7f8d2662a47,bonus-89d9ec08fc2caa9c5548,bonus-23afd7d495967eb778fe,bonus-601e3fbe7d5c30282634,bonus-982ca7225b0f7bd4969e",
+    "value": 1.2725039119426071,
+    "value_id": "story_db_cost_ratio_nsmc"
+  },
+  "story_db_cost_ratio_shopping": {
+    "artifact": "report,slides",
+    "derivation": "mean of matched DB-CDSupCon-to-pooled-CE fit-time ratios across target sizes",
+    "display": "1.41",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_costs.csv",
+    "source_rows": "bonus-7368d6043d487dd387b1,bonus-b859352f690736fafa45,bonus-eba1f54805bee981cb56,bonus-962d575538a6dda26d93,bonus-9cf1a8772b8135f7cba3,bonus-ca0778fd190f3096c78a,bonus-0d17cf9b0cdc6d5551c5,bonus-7a85db67b3744b662c7c,bonus-d1a0486b04cf49ceb075,bonus-72a3736eefc57f460cf6,bonus-8577fe66af6e34d38b1f,bonus-88cc5fba488194de0699",
+    "value": 1.4073383842923106,
+    "value_id": "story_db_cost_ratio_shopping"
+  },
+  "story_db_cost_ratio_steam": {
+    "artifact": "report,slides",
+    "derivation": "mean of matched DB-CDSupCon-to-pooled-CE fit-time ratios across target sizes",
+    "display": "1.08",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_costs.csv",
+    "source_rows": "bonus-4d813ce9a9bc11d28e3d,bonus-554da98fa2098ebe38a5,bonus-7b33ba063fe602c19ea0,bonus-a541c7abe72a4a1349e2,bonus-c4f12229714eb9d6d4ae,bonus-ea389008f88fb63508e6,bonus-02574e37ef4038eb4515,bonus-2d432b60467f4a4cfc9f,bonus-861dc37bcb3b143f1a61,bonus-22e570bd196b5c6e927f,bonus-cc44fc49680463d838fe,bonus-e9268607baa962879513",
+    "value": 1.082876397408393,
+    "value_id": "story_db_cost_ratio_steam"
+  },
+  "story_db_separation_change_nsmc": {
+    "artifact": "report,slides",
+    "derivation": "DB-CDSupCon minus pooled-CE separation gap, averaged across target sizes",
+    "display": "-0.007",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_representation_diagnostics.csv",
+    "source_rows": "nsmc",
+    "value": -0.007087282256258487,
+    "value_id": "story_db_separation_change_nsmc"
+  },
+  "story_db_separation_change_shopping": {
+    "artifact": "report,slides",
+    "derivation": "DB-CDSupCon minus pooled-CE separation gap, averaged across target sizes",
+    "display": "+0.008",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_representation_diagnostics.csv",
+    "source_rows": "shopping",
+    "value": 0.00807340797076804,
+    "value_id": "story_db_separation_change_shopping"
+  },
+  "story_db_separation_change_steam": {
+    "artifact": "report,slides",
+    "derivation": "DB-CDSupCon minus pooled-CE separation gap, averaged across target sizes",
+    "display": "-0.007",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_representation_diagnostics.csv",
+    "source_rows": "steam",
+    "value": -0.007440327928867757,
+    "value_id": "story_db_separation_change_steam"
+  },
+  "story_fit_ratio_nsmc": {
+    "artifact": "report,slides",
+    "derivation": "ratio of mean full-data fit times",
+    "display": "46.5",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "transformer;tfidf_lr",
+    "value": 46.45490516977819,
+    "value_id": "story_fit_ratio_nsmc"
+  },
+  "story_fit_ratio_shopping": {
+    "artifact": "report,slides",
+    "derivation": "ratio of mean full-data fit times",
+    "display": "48.7",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "transformer;tfidf_lr",
+    "value": 48.73278788980455,
+    "value_id": "story_fit_ratio_shopping"
+  },
+  "story_fit_ratio_steam": {
+    "artifact": "report,slides",
+    "derivation": "ratio of mean full-data fit times",
+    "display": "27.7",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "lstm;tfidf_lr",
+    "value": 27.704865698219844,
+    "value_id": "story_fit_ratio_steam"
+  },
+  "story_full_best_neural_nsmc": {
+    "artifact": "report,slides",
+    "derivation": "best neural full-data mean across three seeds, shown as percentage points",
+    "display": "81.85",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-7d4e35fe1c88bb6690c7,part1-8831c7ce7edf48330631,part1-9109096505a657d0c506",
+    "value": 0.8184593834760818,
+    "value_id": "story_full_best_neural_nsmc"
+  },
+  "story_full_best_neural_shopping": {
+    "artifact": "report,slides",
+    "derivation": "best neural full-data mean across three seeds, shown as percentage points",
+    "display": "89.14",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-d368b513aabd606b91d5,part1-59f3d85b1e3e053331c0,part1-a5311999412138a4a912",
+    "value": 0.8914432446001092,
+    "value_id": "story_full_best_neural_shopping"
+  },
+  "story_full_best_neural_steam": {
+    "artifact": "report,slides",
+    "derivation": "best neural full-data mean across three seeds, shown as percentage points",
+    "display": "76.68",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-f6a06a7c417dcd8ddcfe,part1-075f3091cd978b0e68aa,part1-6705f8461833dabfe89d",
+    "value": 0.7667925024787868,
+    "value_id": "story_full_best_neural_steam"
+  },
+  "story_full_best_tfidf_nsmc": {
+    "artifact": "report,slides",
+    "derivation": "best TF-IDF full-data mean across three seeds, shown as percentage points",
+    "display": "80.07",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-63637ea3b406d7cffd4b,part1-34653f49ff826ecb2fea,part1-d909983ea256588408d0",
+    "value": 0.8007402243662917,
+    "value_id": "story_full_best_tfidf_nsmc"
+  },
+  "story_full_best_tfidf_shopping": {
+    "artifact": "report,slides",
+    "derivation": "best TF-IDF full-data mean across three seeds, shown as percentage points",
+    "display": "88.34",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-efbe7c38e37cb972ba81,part1-f9ee678d63083bbc224c,part1-4d2c00295496ce7566fa",
+    "value": 0.8833722158552328,
+    "value_id": "story_full_best_tfidf_shopping"
+  },
+  "story_full_best_tfidf_steam": {
+    "artifact": "report,slides",
+    "derivation": "best TF-IDF full-data mean across three seeds, shown as percentage points",
+    "display": "75.82",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-454e20f7139bc922c9e1,part1-863ceca6402a7c614035,part1-f736334785ff4793ecee",
+    "value": 0.7582433080047869,
+    "value_id": "story_full_best_tfidf_steam"
+  },
+  "story_full_gap_nsmc": {
+    "artifact": "report,slides",
+    "derivation": "best-neural minus best-TF-IDF full-data mean, percentage points",
+    "display": "1.77",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-7d4e35fe1c88bb6690c7,part1-8831c7ce7edf48330631,part1-9109096505a657d0c506;part1-63637ea3b406d7cffd4b,part1-34653f49ff826ecb2fea,part1-d909983ea256588408d0",
+    "value": 0.01771915910979016,
+    "value_id": "story_full_gap_nsmc"
+  },
+  "story_full_gap_shopping": {
+    "artifact": "report,slides",
+    "derivation": "best-neural minus best-TF-IDF full-data mean, percentage points",
+    "display": "0.81",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-d368b513aabd606b91d5,part1-59f3d85b1e3e053331c0,part1-a5311999412138a4a912;part1-efbe7c38e37cb972ba81,part1-f9ee678d63083bbc224c,part1-4d2c00295496ce7566fa",
+    "value": 0.008071028744876307,
+    "value_id": "story_full_gap_shopping"
+  },
+  "story_full_gap_steam": {
+    "artifact": "report,slides",
+    "derivation": "best-neural minus best-TF-IDF full-data mean, percentage points",
+    "display": "0.85",
+    "source_file": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv",
+    "source_rows": "part1-f6a06a7c417dcd8ddcfe,part1-075f3091cd978b0e68aa,part1-6705f8461833dabfe89d;part1-454e20f7139bc922c9e1,part1-863ceca6402a7c614035,part1-f736334785ff4793ecee",
+    "value": 0.008549194473999933,
+    "value_id": "story_full_gap_steam"
+  },
+  "table_bonus_diagnostics_nsmc_db_cdsupcon_retention": {
+    "artifact": "table_bonus_diagnostics",
+    "derivation": "mean source retention across four target sizes",
+    "display": "+0.005",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "nsmc/db_cdsupcon",
+    "value": 0.004773463570409614,
+    "value_id": "table_bonus_diagnostics_nsmc_db_cdsupcon_retention"
+  },
+  "table_bonus_diagnostics_nsmc_db_cdsupcon_separation": {
+    "artifact": "table_bonus_diagnostics",
+    "derivation": "mean separation gap across four target sizes",
+    "display": "0.088",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_representation_diagnostics.csv",
+    "source_rows": "nsmc/db_cdsupcon",
+    "value": 0.08826590780598606,
+    "value_id": "table_bonus_diagnostics_nsmc_db_cdsupcon_separation"
+  },
+  "table_bonus_diagnostics_nsmc_pooled_ce_retention": {
+    "artifact": "table_bonus_diagnostics",
+    "derivation": "mean source retention across four target sizes",
+    "display": "+0.000",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "nsmc/pooled_ce",
+    "value": 0.0,
+    "value_id": "table_bonus_diagnostics_nsmc_pooled_ce_retention"
+  },
+  "table_bonus_diagnostics_nsmc_pooled_ce_separation": {
+    "artifact": "table_bonus_diagnostics",
+    "derivation": "mean separation gap across four target sizes",
+    "display": "0.095",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_representation_diagnostics.csv",
+    "source_rows": "nsmc/pooled_ce",
+    "value": 0.09535319006224455,
+    "value_id": "table_bonus_diagnostics_nsmc_pooled_ce_separation"
+  },
+  "table_bonus_diagnostics_nsmc_supcon_retention": {
+    "artifact": "table_bonus_diagnostics",
+    "derivation": "mean source retention across four target sizes",
+    "display": "-0.000",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "nsmc/supcon",
+    "value": -6.787595210155928e-05,
+    "value_id": "table_bonus_diagnostics_nsmc_supcon_retention"
+  },
+  "table_bonus_diagnostics_nsmc_supcon_separation": {
+    "artifact": "table_bonus_diagnostics",
+    "derivation": "mean separation gap across four target sizes",
+    "display": "0.094",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_representation_diagnostics.csv",
+    "source_rows": "nsmc/supcon",
+    "value": 0.09412929991080697,
+    "value_id": "table_bonus_diagnostics_nsmc_supcon_separation"
+  },
+  "table_bonus_diagnostics_shopping_db_cdsupcon_retention": {
+    "artifact": "table_bonus_diagnostics",
+    "derivation": "mean source retention across four target sizes",
+    "display": "+0.015",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "shopping/db_cdsupcon",
+    "value": 0.01462888621213218,
+    "value_id": "table_bonus_diagnostics_shopping_db_cdsupcon_retention"
+  },
+  "table_bonus_diagnostics_shopping_db_cdsupcon_separation": {
+    "artifact": "table_bonus_diagnostics",
+    "derivation": "mean separation gap across four target sizes",
+    "display": "0.086",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_representation_diagnostics.csv",
+    "source_rows": "shopping/db_cdsupcon",
+    "value": 0.08618205539563514,
+    "value_id": "table_bonus_diagnostics_shopping_db_cdsupcon_separation"
+  },
+  "table_bonus_diagnostics_shopping_pooled_ce_retention": {
+    "artifact": "table_bonus_diagnostics",
+    "derivation": "mean source retention across four target sizes",
+    "display": "+0.000",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "shopping/pooled_ce",
+    "value": 0.0,
+    "value_id": "table_bonus_diagnostics_shopping_pooled_ce_retention"
+  },
+  "table_bonus_diagnostics_shopping_pooled_ce_separation": {
+    "artifact": "table_bonus_diagnostics",
+    "derivation": "mean separation gap across four target sizes",
+    "display": "0.078",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_representation_diagnostics.csv",
+    "source_rows": "shopping/pooled_ce",
+    "value": 0.07810864742486709,
+    "value_id": "table_bonus_diagnostics_shopping_pooled_ce_separation"
+  },
+  "table_bonus_diagnostics_shopping_supcon_retention": {
+    "artifact": "table_bonus_diagnostics",
+    "derivation": "mean source retention across four target sizes",
+    "display": "+0.015",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "shopping/supcon",
+    "value": 0.01462589474334583,
+    "value_id": "table_bonus_diagnostics_shopping_supcon_retention"
+  },
+  "table_bonus_diagnostics_shopping_supcon_separation": {
+    "artifact": "table_bonus_diagnostics",
+    "derivation": "mean separation gap across four target sizes",
+    "display": "0.091",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_representation_diagnostics.csv",
+    "source_rows": "shopping/supcon",
+    "value": 0.09126305034725717,
+    "value_id": "table_bonus_diagnostics_shopping_supcon_separation"
+  },
+  "table_bonus_diagnostics_steam_db_cdsupcon_retention": {
+    "artifact": "table_bonus_diagnostics",
+    "derivation": "mean source retention across four target sizes",
+    "display": "-0.001",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "steam/db_cdsupcon",
+    "value": -0.0007204525802820272,
+    "value_id": "table_bonus_diagnostics_steam_db_cdsupcon_retention"
+  },
+  "table_bonus_diagnostics_steam_db_cdsupcon_separation": {
+    "artifact": "table_bonus_diagnostics",
+    "derivation": "mean separation gap across four target sizes",
+    "display": "0.147",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_representation_diagnostics.csv",
+    "source_rows": "steam/db_cdsupcon",
+    "value": 0.1467218649336598,
+    "value_id": "table_bonus_diagnostics_steam_db_cdsupcon_separation"
+  },
+  "table_bonus_diagnostics_steam_pooled_ce_retention": {
+    "artifact": "table_bonus_diagnostics",
+    "derivation": "mean source retention across four target sizes",
+    "display": "+0.000",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "steam/pooled_ce",
+    "value": 0.0,
+    "value_id": "table_bonus_diagnostics_steam_pooled_ce_retention"
+  },
+  "table_bonus_diagnostics_steam_pooled_ce_separation": {
+    "artifact": "table_bonus_diagnostics",
+    "derivation": "mean separation gap across four target sizes",
+    "display": "0.154",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_representation_diagnostics.csv",
+    "source_rows": "steam/pooled_ce",
+    "value": 0.15416219286252753,
+    "value_id": "table_bonus_diagnostics_steam_pooled_ce_separation"
+  },
+  "table_bonus_diagnostics_steam_supcon_retention": {
+    "artifact": "table_bonus_diagnostics",
+    "derivation": "mean source retention across four target sizes",
+    "display": "-0.001",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "steam/supcon",
+    "value": -0.0005723680429574884,
+    "value_id": "table_bonus_diagnostics_steam_supcon_retention"
+  },
+  "table_bonus_diagnostics_steam_supcon_separation": {
+    "artifact": "table_bonus_diagnostics",
+    "derivation": "mean separation gap across four target sizes",
+    "display": "0.146",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_representation_diagnostics.csv",
+    "source_rows": "steam/supcon",
+    "value": 0.14584540905429758,
+    "value_id": "table_bonus_diagnostics_steam_supcon_separation"
+  },
+  "table_bonus_labels_nsmc_db_cdsupcon_crossover": {
+    "artifact": "table_bonus_label_efficiency",
+    "derivation": "first target-size threshold; missing stays not observed",
+    "display": "200",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+    "source_rows": "nsmc/db_cdsupcon",
+    "value": 200.0,
+    "value_id": "table_bonus_labels_nsmc_db_cdsupcon_crossover"
+  },
+  "table_bonus_labels_nsmc_db_cdsupcon_saved": {
+    "artifact": "table_bonus_label_efficiency",
+    "derivation": "target-only threshold minus candidate threshold; requires both observed",
+    "display": "Not estimable",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+    "source_rows": "nsmc/db_cdsupcon",
+    "value": null,
+    "value_id": "table_bonus_labels_nsmc_db_cdsupcon_saved"
+  },
+  "table_bonus_labels_nsmc_pooled_ce_crossover": {
+    "artifact": "table_bonus_label_efficiency",
+    "derivation": "first target-size threshold; missing stays not observed",
+    "display": "200",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+    "source_rows": "nsmc/pooled_ce",
+    "value": 200.0,
+    "value_id": "table_bonus_labels_nsmc_pooled_ce_crossover"
+  },
+  "table_bonus_labels_nsmc_pooled_ce_saved": {
+    "artifact": "table_bonus_label_efficiency",
+    "derivation": "target-only threshold minus candidate threshold; requires both observed",
+    "display": "Not estimable",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+    "source_rows": "nsmc/pooled_ce",
+    "value": null,
+    "value_id": "table_bonus_labels_nsmc_pooled_ce_saved"
+  },
+  "table_bonus_labels_nsmc_supcon_crossover": {
+    "artifact": "table_bonus_label_efficiency",
+    "derivation": "first target-size threshold; missing stays not observed",
+    "display": "200",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+    "source_rows": "nsmc/supcon",
+    "value": 200.0,
+    "value_id": "table_bonus_labels_nsmc_supcon_crossover"
+  },
+  "table_bonus_labels_nsmc_supcon_saved": {
+    "artifact": "table_bonus_label_efficiency",
+    "derivation": "target-only threshold minus candidate threshold; requires both observed",
+    "display": "Not estimable",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+    "source_rows": "nsmc/supcon",
+    "value": null,
+    "value_id": "table_bonus_labels_nsmc_supcon_saved"
+  },
+  "table_bonus_labels_nsmc_target_transformer_crossover": {
+    "artifact": "table_bonus_label_efficiency",
+    "derivation": "first target-size threshold; missing stays not observed",
+    "display": "Not observed",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+    "source_rows": "nsmc/target_transformer",
+    "value": NaN,
+    "value_id": "table_bonus_labels_nsmc_target_transformer_crossover"
+  },
+  "table_bonus_labels_nsmc_target_transformer_saved": {
+    "artifact": "table_bonus_label_efficiency",
+    "derivation": "target-only threshold minus candidate threshold; requires both observed",
+    "display": "Not estimable",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+    "source_rows": "nsmc/target_transformer",
+    "value": null,
+    "value_id": "table_bonus_labels_nsmc_target_transformer_saved"
+  },
+  "table_bonus_labels_shopping_db_cdsupcon_crossover": {
+    "artifact": "table_bonus_label_efficiency",
+    "derivation": "first target-size threshold; missing stays not observed",
+    "display": "Not observed",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+    "source_rows": "shopping/db_cdsupcon",
+    "value": NaN,
+    "value_id": "table_bonus_labels_shopping_db_cdsupcon_crossover"
+  },
+  "table_bonus_labels_shopping_db_cdsupcon_saved": {
+    "artifact": "table_bonus_label_efficiency",
+    "derivation": "target-only threshold minus candidate threshold; requires both observed",
+    "display": "Not estimable",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+    "source_rows": "shopping/db_cdsupcon",
+    "value": null,
+    "value_id": "table_bonus_labels_shopping_db_cdsupcon_saved"
+  },
+  "table_bonus_labels_shopping_pooled_ce_crossover": {
+    "artifact": "table_bonus_label_efficiency",
+    "derivation": "first target-size threshold; missing stays not observed",
+    "display": "Not observed",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+    "source_rows": "shopping/pooled_ce",
+    "value": NaN,
+    "value_id": "table_bonus_labels_shopping_pooled_ce_crossover"
+  },
+  "table_bonus_labels_shopping_pooled_ce_saved": {
+    "artifact": "table_bonus_label_efficiency",
+    "derivation": "target-only threshold minus candidate threshold; requires both observed",
+    "display": "Not estimable",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+    "source_rows": "shopping/pooled_ce",
+    "value": null,
+    "value_id": "table_bonus_labels_shopping_pooled_ce_saved"
+  },
+  "table_bonus_labels_shopping_supcon_crossover": {
+    "artifact": "table_bonus_label_efficiency",
+    "derivation": "first target-size threshold; missing stays not observed",
+    "display": "Not observed",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+    "source_rows": "shopping/supcon",
+    "value": NaN,
+    "value_id": "table_bonus_labels_shopping_supcon_crossover"
+  },
+  "table_bonus_labels_shopping_supcon_saved": {
+    "artifact": "table_bonus_label_efficiency",
+    "derivation": "target-only threshold minus candidate threshold; requires both observed",
+    "display": "Not estimable",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+    "source_rows": "shopping/supcon",
+    "value": null,
+    "value_id": "table_bonus_labels_shopping_supcon_saved"
+  },
+  "table_bonus_labels_shopping_target_transformer_crossover": {
+    "artifact": "table_bonus_label_efficiency",
+    "derivation": "first target-size threshold; missing stays not observed",
+    "display": "Not observed",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+    "source_rows": "shopping/target_transformer",
+    "value": NaN,
+    "value_id": "table_bonus_labels_shopping_target_transformer_crossover"
+  },
+  "table_bonus_labels_shopping_target_transformer_saved": {
+    "artifact": "table_bonus_label_efficiency",
+    "derivation": "target-only threshold minus candidate threshold; requires both observed",
+    "display": "Not estimable",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+    "source_rows": "shopping/target_transformer",
+    "value": null,
+    "value_id": "table_bonus_labels_shopping_target_transformer_saved"
+  },
+  "table_bonus_labels_steam_db_cdsupcon_crossover": {
+    "artifact": "table_bonus_label_efficiency",
+    "derivation": "first target-size threshold; missing stays not observed",
+    "display": "200",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+    "source_rows": "steam/db_cdsupcon",
+    "value": 200.0,
+    "value_id": "table_bonus_labels_steam_db_cdsupcon_crossover"
+  },
+  "table_bonus_labels_steam_db_cdsupcon_saved": {
+    "artifact": "table_bonus_label_efficiency",
+    "derivation": "target-only threshold minus candidate threshold; requires both observed",
+    "display": "Not estimable",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+    "source_rows": "steam/db_cdsupcon",
+    "value": null,
+    "value_id": "table_bonus_labels_steam_db_cdsupcon_saved"
+  },
+  "table_bonus_labels_steam_pooled_ce_crossover": {
+    "artifact": "table_bonus_label_efficiency",
+    "derivation": "first target-size threshold; missing stays not observed",
+    "display": "200",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+    "source_rows": "steam/pooled_ce",
+    "value": 200.0,
+    "value_id": "table_bonus_labels_steam_pooled_ce_crossover"
+  },
+  "table_bonus_labels_steam_pooled_ce_saved": {
+    "artifact": "table_bonus_label_efficiency",
+    "derivation": "target-only threshold minus candidate threshold; requires both observed",
+    "display": "Not estimable",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+    "source_rows": "steam/pooled_ce",
+    "value": null,
+    "value_id": "table_bonus_labels_steam_pooled_ce_saved"
+  },
+  "table_bonus_labels_steam_supcon_crossover": {
+    "artifact": "table_bonus_label_efficiency",
+    "derivation": "first target-size threshold; missing stays not observed",
+    "display": "200",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+    "source_rows": "steam/supcon",
+    "value": 200.0,
+    "value_id": "table_bonus_labels_steam_supcon_crossover"
+  },
+  "table_bonus_labels_steam_supcon_saved": {
+    "artifact": "table_bonus_label_efficiency",
+    "derivation": "target-only threshold minus candidate threshold; requires both observed",
+    "display": "Not estimable",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+    "source_rows": "steam/supcon",
+    "value": null,
+    "value_id": "table_bonus_labels_steam_supcon_saved"
+  },
+  "table_bonus_labels_steam_target_transformer_crossover": {
+    "artifact": "table_bonus_label_efficiency",
+    "derivation": "first target-size threshold; missing stays not observed",
+    "display": "Not observed",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+    "source_rows": "steam/target_transformer",
+    "value": NaN,
+    "value_id": "table_bonus_labels_steam_target_transformer_crossover"
+  },
+  "table_bonus_labels_steam_target_transformer_saved": {
+    "artifact": "table_bonus_label_efficiency",
+    "derivation": "target-only threshold minus candidate threshold; requires both observed",
+    "display": "Not estimable",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv",
+    "source_rows": "steam/target_transformer",
+    "value": null,
+    "value_id": "table_bonus_labels_steam_target_transformer_saved"
+  },
+  "table_bonus_nsmc_best_tfidf_1000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "67.02 $\\pm$ 0.28 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "part1-e07861b4b6bdb74f184a,part1-f2a198e7a2a2d5ab54ca,part1-bac4c257d9843d4acf26",
+    "value": 0.6702372237981645,
+    "value_id": "table_bonus_nsmc_best_tfidf_1000"
+  },
+  "table_bonus_nsmc_best_tfidf_200": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "60.62 $\\pm$ 0.96 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "part1-bdd99c8b71b538cb9ad6,part1-6339253e1794804a1f9f,part1-6e271339b53c126ae44f",
+    "value": 0.6062272795687218,
+    "value_id": "table_bonus_nsmc_best_tfidf_200"
+  },
+  "table_bonus_nsmc_best_tfidf_2000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "69.65 $\\pm$ 0.19 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "part1-f5209b3ad652c5c27608,part1-5f29d71a27c4b1980e35,part1-e823a7e0c0e8e396d2a9",
+    "value": 0.6964962325732582,
+    "value_id": "table_bonus_nsmc_best_tfidf_2000"
+  },
+  "table_bonus_nsmc_best_tfidf_500": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "63.99 $\\pm$ 0.58 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "part1-b0f55896884522c3560a,part1-d0a6fbe79053b236bd0d,part1-1e064814588f24e5c520",
+    "value": 0.6399005011254895,
+    "value_id": "table_bonus_nsmc_best_tfidf_500"
+  },
+  "table_bonus_nsmc_db_cdsupcon_1000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "66.53 $\\pm$ 0.74 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-08b5ac2c8c1fe759823e,bonus-89d9ec08fc2caa9c5548,bonus-60c76955e7f8d2662a47",
+    "value": 0.6652684488979516,
+    "value_id": "table_bonus_nsmc_db_cdsupcon_1000"
+  },
+  "table_bonus_nsmc_db_cdsupcon_200": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "63.59 $\\pm$ 0.75 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-39f9b86fabef434555e5,bonus-f541273685c799a8bee5,bonus-a38715e7e1d639451b37",
+    "value": 0.6358878952446212,
+    "value_id": "table_bonus_nsmc_db_cdsupcon_200"
+  },
+  "table_bonus_nsmc_db_cdsupcon_2000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "68.78 $\\pm$ 0.62 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-982ca7225b0f7bd4969e,bonus-23afd7d495967eb778fe,bonus-601e3fbe7d5c30282634",
+    "value": 0.6878026437390939,
+    "value_id": "table_bonus_nsmc_db_cdsupcon_2000"
+  },
+  "table_bonus_nsmc_db_cdsupcon_500": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "65.36 $\\pm$ 0.34 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-0fcc8bcc634c5d50b08d,bonus-c43335418713c9029253,bonus-baac94e42153af2c6fd3",
+    "value": 0.6535948365796879,
+    "value_id": "table_bonus_nsmc_db_cdsupcon_500"
+  },
+  "table_bonus_nsmc_pooled_ce_1000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "66.55 $\\pm$ 1.07 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-35f02c276ca296763032,bonus-ada547962ec517697368,bonus-3123a7c9ee1e8556f749",
+    "value": 0.6654720863150606,
+    "value_id": "table_bonus_nsmc_pooled_ce_1000"
+  },
+  "table_bonus_nsmc_pooled_ce_200": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "62.82 $\\pm$ 0.83 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-1377de92fe4780256a92,bonus-b02ecd69b16b29d988d2,bonus-8b289c2f58a2007e482d",
+    "value": 0.6281829502161139,
+    "value_id": "table_bonus_nsmc_pooled_ce_200"
+  },
+  "table_bonus_nsmc_pooled_ce_2000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "68.71 $\\pm$ 0.38 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-a858b17ae6055124ab5b,bonus-a4ca550b98395a2b5b73,bonus-410afd3208fb9636f5cb",
+    "value": 0.6871288030042538,
+    "value_id": "table_bonus_nsmc_pooled_ce_2000"
+  },
+  "table_bonus_nsmc_pooled_ce_500": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "64.73 $\\pm$ 1.33 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-84dc172f68efa7ab9dab,bonus-c8fa2820710663839774,bonus-e55378437e12850d45d9",
+    "value": 0.6473468935266214,
+    "value_id": "table_bonus_nsmc_pooled_ce_500"
+  },
+  "table_bonus_nsmc_supcon_1000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "66.02 $\\pm$ 1.80 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-a8b03596328d73a69769,bonus-6aa1329000b3dec9d636,bonus-a6e71229706195c84e30",
+    "value": 0.6601934074125801,
+    "value_id": "table_bonus_nsmc_supcon_1000"
+  },
+  "table_bonus_nsmc_supcon_200": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "63.08 $\\pm$ 0.79 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-c0eb778a3367c6d4a7ea,bonus-2f220fdee6e860cf30e2,bonus-da738e3a41d273cb7d9b",
+    "value": 0.6307593141490804,
+    "value_id": "table_bonus_nsmc_supcon_200"
+  },
+  "table_bonus_nsmc_supcon_2000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "68.52 $\\pm$ 0.68 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-de9ca0022a05537f3d93,bonus-0a6e0f09e2ed1b2d7930,bonus-8de94f150b69b2c9778b",
+    "value": 0.6852202948868372,
+    "value_id": "table_bonus_nsmc_supcon_2000"
+  },
+  "table_bonus_nsmc_supcon_500": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "64.83 $\\pm$ 1.32 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-0022337f835a4e4d9525,bonus-6f1146319dd90d1c143d,bonus-1e1907150492f90329b1",
+    "value": 0.648273688684775,
+    "value_id": "table_bonus_nsmc_supcon_500"
+  },
+  "table_bonus_nsmc_target_transformer_1000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "54.72 $\\pm$ 5.97 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "part1-70763636dc2225d04de4,part1-f178487dd83c5aed4714,part1-dc822629e727afb95734",
+    "value": 0.5472389251442422,
+    "value_id": "table_bonus_nsmc_target_transformer_1000"
+  },
+  "table_bonus_nsmc_target_transformer_200": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "50.77 $\\pm$ 3.52 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "part1-ddf7f413b188a8337b32,part1-d4338cb2c99373e67b95,part1-dfc7a9458990507ce01c",
+    "value": 0.5076552117136995,
+    "value_id": "table_bonus_nsmc_target_transformer_200"
+  },
+  "table_bonus_nsmc_target_transformer_2000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "57.90 $\\pm$ 1.17 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "part1-1bc8167799840cb01528,part1-c39be495102a6f63ae44,part1-a2bbe11e37eb4ad22bce",
+    "value": 0.5790424089097002,
+    "value_id": "table_bonus_nsmc_target_transformer_2000"
+  },
+  "table_bonus_nsmc_target_transformer_500": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "51.26 $\\pm$ 6.13 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "part1-23b59beba8d6ca48de59,part1-cc6763ea4647a7bc7047,part1-b6b81cc371abcfcfe964",
+    "value": 0.5125525927361128,
+    "value_id": "table_bonus_nsmc_target_transformer_500"
+  },
+  "table_bonus_shopping_best_tfidf_1000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "79.81 $\\pm$ 0.44 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "part1-633ee1a8851b1cf6a889,part1-2d10653ed26a898ebefb,part1-85381eb0846be5eccf83",
+    "value": 0.7980932769235961,
+    "value_id": "table_bonus_shopping_best_tfidf_1000"
+  },
+  "table_bonus_shopping_best_tfidf_200": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "71.93 $\\pm$ 0.96 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "part1-3908f537653227fde2aa,part1-bfacca769f8c7c0ab306,part1-5564765461429230de15",
+    "value": 0.7192750954202044,
+    "value_id": "table_bonus_shopping_best_tfidf_200"
+  },
+  "table_bonus_shopping_best_tfidf_2000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "81.86 $\\pm$ 0.31 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "part1-5ad1f11481725e27bdf2,part1-d8c81c404fdee2609197,part1-ebeeef833c83445b06e3",
+    "value": 0.8185973128220381,
+    "value_id": "table_bonus_shopping_best_tfidf_2000"
+  },
+  "table_bonus_shopping_best_tfidf_500": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "76.73 $\\pm$ 1.52 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "part1-e1cf3682a8821641ea42,part1-7f0f88d2169422de7075,part1-c17c53deec1e2499188e",
+    "value": 0.7672763028438148,
+    "value_id": "table_bonus_shopping_best_tfidf_500"
+  },
+  "table_bonus_shopping_db_cdsupcon_1000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "75.35 $\\pm$ 1.70 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-0d17cf9b0cdc6d5551c5,bonus-d1a0486b04cf49ceb075,bonus-7a85db67b3744b662c7c",
+    "value": 0.7534569520649305,
+    "value_id": "table_bonus_shopping_db_cdsupcon_1000"
+  },
+  "table_bonus_shopping_db_cdsupcon_200": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "69.73 $\\pm$ 3.77 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-eba1f54805bee981cb56,bonus-b859352f690736fafa45,bonus-7368d6043d487dd387b1",
+    "value": 0.697251262913204,
+    "value_id": "table_bonus_shopping_db_cdsupcon_200"
+  },
+  "table_bonus_shopping_db_cdsupcon_2000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "77.88 $\\pm$ 0.69 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-72a3736eefc57f460cf6,bonus-88cc5fba488194de0699,bonus-8577fe66af6e34d38b1f",
+    "value": 0.7788082384253409,
+    "value_id": "table_bonus_shopping_db_cdsupcon_2000"
+  },
+  "table_bonus_shopping_db_cdsupcon_500": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "74.30 $\\pm$ 0.46 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-9cf1a8772b8135f7cba3,bonus-ca0778fd190f3096c78a,bonus-962d575538a6dda26d93",
+    "value": 0.7429513992017395,
+    "value_id": "table_bonus_shopping_db_cdsupcon_500"
+  },
+  "table_bonus_shopping_pooled_ce_1000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "75.86 $\\pm$ 1.58 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-4905eee88c656801f9a8,bonus-71418777ab98bf3c231e,bonus-c4075ebcf6b1bf01b89f",
+    "value": 0.7586073281397253,
+    "value_id": "table_bonus_shopping_pooled_ce_1000"
+  },
+  "table_bonus_shopping_pooled_ce_200": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "69.11 $\\pm$ 3.29 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-b747c35916eaffb358c7,bonus-35487a894fd9d221998d,bonus-1788757d7a4fe076d08c",
+    "value": 0.6911358992819839,
+    "value_id": "table_bonus_shopping_pooled_ce_200"
+  },
+  "table_bonus_shopping_pooled_ce_2000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "75.45 $\\pm$ 2.19 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-28e8b440a5c3521886ae,bonus-2f8e455298e08a7561b8,bonus-8b4cfee01eeb40545180",
+    "value": 0.754475513969402,
+    "value_id": "table_bonus_shopping_pooled_ce_2000"
+  },
+  "table_bonus_shopping_pooled_ce_500": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "74.02 $\\pm$ 0.67 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-d0947154a4f4772cafa0,bonus-1cee01f200f265b5aeee,bonus-c2c7f93241256f6d0cae",
+    "value": 0.7402127375371198,
+    "value_id": "table_bonus_shopping_pooled_ce_500"
+  },
+  "table_bonus_shopping_supcon_1000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "75.52 $\\pm$ 1.70 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-cc3f94f264aea0d31dd9,bonus-c40db89f2ecd5b069c2b,bonus-d2ee81b10294eff0a0df",
+    "value": 0.7551547667072297,
+    "value_id": "table_bonus_shopping_supcon_1000"
+  },
+  "table_bonus_shopping_supcon_200": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "69.48 $\\pm$ 3.63 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-313fe1683d80d7fd1cd9,bonus-0521f277907b180ff0db,bonus-07cb497a8247927aa04e",
+    "value": 0.6948455423381864,
+    "value_id": "table_bonus_shopping_supcon_200"
+  },
+  "table_bonus_shopping_supcon_2000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "78.04 $\\pm$ 0.70 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-991d84228ad4b0664e1b,bonus-7facc89c7674814af473,bonus-cc5c275da5062cf57955",
+    "value": 0.7803812200730399,
+    "value_id": "table_bonus_shopping_supcon_2000"
+  },
+  "table_bonus_shopping_supcon_500": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "74.22 $\\pm$ 0.85 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-79de03bf273a749091cc,bonus-6358a9b1d9dae63cffaf,bonus-bc1bd6230f91877181f7",
+    "value": 0.7421529467226106,
+    "value_id": "table_bonus_shopping_supcon_500"
+  },
+  "table_bonus_shopping_target_transformer_1000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "72.51 $\\pm$ 2.31 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "part1-36c7f8c8b6f49bdbcbb9,part1-124d7df28b35a7ae82e6,part1-30c336191f685203a8ea",
+    "value": 0.7250599007469841,
+    "value_id": "table_bonus_shopping_target_transformer_1000"
+  },
+  "table_bonus_shopping_target_transformer_200": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "63.92 $\\pm$ 2.74 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "part1-9d0dfa394254c10078ba,part1-f70d9f72858dbe1b03e3,part1-ec6f9091233a2040c373",
+    "value": 0.6392007804356907,
+    "value_id": "table_bonus_shopping_target_transformer_200"
+  },
+  "table_bonus_shopping_target_transformer_2000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "71.75 $\\pm$ 7.66 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "part1-0ecc09cc1f54a4f247bf,part1-d64e04a3245f7b98849e,part1-f6d84748ae689f40d67c",
+    "value": 0.7175107308187548,
+    "value_id": "table_bonus_shopping_target_transformer_2000"
+  },
+  "table_bonus_shopping_target_transformer_500": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "64.70 $\\pm$ 5.53 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "part1-50aa110ce1888d7a217c,part1-89afe54df4be60fa289d,part1-9ab7c4fcfa0c2071ea1e",
+    "value": 0.647035716581782,
+    "value_id": "table_bonus_shopping_target_transformer_500"
+  },
+  "table_bonus_steam_best_tfidf_1000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "64.49 $\\pm$ 0.46 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "part1-d17c03f29639396261e5,part1-dae72b6f5fa2d2fe4b25,part1-e5dd3ae5768545e1fe0a",
+    "value": 0.6449355744725386,
+    "value_id": "table_bonus_steam_best_tfidf_1000"
+  },
+  "table_bonus_steam_best_tfidf_200": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "60.50 $\\pm$ 0.60 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "part1-481e5aa9b9f9c12d936c,part1-d83f5b6c51ad9a403353,part1-f5372460fe8d3629387d",
+    "value": 0.6050320767645837,
+    "value_id": "table_bonus_steam_best_tfidf_200"
+  },
+  "table_bonus_steam_best_tfidf_2000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "67.32 $\\pm$ 0.44 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "part1-71686fd34bd6ceed7a1c,part1-721aa1479c44c120197f,part1-3d78dc4e13ef05f2a473",
+    "value": 0.6732487870079469,
+    "value_id": "table_bonus_steam_best_tfidf_2000"
+  },
+  "table_bonus_steam_best_tfidf_500": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "62.42 $\\pm$ 0.58 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "part1-2213fd74287e069d11a6,part1-5d03aaab36a48e2e6ce9,part1-57fa02b4c716d9e4358a",
+    "value": 0.6242055419203142,
+    "value_id": "table_bonus_steam_best_tfidf_500"
+  },
+  "table_bonus_steam_db_cdsupcon_1000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "64.97 $\\pm$ 0.84 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-2d432b60467f4a4cfc9f,bonus-861dc37bcb3b143f1a61,bonus-02574e37ef4038eb4515",
+    "value": 0.6497209366135032,
+    "value_id": "table_bonus_steam_db_cdsupcon_1000"
+  },
+  "table_bonus_steam_db_cdsupcon_200": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "62.78 $\\pm$ 1.50 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-4d813ce9a9bc11d28e3d,bonus-7b33ba063fe602c19ea0,bonus-554da98fa2098ebe38a5",
+    "value": 0.6278178992822822,
+    "value_id": "table_bonus_steam_db_cdsupcon_200"
+  },
+  "table_bonus_steam_db_cdsupcon_2000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "66.14 $\\pm$ 0.66 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-22e570bd196b5c6e927f,bonus-e9268607baa962879513,bonus-cc44fc49680463d838fe",
+    "value": 0.661434695074631,
+    "value_id": "table_bonus_steam_db_cdsupcon_2000"
+  },
+  "table_bonus_steam_db_cdsupcon_500": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "62.83 $\\pm$ 0.92 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-a541c7abe72a4a1349e2,bonus-c4f12229714eb9d6d4ae,bonus-ea389008f88fb63508e6",
+    "value": 0.6283110669680864,
+    "value_id": "table_bonus_steam_db_cdsupcon_500"
+  },
+  "table_bonus_steam_pooled_ce_1000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "65.18 $\\pm$ 0.35 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-4adf2aed173f5ecbb5b3,bonus-8b8001e82f1c7d49c13a,bonus-af83a2dcaa0c65c1fe8e",
+    "value": 0.6517873426981057,
+    "value_id": "table_bonus_steam_pooled_ce_1000"
+  },
+  "table_bonus_steam_pooled_ce_200": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "62.71 $\\pm$ 1.04 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-387726b8b69c5b79394a,bonus-d5d98d5ac10897ba08ae,bonus-8326620cb3331d00ef68",
+    "value": 0.6271047443803827,
+    "value_id": "table_bonus_steam_pooled_ce_200"
+  },
+  "table_bonus_steam_pooled_ce_2000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "66.29 $\\pm$ 0.41 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-6bf2d8b5e45efe091ad9,bonus-b46e4fcc02e37c3450c0,bonus-b167477caa80b03547b8",
+    "value": 0.6628847549806008,
+    "value_id": "table_bonus_steam_pooled_ce_2000"
+  },
+  "table_bonus_steam_pooled_ce_500": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "62.83 $\\pm$ 1.33 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-c3a752f3d064e4ac07f6,bonus-dbd6ac3c5b126a56eefd,bonus-460732a8081fc1430f57",
+    "value": 0.628318626531326,
+    "value_id": "table_bonus_steam_pooled_ce_500"
+  },
+  "table_bonus_steam_supcon_1000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "64.67 $\\pm$ 0.57 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-2057c1eb69a5c89dcdd5,bonus-6f82acf52c80e1285812,bonus-6844e4d9c524ca45210b",
+    "value": 0.6466902872827399,
+    "value_id": "table_bonus_steam_supcon_1000"
+  },
+  "table_bonus_steam_supcon_200": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "61.70 $\\pm$ 0.20 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-204b36d2aa770ba9fa1b,bonus-a42c368a30a2e7908b7c,bonus-10c77b85a2ae8360b081",
+    "value": 0.6170123489414818,
+    "value_id": "table_bonus_steam_supcon_200"
+  },
+  "table_bonus_steam_supcon_2000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "66.51 $\\pm$ 0.97 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-730b38e4eda404d260e1,bonus-3f6c9058df8e7add2f81,bonus-0d3d258489a6bb329078",
+    "value": 0.665065617539478,
+    "value_id": "table_bonus_steam_supcon_2000"
+  },
+  "table_bonus_steam_supcon_500": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "63.93 $\\pm$ 0.14 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "bonus-b1734a54f37d165068f9,bonus-2d268c78d1e806871880,bonus-1767801d5f7498451130",
+    "value": 0.6392919824523123,
+    "value_id": "table_bonus_steam_supcon_500"
+  },
+  "table_bonus_steam_target_transformer_1000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "58.02 $\\pm$ 1.87 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "part1-53913fc71660041583d3,part1-08d97048f72a5614b5ad,part1-d817dc859830b6507fc3",
+    "value": 0.580158717773092,
+    "value_id": "table_bonus_steam_target_transformer_1000"
+  },
+  "table_bonus_steam_target_transformer_200": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "49.18 $\\pm$ 2.60 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "part1-643bf11b18c08857d606,part1-1d674a4b68911100361e,part1-21359e2f4262f9b87011",
+    "value": 0.4917537252432503,
+    "value_id": "table_bonus_steam_target_transformer_200"
+  },
+  "table_bonus_steam_target_transformer_2000": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "57.33 $\\pm$ 5.48 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "part1-598f8e4a7b98955e911e,part1-6f01a9c4f1dc3458a39a,part1-f02aef4a47da64aea862",
+    "value": 0.5733099497813458,
+    "value_id": "table_bonus_steam_target_transformer_2000"
+  },
+  "table_bonus_steam_target_transformer_500": {
+    "artifact": "table_bonus_performance",
+    "derivation": "mean and sample SD across three aligned seeds",
+    "display": "54.20 $\\pm$ 1.14 (3)",
+    "source_file": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv",
+    "source_rows": "part1-5513d716a9fb7701537e,part1-8505c70530f55db4d541,part1-2cf061d4931de9cd6465",
+    "value": 0.5420068870374372,
+    "value_id": "table_bonus_steam_target_transformer_500"
+  },
+  "table_completeness_bonus_final": {
+    "artifact": "table_completeness",
+    "derivation": "completed and expected plan count",
+    "display": "108",
+    "source_file": "Source/results/reporting/frozen_result_manifest.json",
+    "source_rows": "counts/bonus_final",
+    "value": 108,
+    "value_id": "table_completeness_bonus_final"
+  },
+  "table_completeness_bonus_tuning": {
+    "artifact": "table_completeness",
+    "derivation": "completed and expected plan count",
+    "display": "36",
+    "source_file": "Source/results/reporting/frozen_result_manifest.json",
+    "source_rows": "counts/bonus_tuning",
+    "value": 36,
+    "value_id": "table_completeness_bonus_tuning"
+  },
+  "table_completeness_part1_final": {
+    "artifact": "table_completeness",
+    "derivation": "completed and expected plan count",
+    "display": "837",
+    "source_file": "Source/results/reporting/frozen_result_manifest.json",
+    "source_rows": "counts/part1_final",
+    "value": 837,
+    "value_id": "table_completeness_part1_final"
+  },
+  "table_completeness_part1_tuning": {
+    "artifact": "table_completeness",
+    "derivation": "completed and expected plan count",
+    "display": "270",
+    "source_file": "Source/results/reporting/frozen_result_manifest.json",
+    "source_rows": "counts/part1_tuning",
+    "value": 270,
+    "value_id": "table_completeness_part1_tuning"
+  },
+  "table_completeness_total": {
+    "artifact": "table_completeness",
+    "derivation": "completed and expected plan count",
+    "display": "1,251",
+    "source_file": "Source/results/reporting/frozen_result_manifest.json",
+    "source_rows": "counts/total",
+    "value": 1251,
+    "value_id": "table_completeness_total"
+  },
+  "table_config_nsmc_avg_mlp": {
+    "artifact": "table_selected_configs",
+    "derivation": "frozen selected configuration row",
+    "display": "mlp08: {\"dropout\": 0.3, \"embedding_dim\": 128, \"hidden_dim\": 288, \"id\": \"mlp08\", \"learning_rate\": 0.002, \"num_layers\": 2}",
+    "source_file": "Source/results/reporting/derived_metrics/selected_configurations.csv",
+    "source_rows": "nsmc/avg_mlp",
+    "value": "mlp08",
+    "value_id": "table_config_nsmc_avg_mlp"
+  },
+  "table_config_nsmc_gru": {
+    "artifact": "table_selected_configs",
+    "derivation": "frozen selected configuration row",
+    "display": "gru08: {\"dropout\": 0.3, \"embedding_dim\": 128, \"hidden_dim\": 128, \"id\": \"gru08\", \"learning_rate\": 0.002, \"num_layers\": 2}",
+    "source_file": "Source/results/reporting/derived_metrics/selected_configurations.csv",
+    "source_rows": "nsmc/gru",
+    "value": "gru08",
+    "value_id": "table_config_nsmc_gru"
+  },
+  "table_config_nsmc_lstm": {
+    "artifact": "table_selected_configs",
+    "derivation": "frozen selected configuration row",
+    "display": "lstm08: {\"dropout\": 0.3, \"embedding_dim\": 128, \"hidden_dim\": 112, \"id\": \"lstm08\", \"learning_rate\": 0.002, \"num_layers\": 2}",
+    "source_file": "Source/results/reporting/derived_metrics/selected_configurations.csv",
+    "source_rows": "nsmc/lstm",
+    "value": "lstm08",
+    "value_id": "table_config_nsmc_lstm"
+  },
+  "table_config_nsmc_mamba": {
+    "artifact": "table_selected_configs",
+    "derivation": "frozen selected configuration row",
+    "display": "mb08: {\"d_conv\": 4, \"d_state\": 16, \"dropout\": 0.3, \"embedding_dim\": 128, \"expand\": 2, \"hidden_dim\": 128, \"id\": \"mb08\", \"learning_rate\": 0.002, \"num_layers\": 2}",
+    "source_file": "Source/results/reporting/derived_metrics/selected_configurations.csv",
+    "source_rows": "nsmc/mamba",
+    "value": "mb08",
+    "value_id": "table_config_nsmc_mamba"
+  },
+  "table_config_nsmc_tfidf_lr": {
+    "artifact": "table_selected_configs",
+    "derivation": "frozen selected configuration row",
+    "display": "lr06: {\"C\": 2.0, \"id\": \"lr06\", \"max_iter\": 3000, \"solver\": \"liblinear\"}",
+    "source_file": "Source/results/reporting/derived_metrics/selected_configurations.csv",
+    "source_rows": "nsmc/tfidf_lr",
+    "value": "lr06",
+    "value_id": "table_config_nsmc_tfidf_lr"
+  },
+  "table_config_nsmc_tfidf_rf": {
+    "artifact": "table_selected_configs",
+    "derivation": "frozen selected configuration row",
+    "display": "rf09: {\"id\": \"rf09\", \"max_depth\": null, \"max_features\": \"sqrt\", \"min_samples_leaf\": 2, \"n_estimators\": 700}",
+    "source_file": "Source/results/reporting/derived_metrics/selected_configurations.csv",
+    "source_rows": "nsmc/tfidf_rf",
+    "value": "rf09",
+    "value_id": "table_config_nsmc_tfidf_rf"
+  },
+  "table_config_nsmc_tfidf_svm": {
+    "artifact": "table_selected_configs",
+    "derivation": "frozen selected configuration row",
+    "display": "svm05: {\"C\": 0.25, \"id\": \"svm05\"}",
+    "source_file": "Source/results/reporting/derived_metrics/selected_configurations.csv",
+    "source_rows": "nsmc/tfidf_svm",
+    "value": "svm05",
+    "value_id": "table_config_nsmc_tfidf_svm"
+  },
+  "table_config_nsmc_tfidf_xgb": {
+    "artifact": "table_selected_configs",
+    "derivation": "frozen selected configuration row",
+    "display": "xgb03: {\"colsample_bytree\": 0.8, \"id\": \"xgb03\", \"learning_rate\": 0.05, \"max_depth\": 4, \"n_estimators\": 400, \"reg_lambda\": 1.0, \"subsample\": 0.8}",
+    "source_file": "Source/results/reporting/derived_metrics/selected_configurations.csv",
+    "source_rows": "nsmc/tfidf_xgb",
+    "value": "xgb03",
+    "value_id": "table_config_nsmc_tfidf_xgb"
+  },
+  "table_config_nsmc_transformer": {
+    "artifact": "table_selected_configs",
+    "derivation": "frozen selected configuration row",
+    "display": "tr07: {\"dropout\": 0.4, \"embedding_dim\": 128, \"ff_multiplier\": 2, \"hidden_dim\": 128, \"id\": \"tr07\", \"learning_rate\": 0.001, \"num_heads\": 4, \"num_layers\": 2}",
+    "source_file": "Source/results/reporting/derived_metrics/selected_configurations.csv",
+    "source_rows": "nsmc/transformer",
+    "value": "tr07",
+    "value_id": "table_config_nsmc_transformer"
+  },
+  "table_config_shopping_avg_mlp": {
+    "artifact": "table_selected_configs",
+    "derivation": "frozen selected configuration row",
+    "display": "mlp08: {\"dropout\": 0.3, \"embedding_dim\": 128, \"hidden_dim\": 288, \"id\": \"mlp08\", \"learning_rate\": 0.002, \"num_layers\": 2}",
+    "source_file": "Source/results/reporting/derived_metrics/selected_configurations.csv",
+    "source_rows": "shopping/avg_mlp",
+    "value": "mlp08",
+    "value_id": "table_config_shopping_avg_mlp"
+  },
+  "table_config_shopping_gru": {
+    "artifact": "table_selected_configs",
+    "derivation": "frozen selected configuration row",
+    "display": "gru08: {\"dropout\": 0.3, \"embedding_dim\": 128, \"hidden_dim\": 128, \"id\": \"gru08\", \"learning_rate\": 0.002, \"num_layers\": 2}",
+    "source_file": "Source/results/reporting/derived_metrics/selected_configurations.csv",
+    "source_rows": "shopping/gru",
+    "value": "gru08",
+    "value_id": "table_config_shopping_gru"
+  },
+  "table_config_shopping_lstm": {
+    "artifact": "table_selected_configs",
+    "derivation": "frozen selected configuration row",
+    "display": "lstm04: {\"dropout\": 0.2, \"embedding_dim\": 96, \"hidden_dim\": 96, \"id\": \"lstm04\", \"learning_rate\": 0.002, \"num_layers\": 1}",
+    "source_file": "Source/results/reporting/derived_metrics/selected_configurations.csv",
+    "source_rows": "shopping/lstm",
+    "value": "lstm04",
+    "value_id": "table_config_shopping_lstm"
+  },
+  "table_config_shopping_mamba": {
+    "artifact": "table_selected_configs",
+    "derivation": "frozen selected configuration row",
+    "display": "mb08: {\"d_conv\": 4, \"d_state\": 16, \"dropout\": 0.3, \"embedding_dim\": 128, \"expand\": 2, \"hidden_dim\": 128, \"id\": \"mb08\", \"learning_rate\": 0.002, \"num_layers\": 2}",
+    "source_file": "Source/results/reporting/derived_metrics/selected_configurations.csv",
+    "source_rows": "shopping/mamba",
+    "value": "mb08",
+    "value_id": "table_config_shopping_mamba"
+  },
+  "table_config_shopping_tfidf_lr": {
+    "artifact": "table_selected_configs",
+    "derivation": "frozen selected configuration row",
+    "display": "lr06: {\"C\": 2.0, \"id\": \"lr06\", \"max_iter\": 3000, \"solver\": \"liblinear\"}",
+    "source_file": "Source/results/reporting/derived_metrics/selected_configurations.csv",
+    "source_rows": "shopping/tfidf_lr",
+    "value": "lr06",
+    "value_id": "table_config_shopping_tfidf_lr"
+  },
+  "table_config_shopping_tfidf_rf": {
+    "artifact": "table_selected_configs",
+    "derivation": "frozen selected configuration row",
+    "display": "rf09: {\"id\": \"rf09\", \"max_depth\": null, \"max_features\": \"sqrt\", \"min_samples_leaf\": 2, \"n_estimators\": 700}",
+    "source_file": "Source/results/reporting/derived_metrics/selected_configurations.csv",
+    "source_rows": "shopping/tfidf_rf",
+    "value": "rf09",
+    "value_id": "table_config_shopping_tfidf_rf"
+  },
+  "table_config_shopping_tfidf_svm": {
+    "artifact": "table_selected_configs",
+    "derivation": "frozen selected configuration row",
+    "display": "svm05: {\"C\": 0.25, \"id\": \"svm05\"}",
+    "source_file": "Source/results/reporting/derived_metrics/selected_configurations.csv",
+    "source_rows": "shopping/tfidf_svm",
+    "value": "svm05",
+    "value_id": "table_config_shopping_tfidf_svm"
+  },
+  "table_config_shopping_tfidf_xgb": {
+    "artifact": "table_selected_configs",
+    "derivation": "frozen selected configuration row",
+    "display": "xgb03: {\"colsample_bytree\": 0.8, \"id\": \"xgb03\", \"learning_rate\": 0.05, \"max_depth\": 4, \"n_estimators\": 400, \"reg_lambda\": 1.0, \"subsample\": 0.8}",
+    "source_file": "Source/results/reporting/derived_metrics/selected_configurations.csv",
+    "source_rows": "shopping/tfidf_xgb",
+    "value": "xgb03",
+    "value_id": "table_config_shopping_tfidf_xgb"
+  },
+  "table_config_shopping_transformer": {
+    "artifact": "table_selected_configs",
+    "derivation": "frozen selected configuration row",
+    "display": "tr07: {\"dropout\": 0.4, \"embedding_dim\": 128, \"ff_multiplier\": 2, \"hidden_dim\": 128, \"id\": \"tr07\", \"learning_rate\": 0.001, \"num_heads\": 4, \"num_layers\": 2}",
+    "source_file": "Source/results/reporting/derived_metrics/selected_configurations.csv",
+    "source_rows": "shopping/transformer",
+    "value": "tr07",
+    "value_id": "table_config_shopping_transformer"
+  },
+  "table_config_steam_avg_mlp": {
+    "artifact": "table_selected_configs",
+    "derivation": "frozen selected configuration row",
+    "display": "mlp08: {\"dropout\": 0.3, \"embedding_dim\": 128, \"hidden_dim\": 288, \"id\": \"mlp08\", \"learning_rate\": 0.002, \"num_layers\": 2}",
+    "source_file": "Source/results/reporting/derived_metrics/selected_configurations.csv",
+    "source_rows": "steam/avg_mlp",
+    "value": "mlp08",
+    "value_id": "table_config_steam_avg_mlp"
+  },
+  "table_config_steam_gru": {
+    "artifact": "table_selected_configs",
+    "derivation": "frozen selected configuration row",
+    "display": "gru08: {\"dropout\": 0.3, \"embedding_dim\": 128, \"hidden_dim\": 128, \"id\": \"gru08\", \"learning_rate\": 0.002, \"num_layers\": 2}",
+    "source_file": "Source/results/reporting/derived_metrics/selected_configurations.csv",
+    "source_rows": "steam/gru",
+    "value": "gru08",
+    "value_id": "table_config_steam_gru"
+  },
+  "table_config_steam_lstm": {
+    "artifact": "table_selected_configs",
+    "derivation": "frozen selected configuration row",
+    "display": "lstm08: {\"dropout\": 0.3, \"embedding_dim\": 128, \"hidden_dim\": 112, \"id\": \"lstm08\", \"learning_rate\": 0.002, \"num_layers\": 2}",
+    "source_file": "Source/results/reporting/derived_metrics/selected_configurations.csv",
+    "source_rows": "steam/lstm",
+    "value": "lstm08",
+    "value_id": "table_config_steam_lstm"
+  },
+  "table_config_steam_mamba": {
+    "artifact": "table_selected_configs",
+    "derivation": "frozen selected configuration row",
+    "display": "mb07: {\"d_conv\": 3, \"d_state\": 16, \"dropout\": 0.4, \"embedding_dim\": 128, \"expand\": 2, \"hidden_dim\": 128, \"id\": \"mb07\", \"learning_rate\": 0.001, \"num_layers\": 2}",
+    "source_file": "Source/results/reporting/derived_metrics/selected_configurations.csv",
+    "source_rows": "steam/mamba",
+    "value": "mb07",
+    "value_id": "table_config_steam_mamba"
+  },
+  "table_config_steam_tfidf_lr": {
+    "artifact": "table_selected_configs",
+    "derivation": "frozen selected configuration row",
+    "display": "lr06: {\"C\": 2.0, \"id\": \"lr06\", \"max_iter\": 3000, \"solver\": \"liblinear\"}",
+    "source_file": "Source/results/reporting/derived_metrics/selected_configurations.csv",
+    "source_rows": "steam/tfidf_lr",
+    "value": "lr06",
+    "value_id": "table_config_steam_tfidf_lr"
+  },
+  "table_config_steam_tfidf_rf": {
+    "artifact": "table_selected_configs",
+    "derivation": "frozen selected configuration row",
+    "display": "rf09: {\"id\": \"rf09\", \"max_depth\": null, \"max_features\": \"sqrt\", \"min_samples_leaf\": 2, \"n_estimators\": 700}",
+    "source_file": "Source/results/reporting/derived_metrics/selected_configurations.csv",
+    "source_rows": "steam/tfidf_rf",
+    "value": "rf09",
+    "value_id": "table_config_steam_tfidf_rf"
+  },
+  "table_config_steam_tfidf_svm": {
+    "artifact": "table_selected_configs",
+    "derivation": "frozen selected configuration row",
+    "display": "svm05: {\"C\": 0.25, \"id\": \"svm05\"}",
+    "source_file": "Source/results/reporting/derived_metrics/selected_configurations.csv",
+    "source_rows": "steam/tfidf_svm",
+    "value": "svm05",
+    "value_id": "table_config_steam_tfidf_svm"
+  },
+  "table_config_steam_tfidf_xgb": {
+    "artifact": "table_selected_configs",
+    "derivation": "frozen selected configuration row",
+    "display": "xgb03: {\"colsample_bytree\": 0.8, \"id\": \"xgb03\", \"learning_rate\": 0.05, \"max_depth\": 4, \"n_estimators\": 400, \"reg_lambda\": 1.0, \"subsample\": 0.8}",
+    "source_file": "Source/results/reporting/derived_metrics/selected_configurations.csv",
+    "source_rows": "steam/tfidf_xgb",
+    "value": "xgb03",
+    "value_id": "table_config_steam_tfidf_xgb"
+  },
+  "table_config_steam_transformer": {
+    "artifact": "table_selected_configs",
+    "derivation": "frozen selected configuration row",
+    "display": "tr08: {\"dropout\": 0.3, \"embedding_dim\": 128, \"ff_multiplier\": 2, \"hidden_dim\": 128, \"id\": \"tr08\", \"learning_rate\": 0.002, \"num_heads\": 8, \"num_layers\": 2}",
+    "source_file": "Source/results/reporting/derived_metrics/selected_configurations.csv",
+    "source_rows": "steam/transformer",
+    "value": "tr08",
+    "value_id": "table_config_steam_transformer"
+  },
+  "table_crossover_nsmc_observed": {
+    "artifact": "table_part1_crossover",
+    "derivation": "first observed threshold",
+    "display": "64,000",
+    "source_file": "Source/results/reporting/derived_metrics/part1_crossover_summary.csv",
+    "source_rows": "nsmc",
+    "value": 64000.0,
+    "value_id": "table_crossover_nsmc_observed"
+  },
+  "table_crossover_nsmc_sustained": {
+    "artifact": "table_part1_crossover",
+    "derivation": "first sustained threshold",
+    "display": "64,000",
+    "source_file": "Source/results/reporting/derived_metrics/part1_crossover_summary.csv",
+    "source_rows": "nsmc",
+    "value": 64000.0,
+    "value_id": "table_crossover_nsmc_sustained"
+  },
+  "table_crossover_shopping_observed": {
+    "artifact": "table_part1_crossover",
+    "derivation": "first observed threshold",
+    "display": "Not through 159,918",
+    "source_file": "Source/results/reporting/derived_metrics/part1_crossover_summary.csv",
+    "source_rows": "shopping",
+    "value": NaN,
+    "value_id": "table_crossover_shopping_observed"
+  },
+  "table_crossover_shopping_sustained": {
+    "artifact": "table_part1_crossover",
+    "derivation": "first sustained threshold",
+    "display": "Not through 159,918",
+    "source_file": "Source/results/reporting/derived_metrics/part1_crossover_summary.csv",
+    "source_rows": "shopping",
+    "value": NaN,
+    "value_id": "table_crossover_shopping_sustained"
+  },
+  "table_crossover_steam_observed": {
+    "artifact": "table_part1_crossover",
+    "derivation": "first observed threshold",
+    "display": "Not through 79,828",
+    "source_file": "Source/results/reporting/derived_metrics/part1_crossover_summary.csv",
+    "source_rows": "steam",
+    "value": NaN,
+    "value_id": "table_crossover_steam_observed"
+  },
+  "table_crossover_steam_sustained": {
+    "artifact": "table_part1_crossover",
+    "derivation": "first sustained threshold",
+    "display": "Not through 79,828",
+    "source_file": "Source/results/reporting/derived_metrics/part1_crossover_summary.csv",
+    "source_rows": "steam",
+    "value": NaN,
+    "value_id": "table_crossover_steam_sustained"
+  },
+  "table_dataset_nsmc_n_full": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct generated table cell",
+    "display": "130,797",
+    "source_file": "Source/results/reporting/derived_metrics/dataset_statistics.csv",
+    "source_rows": "nsmc",
+    "value": 130797,
+    "value_id": "table_dataset_nsmc_n_full"
+  },
+  "table_dataset_nsmc_test_positive_pct": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct generated table cell",
+    "display": "50.3",
+    "source_file": "Source/results/reporting/derived_metrics/dataset_statistics.csv",
+    "source_rows": "nsmc",
+    "value": 50.26878436163714,
+    "value_id": "table_dataset_nsmc_test_positive_pct"
+  },
+  "table_dataset_nsmc_test_rows": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct generated table cell",
+    "display": "49,110",
+    "source_file": "Source/results/reporting/derived_metrics/dataset_statistics.csv",
+    "source_rows": "nsmc",
+    "value": 49110,
+    "value_id": "table_dataset_nsmc_test_rows"
+  },
+  "table_dataset_nsmc_train_positive_pct": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct generated table cell",
+    "display": "49.8",
+    "source_file": "Source/results/reporting/derived_metrics/dataset_statistics.csv",
+    "source_rows": "nsmc",
+    "value": 49.83447632590961,
+    "value_id": "table_dataset_nsmc_train_positive_pct"
+  },
+  "table_dataset_nsmc_train_rows": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct generated table cell",
+    "display": "130,797",
+    "source_file": "Source/results/reporting/derived_metrics/dataset_statistics.csv",
+    "source_rows": "nsmc",
+    "value": 130797,
+    "value_id": "table_dataset_nsmc_train_rows"
+  },
+  "table_dataset_nsmc_validation_positive_pct": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct generated table cell",
+    "display": "49.8",
+    "source_file": "Source/results/reporting/derived_metrics/dataset_statistics.csv",
+    "source_rows": "nsmc",
+    "value": 49.83486996009357,
+    "value_id": "table_dataset_nsmc_validation_positive_pct"
+  },
+  "table_dataset_nsmc_validation_rows": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct generated table cell",
+    "display": "14,534",
+    "source_file": "Source/results/reporting/derived_metrics/dataset_statistics.csv",
+    "source_rows": "nsmc",
+    "value": 14534,
+    "value_id": "table_dataset_nsmc_validation_rows"
+  },
+  "table_dataset_shopping_n_full": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct generated table cell",
+    "display": "159,918",
+    "source_file": "Source/results/reporting/derived_metrics/dataset_statistics.csv",
+    "source_rows": "shopping",
+    "value": 159918,
+    "value_id": "table_dataset_shopping_n_full"
+  },
+  "table_dataset_shopping_test_positive_pct": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct generated table cell",
+    "display": "50.0",
+    "source_file": "Source/results/reporting/derived_metrics/dataset_statistics.csv",
+    "source_rows": "shopping",
+    "value": 50.0,
+    "value_id": "table_dataset_shopping_test_positive_pct"
+  },
+  "table_dataset_shopping_test_rows": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct generated table cell",
+    "display": "19,990",
+    "source_file": "Source/results/reporting/derived_metrics/dataset_statistics.csv",
+    "source_rows": "shopping",
+    "value": 19990,
+    "value_id": "table_dataset_shopping_test_rows"
+  },
+  "table_dataset_shopping_train_positive_pct": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct generated table cell",
+    "display": "50.0",
+    "source_file": "Source/results/reporting/derived_metrics/dataset_statistics.csv",
+    "source_rows": "shopping",
+    "value": 49.99937467952326,
+    "value_id": "table_dataset_shopping_train_positive_pct"
+  },
+  "table_dataset_shopping_train_rows": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct generated table cell",
+    "display": "159,918",
+    "source_file": "Source/results/reporting/derived_metrics/dataset_statistics.csv",
+    "source_rows": "shopping",
+    "value": 159918,
+    "value_id": "table_dataset_shopping_train_rows"
+  },
+  "table_dataset_shopping_validation_positive_pct": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct generated table cell",
+    "display": "50.0",
+    "source_file": "Source/results/reporting/derived_metrics/dataset_statistics.csv",
+    "source_rows": "shopping",
+    "value": 50.0,
+    "value_id": "table_dataset_shopping_validation_positive_pct"
+  },
+  "table_dataset_shopping_validation_rows": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct generated table cell",
+    "display": "19,990",
+    "source_file": "Source/results/reporting/derived_metrics/dataset_statistics.csv",
+    "source_rows": "shopping",
+    "value": 19990,
+    "value_id": "table_dataset_shopping_validation_rows"
+  },
+  "table_dataset_steam_n_full": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct generated table cell",
+    "display": "79,828",
+    "source_file": "Source/results/reporting/derived_metrics/dataset_statistics.csv",
+    "source_rows": "steam",
+    "value": 79828,
+    "value_id": "table_dataset_steam_n_full"
+  },
+  "table_dataset_steam_test_positive_pct": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct generated table cell",
+    "display": "50.0",
+    "source_file": "Source/results/reporting/derived_metrics/dataset_statistics.csv",
+    "source_rows": "steam",
+    "value": 49.994989477903594,
+    "value_id": "table_dataset_steam_test_positive_pct"
+  },
+  "table_dataset_steam_test_rows": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct generated table cell",
+    "display": "9,979",
+    "source_file": "Source/results/reporting/derived_metrics/dataset_statistics.csv",
+    "source_rows": "steam",
+    "value": 9979,
+    "value_id": "table_dataset_steam_test_rows"
+  },
+  "table_dataset_steam_train_positive_pct": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct generated table cell",
+    "display": "50.0",
+    "source_file": "Source/results/reporting/derived_metrics/dataset_statistics.csv",
+    "source_rows": "steam",
+    "value": 49.99624192012828,
+    "value_id": "table_dataset_steam_train_positive_pct"
+  },
+  "table_dataset_steam_train_rows": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct generated table cell",
+    "display": "79,828",
+    "source_file": "Source/results/reporting/derived_metrics/dataset_statistics.csv",
+    "source_rows": "steam",
+    "value": 79828,
+    "value_id": "table_dataset_steam_train_rows"
+  },
+  "table_dataset_steam_validation_positive_pct": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct generated table cell",
+    "display": "50.0",
+    "source_file": "Source/results/reporting/derived_metrics/dataset_statistics.csv",
+    "source_rows": "steam",
+    "value": 49.994989477903594,
+    "value_id": "table_dataset_steam_validation_positive_pct"
+  },
+  "table_dataset_steam_validation_rows": {
+    "artifact": "table_dataset_stats",
+    "derivation": "direct generated table cell",
+    "display": "9,979",
+    "source_file": "Source/results/reporting/derived_metrics/dataset_statistics.csv",
+    "source_rows": "steam",
+    "value": 9979,
+    "value_id": "table_dataset_steam_validation_rows"
+  },
+  "table_efficiency_nsmc_tfidf_lr_fit_time": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "5.1",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-63637ea3b406d7cffd4b,part1-34653f49ff826ecb2fea,part1-d909983ea256588408d0",
+    "value": 5.077946629006571,
+    "value_id": "table_efficiency_nsmc_tfidf_lr_fit_time"
+  },
+  "table_efficiency_nsmc_tfidf_lr_latency": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "0.50",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-63637ea3b406d7cffd4b,part1-34653f49ff826ecb2fea,part1-d909983ea256588408d0",
+    "value": 0.5016965,
+    "value_id": "table_efficiency_nsmc_tfidf_lr_latency"
+  },
+  "table_efficiency_nsmc_tfidf_lr_macro_f1": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "80.07",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-63637ea3b406d7cffd4b,part1-34653f49ff826ecb2fea,part1-d909983ea256588408d0",
+    "value": 0.8007402243662917,
+    "value_id": "table_efficiency_nsmc_tfidf_lr_macro_f1"
+  },
+  "table_efficiency_nsmc_tfidf_lr_peak_memory": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "1702",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-63637ea3b406d7cffd4b,part1-34653f49ff826ecb2fea,part1-d909983ea256588408d0",
+    "value": 1702.296875,
+    "value_id": "table_efficiency_nsmc_tfidf_lr_peak_memory"
+  },
+  "table_efficiency_nsmc_tfidf_lr_size": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "0.42",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-63637ea3b406d7cffd4b,part1-34653f49ff826ecb2fea,part1-d909983ea256588408d0",
+    "value": 0.4185543060302734,
+    "value_id": "table_efficiency_nsmc_tfidf_lr_size"
+  },
+  "table_efficiency_nsmc_transformer_fit_time": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "235.9",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-7d4e35fe1c88bb6690c7,part1-8831c7ce7edf48330631,part1-9109096505a657d0c506",
+    "value": 235.89552910769513,
+    "value_id": "table_efficiency_nsmc_transformer_fit_time"
+  },
+  "table_efficiency_nsmc_transformer_latency": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "1.87",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-7d4e35fe1c88bb6690c7,part1-8831c7ce7edf48330631,part1-9109096505a657d0c506",
+    "value": 1.8716993333333332,
+    "value_id": "table_efficiency_nsmc_transformer_latency"
+  },
+  "table_efficiency_nsmc_transformer_macro_f1": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "81.85",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-7d4e35fe1c88bb6690c7,part1-8831c7ce7edf48330631,part1-9109096505a657d0c506",
+    "value": 0.8184593834760818,
+    "value_id": "table_efficiency_nsmc_transformer_macro_f1"
+  },
+  "table_efficiency_nsmc_transformer_peak_memory": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "335",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-7d4e35fe1c88bb6690c7,part1-8831c7ce7edf48330631,part1-9109096505a657d0c506",
+    "value": 334.69189453125,
+    "value_id": "table_efficiency_nsmc_transformer_peak_memory"
+  },
+  "table_efficiency_nsmc_transformer_size": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "11.23",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-7d4e35fe1c88bb6690c7,part1-8831c7ce7edf48330631,part1-9109096505a657d0c506",
+    "value": 11.226367314656576,
+    "value_id": "table_efficiency_nsmc_transformer_size"
+  },
+  "table_efficiency_shopping_tfidf_lr_fit_time": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "5.9",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-efbe7c38e37cb972ba81,part1-f9ee678d63083bbc224c,part1-4d2c00295496ce7566fa",
+    "value": 5.944887114669352,
+    "value_id": "table_efficiency_shopping_tfidf_lr_fit_time"
+  },
+  "table_efficiency_shopping_tfidf_lr_latency": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "0.50",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-efbe7c38e37cb972ba81,part1-f9ee678d63083bbc224c,part1-4d2c00295496ce7566fa",
+    "value": 0.5035833333333334,
+    "value_id": "table_efficiency_shopping_tfidf_lr_latency"
+  },
+  "table_efficiency_shopping_tfidf_lr_macro_f1": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "88.34",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-efbe7c38e37cb972ba81,part1-f9ee678d63083bbc224c,part1-4d2c00295496ce7566fa",
+    "value": 0.8833722158552328,
+    "value_id": "table_efficiency_shopping_tfidf_lr_macro_f1"
+  },
+  "table_efficiency_shopping_tfidf_lr_peak_memory": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "3483",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-efbe7c38e37cb972ba81,part1-f9ee678d63083bbc224c,part1-4d2c00295496ce7566fa",
+    "value": 3483.09765625,
+    "value_id": "table_efficiency_shopping_tfidf_lr_peak_memory"
+  },
+  "table_efficiency_shopping_tfidf_lr_size": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "0.43",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-efbe7c38e37cb972ba81,part1-f9ee678d63083bbc224c,part1-4d2c00295496ce7566fa",
+    "value": 0.4305934906005859,
+    "value_id": "table_efficiency_shopping_tfidf_lr_size"
+  },
+  "table_efficiency_shopping_transformer_fit_time": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "289.7",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-d368b513aabd606b91d5,part1-59f3d85b1e3e053331c0,part1-a5311999412138a4a912",
+    "value": 289.7109227880137,
+    "value_id": "table_efficiency_shopping_transformer_fit_time"
+  },
+  "table_efficiency_shopping_transformer_latency": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "1.96",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-d368b513aabd606b91d5,part1-59f3d85b1e3e053331c0,part1-a5311999412138a4a912",
+    "value": 1.9550883333333333,
+    "value_id": "table_efficiency_shopping_transformer_latency"
+  },
+  "table_efficiency_shopping_transformer_macro_f1": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "89.14",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-d368b513aabd606b91d5,part1-59f3d85b1e3e053331c0,part1-a5311999412138a4a912",
+    "value": 0.8914432446001092,
+    "value_id": "table_efficiency_shopping_transformer_macro_f1"
+  },
+  "table_efficiency_shopping_transformer_peak_memory": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "333",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-d368b513aabd606b91d5,part1-59f3d85b1e3e053331c0,part1-a5311999412138a4a912",
+    "value": 332.84619140625,
+    "value_id": "table_efficiency_shopping_transformer_peak_memory"
+  },
+  "table_efficiency_shopping_transformer_size": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "11.24",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-d368b513aabd606b91d5,part1-59f3d85b1e3e053331c0,part1-a5311999412138a4a912",
+    "value": 11.239408493041992,
+    "value_id": "table_efficiency_shopping_transformer_size"
+  },
+  "table_efficiency_steam_lstm_fit_time": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "95.1",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-f6a06a7c417dcd8ddcfe,part1-075f3091cd978b0e68aa,part1-6705f8461833dabfe89d",
+    "value": 95.08196006465005,
+    "value_id": "table_efficiency_steam_lstm_fit_time"
+  },
+  "table_efficiency_steam_lstm_latency": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "1.03",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-f6a06a7c417dcd8ddcfe,part1-075f3091cd978b0e68aa,part1-6705f8461833dabfe89d",
+    "value": 1.0266515,
+    "value_id": "table_efficiency_steam_lstm_latency"
+  },
+  "table_efficiency_steam_lstm_macro_f1": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "76.68",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-f6a06a7c417dcd8ddcfe,part1-075f3091cd978b0e68aa,part1-6705f8461833dabfe89d",
+    "value": 0.7667925024787868,
+    "value_id": "table_efficiency_steam_lstm_macro_f1"
+  },
+  "table_efficiency_steam_lstm_peak_memory": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "176",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-f6a06a7c417dcd8ddcfe,part1-075f3091cd978b0e68aa,part1-6705f8461833dabfe89d",
+    "value": 175.77783203125,
+    "value_id": "table_efficiency_steam_lstm_peak_memory"
+  },
+  "table_efficiency_steam_lstm_size": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "12.13",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-f6a06a7c417dcd8ddcfe,part1-075f3091cd978b0e68aa,part1-6705f8461833dabfe89d",
+    "value": 12.130563100179037,
+    "value_id": "table_efficiency_steam_lstm_size"
+  },
+  "table_efficiency_steam_tfidf_lr_fit_time": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "3.4",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-454e20f7139bc922c9e1,part1-863ceca6402a7c614035,part1-f736334785ff4793ecee",
+    "value": 3.431958887667861,
+    "value_id": "table_efficiency_steam_tfidf_lr_fit_time"
+  },
+  "table_efficiency_steam_tfidf_lr_latency": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "0.52",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-454e20f7139bc922c9e1,part1-863ceca6402a7c614035,part1-f736334785ff4793ecee",
+    "value": 0.5173446666666667,
+    "value_id": "table_efficiency_steam_tfidf_lr_latency"
+  },
+  "table_efficiency_steam_tfidf_lr_macro_f1": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "75.82",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-454e20f7139bc922c9e1,part1-863ceca6402a7c614035,part1-f736334785ff4793ecee",
+    "value": 0.7582433080047869,
+    "value_id": "table_efficiency_steam_tfidf_lr_macro_f1"
+  },
+  "table_efficiency_steam_tfidf_lr_peak_memory": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "2162",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-454e20f7139bc922c9e1,part1-863ceca6402a7c614035,part1-f736334785ff4793ecee",
+    "value": 2162.45703125,
+    "value_id": "table_efficiency_steam_tfidf_lr_peak_memory"
+  },
+  "table_efficiency_steam_tfidf_lr_size": {
+    "artifact": "table_part1_efficiency",
+    "derivation": "generated representative best-family cell",
+    "display": "0.42",
+    "source_file": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv",
+    "source_rows": "part1-454e20f7139bc922c9e1,part1-863ceca6402a7c614035,part1-f736334785ff4793ecee",
+    "value": 0.4184474945068359,
+    "value_id": "table_efficiency_steam_tfidf_lr_size"
+  }
+}

@@ -1,19 +1,3 @@
 \section{Conclusion}
-\label{sec:conclusion}
 
-We measured when neural sequence models trained from scratch overtake TF-IDF
-classifiers on Korean review sentiment. The crossover thresholds are
-\crossoverNSMC{} (NSMC), \crossoverShopping{} (Shopping) and \crossoverSteam{} (Steam).
-In other words, none of the three domains shows a neural crossover within the tested range:
-the best neural model never beats the best TF-IDF model by \crossoverMargin{} point, and at
-$n=8{,}000$ it is still \gapNSMC, \gapShopping{} and \gapSteam{} points behind. Teams in this
-regime should deploy a linear model on Kiwi-morpheme TF-IDF features and invest in more
-labels. Neural models trained from scratch close the gap as data grows, but only the
-extrapolation beyond 8{,}000 reviews, or a pretrained encoder, could justify their
-training cost.
-
-\paragraph{Reproducibility.}
-All code, configurations, per-run results and the scripts that regenerate every table,
-figure and number in this report are in the \texttt{source/} folder
-:
-\begin{center}\texttt{bash scripts/run\_everything.sh}\end{center}
+The benchmark yields four practical conclusions. First, linear TF-IDF is the strongest low-data default across all three domains. Second, learned-from-scratch neural models lead at full data, but only NSMC reaches a sustained one-point crossover. Third, the last fraction of macro-F1 carries a large training-time and model-size cost. Fourth, existing source labels make a low-label Transformer much stronger, yet standard SupCon and DB-CDSupCon add no consistent advantage over pooled CE. Since the target-only bonus crossover is unobserved, the experiment does not support a numeric target-label-savings claim.

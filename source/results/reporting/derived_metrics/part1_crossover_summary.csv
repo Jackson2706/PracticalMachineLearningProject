@@ -1,0 +1,4 @@
+dataset,first_observed_crossover,first_sustained_crossover,status,largest_tested_size,sustained_definition
+nsmc,64000.0,64000.0,observed_and_sustained,130797,neural-minus-TF-IDF mean macro-F1 is at least 0.01 at this and every larger tested size
+shopping,,,not_observed_through_159918,159918,neural-minus-TF-IDF mean macro-F1 is at least 0.01 at this and every larger tested size
+steam,,,not_observed_through_79828,79828,neural-minus-TF-IDF mean macro-F1 is at least 0.01 at this and every larger tested size

@@ -1,0 +1,4 @@
+dataset,train_negative,train_positive,validation_negative,validation_positive,test_negative,test_positive
+nsmc,65615,65182,7291,7243,24423,24687
+shopping,79960,79958,9995,9995,9995,9995
+steam,39917,39911,4990,4989,4990,4989

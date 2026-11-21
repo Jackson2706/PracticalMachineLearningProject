@@ -1,0 +1,13 @@
+\section{Background and related work}
+
+\paragraph{Classical text classification.}
+Sparse word features remain competitive text-classification baselines because linear models can exploit high-dimensional lexical evidence without learning an embedding space. Efficient shallow classifiers can match deeper models on some tasks at a fraction of their cost \citep{joulin2017bag}. We test logistic regression and a linear SVM alongside Random Forests \citep{breiman2001random} and XGBoost \citep{chen2016xgboost}, holding the TF-IDF representation fixed.
+
+\paragraph{Neural sequence models.}
+The neural set spans average learned embeddings, LSTM \citep{hochreiter1997long}, GRU \citep{cho2014learning}, Transformer self-attention \citep{vaswani2017attention}, and the selective state-space Mamba architecture \citep{gu2023mamba}. These backbones are trained from scratch so the study measures architecture and data scale without confounding pretrained knowledge.
+
+\paragraph{Learning curves.}
+Learning curves connect labeled-data budgets to predictive performance and can reveal ranking changes that a single evaluation size hides \citep{kolachina2012prediction}. Our crossover criterion is deliberately operational: a one-point mean macro-F1 advantage that is sustained across the remaining tested grid.
+
+\paragraph{Supervised contrastive and cross-domain learning.}
+Supervised contrastive learning pulls same-class representations together while separating different classes \citep{khosla2020supervised}. In a multi-domain sentiment batch, ordinary same-label positives can be dominated by within-domain pairs. The bonus method raises the weight of same-label positives from different domains and uses a balanced domain-label sampler. This is an application and modification of supervised contrastive learning, not a claim to have invented the underlying objective.

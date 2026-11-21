@@ -1,59 +1,16 @@
 \section{Discussion}
-\label{sec:discussion}
 
-\paragraph{When does a neural model pay off?}
-In this setting it does not, up to the largest size we tested. For a team with between
-500 and 8{,}000 labelled Korean reviews and no pretrained encoder, a linear model on Kiwi
-morpheme TF-IDF features (\bestTfidfNSMC{} for movies and shopping, \bestTfidfSteam{} for
-games) is the best choice in all three domains. It is the most accurate method at every
-size, it fits in about a second, and it needs no GPU. The neural models close most of the
-gap as data grows (from about 5 points at $n=500$ to about half a point on NSMC and
-Shopping at $n=8{,}000$). Collecting more labels is therefore worthwhile, but it improves
-the TF-IDF baseline as well and does not change the choice of model within this range.
+\paragraph{How does model behavior change with scale?}
+All families improve with more labels, but TF-IDF reaches useful performance earlier. Learned-from-scratch neural models close the gap near the upper end of each schedule. NSMC is the only domain where the neural advantage reaches and sustains the prespecified one-point margin. Shopping's best neural pipeline wins at full data without clearing the margin; Steam's top three neural methods are tightly grouped and also remain below it.
 
-\paragraph{Cost of the switch.}
-Even if the quality gap closed, switching would cost little at inference and a lot in
-training. On the CPU at batch size 1, per-review latency is about one millisecond for
-both families, and a GPU does not reduce it. Training time and memory are where the
-switch is expensive: the neural winners need one to two orders of magnitude more fit time
-(\fitRatioNSMC, \fitRatioShopping, \fitRatioSteam), and their processes need about
-\ramRatioNSMC{} the RAM. The neural winner is Pareto-efficient only on Steam, and only
-through slightly lower latency, at a cost of \gapSteam{} points of macro-F1. In
-deployment terms, the TF-IDF models are smaller (well under a megabyte serialised, except
-RF and XGBoost), easier to retrain often, and need no accelerator.
+\paragraph{Does the improvement justify cost?}
+There is no universal answer. Linear TF-IDF is fast, compact, and competitive at every tested scale. On NSMC, a team that values roughly \Result{story_full_gap_nsmc} additional macro-F1 points may accept \Result{story_fit_ratio_nsmc} times the fit time. On Shopping and Steam, the smaller gains make that trade harder to justify unless predictive quality dominates deployment constraints. Random Forest is rarely attractive because its sparse-text latency and model size are high without a matching quality gain.
 
-\paragraph{Cross-domain consistency.}
-The answer is the same in all three domains, and so are the winners of each family
-(linear TF-IDF; a simple embedding model). Absolute quality differs widely. Shopping is
-easiest, NSMC is in the middle and Steam is hardest, even though Steam reviews are the
-longest of the three (\cref{tab:data}). Review length therefore does not explain the
-ordering. A more plausible explanation, which we did not test, is how closely the label
-follows the text. Star ratings of purchases (Shopping) are tied to the review's tone,
-whereas a Steam recommendation flag summarises a whole play experience that the text may
-discuss in mixed terms. The Steam gap is also the widest (\gapSteam{} points at 8{,}000),
-which fits the idea that noisier labels hurt a model trained from scratch more than a
-regularised linear one.
+\paragraph{What transfers across domains?}
+The shared result is that pooling existing source labels substantially improves a low-label target-only Transformer. The domain-specific result is whether that pooled model beats TF-IDF and whether a contrastive loss helps. Shopping remains especially favorable to TF-IDF at low target budgets. Standard SupCon and DB-CDSupCon each win selected cells, but neither dominates pooled CE across targets and sizes.
 
-\paragraph{Which backbone?}
-At matched parameter budgets, the simplest backbones work best. A mean-pooled embedding
-MLP is competitive with the GRU and LSTM, and best of the neural models on Steam. The
-small Transformer and Mamba trail them at almost every size. Mamba is the weakest neural
-model on all three datasets at $n=8{,}000$: NSMC \mambaFOneNSMC, Shopping
-\mambaFOneShopping, Steam \mambaFOneSteam. Two explanations are plausible, but we did not
-test them. (i) Attention and selective state-space layers need more data than a few
-thousand short reviews to learn useful token interactions from scratch, while sentiment
-here is largely carried by individual morphemes, which pooling captures directly.
-(ii) We ran Mamba with the reference PyTorch selective scan (\mambaBackend), with the
-generic optimiser settings of our search space. This explains its high fit time but should
-not affect its accuracy. Mamba's weakness is therefore a statement about this small,
-from-scratch regime, not about the architecture in general.
+\paragraph{Does DB-CDSupCon improve representations?}
+The separation diagnostic changes in the intended direction only on Shopping when averaged across target sizes. NSMC and Steam move slightly downward. Even where separation rises, target macro-F1 does not rise at every size. A representation diagnostic is supporting evidence, not a substitute for the task metric.
 
-\paragraph{Variance.}
-Seed-to-seed standard deviations are mostly below one point and largest at $n=500$, where
-a few neural runs failed to train well (e.g.\ the Steam LSTM and Transformer;
-\cref{tab:f1}). At $n=8{,}000$ every seed trains on the full pool, so deterministic
-models (TF-IDF\,+\,LR/SVM) have a standard deviation of exactly zero. The remaining
-variation in RF, XGBoost and the neural models comes from their own randomness, not from
-the data. The \nSeeds{} seeds measure run-to-run variability; they are not a significance
-test, and gaps smaller than about one standard deviation (e.g.\ NSMC and Shopping at
-8{,}000) should be read as ties.
+\paragraph{Practical recommendations.}
+With hundreds or a few thousand labels, start with TF-IDF plus a linear classifier. At tens of thousands of labels, compare that baseline with a small Transformer or gated RNN using the target hardware. If labeled source domains already exist, pooled CE is the essential transfer baseline. Add a contrastive objective only after a matched pooled comparison shows a stable benefit for the target domain.

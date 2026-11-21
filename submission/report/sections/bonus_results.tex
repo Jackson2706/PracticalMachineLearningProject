@@ -1,0 +1,50 @@
+\section{Part 2: bonus extension}
+
+\subsection{Target-domain performance}
+
+Pooling two source domains produces the largest consistent change relative to target-only CE. At 200 target labels, pooled CE improves on the target-only Transformer by \Result{story_bonus_pool_vs_target_nsmc_200} points on NSMC, \Result{story_bonus_pool_vs_target_shopping_200} on Shopping, and \Result{story_bonus_pool_vs_target_steam_200} on Steam. This comparison includes \Result{bonus_source_labels} existing source labels, so it measures transfer in the stated setting rather than an equal-total-label contest.
+
+Against the best TF-IDF reference at 200 labels, pooled CE changes macro-F1 by \Result{story_bonus_pool_vs_tfidf_nsmc_200}, \Result{story_bonus_pool_vs_tfidf_shopping_200}, and \Result{story_bonus_pool_vs_tfidf_steam_200} points. It clears the one-point criterion on NSMC and Steam, but not Shopping. The advantage does not persist uniformly at larger target sizes.
+
+\begin{figure*}[!b]
+  \centering
+  \includegraphics[width=\textwidth]{bonus_learning_curves.pdf}
+  \caption{Bonus target-domain test macro-F1. Error bars show sample SD across three aligned seeds. Best TF-IDF and target-only Transformer reuse Part~1 runs.}
+  \label{fig:bonus-curves}
+\end{figure*}
+
+Standard SupCon is slightly above pooled CE in some cells and below it in others. DB-CDSupCon likewise has mixed increments. At 200 labels its gains over pooled CE are \Result{story_bonus_db_vs_pool_nsmc_200}, \Result{story_bonus_db_vs_pool_shopping_200}, and \Result{story_bonus_db_vs_pool_steam_200} percentage points. Three seeds are enough to expose this variability but not to support significance claims. Complete means, sample SDs, and seed counts appear in \Cref{tab:bonus-performance}.
+
+\subsection{Label efficiency}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{bonus_crossover_status.pdf}
+  \caption{First observed bonus crossover against best TF-IDF. N/O means not observed in the tested 200--2,000 target-label range.}
+  \label{fig:bonus-crossover}
+\end{figure}
+
+The target-only Transformer never crosses the fixed TF-IDF reference by 0.01. A candidate can cross earlier, but there is no observed target-only threshold from which to subtract. New target-label savings are therefore \Result{bonus_labels_saved_nsmc} on NSMC, \Result{bonus_labels_saved_shopping} on Shopping, and \Result{bonus_labels_saved_steam} on Steam. This does not imply zero benefit; it means the finite grid does not identify a valid savings quantity. It also precludes any claim about total annotation savings.
+The complete threshold table is reported in \Cref{tab:bonus-labels}.
+
+\subsection{Source retention, representation, and overhead}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{bonus_transfer.pdf}
+  \caption{Target and source differences from pooled CE. Point labels are target-label counts.}
+  \label{fig:bonus-transfer}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{bonus_representation.pdf}
+  \caption{Cross-domain sentiment separation gap. Higher separation does not consistently imply better target macro-F1.}
+  \label{fig:bonus-representation}
+\end{figure}
+
+Source retention changes sign across targets and label counts, so neither contrastive objective prevents negative transfer uniformly. DB-CDSupCon changes the separation gap relative to pooled CE by \Result{story_db_separation_change_nsmc} on NSMC, \Result{story_db_separation_change_shopping} on Shopping, and \Result{story_db_separation_change_steam} on Steam when averaged over target sizes. Only Shopping moves upward.
+
+DB-CDSupCon requires \Result{story_db_cost_ratio_nsmc}, \Result{story_db_cost_ratio_shopping}, and \Result{story_db_cost_ratio_steam} times pooled-CE fit time on average across the four target sizes. The \Result{bonus_projection_parameters}-parameter projection head is training-only. All three pooled objectives deploy the same \Result{bonus_deployed_parameters}-parameter Transformer and have no objective-specific inference path.
+The averaged source-retention and separation values are listed in \Cref{tab:bonus-diagnostics}.
+\FloatBarrier

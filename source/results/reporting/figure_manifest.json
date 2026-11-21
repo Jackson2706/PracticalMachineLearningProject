@@ -1,0 +1,52 @@
+{
+  "bonus_crossover_status": {
+    "data": "Source/results/reporting/figure_data/bonus_crossover_status.csv",
+    "rule": "first target size with method mean at least 0.01 above fixed best-TF-IDF mean",
+    "source": "Source/results/reporting/derived_metrics/bonus_label_efficiency_corrected.csv"
+  },
+  "bonus_learning_curves": {
+    "data": "Source/results/reporting/figure_data/bonus_learning_curves.csv",
+    "rule": "fixed Part 1 TF-IDF model per target/size; mean and sample SD across aligned seeds",
+    "source": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv"
+  },
+  "bonus_representation": {
+    "data": "Source/results/reporting/figure_data/bonus_representation.csv",
+    "rule": "mean over three seeds, then mean and SD across four target-label sizes",
+    "source": "Source/results/reporting/derived_metrics/bonus_representation_diagnostics.csv"
+  },
+  "bonus_transfer": {
+    "data": "Source/results/reporting/figure_data/bonus_transfer.csv",
+    "rule": "method mean minus matched pooled-CE mean; labels are target-label counts",
+    "source": "Source/results/reporting/derived_metrics/bonus_summary_corrected.csv"
+  },
+  "confusion_comparison": {
+    "data": "Source/results/reporting/figure_data/confusion_comparison.csv",
+    "rule": "sum three seed confusion counts, then normalize within actual class",
+    "source": "Source/results/csv/run_records.csv"
+  },
+  "dataset_overview": {
+    "data": "Source/results/reporting/figure_data/dataset_overview.csv",
+    "rule": "count labels by dataset and fixed split",
+    "source": "Source/data/splits/*_splits.csv"
+  },
+  "efficiency_pareto": {
+    "data": "Source/results/reporting/figure_data/efficiency_pareto.csv",
+    "rule": "mean across three seeds; outlined points are non-dominated on quality versus fit time",
+    "source": "Source/results/reporting/derived_metrics/part1_efficiency_full_data.csv"
+  },
+  "full_data_comparison": {
+    "data": "Source/results/reporting/figure_data/full_data_comparison.csv",
+    "rule": "full-data mean and sample SD across three final seeds",
+    "source": "Source/results/reporting/derived_metrics/part1_full_data_ranking.csv"
+  },
+  "part1_crossover": {
+    "data": "Source/results/reporting/figure_data/part1_crossover.csv",
+    "rule": "best complete neural mean minus best complete TF-IDF mean at each size",
+    "source": "Source/results/reporting/derived_metrics/part1_best_by_size.csv"
+  },
+  "part1_learning_curves": {
+    "data": "Source/results/reporting/figure_data/part1_learning_curves.csv",
+    "rule": "mean with sample-SD error bars across three final seeds",
+    "source": "Source/results/reporting/derived_metrics/part1_summary.csv"
+  }
+}

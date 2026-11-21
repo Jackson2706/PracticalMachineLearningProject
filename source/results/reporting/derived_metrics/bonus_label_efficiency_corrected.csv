@@ -1,0 +1,16 @@
+target_domain,method,crossover_threshold_size,threshold_status,normalized_log2_aulc,target_only_threshold_size,crossover_shift_vs_target_only,new_target_labels_saved,savings_interpretation
+nsmc,best_tfidf,,not_observed_within_200_to_2000,0.6508513099771073,,,,new target-domain labels saved when labeled source-domain data already exists
+nsmc,db_cdsupcon,200.0,observed,0.6587345818714572,,,,new target-domain labels saved when labeled source-domain data already exists
+nsmc,pooled_ce,200.0,observed,0.6549778443683255,,,,new target-domain labels saved when labeled source-domain data already exists
+nsmc,supcon,200.0,observed,0.653938064736815,,,,new target-domain labels saved when labeled source-domain data already exists
+nsmc,target_transformer,,not_observed_within_200_to_2000,0.5320275018444837,,,,new target-domain labels saved when labeled source-domain data already exists
+shopping,best_tfidf,,not_observed_within_200_to_2000,0.7747269176738263,,,,new target-domain labels saved when labeled source-domain data already exists
+shopping,db_cdsupcon,,not_observed_within_200_to_2000,0.7424179214971094,,,,new target-domain labels saved when labeled source-domain data already exists
+shopping,pooled_ce,,not_observed_within_200_to_2000,0.7381320041098235,,,,new target-domain labels saved when labeled source-domain data already exists
+shopping,supcon,,not_observed_within_200_to_2000,0.7424080585611703,,,,new target-domain labels saved when labeled source-domain data already exists
+shopping,target_transformer,,not_observed_within_200_to_2000,0.6795719657388458,,,,new target-domain labels saved when labeled source-domain data already exists
+steam,best_tfidf,,not_observed_within_200_to_2000,0.6340127030124911,,,,new target-domain labels saved when labeled source-domain data already exists
+steam,db_cdsupcon,200.0,observed,0.639643557170674,,,,new target-domain labels saved when labeled source-domain data already exists
+steam,pooled_ce,200.0,observed,0.6403446086690172,,,,new target-domain labels saved when labeled source-domain data already exists
+steam,supcon,200.0,observed,0.6409654339763491,,,,new target-domain labels saved when labeled source-domain data already exists
+steam,target_transformer,,not_observed_within_200_to_2000,0.5482044410793103,,,,new target-domain labels saved when labeled source-domain data already exists

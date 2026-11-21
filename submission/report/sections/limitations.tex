@@ -1,28 +1,9 @@
-\section{Limitations}
-\label{sec:limitations}
+\section{Limitations and threats to validity}
 
-\begin{itemize}
-  \item \textbf{Labels are proxies.} Ratings and recommendation flags only
-        approximate sentiment; the conflicting-duplicate statistics in \cref{tab:data}
-        hint at label noise.
-  \item \textbf{Three domains, binary labels.} Conclusions are limited to the tested
-        datasets, model families and protocol and may not transfer to other domains or
-        fine-grained sentiment.
-  \item \textbf{No pretrained models.} Pretrained Korean encoders were deliberately excluded;
-        with them the crossover could look very different.
-  \item \textbf{Kiwi's linguistic knowledge.} The morphological analyser is itself trained
-        on external Korean data; it is applied equally to all methods, and the ablation
-        (\cref{sec:ablation}) measures how much the conclusions depend on it.
-  \item \textbf{Ablation reuses Kiwi-tuned configurations.} Hyperparameters were not re-tuned
-        for eojeol or character tokens, which may understate those tokenizers.
-  \item \textbf{Fixed grid of sizes.} The threshold is only resolved to the tested sizes
-        (a factor of two).
-  \item \textbf{One tuning size and seed.} Configurations are tuned at $n=2{,}000$ and
-        frozen; a different optimum at other sizes is possible and could favour either
-        family.
-  \item \textbf{Single machine.} Costs were measured on one machine (\cpuModel) with a
-        fixed thread count; absolute timings and the CPU/accelerator ranking depend on hardware
-        and on implementation (e.g.\ the Mamba backend).
-  \item \textbf{Variability, not significance.} \nSeeds{} seeds quantify run-to-run
-        variability but are not a formal significance test.
-\end{itemize}
+Ratings and recommendation flags are noisy proxies for sentiment. The benchmark covers three Korean review domains and binary labels, so the findings may not transfer to other genres, label schemes, or languages. NSMC uses an official test file while Shopping and Steam use seeded random splits.
+
+All neural representations are learned from scratch. This isolates data scaling but does not answer how a pretrained Korean language model would behave. Each dataset-model pair receives the same number of tuning candidates, not the same compute budget, and selection occurs at 8,000 labels. A configuration that is optimal at that size may not be optimal at 200 labels or full data.
+
+Three final seeds describe variation but provide little power for formal tests. We therefore report effect sizes, sample SDs, and raw paired seed differences without significance language. CUDA training and CPU classical timing reflect a practical mixed-device setup. They do not isolate architecture from hardware. PyTorch deterministic mode emitted a warning for one attention kernel, so the process is seeded and repeatable at the protocol level but is not claimed to be bitwise deterministic.
+
+The bonus adds 4,000 source examples, uses one Transformer backbone, and evaluates only four target sizes. It tests whether existing source labels help, not whether source labeling is cost-free or whether total annotation decreases. Projection diagnostics use fixed deterministic samples and cosine pairs, but stored embeddings were not retained for alternative projections.

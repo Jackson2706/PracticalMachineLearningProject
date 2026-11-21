@@ -1,0 +1,39 @@
+\begin{longtable}{lll >{\raggedright\arraybackslash}p{7.2cm}}
+\caption{Frozen Part 1 configurations selected at 8,000 labels with tuning seed 777.}\label{tab:selected-configs}\\
+\toprule
+Dataset & Model & ID & Configuration \\
+\midrule
+\endfirsthead
+\toprule
+Dataset & Model & ID & Configuration \\
+\midrule
+\endhead
+NSMC & TF-IDF + LR & lr06 & \texttt{\{"C": 2.0, "id": "lr06", "max\_iter": 3000, "solver": "liblinear"\}} \\
+NSMC & TF-IDF + SVM & svm05 & \texttt{\{"C": 0.25, "id": "svm05"\}} \\
+NSMC & TF-IDF + RF & rf09 & \texttt{\{"id": "rf09", "max\_depth": null, "max\_features": "sqrt", "min\_samples\_leaf": 2, "n\_estimators": 700\}} \\
+NSMC & TF-IDF + XGBoost & xgb03 & \texttt{\{"colsample\_bytree": 0.8, "id": "xgb03", "learning\_rate": 0.05, "max\_depth": 4, "n\_estimators": 400, "reg\_lambda": 1.0, "subsample": 0.8\}} \\
+NSMC & Avg. embeddings + MLP & mlp08 & \texttt{\{"dropout": 0.3, "embedding\_dim": 128, "hidden\_dim": 288, "id": "mlp08", "learning\_rate": 0.002, "num\_layers": 2\}} \\
+NSMC & LSTM & lstm08 & \texttt{\{"dropout": 0.3, "embedding\_dim": 128, "hidden\_dim": 112, "id": "lstm08", "learning\_rate": 0.002, "num\_layers": 2\}} \\
+NSMC & GRU & gru08 & \texttt{\{"dropout": 0.3, "embedding\_dim": 128, "hidden\_dim": 128, "id": "gru08", "learning\_rate": 0.002, "num\_layers": 2\}} \\
+NSMC & Transformer & tr07 & \texttt{\{"dropout": 0.4, "embedding\_dim": 128, "ff\_multiplier": 2, "hidden\_dim": 128, "id": "tr07", "learning\_rate": 0.001, "num\_heads": 4, "num\_layers": 2\}} \\
+NSMC & Mamba & mb08 & \texttt{\{"d\_conv": 4, "d\_state": 16, "dropout": 0.3, "embedding\_dim": 128, "expand": 2, "hidden\_dim": 128, "id": "mb08", "learning\_rate": 0.002, "num\_layers": 2\}} \\
+Shopping & TF-IDF + LR & lr06 & \texttt{\{"C": 2.0, "id": "lr06", "max\_iter": 3000, "solver": "liblinear"\}} \\
+Shopping & TF-IDF + SVM & svm05 & \texttt{\{"C": 0.25, "id": "svm05"\}} \\
+Shopping & TF-IDF + RF & rf09 & \texttt{\{"id": "rf09", "max\_depth": null, "max\_features": "sqrt", "min\_samples\_leaf": 2, "n\_estimators": 700\}} \\
+Shopping & TF-IDF + XGBoost & xgb03 & \texttt{\{"colsample\_bytree": 0.8, "id": "xgb03", "learning\_rate": 0.05, "max\_depth": 4, "n\_estimators": 400, "reg\_lambda": 1.0, "subsample": 0.8\}} \\
+Shopping & Avg. embeddings + MLP & mlp08 & \texttt{\{"dropout": 0.3, "embedding\_dim": 128, "hidden\_dim": 288, "id": "mlp08", "learning\_rate": 0.002, "num\_layers": 2\}} \\
+Shopping & LSTM & lstm04 & \texttt{\{"dropout": 0.2, "embedding\_dim": 96, "hidden\_dim": 96, "id": "lstm04", "learning\_rate": 0.002, "num\_layers": 1\}} \\
+Shopping & GRU & gru08 & \texttt{\{"dropout": 0.3, "embedding\_dim": 128, "hidden\_dim": 128, "id": "gru08", "learning\_rate": 0.002, "num\_layers": 2\}} \\
+Shopping & Transformer & tr07 & \texttt{\{"dropout": 0.4, "embedding\_dim": 128, "ff\_multiplier": 2, "hidden\_dim": 128, "id": "tr07", "learning\_rate": 0.001, "num\_heads": 4, "num\_layers": 2\}} \\
+Shopping & Mamba & mb08 & \texttt{\{"d\_conv": 4, "d\_state": 16, "dropout": 0.3, "embedding\_dim": 128, "expand": 2, "hidden\_dim": 128, "id": "mb08", "learning\_rate": 0.002, "num\_layers": 2\}} \\
+Steam & TF-IDF + LR & lr06 & \texttt{\{"C": 2.0, "id": "lr06", "max\_iter": 3000, "solver": "liblinear"\}} \\
+Steam & TF-IDF + SVM & svm05 & \texttt{\{"C": 0.25, "id": "svm05"\}} \\
+Steam & TF-IDF + RF & rf09 & \texttt{\{"id": "rf09", "max\_depth": null, "max\_features": "sqrt", "min\_samples\_leaf": 2, "n\_estimators": 700\}} \\
+Steam & TF-IDF + XGBoost & xgb03 & \texttt{\{"colsample\_bytree": 0.8, "id": "xgb03", "learning\_rate": 0.05, "max\_depth": 4, "n\_estimators": 400, "reg\_lambda": 1.0, "subsample": 0.8\}} \\
+Steam & Avg. embeddings + MLP & mlp08 & \texttt{\{"dropout": 0.3, "embedding\_dim": 128, "hidden\_dim": 288, "id": "mlp08", "learning\_rate": 0.002, "num\_layers": 2\}} \\
+Steam & LSTM & lstm08 & \texttt{\{"dropout": 0.3, "embedding\_dim": 128, "hidden\_dim": 112, "id": "lstm08", "learning\_rate": 0.002, "num\_layers": 2\}} \\
+Steam & GRU & gru08 & \texttt{\{"dropout": 0.3, "embedding\_dim": 128, "hidden\_dim": 128, "id": "gru08", "learning\_rate": 0.002, "num\_layers": 2\}} \\
+Steam & Transformer & tr08 & \texttt{\{"dropout": 0.3, "embedding\_dim": 128, "ff\_multiplier": 2, "hidden\_dim": 128, "id": "tr08", "learning\_rate": 0.002, "num\_heads": 8, "num\_layers": 2\}} \\
+Steam & Mamba & mb07 & \texttt{\{"d\_conv": 3, "d\_state": 16, "dropout": 0.4, "embedding\_dim": 128, "expand": 2, "hidden\_dim": 128, "id": "mb07", "learning\_rate": 0.001, "num\_layers": 2\}} \\
+\bottomrule
+\end{longtable}

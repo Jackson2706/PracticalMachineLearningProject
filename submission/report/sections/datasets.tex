@@ -1,0 +1,16 @@
+\section{Datasets and preprocessing}
+
+We use NSMC movie reviews \citep{nsmc}, Naver Shopping reviews, and Korean Steam reviews \citep{bab2min_corpus}. NSMC supplies binary labels and an official test file. Shopping ratings 1--2 map to negative and 4--5 to positive; rating 3 is excluded if present. Steam uses the published binary recommendation field only as the target. Ratings, recommendation fields, and identifiers never enter model inputs.
+
+Text is decoded as UTF-8, normalized to Unicode NFC, and stripped of unnecessary whitespace. Punctuation, emoji, emoticons, repeated characters, slang, and negation remain. Empty reviews and every normalized text that appears with conflicting labels are removed; exact text-label duplicates collapse to one record. NSMC keeps its cleaned official test set and reserves 10\% of the cleaned training source for validation. Cross-partition text duplicates are removed from the training side. Shopping and Steam use stratified 80/10/10 splits.
+
+\input{../assets/tables/dataset_stats.tex}
+
+For each final seed, one deterministic stratified order covers the complete training pool. Every smaller subset is a strict prefix. Consequently, all nine pipelines receive the same example identifiers for a dataset, size, and seed. Validation and test identifiers are absent from every prefix. \Cref{fig:datasets} summarizes the fixed splits.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.93\textwidth]{dataset_overview.pdf}
+  \caption{Cleaned split sizes and class balance. The near-balanced labels make macro-F1 and accuracy similar in magnitude, but macro-F1 remains the primary metric because it weights both classes equally.}
+  \label{fig:datasets}
+\end{figure*}

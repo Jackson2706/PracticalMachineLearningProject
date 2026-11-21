@@ -22,6 +22,7 @@ dependencies = [
 
 [project.optional-dependencies]
 test = ["pytest>=8,<10", "pytest-cov>=5,<8"]
+report = ["matplotlib>=3.8,<4"]
 
 [project.scripts]
 ks-benchmark = "korean_sentiment.cli:main"

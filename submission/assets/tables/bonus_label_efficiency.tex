@@ -1,0 +1,29 @@
+\begin{table}[t]
+\centering
+\caption{Bonus label-efficiency result. Crossovers compare each method with the fixed best Part 1 TF-IDF reference at the same target size. Savings are reported only if both the method and target-only Transformer crossovers are observed.}
+\label{tab:bonus-labels}
+\scriptsize
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{@{}llrr@{}}
+\toprule
+Target & Method & Crossover & Labels saved \\
+\midrule
+NSMC & Target-only Transformer & Not observed & Not estimable \\
+ & Pooled CE & 200 & Not estimable \\
+ & SupCon & 200 & Not estimable \\
+ & DB-CDSupCon & 200 & Not estimable \\
+\addlinespace
+Shopping & Target-only Transformer & Not observed & Not estimable \\
+ & Pooled CE & Not observed & Not estimable \\
+ & SupCon & Not observed & Not estimable \\
+ & DB-CDSupCon & Not observed & Not estimable \\
+\addlinespace
+Steam & Target-only Transformer & Not observed & Not estimable \\
+ & Pooled CE & 200 & Not estimable \\
+ & SupCon & 200 & Not estimable \\
+ & DB-CDSupCon & 200 & Not estimable \\
+\addlinespace
+\bottomrule
+\end{tabular}
+}
+\end{table}

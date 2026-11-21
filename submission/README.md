@@ -1,37 +1,10 @@
-# Submission workspace
+# Final submission
 
-This directory is reserved for the later report and presentation stage. The benchmark implementation does not generate figures, LaTeX tables, report prose, slides, or a web demo. Existing report and slide files in this working copy predate the new `Source/` implementation and were left unchanged.
+This directory contains the audited final report and presentation. The authoritative build instructions, evidence locations, and known limitations are in [REPORTING_README.md](REPORTING_README.md) and [FINAL_HANDOFF.md](FINAL_HANDOFF.md).
 
-## Existing report and slides
-
-* `report/main.tex`: the written report (sections in `report/sections/`: intro, related, data, preprocessing, methods, setup, results, ablation, discussion, limitations, conclusion, appendix).
-* `slides/slides.tex`: the Beamer presentation. It reuses the report's tables, figures and numbers through the symlinks `slides/tables`, `slides/figures` and `slides/generated`.
-
-## Auto-generated files (do not edit by hand)
-
-| Path | Produced by |
-|---|---|
-| `report/tables/*.tex` (Tables 1–6, A1–A6) | `python -m ksent.analysis.make_tables` |
-| `report/figures/fig2–fig5, figA1 *.pdf/.png` | `python -m ksent.analysis.make_figures` (`--placeholder` for dummy layouts) |
-| `report/generated/numbers.tex` | `python -m ksent.analysis.make_numbers` |
-
-* `report/figures/fig1_pipeline.tex` (TikZ) is hand-written.
-* The prose cites results **only** through the macros in `numbers.tex`.
-* Until real results exist:
-  * a macro without data expands to a red `[TBD: name]`;
-  * a table cell without data prints `--`;
-  * a figure drawn without results carries a red PLACEHOLDER watermark.
-
-## Build (XeLaTeX: Korean text uses `kotex` with the UnBatang/UnDotum fonts from TeX Live)
+Rebuild everything from the completed atomic records with:
 
 ```bash
-cd source && bash scripts/07_analyze.sh && bash scripts/08_build_submission.sh
-# or manually:
-cd submission/report && latexmk -xelatex main.tex      # or: tectonic main.tex
-cd submission/slides && latexmk -xelatex slides.tex    # or: tectonic slides.tex
+cd submission
+./build_all.sh
 ```
-
-If your TeX distribution lacks the Un fonts, install the TeX Live package `unfonts-core`.
-Alternatively, change `\setmainhangulfont{...}` to any installed Korean font.
-
-Before submitting, check that nothing is left unfilled. `08_build_submission.sh` prints the number of remaining TBD macros and tables containing `--`.

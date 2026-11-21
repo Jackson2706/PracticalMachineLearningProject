@@ -1,0 +1,18 @@
+\begin{table*}[t]
+\centering
+\caption{Representative full-data efficiency. Times are means across three seeds on one recorded hardware ID; TF-IDF used CPU and neural methods used CUDA, so cross-device latency is descriptive.}
+\label{tab:efficiency}
+\scriptsize
+\begin{tabular}{llrrrrr}
+\toprule
+Dataset & Method & Macro-F1 (\%) & Fit (s) & End-to-end p50 (ms) & Size (MB) & Peak memory (MB) \\
+\midrule
+NSMC & TF-IDF + LR & 80.07 & 5.1 & 0.50 & 0.42 & 1702 \\
+NSMC & Transformer & 81.85 & 235.9 & 1.87 & 11.23 & 335 \\
+Shopping & TF-IDF + LR & 88.34 & 5.9 & 0.50 & 0.43 & 3483 \\
+Shopping & Transformer & 89.14 & 289.7 & 1.96 & 11.24 & 333 \\
+Steam & TF-IDF + LR & 75.82 & 3.4 & 0.52 & 0.42 & 2162 \\
+Steam & LSTM & 76.68 & 95.1 & 1.03 & 12.13 & 176 \\
+\bottomrule
+\end{tabular}
+\end{table*}

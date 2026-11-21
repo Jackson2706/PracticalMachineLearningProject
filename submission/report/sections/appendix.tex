@@ -1,96 +1,25 @@
-\section{Additional Tables}
-\label{sec:appendix}
+\section{Audit and completeness}
+\input{../assets/tables/completeness.tex}
 
-\begin{table}[h]
-  \centering
-  \caption{Test accuracy ($\times100$) across training sizes. \pmnote}
-  \label{tab:a1acc}
-  \input{tables/tableA1_accuracy}
-\end{table}
+The audit outcome is \texttt{complete\_with\_declared\_exceptions}. All planned runs are complete. The declared exception concerns only the original derived bonus TF-IDF reference; the reporting rebuild fixes the selection rule from intact Part~1 atomic records.
 
-\begin{table}[h]
-  \centering
-  \caption{Test macro-precision ($\times100$) across training sizes. \pmnote}
-  \label{tab:a1p}
-  \input{tables/tableA1_precision}
-\end{table}
+\section{Additional result checks}
+\input{../assets/tables/bonus_performance.tex}
+\input{../assets/tables/bonus_label_efficiency.tex}
+\input{../assets/tables/bonus_diagnostics.tex}
 
-\begin{table}[h]
+\begin{figure}[ht]
   \centering
-  \caption{Test macro-recall ($\times100$) across training sizes. \pmnote}
-  \label{tab:a1r}
-  \input{tables/tableA1_recall}
-\end{table}
-
-\clearpage
-\begin{table}[h]
-  \centering
-  \caption{The ten predefined tuning configurations per method. The nine neural
-  methods share the same ten (lr, dropout, width) combinations; widths S/M/L are
-  parameter-matched per architecture. XGBoost rounds are chosen by early stopping on
-  validation (maximum 1{,}000, patience 50) and frozen.}
-  \label{tab:a2defs}
-  \input{tables/tableA2_defs}
-\end{table}
-
-\begin{table}[h]
-  \centering
-  \caption{Validation macro-F1 ($\times100$) of all ten tuning configurations
-  ($n=2{,}000$, tuning seed 0, single run). Bold: selected configuration.}
-  \label{tab:a2}
-  \input{tables/tableA2}
-\end{table}
-
-\clearpage
-\begin{table}[h]
-  \centering
-  \caption{Marginal value of labels: test macro-F1 gain (points) between adjacent
-  training sizes, computed per seed on the nested subsets. \pmnote}
-  \label{tab:a3}
-  \input{tables/tableA3}
-\end{table}
-
-\begin{table}[h]
-  \centering
-  \caption{Crossover sensitivity: paired test macro-F1 gap (neural $-$ TF-IDF, points)
-  per size when the family winners are selected by validation (main analysis) or by
-  test macro-F1. The second row of each pair lists the selected neural vs TF-IDF
-  methods. \pmnote}
-  \label{tab:a4}
-  \input{tables/tableA4}
-\end{table}
-
-\clearpage
-\begin{table}[h]
-  \centering
-  \caption{Preprocessing diagnostics for the Kiwi neural vocabulary (minimum frequency 2,
-  cap 20{,}000): vocabulary size and test-set out-of-vocabulary (OOV) rates per training
-  size. \pmnote{} (Seeds change the training subset.)}
-  \label{tab:a5}
-  \input{tables/tableA5}
-\end{table}
-
-\begin{table}[h]
-  \centering
-  \caption{Symbol coverage (share of all 12{,}000 reviews per dataset containing the jamo
-  ㅋ, ㅠ, ㅎ or an emoji; all survive Kiwi tokenization, verified automatically) and the
-  share of train-pool reviews truncated at each tokenizer's maximum length $L$.}
-  \label{tab:a5sym}
-  \input{tables/tableA5_symbols}
-\end{table}
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.85\linewidth]{figures/figA1_oov.pdf}
-  \caption{Out-of-vocabulary rate of the Kiwi neural vocabulary on the test set versus
-  training size: share of test tokens (left) and of test reviews with at least one OOV
-  token (right); error bars $\pm1$ std over \nSeeds{} training subsets (sample std).}
-  \label{fig:oov}
+  \includegraphics[width=0.62\textwidth]{confusion_comparison.pdf}
+  \caption{NSMC full-data confusion matrices summed over three seeds and normalized within the actual class. Parentheses give summed counts.}
+  \label{fig:confusion}
 \end{figure}
 
-\begin{table}[h]
-  \centering
-  \caption{Hardware and software environment of all reported measurements.}
-  \label{tab:a6}
-  \input{tables/tableA6}
-\end{table}
+\section{Frozen configurations}
+\input{../assets/tables/selected_configs.tex}
+
+\section{Additional interpretation details}
+
+The machine-readable appendix is more exhaustive than a printed table. \texttt{part1\_metrics\_by\_seed.csv} contains all 837 Part~1 final rows. \texttt{part1\_summary.csv} contains every learning-curve cell, gains from the previous and approximate half-size budgets, and normalized log-size AULC. \texttt{bonus\_metrics\_by\_seed\_corrected.csv} contains all five bonus comparison methods with corrected TF-IDF reuse. \texttt{bonus\_paired\_differences.csv} records every ordered paired seed difference. Cost, source-retention, representation, and label-efficiency files sit beside them.
+
+\paragraph{Loss and deployment.} The SupCon projection is a linear layer, ReLU, second linear layer, and L2 normalization. It adds \Result{bonus_projection_parameters} trainable parameters during SupCon training. The deployed classifier bypasses this head, leaving \Result{bonus_deployed_parameters} parameters for pooled CE, SupCon, and DB-CDSupCon. Thus contrastive training changes fit time and peak training memory but not the deployed computation graph.

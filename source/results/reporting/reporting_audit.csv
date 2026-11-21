@@ -1,0 +1,22 @@
+check_id,area,severity,status,count,details
+plan_count,completeness,error,pass,1251,"planned=1251, expected=1251"
+unique_plan_run_ids,identity,error,pass,0,plan run IDs are unique
+unique_record_run_ids,identity,error,pass,0,duplicate record IDs=0
+planned_records_present,completeness,error,pass,0,missing planned records=0
+unplanned_records_declared,completeness,warning,pass,12,unplanned records=12 (smoke records; excluded from final analysis)
+all_planned_jobs_completed,completeness,error,pass,0,non-completed groups=[]
+final_seed_completeness,completeness,error,pass,0,incomplete conditions=0
+no_test_metrics_in_tuning,selection,error,pass,0,tuning rows with test metrics=0
+part1_selection_recomputed,selection,error,pass,0,selector mismatches=0
+part1_configs_frozen,selection,error,pass,0,final config mismatches=0
+bonus_selection_recomputed,selection,error,pass,0,selector mismatches=0
+shared_data_manifest,fairness,error,pass,0,run data-hash mismatches=0
+nested_subsets_and_no_leakage,fairness,error,pass,0,subset/leakage issues=0
+identical_part1_subset_ids,fairness,error,pass,0,all Part 1 models reference the same dataset/size/seed prefix manifests
+bonus_matched_design,fairness,error,pass,0,mismatched bonus cells=0
+bonus_tfidf_reference_selection,derived_csv,warning,warning,7,existing bonus aggregate mixes per-seed TF-IDF winners in 7 rows; reporting rebuild selects one model by three-seed mean
+metric_ranges,plausibility,error,pass,0,invalid final metric rows=0
+confusion_totals,plausibility,error,pass,0,confusion total mismatches=0
+resource_plausibility,plausibility,error,pass,0,invalid resource rows=0
+atomic_artifacts,integrity,error,pass,0,runs missing required artifacts=0
+timing_hardware_identity,resources,error,pass,1,hardware IDs=['8b5663550ab8bee2']

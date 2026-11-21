@@ -1,0 +1,363 @@
+\documentclass[aspectratio=169,12pt]{beamer}
+\usepackage{fontspec}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta}
+\pdfstringdefDisableCommands{\def\translate#1{#1}}
+
+\definecolor{blue}{HTML}{0072B2}
+\definecolor{sky}{HTML}{56B4E9}
+\definecolor{green}{HTML}{009E73}
+\definecolor{orange}{HTML}{E69F00}
+\definecolor{vermillion}{HTML}{D55E00}
+\definecolor{purple}{HTML}{CC79A7}
+\setbeamercolor{structure}{fg=blue}
+\setbeamercolor{frametitle}{fg=black}
+\setbeamercolor{title}{fg=black}
+\setbeamercolor{alerted text}{fg=vermillion}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{\hfill\usebeamerfont{footline}\insertframenumber/\inserttotalframenumber\hspace{4mm}\vspace{2mm}}
+\setbeamertemplate{itemize item}{\color{blue}\small$\bullet$}
+\setbeamersize{text margin left=7mm,text margin right=7mm}
+\graphicspath{{../assets/figures/}}
+\input{../assets/tables/numbers.tex}
+\newcommand{\Result}[1]{\csname result@#1\endcsname}
+\newcommand{\takeaway}[1]{\vfill\begin{beamercolorbox}[sep=5pt,wd=\linewidth]{block body}\normalsize\textbf{Takeaway:} #1\end{beamercolorbox}}
+
+\title{How Much Labeled Data Do Korean Sentiment Models Need?}
+\subtitle{A multi-domain scale benchmark with a cross-domain contrastive extension}
+\author{Practical Machine Learning Course Project}
+\date{November 2026}
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+  \vspace{-3mm}
+  \centering
+  \large Model choice changes with label scale, and the crossover is domain-dependent.
+\end{frame}
+
+\begin{frame}{Why measure the whole learning curve?}
+  \begin{columns}[T]
+    \column{0.48\textwidth}
+    \Large\color{blue}200 labels
+    \vspace{2mm}
+    \begin{itemize}
+      \item Sparse lexical evidence is easy to estimate
+      \item Neural embeddings are mostly unlearned
+      \item Training cost matters immediately
+    \end{itemize}
+    \column{0.48\textwidth}
+    \Large\color{purple}Full cleaned pool
+    \vspace{2mm}
+    \begin{itemize}
+      \item Sequence models can learn reusable patterns
+      \item Small quality gaps may affect many predictions
+      \item Deployment cost becomes the trade-off
+    \end{itemize}
+  \end{columns}
+  \takeaway{A full-data leaderboard cannot tell us when a model becomes worthwhile.}
+\end{frame}
+
+\begin{frame}{Approved benchmark first; bonus transfer study second}
+  \begin{columns}[T]
+    \column{0.49\textwidth}
+    \textbf{\color{blue}Part 1: approved main study}
+    \begin{itemize}
+      \item Three Korean review datasets
+      \item Nine complete pipelines
+      \item 200 labels to each full cleaned pool
+      \item Performance crossover plus cost
+    \end{itemize}
+    \column{0.49\textwidth}
+    \textbf{\color{purple}Part 2: bonus extension}
+    \begin{itemize}
+      \item One low-label target at a time
+      \item Two source domains already labeled
+      \item Pooled CE, SupCon, DB-CDSupCon
+      \item Label efficiency and source retention
+    \end{itemize}
+  \end{columns}
+  \takeaway{Continual learning and pretrained language models are outside the completed design.}
+\end{frame}
+
+\begin{frame}{Three domains, fixed splits, nested subsets}
+  \centering
+  \includegraphics[width=0.88\textwidth]{dataset_overview.pdf}
+  \takeaway{Every model sees the same example IDs for a dataset, size, and seed.}
+\end{frame}
+
+\begin{frame}{Nine Part 1 pipelines under one protocol}
+  \begin{columns}[T]
+    \column{0.47\textwidth}
+    \textbf{\color{blue}TF-IDF family}
+    \begin{itemize}
+      \item Logistic regression
+      \item Linear SVM
+      \item Random Forest
+      \item XGBoost
+    \end{itemize}
+    \column{0.47\textwidth}
+    \textbf{\color{purple}Learned from scratch}
+    \begin{itemize}
+      \item Average embeddings + MLP
+      \item LSTM and GRU
+      \item Small Transformer
+      \item Small Mamba
+    \end{itemize}
+  \end{columns}
+  \vspace{4mm}
+  \centering
+  \small Same nested subsets $\cdot$ ten tuning candidates each $\cdot$ tuning at 8,000 $\cdot$ frozen configurations $\cdot$ final seeds 13, 42, 2026
+  \takeaway{Fairness comes from shared data and selection rules, not matched representations.}
+\end{frame}
+
+\begin{frame}{Primary metric and crossover definition}
+  \begin{columns}[c]
+    \column{0.43\textwidth}
+    \centering
+    \Large Macro-F1
+    \[
+      \frac{F1_{\mathrm{negative}}+F1_{\mathrm{positive}}}{2}
+    \]
+    \column{0.54\textwidth}
+    \Large First sustained crossover
+    \[
+      \bar F_{1,\mathrm{neural}}(n)-\bar F_{1,\mathrm{TFIDF}}(n)\geq 0.01
+    \]
+    \normalsize at size $n$ \textbf{and every larger tested size}
+  \end{columns}
+  \vspace{3mm}
+  \centering
+  Means and sample SD use three final seeds. No formal significance claim.
+  \takeaway{The threshold is prespecified and sustained, so one isolated win is insufficient.}
+\end{frame}
+
+\begin{frame}{Part 1: rankings change with label scale}
+  \centering
+  \includegraphics[width=0.96\textwidth]{part1_learning_curves.pdf}
+  \takeaway{TF-IDF leads early; neural curves close the gap near the largest budgets.}
+\end{frame}
+
+\begin{frame}{Only NSMC reaches a sustained one-point crossover}
+  \centering
+  \includegraphics[width=0.88\textwidth]{part1_crossover.pdf}
+  \vspace{-1mm}
+  \begin{columns}[T]
+    \column{0.31\textwidth}\centering NSMC\\\textbf{\Result{part1_crossover_nsmc}}
+    \column{0.34\textwidth}\centering Shopping\\{\small\textbf{\Result{part1_crossover_shopping}}}
+    \column{0.31\textwidth}\centering Steam\\{\small\textbf{\Result{part1_crossover_steam}}}
+  \end{columns}
+  \takeaway{Neural models win at full data, but the prespecified margin is not universal.}
+\end{frame}
+
+\begin{frame}{The last fraction of macro-F1 is expensive}
+  \centering
+  \includegraphics[width=0.88\textwidth]{efficiency_pareto.pdf}
+  \vspace{-1mm}
+  \small Best-neural fit-time ratios versus best TF-IDF:
+  NSMC \Result{story_fit_ratio_nsmc}$\times$,
+  Shopping \Result{story_fit_ratio_shopping}$\times$,
+  Steam \Result{story_fit_ratio_steam}$\times$.
+  \takeaway{Linear TF-IDF remains the practical default unless the final quality increment is valuable.}
+\end{frame}
+
+\begin{frame}{Why test cross-domain learning?}
+  \begin{columns}[c]
+    \column{0.45\textwidth}
+      \centering
+      \Large New target labels\\[2mm]
+      \textbf{200, 500, 1,000, 2,000}
+    \column{0.08\textwidth}
+      \centering\Huge+
+    \column{0.45\textwidth}
+      \centering
+      \Large Existing source labels\\[2mm]
+      \textbf{2,000 + 2,000}
+  \end{columns}
+  \vspace{6mm}
+  \begin{itemize}
+    \item Rotate NSMC, Shopping, and Steam as the target
+    \item Reuse Part 1 TF-IDF and target-only Transformer results
+    \item Train only the three pooled objectives
+  \end{itemize}
+  \takeaway{The question is new target labels saved when source labels already exist, not total annotation savings.}
+\end{frame}
+
+\begin{frame}{Five methods separate pooling from the loss function}
+  \begin{enumerate}
+    \item Best Part 1 TF-IDF at the same target size
+    \item Part 1 target-only Transformer + CE
+    \item Pooled multi-domain Transformer + CE
+    \item Pooled Transformer + standard SupCon
+    \item Pooled Transformer + \textbf{DB-CDSupCon}
+  \end{enumerate}
+  \vspace{3mm}
+  \centering
+  \small Methods 1--2 reuse Part 1. Methods 3--5 share examples, backbone, sampler, seed, and optimizer.
+  \takeaway{Pooled CE is the required baseline for attributing any gain to contrastive learning.}
+\end{frame}
+
+\begin{frame}{DB-CDSupCon emphasizes cross-domain positives}
+  \centering
+  \begin{tikzpicture}[
+    box/.style={draw,rounded corners,minimum width=2.5cm,minimum height=0.9cm,align=center},
+    arrow/.style={-{Stealth[length=2mm]},thick}
+  ]
+    \node[box,fill=sky!18] (batch) {balanced batch\\domain $\times$ label};
+    \node[box,fill=green!15,right=1.2cm of batch] (encoder) {shared\\Transformer};
+    \node[box,fill=orange!18,right=1.2cm of encoder] (proj) {training-only\\projection};
+    \node[box,fill=purple!15,right=1.2cm of proj] (loss) {weighted\\SupCon};
+    \draw[arrow] (batch) -- (encoder);
+    \draw[arrow] (encoder) -- (proj);
+    \draw[arrow] (proj) -- (loss);
+  \end{tikzpicture}
+  \vspace{5mm}
+  \[
+    \tilde w_{ip}=
+    \begin{cases}
+      \alpha,&y_i=y_p,\ d_i\neq d_p\\
+      1,&y_i=y_p,\ d_i=d_p
+    \end{cases}
+    \qquad
+    \mathcal L=\mathcal L_{\mathrm{CE}}+\lambda\mathcal L_{\mathrm{SC}}
+  \]
+  \scriptsize SupCon: Khosla et al., NeurIPS 2020.
+  \takeaway{Cross-domain same-sentiment pairs get more weight; deployment discards the projection head.}
+\end{frame}
+
+\begin{frame}{Pooling helps target-only CE; contrastive gains are mixed}
+  \centering
+  \includegraphics[width=0.94\textwidth]{bonus_learning_curves.pdf}
+  \takeaway{The source-data effect is large, while SupCon and DB-CDSupCon change sign across cells.}
+\end{frame}
+
+\begin{frame}{The tested grid does not support a labels-saved number}
+  \centering
+  \includegraphics[width=0.72\textwidth]{bonus_crossover_status.pdf}
+  \par\vspace{-1mm}
+  {\small Target-only Transformer never reaches the TF-IDF + 0.01 threshold.\par}
+  \takeaway{Without an observed target-only threshold, crossover shift and new target-label savings are not estimable.}
+\end{frame}
+
+\begin{frame}{Transfer, separation, and overhead do not move together}
+  \begin{columns}[T]
+    \column{0.58\textwidth}
+      \includegraphics[width=\textwidth]{bonus_transfer.pdf}
+    \column{0.4\textwidth}
+      \begin{itemize}
+        \item Source retention changes sign
+        \item Separation improves only for Shopping on average
+        \item DB fit-time ratio: \Result{story_db_cost_ratio_nsmc}$\times$ to \Result{story_db_cost_ratio_shopping}$\times$
+        \item Same deployed \Result{bonus_deployed_parameters}-parameter classifier
+      \end{itemize}
+  \end{columns}
+  \takeaway{A cleaner representation metric is not enough; target and source task metrics must agree.}
+\end{frame}
+
+\begin{frame}{What worked, what did not, and what is limited}
+  \begin{columns}[T]
+    \column{0.32\textwidth}
+    \textbf{\color{green}Worked}
+    \begin{itemize}
+      \item Shared nested benchmark
+      \item Clear NSMC crossover
+      \item Pooling source labels
+    \end{itemize}
+    \column{0.32\textwidth}
+    \textbf{\color{vermillion}Did not generalize}
+    \begin{itemize}
+      \item One crossover rule for all domains
+      \item SupCon over pooled CE
+      \item DB-CDSupCon dominance
+    \end{itemize}
+    \column{0.32\textwidth}
+    \textbf{Limits}
+    \begin{itemize}
+      \item Three seeds
+      \item No pretrained model
+      \item Three binary domains
+      \item Mixed CPU/GPU timing
+    \end{itemize}
+  \end{columns}
+  \takeaway{The negative and mixed results narrow the conditions under which complexity is useful.}
+\end{frame}
+
+\begin{frame}{Four takeaways}
+  \begin{enumerate}
+    \item \textbf{Start with linear TF-IDF} at low and medium label budgets.
+    \item \textbf{Expect domain-specific crossover:} only NSMC sustains the one-point neural margin.
+    \item \textbf{Price the last quality increment:} the best neural fit takes \Result{story_fit_ratio_steam}$\times$--\Result{story_fit_ratio_shopping}$\times$ as long.
+    \item \textbf{Pool before adding contrastive losses:} source labels help, but SupCon variants do not dominate pooled CE.
+  \end{enumerate}
+  \vspace{4mm}
+  \centering
+  \Large Questions?
+\end{frame}
+
+\appendix
+
+\begin{frame}{Backup: full-data results}
+  \centering
+  \includegraphics[width=0.86\textwidth]{full_data_comparison.pdf}
+\end{frame}
+
+\begin{frame}{Backup: NSMC confusion matrices}
+  \centering
+  \includegraphics[width=0.7\textwidth]{confusion_comparison.pdf}
+\end{frame}
+
+\begin{frame}{Result audit and completeness}
+  \centering
+  \begin{tabular}{lrr}
+    \toprule
+    Phase & Completed & Expected\\
+    \midrule
+    Part 1 tuning & \Result{table_completeness_part1_tuning} & \Result{table_completeness_part1_tuning}\\
+    Part 1 final & \Result{table_completeness_part1_final} & \Result{table_completeness_part1_final}\\
+    Bonus tuning & \Result{table_completeness_bonus_tuning} & \Result{table_completeness_bonus_tuning}\\
+    Bonus final & \Result{table_completeness_bonus_final} & \Result{table_completeness_bonus_final}\\
+    \midrule
+    Total & \Result{table_completeness_total} & \Result{table_completeness_total}\\
+    \bottomrule
+  \end{tabular}
+  \vspace{4mm}
+
+  \small Audit: complete with one declared derived-data correction. Atomic run values are unchanged.
+\end{frame}
+
+\begin{frame}{Backup: representation separation}
+  \centering
+  \includegraphics[width=0.78\textwidth]{bonus_representation.pdf}
+\end{frame}
+
+\begin{frame}{Tuning and frozen configurations}
+  \begin{itemize}
+    \item Part 1: ten predefined candidates per dataset-model pair at 8,000 labels
+    \item Selector: validation macro-F1, latency, serialized size, configuration ID
+    \item Bonus: four SupCon and eight DB-CDSupCon candidates per target
+    \item Selector: target validation macro-F1, mean source validation macro-F1, fit time
+    \item Test metrics absent from every tuning record
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Backup: why no inference overhead from SupCon?}
+  \[
+    \text{tokens}\rightarrow \text{Transformer}\rightarrow h
+    \begin{cases}
+      \rightarrow \text{classifier} & \text{training and deployment}\\
+      \rightarrow \text{projection}\rightarrow z & \text{training only}
+    \end{cases}
+  \]
+  \begin{itemize}
+    \item Projection head: \Result{bonus_projection_parameters} parameters
+    \item Deployed Transformer and classifier: \Result{bonus_deployed_parameters} parameters
+    \item SupCon and DB-CDSupCon change training loss, not deployed prediction
+  \end{itemize}
+\end{frame}
+
+\end{document}

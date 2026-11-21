@@ -1,0 +1,21 @@
+\begin{table*}[t]
+\centering
+\caption{Evaluated model families. All data-dependent representations are fitted on the active training subset.}
+\label{tab:models}
+\small
+\begin{tabular}{llll}
+\toprule
+Method & Family & Representation & Classifier/backbone \\
+\midrule
+TF-IDF + LR & Classical & word 1--2 gram TF-IDF & logistic regression \\
+TF-IDF + SVM & Classical & word 1--2 gram TF-IDF & linear SVM \\
+TF-IDF + RF & Classical & word 1--2 gram TF-IDF & random forest \\
+TF-IDF + XGBoost & Classical & word 1--2 gram TF-IDF & XGBoost \\
+Avg. embeddings + MLP & Neural & learned token embeddings & masked mean + MLP \\
+LSTM & Neural & learned token embeddings & LSTM \\
+GRU & Neural & learned token embeddings & GRU \\
+Transformer & Neural & learned token embeddings & 2-layer encoder \\
+Mamba & Neural & learned token embeddings & selective SSM \\
+\bottomrule
+\end{tabular}
+\end{table*}
