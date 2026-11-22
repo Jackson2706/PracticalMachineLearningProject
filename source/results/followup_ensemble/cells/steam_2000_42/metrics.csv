@@ -1,0 +1,8 @@
+target_domain,target_train_size,seed,method,component,weight_tfidf,test_macro_f1,test_accuracy,reproduced_hard_test_macro_f1,original_test_macro_f1,fit_time_sec,run_id,note
+steam,2000,42,best_tfidf,tfidf_svm,1.0,0.675034175125719,0.6753181681531215,0.6683594176752838,0.6683594176752838,0.050482132006436586,part1-721aa1479c44c120197f,platt_on_target_validation
+steam,2000,42,pooled_ce,transformer,0.0,0.658279095251351,0.6582823930253533,0.658279095251351,0.6586728661446688,12.61336305300938,bonus-b46e4fcc02e37c3450c0,
+steam,2000,42,ens_avg_pooled_ce,tfidf_svm+pooled_ce,0.5,0.6694044241255133,0.6694057520793667,,,12.663845185015816,,w fixed at 0.5
+steam,2000,42,ens_valw_pooled_ce,tfidf_svm+pooled_ce,0.9,0.6801947804136774,0.680428900691452,,,12.663845185015816,,w chosen on validation macro-F1 (0.6798)
+steam,2000,42,db_cdsupcon,transformer,0.0,0.6584126684140352,0.6584828139092094,0.6584126684140352,0.657199704386527,14.978931447025388,bonus-e9268607baa962879513,
+steam,2000,42,ens_avg_db_cdsupcon,tfidf_svm+db_cdsupcon,0.5,0.668032926187514,0.668103016334302,,,15.029413579031825,,w fixed at 0.5
+steam,2000,42,ens_valw_db_cdsupcon,tfidf_svm+db_cdsupcon,0.8,0.6818061779614717,0.6820322677623009,,,15.029413579031825,,w chosen on validation macro-F1 (0.6787)
